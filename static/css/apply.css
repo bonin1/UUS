@@ -1,0 +1,177 @@
+.desktop-1-child {
+    position: absolute;
+    top: 146px;
+    left: 333px;
+    border-radius: var(--br-3xs);
+    background-color: #262626;
+    width: 866px;
+    height: 1081px;
+  }
+  .logo-2-icon {
+    position: absolute;
+    top: 62px;
+    left: 549px;
+    width: 433px;
+    height: 355px;
+    object-fit: cover;
+  }
+  .group-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: var(--br-3xs);
+    background-color: var(--color-gainsboro);
+    width: 445px;
+    height: 58px;
+  }
+  .emri-first {
+    position: absolute;
+    top: 20px;
+    left: 17px;
+    font-weight: 600;
+  }
+  .rectangle-container,
+  .rectangle-group,
+  .rectangle-parent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 445px;
+    height: 58px;
+  }
+  .rectangle-container,
+  .rectangle-group {
+    top: 87px;
+  }
+  .rectangle-container {
+    top: 174px;
+  }
+  .vendbanimi-place {
+    position: absolute;
+    top: 19px;
+    left: 17px;
+    font-weight: 600;
+  }
+  .group-div {
+    position: absolute;
+    top: 348px;
+    left: 0;
+    width: 445px;
+    height: 58px;
+  }
+  .drejtimi-i-shkolles {
+    position: absolute;
+    top: 19px;
+    left: 17px;
+    font-weight: 600;
+    white-space: pre-wrap;
+  }
+  .rectangle-parent1,
+  .rectangle-parent2 {
+    position: absolute;
+    top: 435px;
+    left: 0;
+    width: 445px;
+    height: 58px;
+  }
+  .rectangle-parent2 {
+    top: 261px;
+  }
+  .niveli-i-studimeve {
+    position: absolute;
+    top: 20px;
+    left: 17.2px;
+    font-weight: 600;
+    display: inline-block;
+    width: 250.4px;
+  }
+  .fearrow-up-icon {
+    position: absolute;
+    top: 17px;
+    left: 402px;
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+    object-fit: contain;
+  }
+  .group-parent,
+  .rectangle-parent3,
+  .rectangle-parent4 {
+    position: absolute;
+    top: 522px;
+    left: 0;
+    width: 445px;
+    height: 58px;
+  }
+  .group-parent,
+  .rectangle-parent4 {
+    top: 609px;
+  }
+  .group-parent {
+    top: 417px;
+    left: 543px;
+    height: 667px;
+    font-size: var(--font-size-base);
+    color: var(--color-dimgray);
+  }
+  .aplikimiuuseducom,
+  .for-further-information {
+    position: absolute;
+    top: 1265px;
+    left: 333px;
+    font-weight: 600;
+  }
+  .aplikimiuuseducom {
+    top: 1306px;
+    color: var(--color-gray-100);
+  }
+  .apply-for-bachelor,
+  .here,
+  .view-the-study {
+    position: absolute;
+    top: 1374px;
+    left: 333px;
+    font-weight: 600;
+  }
+  .apply-for-bachelor,
+  .here {
+    top: 1415px;
+    color: var(--color-gray-100);
+  }
+  .apply-for-bachelor {
+    top: 333px;
+    left: 540px;
+    font-size: 36px;
+    color: var(--color-white);
+  }
+  .desktop-1-item {
+    position: absolute;
+    height: 3.52%;
+    width: 15.07%;
+    top: 75.18%;
+    right: 39.31%;
+    bottom: 21.3%;
+    left: 45.63%;
+    border-radius: var(--br-3xs);
+    background-color: #004492;
+  }
+  .apply {
+    position: absolute;
+    width: 5.31%;
+    top: 75.98%;
+    left: 50.51%;
+    font-weight: 600;
+    color: var(--color-white);
+    display: inline-block;
+  }
+  .desktop-1 {
+    width: 100%;
+    position: relative;
+    background-color: var(--color-white);
+    height: 1507px;
+    overflow: hidden;
+    text-align: center;
+    font-size: var(--font-size-5xl);
+    color: var(--color-black);
+    font-family: var(--font-lato);
+  }
