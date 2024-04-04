@@ -573,9 +573,7 @@ video{
     .About_USS_image{
         display: none;
     }
-    .Study_programs >h1{
-        font-size: 36px;
-    }
+    .Study_programs >h1,
     .Facts_UUS > h1{
         font-size: 36px;
     }
