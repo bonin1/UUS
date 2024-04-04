@@ -13,7 +13,7 @@
     left: 549px;
     width: 433px;
     height: 355px;
-    object-fit: cover;
+    object-fit: contain;
   }
   .group-child {
     position: absolute;

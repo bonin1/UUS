@@ -451,9 +451,30 @@ video{
     font-weight: 800;
     font-size: 64px;
     text-align: center;
+    margin-top: 40px;
+}
+.icon_container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 70px;
+}
+.icon_div{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 300px;
+}
+.icon_div > h1{
+    color: #767676;
+    font-size: 24px;
+    text-align: justify;
 }
 
 /* facts */
+
+
 @media screen and (max-width:768px) {
     .welcome-text{
         font-size: 70px !important;
@@ -554,6 +575,17 @@ video{
     }
     .Study_programs >h1{
         font-size: 36px;
+    }
+    .Facts_UUS > h1{
+        font-size: 36px;
+    }
+    .icon_container{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .icon_div{
+        margin: 20px;
     }
 }
 @media screen and (max-width:568px){

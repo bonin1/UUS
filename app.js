@@ -14,7 +14,7 @@ app.use("/static", express.static('static'));
 app.get('/',(req,res)=>{
     res.render('home')
 })
-app.get('apply',(req,res)=>{
+app.get('/apply',(req,res)=>{
     res.render('apply')
 })
 
