@@ -610,6 +610,10 @@ video{
     .icon_div{
         margin: 20px;
     }
+    .button_learn > button{
+        font-size: 20px;
+        padding: 7px 15px;
+    }
 }
 @media screen and (max-width:568px){
     .welcome-text{
@@ -628,7 +632,7 @@ video{
         padding: 8px 70px;
         font-size: 10px !important;
         position: absolute;
-        bottom: 100px !important;
+        bottom: 150px !important;
     }
 }
 @media screen and (max-width:468px){
@@ -677,5 +681,10 @@ video{
         position: absolute;
         bottom: 170px;
         font-size: 22px;
+    }
+}
+@media screen and (max-width:1400px) {
+    .hover-container{
+        width: 100%;
     }
 }
