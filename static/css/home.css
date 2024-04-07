@@ -466,7 +466,7 @@ video{
 
 .Facts_UUS{
     width: 100%;
-    height: 100vh;
+    height: auto;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -499,6 +499,177 @@ video{
 
 /* facts */
 
+/* galery */
+.Photo_Galery{
+    width: 100%;
+    height: 149vh;
+    display: flex;
+    margin-top: 100px;
+}
+.HalfG{
+    width: 50%;
+    position: relative;
+}
+.half_part_galery > h1{
+    font-size: 40px;
+    color: #000;
+}
+.uss-law-div{
+    background: no-repeat url('/static/image/law_img.png');
+    width: 440px;
+    height: 350px;
+    position: relative;
+}
+.uss-law-div > h2,
+.erasmus-div > h2{
+    position: absolute;
+    bottom: 50px;
+    left: 30px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: 500;
+    text-shadow: 0 0 10px black;
+}
+.uss-law-div > button,
+.erasmus-div > button{
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    border-bottom: 2px solid white;
+    color: #fff;
+    font-size: 18px;
+    text-shadow: 0 0 10px black;
+}
+.erasmus-div{
+    background: no-repeat url('/static/image/IMG_3204.png');
+    width: 440px;
+    height: 350px;
+    position: relative;
+}
+.container-div-galery{
+    width: 100%;
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+    margin: 10px 0;
+    position: relative;
+    right: -100px;
+    z-index: 1;
+}
+.working-div{
+    width: 100%;
+    height: 350px;
+    position: relative;
+}
+.working-div > img{
+    width: 100%;
+    height: 580px;
+    object-fit: cover;
+    filter: brightness(0.5);
+}
+.working-div > h2{
+    position: absolute;
+    top: 30px;
+    right: 100px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: 500;
+    text-shadow: 0 0 10px black;
+}
+.working-div > p{
+    position: absolute;
+    right: 70px;
+    top: 110px;
+    text-align: justify;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 500;
+    text-shadow: 0 0 10px black;
+    width: 50%;
+}
+.working-div > button{
+    position: absolute;
+    top: 500px;
+    right: 70px;
+    background-color: transparent;
+    border: 2px solid white;
+    padding: 10px 20px;
+    color: #fff;
+    cursor: pointer;
+}
+.athletics_section{
+    width: 100%;
+    height: 70%;
+    position: relative;
+}
+.athletics_section>img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.athletics_section > h2{
+    color: #fff;
+    position: absolute;
+    top: 250px;
+    left: 100px;
+    text-shadow: 0 0 10px black;
+    font-size: 55px;
+}
+.athletics_section > p{
+    color: #fff;
+    position: absolute;
+    top: 350px;
+    left: 100px;
+    text-shadow: 0 0 10px black;
+    font-size: 40px;
+    width: 500px;
+    text-align: justify;
+}
+.athletics_section > button{
+    position: absolute;
+    bottom: 30px;
+    right: 70px;
+    background-color: transparent;
+    border: 2px solid white;
+    padding: 10px 20px;
+    color: #fff;
+    cursor: pointer;
+}
+.uus_college{
+    width: 100%;
+    height: 30%;
+    position: relative;
+}
+.uus_college > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.uus_college > h2{
+    color: #fff;
+    position: absolute;
+    bottom:150px;
+    left: 150px;
+    text-shadow: 0 0 10px black;
+    font-size: 35px;
+    text-transform: uppercase;
+}
+.uus_college > button{
+    position: absolute;
+    bottom: 120px;
+    left: 150px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    border-bottom: 2px solid white;
+    color: #fff;
+    font-size: 18px;
+    text-shadow: 0 0 10px black;
+}
+/* galery */
 
 @media screen and (max-width:768px) {
     .welcome-text{
@@ -659,6 +830,15 @@ video{
     .text{
         font-size: 18px !important;
     }
+    .athletics_section > p{
+        font-size: 20px;
+        position: absolute;
+        left: 50px;
+        width: 300px;
+    }
+    .working-div > p{
+        font-size: 20px;
+    }
 }
 @media screen and (max-width:1310px){
     .hover-container,
@@ -686,5 +866,26 @@ video{
 @media screen and (max-width:1400px) {
     .hover-container{
         width: 100%;
+    }
+}
+@media screen and (max-width:1225px){
+    .Photo_Galery{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        padding: 0 10px;
+    }
+    .HalfG{
+        width: 100%;
+        height: 150vh;
+    }
+    .container-div-galery{
+        width: 100%;
+        display: flex;
+        justify-content:center ;
+        align-items: center;
+        position: relative;
+        right: 0px !important;
     }
 }
