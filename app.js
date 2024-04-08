@@ -20,6 +20,9 @@ app.get('/apply',(req,res)=>{
 app.get('/login',(req,res)=>{
     res.render('login')
 })
+app.get('/change-pw',(req,res)=>{
+    res.render('change-pw')
+})
 
 app.listen(process.env.PORT, ()=>{
     console.log('Ready!')

@@ -4,6 +4,12 @@
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
   }
+  .header{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   body{
     display: flex;
     justify-content: center;
@@ -107,3 +113,42 @@
   .register-link p a:hover{
     text-decoration: underline;
   }
+  .nav-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.nav-item {
+    margin-left: 5rem;
+}
+
+.nav-link{
+    font-size: 1.6rem;
+    font-weight: 400;
+}
+
+.nav-logo{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+.nav-logo > img{
+    height: 114px;
+}
+.header{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.navbar {
+  width: 1400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 114px;
+}
