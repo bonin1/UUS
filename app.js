@@ -17,6 +17,9 @@ app.get('/',(req,res)=>{
 app.get('/apply',(req,res)=>{
     res.render('apply')
 })
+app.get('/login',(req,res)=>{
+    res.render('login')
+})
 
 app.listen(process.env.PORT, ()=>{
     console.log('Ready!')
