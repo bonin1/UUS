@@ -671,6 +671,74 @@ video{
 }
 /* galery */
 
+
+
+/* apply */
+.apply_footer{
+    position: relative;
+    width: 100%;
+}
+.apply_footer > h1{
+    text-align: center;
+    padding: 50px 0;
+    font-size: 30px;
+}
+.apply_section{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.apply_section > img{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    z-index: -1;
+    object-fit: cover;
+}
+.apply_container{
+    width: 1000px;
+    display: flex;
+    justify-content: center;
+}
+.apply_forma{
+    background-color: #ffffff28;
+    width: 100%;
+    backdrop-filter: blur(10px);
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 30px 50px;
+}
+.apply_forma > h1{
+    font-size: 50px;
+    color: #fff;
+}
+.apply_forma > p{
+    font-size: 28px;
+    color: #fff;
+    text-align: justify;
+    padding: 100px 0;
+}
+.apply_forma > a{
+    color: #fff;
+    background-color: #004492;
+    text-decoration: none;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 50px;
+    font-size: 28px;
+}
+.apply_forma > a > img{
+    width: 30px;
+}
+/* apply */
 @media screen and (max-width:768px) {
     .welcome-text{
         font-size: 70px !important;
@@ -889,3 +957,7 @@ video{
         right: 0px !important;
     }
 }
+
+
+
+
