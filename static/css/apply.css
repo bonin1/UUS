@@ -4,7 +4,7 @@
   box-sizing: border-box;
   font-family: "Lato",sans-serif;
 }
-<<<<<<< HEAD
+
 .desktop-1-child{
   position: absolute;
   top: 146px;
@@ -13,7 +13,7 @@
   background-color: #262626;
   width: 866px;
   height: 1081px;
-=======
+}
 
 body{
   width: 100%;
@@ -114,5 +114,4 @@ form > button{
   form > select{
     width: 300px !important; 
   }
->>>>>>> 0689d35fc1ce5d712a1f5f7ea0f15d943921276d
 }
