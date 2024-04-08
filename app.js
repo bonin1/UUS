@@ -23,6 +23,10 @@ app.get('/login',(req,res)=>{
 app.get('/change-pw',(req,res)=>{
     res.render('change-pw')
 })
+app.get('/confirm-change',(req,res)=>{
+    res.render('confirm-change')
+})
+
 
 app.listen(process.env.PORT, ()=>{
     console.log('Ready!')
