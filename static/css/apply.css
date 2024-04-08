@@ -1,13 +1,107 @@
-.desktop-1{
-  background-color: #F1F1F1;
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Lato",sans-serif;
 }
-.desktop-1-child{
+
+body{
+  width: 100%;
+  height: 100vh;
+}
+
+.wrapper{
+  width: 100%;
+  height: 80rem;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+}
+.apply_container{
+  width: 1000px;
+  display: flex;
+  flex-direction: column;
   background-color: #262626;
-  position: absolute;
-  top: 146px;
-  left: 333px;
-  border-radius: 15;
-  background-color: #262626;
-  width: 866px;
-  height: 1081px;
+  padding: 50px 0px;
+  margin-top: 50px;
+}
+.logo{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.logo > a > img{
+  width: 433px;
+}
+.apply_container > h1{
+  color: #fff;
+  font-size: 36px;
+  text-align: center;
+  padding: 40px 0;
+  font-weight: 500;
+}
+form{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+form > input,
+form > select{
+  width:445px ;
+  margin: 10px 0;
+  height: 58px;
+  font-size: 16px;
+  text-indent: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+form > input::placeholder,
+.disabled{
+  color: #676767;
+  font-weight: 500;
+}
+form > button{
+  color: #fff;
+  background-color: #004492;
+  width: 217px;
+  height: 53px;
+  text-align: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 24px;
+  border-radius: 10px;
+  margin-top: 40px;
+}
+.container > h2{
+  font-size: 24px;
+  color: #000;
+  font-weight: 500;
+  margin: 20px 0;
+}
+.container > a{
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 500;
+  color: #8f8f8f;
+  cursor: pointer;
+}
+@media screen and (max-width:1400px) {
+  .apply_container,
+  .container{
+    width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .logo > a > img{
+    width: 300px;
+  }
+  form > input,
+  form > select{
+    width: 300px !important; 
+  }
 }
