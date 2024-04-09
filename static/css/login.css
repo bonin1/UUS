@@ -14,10 +14,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     min-height: 100vh;
-    background-size: cover;
-    background-position: center;
     background-color: #f1f1f1;
+  }
+  .Main_logo{
+    width: 500px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
   }
   .wrapper{
     width: 420px;
@@ -151,4 +156,9 @@
   justify-content: space-between;
   align-items: center;
   height: 114px;
+}
+@media screen and (max-width:768px) {
+  .Main_logo{
+    width: 300px;
+  }
 }

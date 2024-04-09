@@ -28,6 +28,12 @@ body{
   padding: 30px 40px;
   background-color: #262626;
 }
+.Main_logo{
+  width: 500px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
 .wrapper h1{
   font-size: 23px;
   text-align: center;
@@ -112,4 +118,9 @@ body{
 }
 .register-link p a:hover{
   text-decoration: underline;
+}
+@media screen and (max-width:768px) {
+  .Main_logo{
+    width: 300px;
+  }
 }

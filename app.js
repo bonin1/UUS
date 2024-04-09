@@ -26,6 +26,15 @@ app.get('/change-pw',(req,res)=>{
 app.get('/confirm-change',(req,res)=>{
     res.render('confirm-change')
 })
+app.get('/about-us',(req,res)=>{
+    res.render('aboutus')
+})
+app.get('/accreditation',(req,res)=>{
+    res.render('accreditation')
+})
+app.get('/international-awards',(req,res)=>{
+    res.render('international-awards')
+})
 
 
 app.listen(process.env.PORT, ()=>{
