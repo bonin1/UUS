@@ -21,7 +21,10 @@ const routes = [
     { path: '/accreditation', view: 'accreditation' },
     { path: '/international-awards', view: 'international-awards' },
     { path: '/erasmus', view: 'erasmus' },
-    { path: '/transfer', view: 'transfer' }
+    { path: '/transfer', view: 'transfer' },
+    { path: '/arrivals', view: 'arrivals' },
+    { path: '/e-library', view: 'e-library' },
+    { path: '/clubs', view: 'clubs' }
 ];
 
 routes.forEach(route => {
