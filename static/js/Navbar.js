@@ -3,12 +3,14 @@
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-menu");
 const navLink = document.querySelectorAll(".nav-link");
+const body = document.querySelector("body");
 const whiteLogo = '/static/image/logo2.0white.png';
 const blackLogo = '/static/image/logo2.0black.png';
 
 hamburger.addEventListener("click", function() {
     mobileMenu();
     toggleBars();
+    toggleBodyOverflow();
 });
 
 navLink.forEach(n => n.addEventListener("click", closeMenu));
@@ -21,12 +23,22 @@ function mobileMenu() {
 function closeMenu() {
     hamburger.classList.remove("active");
     navMenu.classList.remove("active");
+    body.classList.remove("overflow-hidden");
 }
 
 function toggleBars() {
     const bars = document.querySelectorAll('.bar');
     bars.forEach(bar => bar.classList.toggle('active'));
 }
+
+function toggleBodyOverflow() {
+    if (navMenu.classList.contains("active")) {
+        body.classList.add("overflow-hidden");
+    } else {
+        body.classList.remove("overflow-hidden");
+    }
+}
+
 
 
 const imageElement = document.getElementById('logo');

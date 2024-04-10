@@ -11,33 +11,25 @@ app.use("/static", express.static('static'));
 
 
 
-app.get('/',(req,res)=>{
-    res.render('home')
-})
-app.get('/apply',(req,res)=>{
-    res.render('apply')
-})
-app.get('/login',(req,res)=>{
-    res.render('login')
-})
-app.get('/change-pw',(req,res)=>{
-    res.render('change-pw')
-})
-app.get('/confirm-change',(req,res)=>{
-    res.render('confirm-change')
-})
-app.get('/about-us',(req,res)=>{
-    res.render('aboutus')
-})
-app.get('/accreditation',(req,res)=>{
-    res.render('accreditation')
-})
-app.get('/international-awards',(req,res)=>{
-    res.render('international-awards')
-})
-app.get('/erasmus',(req,res)=>{
-    res.render('erasmus')
-})
+const routes = [
+    { path: '/', view: 'home' },
+    { path: '/apply', view: 'apply' },
+    { path: '/login', view: 'login' },
+    { path: '/change-pw', view: 'change-pw' },
+    { path: '/confirm-change', view: 'confirm-change' },
+    { path: '/about-us', view: 'aboutus' },
+    { path: '/accreditation', view: 'accreditation' },
+    { path: '/international-awards', view: 'international-awards' },
+    { path: '/erasmus', view: 'erasmus' },
+    { path: '/transfer', view: 'transfer' }
+];
+
+routes.forEach(route => {
+    app.get(route.path, (req, res) => {
+        res.render(route.view);
+    });
+});
+
 
 app.listen(process.env.PORT, ()=>{
     console.log('Ready!')

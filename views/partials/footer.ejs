@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/Footer.css">
+</head>
+<body>
+    <style>
+        footer{
+            background-color: #373737;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .logo_footer{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .logo_footer > img{
+            width: 500px;
+        }
+        .footer_container{
+            width: 1400px;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .wrapper_footer{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .footer_groops{
+            width: 33.33333%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .div_sectors{
+            display: flex;
+            flex-direction: column;
+            margin-top: 30px;
+        }
+        .div_sectors > a{
+            color: #fff;
+            text-decoration: none;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .footer_groops_inside > h1{
+            color: #fff;
+            font-size: 36px;
+            font-weight: 600;
+        }
+        .underline{
+            width: 150px;
+            background-color: #004492;
+            height: 5px;
+            margin: 20px 0;
+        }
+        .lower_footer{
+            padding: 50px 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .lower_footer > h1{
+            font-size: 20px;
+            color: #fff;
+            font-weight: 600;
+            text-align: center;
+        }
+        .disabled_a{
+            pointer-events: none;
+        }
+
+        @media screen and (max-width:1400px) {
+            .footer_container{
+                width: 100%;
+            }
+        }
+        @media screen and (max-width:880px) {
+            .wrapper_footer{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+            .footer_groops{
+                width: 100% ;
+                margin: 50px 0;
+                text-align: center;
+            }
+            .logo_footer > img{
+                width: 300px;
+            }
+        }
+    </style>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+    <div class="logo_footer">
+        <img src="/static/image/logo2.0white.png" alt="">
+    </div>
+    <div class="footer_container">
+        <div class="wrapper_footer">
+            <div class="studies_footer footer_groops">
+                <div class="studies_container_inside footer_groops_inside">
+                    <h1>Studies</h1>
+                    <div class="div_sectors">
+                        <a href="">Bachelor</a>
+                        <a href="">Master Studies</a>
+                    </div>
+                </div>
+            </div>
+            <div class="e_service_footer footer_groops">
+                <div class="e-service_container_inside footer_groops_inside">
+                    <h1>E-Service</h1>
+                    <div class="div_sectors">
+                        <a href="">DMIS - Student</a>
+                        <a href="">DMiS - Stuff</a>
+                        <a href="">E-Learning</a>
+                        <a href="">E-Library</a>
+                    </div>
+                </div>
+            </div>
+            <div class="contact_footer footer_groops">
+                <div class="contact_container_inside footer_groops_inside">
+                    <h1>Contact</h1>
+                    <div class="div_sectors">
+                        <a href="" style="color: #006CE8;">info@uus-edu.com</a>
+                        <a href="" class="disabled_a">+383 44 123 456</a>
+                        <a href="" class="disabled_a">Str. Hasan Prishtina 1,1,<br> Konjuh, Lipjan, 14000,<br> Kosovo</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="lower_footer">
+        <div class="underline"></div>
+        <h1>© 2024 University of United Students. All Rights Reserved</h1>
+    </div>
+</footer>
+
+<!-- FOOTER -->
+</body> 
+</html>
