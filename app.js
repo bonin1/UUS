@@ -35,7 +35,9 @@ app.get('/accreditation',(req,res)=>{
 app.get('/international-awards',(req,res)=>{
     res.render('international-awards')
 })
-
+app.get('/erasmus',(req,res)=>{
+    res.render('erasmus')
+})
 
 app.listen(process.env.PORT, ()=>{
     console.log('Ready!')

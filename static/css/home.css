@@ -54,7 +54,7 @@ video{
     display: flex;
     flex-direction: column;
 }
-.button_container > button{
+.button_container > a{
     padding: 10px 20px;
     background-color: #004492;
     color: #fff;
@@ -64,33 +64,34 @@ video{
     cursor: pointer;
     font-size: 20px;
     transition: 0.3s ease;
+    text-decoration: none;
 }
 
-.button_container > button:nth-child(1){
+.button_container > a:nth-child(1){
     width: 120px;
     transform: translateX(-100px);
     padding-right: 125px;
 }
-.button_container > button:nth-child(1):hover{
+.button_container > a:nth-child(1):hover{
     transform: translateX(0px);
     padding-right: 20px;
 }
-.button_container > button:nth-child(2){
+.button_container > a:nth-child(2){
     width: 170px;
     transform: translateX(-140px);
     padding-right: 165px;
     text-wrap: nowrap;
 }
-.button_container > button:nth-child(2):hover{
+.button_container > a:nth-child(2):hover{
     transform: translateX(0px);
     padding-right: 20px;
 }
-.button_container > button:nth-child(3){
+.button_container > a:nth-child(3){
     border: none;
     transform: translateX(-230px);
     padding-right: 50px;
 }
-.button_container > button:nth-child(3):hover{
+.button_container > a:nth-child(3):hover{
     transform: translateX(0px);
     padding-right: 20px;
 }
@@ -568,7 +569,7 @@ video{
     .apply-container{
         padding: 0 20px;
     }
-    .button_container > button{
+    .button_container > a{
         transform: translateX(0px) !important;
         padding-right: 20px !important;
     }
