@@ -253,7 +253,7 @@ video{
     justify-content: center;
     align-items: center;
 }
-.button_learn > button{
+.button_learn > a{
     background-color: transparent;
     border: 5px solid white;
     font-size: 24px;
@@ -264,8 +264,9 @@ video{
     display: flex;
     justify-content: center;
     align-items: center;
+    text-decoration: none;
 }
-.button_learn > button > span{
+.button_learn > a > span{
     margin-top: 7px;
 }
 /* study program */
@@ -592,7 +593,7 @@ video{
     .icon_div{
         margin: 20px;
     }
-    .button_learn > button{
+    .button_learn > a{
         font-size: 20px;
         padding: 7px 15px;
     }

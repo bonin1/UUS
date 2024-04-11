@@ -24,7 +24,11 @@ const routes = [
     { path: '/transfer', view: 'transfer' },
     { path: '/arrivals', view: 'arrivals' },
     { path: '/e-library', view: 'e-library' },
-    { path: '/clubs', view: 'clubs' }
+    { path: '/clubs', view: 'clubs' },
+    { path: '/clubs/football', view: 'football' },
+    { path: '/clubs/basketball', view: 'basketball' },
+    { path: '/bachelor', view: 'bachelor' },
+    { path: '/master', view: 'master' }
 ];
 
 routes.forEach(route => {
