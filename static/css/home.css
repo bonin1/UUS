@@ -339,8 +339,8 @@ video{
     font-weight: 500;
     text-shadow: 0 0 10px black;
 }
-.uss-law-div > button,
-.erasmus-div > button{
+.uss-law-div > a,
+.erasmus-div > a{
     position: absolute;
     bottom: 30px;
     left: 30px;
@@ -351,6 +351,7 @@ video{
     color: #fff;
     font-size: 18px;
     text-shadow: 0 0 10px black;
+    text-decoration: none;
 }
 .erasmus-div{
     background: no-repeat url('/static/image/IMG_3204.png');
@@ -399,7 +400,7 @@ video{
     text-shadow: 0 0 10px black;
     width: 50%;
 }
-.working-div > button{
+.working-div > a{
     position: absolute;
     top: 500px;
     right: 70px;
@@ -408,6 +409,7 @@ video{
     padding: 10px 20px;
     color: #fff;
     cursor: pointer;
+    text-decoration: none;
 }
 .athletics_section{
     width: 100%;
@@ -437,7 +439,7 @@ video{
     width: 500px;
     text-align: justify;
 }
-.athletics_section > button{
+.athletics_section > a{
     position: absolute;
     bottom: 30px;
     right: 70px;
@@ -446,6 +448,7 @@ video{
     padding: 10px 20px;
     color: #fff;
     cursor: pointer;
+    text-decoration: none;
 }
 .uus_college{
     width: 100%;
@@ -466,7 +469,7 @@ video{
     font-size: 35px;
     text-transform: uppercase;
 }
-.uus_college > button{
+.uus_college > a{
     position: absolute;
     bottom: 120px;
     left: 150px;
@@ -477,6 +480,7 @@ video{
     color: #fff;
     font-size: 18px;
     text-shadow: 0 0 10px black;
+    text-decoration: none;
 }
 /* galery */
 
