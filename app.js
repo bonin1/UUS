@@ -28,7 +28,8 @@ const routes = [
     { path: '/clubs/football', view: 'football' },
     { path: '/clubs/basketball', view: 'basketball' },
     { path: '/bachelor', view: 'bachelor' },
-    { path: '/master', view: 'master' }
+    { path: '/master', view: 'master' },
+    { path: '/college', view: 'college' }
 ];
 
 routes.forEach(route => {

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College</title>
+    <link rel="stylesheet" href="/static/css/college.css">
+</head>
+<body>
+    <%- include('partials/Navbar-light'); %>
+
+    <div class="wrapper">
+        <div class="wrapper-assist">
+            <div class="links-container">
+                <div class="links" id="links">
+                    <div class="list-container">
+                        <ul class="unordered">
+                            <li>
+                                <a href="/college">UUS COLLEGE</a>
+                            </li>
+                            <li>
+                                <a href="#campus">CAMPUS LIFE</a>
+                            </li>
+                            <li>
+                                <a href="#community">COMMUNITY</a>
+                            </li>
+                            <li>
+                                <a href="#news">NEWS&EVENTS</a>
+                            </li>
+                        </ul>
+                        <div id="hamburger" class="hamburger_undermenu" onclick="toggleMenu()">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </div>
+                    </div>
+                    
+                    
+                    <div id="container-hidden">
+                        <ul id="menu">
+                            <li>
+                                <a href="/college">UUS COLLEGE</a>
+                            </li>
+                            <li>
+                                <a href="#campus">CAMPUS LIFE</a>
+                            </li>
+                            <li>
+                                <a href="#community">COMMUNITY</a>
+                            </li>
+                            <li>
+                                <a href="#news">NEWS&EVENTS</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="backgroud-container">
+                <div class="part-one part">
+                    <h1>UUS COLLEGE</h1>
+                    <p>
+                        "On campus, every encounter is a lesson, every corner a possibility, and every day an invitation to seize the boundless opportunities of the university experience."
+                    </p>
+                </div>
+                <div class="part-two part"></div>
+            </div>
+            <div class="campus">
+                <h1>UUS COLLEGE</h1>
+                <p>
+                    Nestled amidst rolling hills and surrounded by lush greenery, UUS College stands as an architectural marvel, blending modern aesthetics with natural beauty. Its sleek exteriors boast striking facades, adorned with expansive glass windows that invite the warmth of natural light into every corner. As students traverse the campus pathways, they're greeted by meticulously landscaped gardens, tranquil courtyards, and vibrant communal spaces that foster a sense of community and connection. Inside, UUS College continues to impress with its cutting-edge facilities and thoughtfully designed interiors.
+                </p>
+            </div>
+            <div class="background-section">
+                <div class="first-part">
+                    <div class="blur">
+                        <h1>CAMPUS LIFE</h1>
+                    </div>
+                </div>
+                <div class="second-part">
+                    <p>
+                        "Embrace every moment, explore every opportunity, and cherish the vibrant tapestry of campus life."
+                    </p>
+                </div>
+            </div>
+            <div class="campus-life" id="campus">
+                <h1>CAMPUS LIFE</h1>
+                <p>
+                    Experience the vibrant tapestry of campus life at UUS College, where every day is an opportunity for growth, exploration, and connection. From lively student events to enriching academic experiences, our campus buzzes with energy and excitement. Immerse yourself in a diverse community of passionate learners, where friendships are forged, ideas are exchanged, and memories are made. Engage in a multitude of extracurricular activities, whether it's joining student clubs and organizations, participating in sports tournaments, or attending cultural performances. Fuel your passions and expand your horizons through a range of academic and personal development opportunities, from guest lectures and workshops to volunteer projects and internships. At UUS College, campus life is more than just a backdrop – it's a vibrant mosaic of experiences that shapes who you are and who you'll become.
+                </p>
+            </div>
+            <div class="community" id="community">
+                <h1>COMMUNITY</h1>
+                <p>
+                    At UUS College, community is at the heart of everything we do. Our vibrant and diverse community is a tapestry of unique backgrounds, perspectives, and talents that come together to create a rich and inclusive environment. From the moment you step onto campus, you'll feel a sense of belonging and connection.
+                    <br><br>
+                    "Here, we showcase some of the activities organized by our college community, reflecting the collective efforts and engagement of our student body."
+                </p>
+                <div class="card-container">
+                    <div class="card">
+                        <img src="/static/image/cultural.png" alt="">
+                        <p>
+                            <span>Cultural Events:</span> Hosting cultural events and celebrations to promote diversity and inclusivity, such as cultural festivals, food fairs, or international days.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <img src="/static/image/social.png" alt="">
+                        <p>
+                            <span>Social Clubs and Organizations:</span> Establishing social clubs and organizations based on shared interests or hobbies, such as art clubs, debate teams, or music ensembles, to foster friendships, creativity, and personal growth among students.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <img src="/static/image/sports.png" alt="">
+                        <p>
+                            <span>Sports and Recreation:</span> Organizing sports tournaments, intramural leagues, or recreational activities to promote physical health, teamwork, and friendly competition among students.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <img src="/static/image/thatre.png" alt="">
+                        <p>
+                            <span>Creative Arts Projects:</span> Collaborating on creative arts projects such as theater productions, art exhibitions, or literary magazines to showcase and celebrate students' talents and creativity within the school community.
+                        </p>
+                    </div>
+                    <div class="card">
+                        <img src="/static/image/career.png" alt="">
+                        <p>
+                            <span>Career Development Workshops:</span> Hosting workshops, guest speaker events, or career fairs to provide students with opportunities for career exploration, networking, and professional development.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/footer'); %>
+    <script>
+        var path = window.location.pathname;
+        var links = document.querySelectorAll('.links a');
+    
+        for (var i = 0; i < links.length; i++) {
+            var href = links[i].getAttribute('href');
+            if(path.includes(href)) {
+                links[i].classList.add('active');
+            }
+        }
+        function toggleMenu() {
+        var menu = document.getElementById('container-hidden');
+        var hamburger = document.getElementById('hamburger');
+        var links = document.getElementById('links');
+        
+        if (menu.style.display === 'none') {
+            menu.style.display = 'block';
+            hamburger.classList.add('active_ham');
+            links.classList.add('active_links');
+        } else {
+            menu.style.display = 'none';
+            hamburger.classList.remove('active_ham');
+            links.classList.remove('active_links');
+        }
+    }
+    </script>
+</body>
+</html>
