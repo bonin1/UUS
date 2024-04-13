@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Sciece</title>
+    <link rel="stylesheet" href="/static/css/computerscience.css">
+</head>
+<body>
+    <%- include('partials/Navbar'); %>
+    <img class="main-image" src="/static/image/main.png" alt="">
+    <div class="wrapper">
+        <div class="wrapper-assist">
+            <div class="title">
+                <h1>How to register?</h1>
+                <div class="underline"></div>
+            </div>
+            <p>
+                The Faculty of Computer Science is fully focused on providing teaching in modern, practical ways and in line with world technological developments, so that tomorrow our students can compete in global markets as individuals or as integral parts of prestigious organizations.
+            </p>
+            <div class="container-card">
+                <div class="card">
+                    <h1>Academic Staff</h1>
+                </div>
+                <div class="card">
+                    <h1>Dean</h1>
+                </div>
+                <div class="card">
+                    <h1>News</h1>
+                </div>
+            </div>
+            <section class="academic-staff sections">
+                <div class="card-ac">
+                    <img src="/static/image/Windows_10_Default_Profile_Picture.svg.png" alt="">
+                    <h1>Prof. Filan Fisteki</h1>
+                </div>
+                <div class="card-ac">
+                    <img src="/static/image/Windows_10_Default_Profile_Picture.svg.png" alt="">
+                    <h1>Prof. Ass. Filan Fisteki</h1>
+                </div>
+            </section>
+            <section class="dean sections">
+                <div class="card-de">
+                    <div class="card-ac">
+                        <img src="/static/image/Windows_10_Default_Profile_Picture.svg.png" alt="">
+                        <h1>Dean Filan Fisteki</h1>
+                    </div>
+                </div>
+            </section>
+            <section class="news sections">
+                ne
+            </section>
+        </div>
+    </div>
+    <%- include('partials/footer'); %>
+    <script>
+        var cards = document.querySelectorAll('.card');
+
+        var sections = {
+            'Academic Staff': document.querySelector('.academic-staff'),
+            'Dean': document.querySelector('.dean'),
+            'News': document.querySelector('.news')
+        };
+
+        function hideAllSections() {
+            for (var section in sections) {
+                sections[section].style.display = 'none';
+            }
+        }
+
+        cards.forEach(function(card) {
+            card.addEventListener('click', function() {
+                var h1Text = card.querySelector('h1').innerText;
+
+                for (var section in sections) {
+                    sections[section].style.display = 'none';
+                    sections[section].classList.remove('active1');
+                    cards.forEach(function(card) {
+                        card.classList.remove('active1');
+                    });
+                }
+                if (sections[h1Text]) {
+                    sections[h1Text].style.display = 'flex';
+                    sections[h1Text].classList.add('active1');
+                    card.classList.add('active1');
+                }
+            });
+        });
+
+        hideAllSections();
+
+        sections['Academic Staff'].style.display = 'flex';
+        sections['Academic Staff'].classList.add('active1');
+
+        var academicCard = Array.from(cards).find(function(card) {
+            return card.querySelector('h1').innerText === 'Academic Staff';
+        });
+        if (academicCard) {
+            academicCard.classList.add('active1');
+        }
+        hideAllSections();
+        sections['Academic Staff'].style.display = 'flex';
+        sections['Dean'].style.display = 'none';
+
+    </script>
+</body>
+</html>

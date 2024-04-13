@@ -29,7 +29,8 @@ const routes = [
     { path: '/clubs/basketball', view: 'basketball' },
     { path: '/bachelor', view: 'bachelor' },
     { path: '/master', view: 'master' },
-    { path: '/college', view: 'college' }
+    { path: '/college', view: 'college' },
+    { path: '/computer-science', view: 'computerscience' }
 ];
 
 routes.forEach(route => {
