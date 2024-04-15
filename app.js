@@ -31,7 +31,8 @@ const routes = [
     { path: '/master', view: 'master' },
     { path: '/college', view: 'college' },
     { path: '/computer-science', view: 'computerscience' },
-    { path: '/cyber', view: 'cyber' }
+    { path: '/cyber', view: 'cyber' },
+    { path: '/law-school', view: 'law-school' }
 ];
 
 routes.forEach(route => {

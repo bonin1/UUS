@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College</title>
+    <link rel="stylesheet" href="/static/css/law-school.css">
+</head>
+<body>
+    <%- include('partials/Navbar-light'); %>
+
+    <div class="wrapper">
+        <div class="wrapper-assist">
+            <div class="links-container">
+                <div class="links" id="links">
+                    <div class="list-container">
+                        <ul class="unordered">
+                            <li>
+                                <a href="/law-school">STUDY OF LAW</a>
+                            </li>
+                            <li>
+                                <a href="#campus">ACADEMIC RESOURCES</a>
+                            </li>
+                            <li>
+                                <a href="#community">ANNOUNCEMENTS</a>
+                            </li>
+                            <li>
+                                <a href="#news">CAREER SERVICES</a>
+                            </li>
+                        </ul>
+                        <div id="hamburger" class="hamburger_undermenu" onclick="toggleMenu()">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </div>
+                    </div>
+                    
+                    
+                    <div id="container-hidden">
+                        <ul id="menu">
+                            <li>
+                                <a href="/law-school">STUDY OF LAW</a>
+                            </li>
+                            <li>
+                                <a href="#campus">ACADEMIC RESOURCES</a>
+                            </li>
+                            <li>
+                                <a href="#community">ANNOUNCEMENTS</a>
+                            </li>
+                            <li>
+                                <a href="#news">CAREER SERVICES</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="backgroud-container">
+                <div class="part-one part">
+                    <h1>UUS Law School</h1>
+                    <p>
+                        "Empowering future legal professionals. Dynamic learning environment. Expert faculty. Join us at UUS Law School for a transformative legal education."
+                    </p>
+                </div>
+                <div class="part-two part"></div>
+            </div>
+            <div class="campus">
+                <h1>History of our school.</h1>
+                <br>
+                <p>
+                    UUS University's law school boasts a rich and storied history, making it one of the oldest law universities in existence. With a legacy spanning centuries, our institution has been at the forefront of legal education, shaping the minds of generations of legal professionals. As a pioneer in the field, we continue to uphold our tradition of academic excellence and innovation, preparing students to navigate the complexities of the modern legal landscape with confidence and distinction. Join us at UUS University's law school and become part of our esteemed legacy.
+                </p>
+            </div>
+            <div class="campus-life" id="campus">
+                <h1>Activities</h1>
+                <p>
+                    At UUS University's law school, we pride ourselves on offering a diverse range of activities to enrich the student experience. From moot court competitions and mock trials to legal clinics and pro bono initiatives, students have ample opportunities to apply their knowledge in real-world settings. Our vibrant student organizations also play a pivotal role in fostering leadership skills and promoting collaboration among peers. Additionally, guest lectures, panel discussions, and networking events provide valuable insights and connections for students aspiring to excel in their legal careers. At UUS University's law school, there's always something exciting happening beyond the classroom.
+                </p>
+            </div>
+    <%- include('partials/footer'); %>
+    <script>
+        var path = window.location.pathname;
+        var links = document.querySelectorAll('.links a');
+    
+        for (var i = 0; i < links.length; i++) {
+            var href = links[i].getAttribute('href');
+            if(path.includes(href)) {
+                links[i].classList.add('active');
+            }
+        }
+        function toggleMenu() {
+        var menu = document.getElementById('container-hidden');
+        var hamburger = document.getElementById('hamburger');
+        var links = document.getElementById('links');
+        
+        if (menu.style.display === 'none') {
+            menu.style.display = 'block';
+            hamburger.classList.add('active_ham');
+            links.classList.add('active_links');
+        } else {
+            menu.style.display = 'none';
+            hamburger.classList.remove('active_ham');
+            links.classList.remove('active_links');
+        }
+    }
+    </script>
+</body>
+</html>
