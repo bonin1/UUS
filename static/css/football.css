@@ -12,6 +12,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 .container{
     width: 100%;
@@ -55,6 +56,47 @@ body{
 .other-players-container > .card{
     margin: 30px 50px;
 }
+.wrapper-assist{
+    width: 1400px;
+    padding: 50px 0px;
+}
+.coach-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.card-section{
+    width: 392px;
+    height: 380px;
+    box-shadow: 0 0 10px lightgray;
+    border-radius: 10px;
+    position: relative;
+    padding: 0px;
+    margin: 0;
+}
+.card-section > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.card-section > h1{
+    position: absolute;
+    bottom: 50px;
+    font-size: 20px;
+    text-shadow: 0 0 10px black;
+    color: #fff;
+    left: 10px;
+}
+.card-section > h2{
+    position: absolute;
+    bottom: 20px;
+    font-size: 24px;
+    text-shadow: 0 0 10px black;
+    color: #fff;
+    left: 10px;
+}
 @media screen and (max-width: 1400px) {
     .container{
         height: auto;
@@ -64,5 +106,20 @@ body{
     }
     .captain-container{
         margin-top: 30px;
+    }
+    .wrapper-assist{
+        width: 100%;
+        padding: 50px 20px;
+    }
+}
+@media screen  and (max-width:830px){
+    .coach-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .card-section{
+        margin: 50px 0;
     }
 }
