@@ -1,0 +1,141 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-family: "Lato", sans-serif;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+}
+
+.wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper-assist{
+    width: 1400px;
+    height: auto;
+    padding: 50px 0;
+}
+.main{
+    width: 100%;
+    display: flex;
+}
+.both-containers{
+    width: 50%;
+}
+.first-container > a > img{
+    width: 100%;
+}
+.first-container > h1 {
+    font-size: 32px;
+    text-align: center;
+}
+.same{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 40px 0;
+}
+.same > img{
+    object-fit: contain;
+}
+.second-container {
+    padding: 30px ;
+    padding-top: 100px;
+}
+.second-container > h1{
+    font-size: 40px ;
+    color: #004492;
+    padding-bottom: 30px;
+    text-decoration: underline;
+}
+.second-container > form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.second-container > form > input,
+.second-container > form > textarea{
+    width: 100%;
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #C7C7C7;
+    border-radius: 10px;
+}
+.second-container > form > input:focus,
+.second-container > form > textarea:focus{
+    outline: none;
+}
+.second-container > form > input::placeholder,
+.second-container > form > textarea::placeholder{
+    color: #676767;
+}
+.second-container > form > textarea{
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 200px;
+    min-height: 40px;
+}
+.second-container > form > input[type = submit]{
+    background-color: #004492;
+    color: white;
+    font-size: 32px;
+    cursor: pointer;
+}
+.socials > img{
+    width: 100px;
+    height: 100px;
+    margin: 0 40px;
+}
+.socials{
+    display: flex;
+}
+.section{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.section > h1{
+    margin: 50px 0;
+}
+@media screen and (max-width:800px) {
+    .main{
+        flex-direction: column;
+    }
+    .both-containers{
+        width: 100%;
+    }
+    .first-container{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    .first-container > a> img{
+        width: 300px;
+    }
+    .same{
+        width: 100%;
+        padding: 0 20px;
+    }
+    .same > h1{
+        font-size: 20px;
+        text-wrap: wrap;
+    }
+    .section{
+        width: 100%;
+    }
+    .socials > img{
+        width: 60px;
+        object-fit: contain;
+    }
+}

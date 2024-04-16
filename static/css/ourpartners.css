@@ -8,7 +8,6 @@
 body{
     width: 100%;
     height: 100vh;
-    background-color: #EDEDED;
 }
 .wrapper{
     width: 100%;
@@ -119,6 +118,79 @@ body{
     text-align: center;
     font-size: 25px;
 }
+.container-information{
+    width: 100%;
+}
+.container-information > h1{
+    font-size: 35px;
+    color: #000;
+}
+.container-information > p{
+    margin: 50px 0;
+    font-size: 25px;
+}
+#partner-universities > h1{
+    font-size: 35px;
+    color: #004392;
+}
+.hidden {
+    display: none !important;
+}
+.element{
+    width: 100%;
+    display: flex;
+    margin: 50px 0;
+}
+.first-half{
+    width:30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.second-half{
+    width: 70%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    font-size: 20px;
+}
+#seeMore{
+    background-color: #D2E3FF;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.button-container{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+.title-erasmus{
+    text-align: center;
+    font-size: 35px;
+    color: #004392;
+    margin: 50px 0;
+}
+.exploring-more{
+    width: 100%;
+    height: auto;
+    padding: 20px 20px;
+    background-color: #D2E3FF;
+}
+.exploring-more > h1{
+    color: #000;
+    font-size: 30px;
+    text-align: center;
+    margin: 50px 0;
+}
+.exploring-more > p{
+    font-size: 25px;
+    color: #000;
+}
 @media screen and (max-width:1400px) {
     .wrapper{
         padding: 0px 20px;
@@ -188,5 +260,20 @@ body{
     }
     .part-one{
         width: 100%;
+    }
+    .first-half{
+        width: 30%;
+    }
+    .second-half{
+        width: 70%;
+    }
+    .first-half > img{
+        width: 150px;
+    }
+}
+@media screen and (max-width:1150px) {
+    .both-halfs{
+        width: 50%;
+        font-size: 15px;
     }
 }
