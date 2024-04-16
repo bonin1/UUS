@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our partners</title>
+    <link rel="stylesheet" href="/static/css/ourpartners.css">
+</head>
+<body>
+    <%- include('partials/Navbar-light'); %>
+    <div class="wrapper">
+        <div class="wrapper-assist">
+            <div class="links-container">
+                <div class="links" id="links">
+                    <div class="list-container">
+                        <ul class="unordered">
+                            <li>
+                                <a href="/ourpartners">WHY TO STUDY ABROAD</a>
+                            </li>
+                            <li>
+                                <a href="#erasmus">ERASMUS</a>
+                            </li>
+                            <li>
+                                <a href="#">PARTNER UNIVERSITIES</a>
+                            </li>
+                            <li>
+                                <a href="#">CONTACT US</a>
+                            </li>
+                        </ul>
+                        <div id="hamburger" class="hamburger_undermenu" onclick="toggleMenu()">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </div>
+                    </div>
+                    
+                    
+                    <div id="container-hidden">
+                        <ul id="menu">
+                            <li>
+                                <a href="/ourpartners">WHY TO STUDY ABROAD</a>
+                            </li>
+                            <li>
+                                <a href="#">ERASMUS</a>
+                            </li>
+                            <li>
+                                <a href="#">PARTNER UNIVERSITIES</a>
+                            </li>
+                            <li>
+                                <a href="#">CONTACT US</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="backgroud-container">
+                <div class="part-one part">
+                    <h1>ERASMUS</h1>
+                    <br>
+                    <p>
+                        "Erasmus: where classrooms have no walls, curiosity knows no bounds, and learning is a global adventure."
+                    </p>
+                </div>
+                <div class="part-two part"></div>
+            </div>
+            <div class="paragraph-background" id="erasmus">
+                <p>
+                    "Erasmus, named after the renowned Dutch philosopher Desiderius Erasmus, is a flagship European Union program that has been transforming the lives of students since its inception in 1987. Designed to promote international exchange and cooperation in higher education, Erasmus offers students the opportunity to study or train abroad in one of the program's participating countries.
+                </p>
+            </div>
+            
+        </div>
+    </div>
+    <%- include('partials/footer'); %>
+    <script>
+        var path = window.location.pathname;
+        var links = document.querySelectorAll('.links a');
+    
+        for (var i = 0; i < links.length; i++) {
+            var href = links[i].getAttribute('href');
+            if(path.includes(href)) {
+                links[i].classList.add('active');
+            }
+        }
+        function toggleMenu() {
+        var menu = document.getElementById('container-hidden');
+        var hamburger = document.getElementById('hamburger');
+        var links = document.getElementById('links');
+        
+        if (menu.style.display === 'none') {
+            menu.style.display = 'block';
+            hamburger.classList.add('active_ham');
+            links.classList.add('active_links');
+        } else {
+            menu.style.display = 'none';
+            hamburger.classList.remove('active_ham');
+            links.classList.remove('active_links');
+        }
+    }
+    </script>
+</body>
+</html>
