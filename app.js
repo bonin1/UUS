@@ -9,8 +9,10 @@ app.set("view engine", "ejs");
 app.use("/static", express.static('static'));
 
 const apply = require('./routes/ApplyRoute')
+
 app.use('/apply',apply)
 
+const User = require('./model/UsersModel')
 
 
 const routes = [
