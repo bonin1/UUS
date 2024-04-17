@@ -1,13 +1,39 @@
 const express = require('express');
-const db = require('../database');
-
+const ApplyForm = require('../model/ApplyModel');
+const flash = require('connect-flash');
 const router = express.Router();
+const { body, validationResult } = require('express-validator');
+
+const loggingRateLimiter = require('../middleware/loginlimitter')
+const sessionMiddleware = require('../middleware/sesionMiddleware')
+
+
+router.use(flash());
+router.use(loggingRateLimiter)
+router.use(sessionMiddleware);
 
 router.get('/', (req, res) => {
-    res.render('apply');
+    res.render('apply', { successAlert: req.flash('success'), dangerAlert: req.flash('danger') });
 });
 
-router.post('/', (req, res) => {
+
+router.post('/', 
+[
+    body('email').isEmail(),
+    body('phone_number').isMobilePhone(),
+    body('name').isLength({ min: 1 }),
+    body('lastname').isLength({ min: 1 }),
+    body('address').isLength({ min: 1 }),
+    body('high_school').isLength({ min: 1 }),
+    body('study_level').isLength({ min: 1 }),
+    body('choose_dep').isLength({ min: 1 })
+],
+async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        req.flash('danger', `Something went wrong try again!`);
+        return res.redirect('/apply');
+    }
     const {
         user_id,
         name,
@@ -19,31 +45,29 @@ router.post('/', (req, res) => {
         study_level,
         choose_dep,
         application_date,
-        status
+        status = 'pending'
     } = req.body;
 
-    const formData = {
-        name,
-        lastname,
-        phone_number,
-        email,
-        address,
-        high_school,
-        study_level,
-        choose_dep,
-        application_date,
-        status: status || 'pending'
-    };
-
-    const sql = 'INSERT INTO apply_form SET ?';
-    db.query(sql, formData, (err, result) => {
-        if (err) {
-            res.status(500).json({ error: 'Error inserting data into database' });
-        } else {
-            const script = `<script>alert('Application submitted successfully!');</script>`;
-            res.send(script);
-        }
-    });
+    try {
+        await ApplyForm.create({
+            user_id,
+            name,
+            lastname,
+            phone_number,
+            email,
+            address,
+            high_school,
+            study_level,
+            choose_dep,
+            application_date,
+            status
+        });
+        req.flash('success', 'Application is successful!');
+        res.redirect('/apply');
+    } catch (err) {
+        req.flash('danger', 'Application is not successful, try again later!');
+        res.redirect('/apply');
+    }
 });
 
 module.exports = router;
