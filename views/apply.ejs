@@ -17,22 +17,22 @@
                         </a>
                     </div>
                     <h1>Apply for Bachelor & Master</h1>
-                    <form action="/" method="post">
-                        <input type="text" placeholder="Emri | First name">
-                        <input type="text" placeholder="Mbiemri | Last name">
-                        <input type="text" name="" id="" placeholder="Numri i telefonit | Phone Number">
-                        <input type="email" placeholder="Email adresa | Email">
-                        <input type="text" placeholder="Vendbanimi | Place you live">
-                        <input type="text" placeholder="Drejtimi i shkolles se mesme | High school department  ">
-                        <select name="" id="">
-                        <option value="" class="disabled" disabled selected>Niveli i studimeve | Level of studies</option>
-                        <option value="">Bachelor</option>
-                        <option value="">Master</option>
+                    <form action="/apply" method="post">
+                        <input type="text" name="name" placeholder="Emri | First name">
+                        <input type="text" name="lastname" placeholder="Mbiemri | Last name">
+                        <input type="text" name="phone_number" id="" placeholder="Numri i telefonit | Phone Number">
+                        <input type="email" name="email" placeholder="Email adresa | Email">
+                        <input type="text" name="address" placeholder="Vendbanimi | Place you live">
+                        <input type="text" name="high_school" placeholder="Drejtimi i shkolles se mesme | High school department  ">
+                        <select name="study_level" id="">
+                            <option value="" class="disabled" disabled selected>Niveli i studimeve | Level of studies</option>
+                            <option value="bachelor">Bachelor</option>
+                            <option value="master">Master</option>
                         </select>
-                        <select name="" id="">
-                        <option value="" class="" disabled selected>Zgjedh drejtimin | Select your study program</option>
-                        <option value="">Computer Science</option>
-                        <option value="">Cyber Security</option>
+                        <select name="choose_dep" id="">
+                            <option value="" class="" disabled selected>Zgjedh drejtimin | Select your study program</option>
+                            <option value="computer_science">Computer Science</option>
+                            <option value="cyber">Cyber Security</option>
                         </select>
                         <button type="submit">Apply</button>
                     </form>

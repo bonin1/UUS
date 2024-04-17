@@ -1,7 +1,6 @@
 const express = require("express")
 const app = express()
 const bodyParser = require('body-parser');
-// const db = require('./database')
 require('dotenv').config();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -9,11 +8,13 @@ app.use(bodyParser.json());
 app.set("view engine", "ejs");
 app.use("/static", express.static('static'));
 
+const apply = require('./routes/ApplyRoute')
+app.use('/apply',apply)
+
 
 
 const routes = [
     { path: '/', view: 'home' },
-    { path: '/apply', view: 'apply' },
     { path: '/login', view: 'login' },
     { path: '/change-pw', view: 'change-pw' },
     { path: '/confirm-change', view: 'confirm-change' },
