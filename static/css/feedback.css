@@ -25,6 +25,7 @@ body{
     font-size: 28px;
     color: #000;
     margin-bottom: 50px;
+    text-align: justify;
 }
 .alert{
     position: fixed;
@@ -35,6 +36,7 @@ body{
     padding: 20px 30px;
     font-weight: 500;
     border-radius: 10px;
+    z-index: 100000;
 }
 .close{
     background-color: transparent;
@@ -65,6 +67,12 @@ body{
 form {
     width:100%;
 }
+form > p{
+    color: #004492;
+    font-size: 35px;
+    margin: 50px 0;
+    text-align: justify;
+}
 .optional-inputs{
     width: 100%;
     display: flex;
@@ -81,9 +89,184 @@ form {
     border-radius: 10px;
     border: 1px solid #C7C7C7;
 }
+.checkboxes{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.checkboxes > input[type="radio"] {
+    display: none;
+}
+
+.radio1 + label {
+    background-image: url('/static/image/lucide_smile.png');
+}
+
+.radio2 + label {
+    background-image: url('/static/image/fa6-regular_face-meh.png');
+}
+
+.radio3 + label {
+    background-image: url('/static/image/akar-icons_face-sad.png');
+}
+
+.checkboxes > input[type="radio"]:checked + label {
+    filter: contrast(50%);
+}
+
+.checkboxes > input[type="radio"] + label {
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+    padding: 0 0 0 0px;
+    background-size: contain;
+    margin: 40px 40px;
+}
+.checkboxes-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.inputas{
+    display: flex;
+}
+.inputas > h1{
+    font-size: 25px;
+    color: #000;
+    padding: 20px 0;
+    margin-left: 10px;
+}
+.inputas > input[type="checkbox"]{
+    width: 25px;
+}
+.difficulties{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .optional-inputs > input:focus{
     outline: none;
 }
 .optional-inputs > input::placeholder{
     color: #676767;
+}
+
+.radio-button {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 0 30px;
+    position: relative;
+    align-items: center;
+    color: #000;
+}
+
+.radio-button input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+}
+
+.radio {
+    position: relative;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    transform: translateZ(-25px);
+    transition: all 0.3s ease-in-out;
+}
+
+.radio::before {
+    position: absolute;
+    content: '';
+    width: 10px;
+    height: 10px;
+    top: 5px;
+    left: 5px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.radio-button input[type="radio"]:checked + .radio {
+    border-color: #5cb85c;
+    transform: translateZ(0px);
+    background-color: #fff;
+}
+
+.radio-button input[type="radio"]:checked + .radio::before {
+    opacity: 1;
+}
+.rating-1{
+    display: flex;
+    justify-content: center;
+}
+
+.rating-1 > input{
+    width: 230px;
+    padding: 15px 0;
+    border: 1px solid #C7C7C7;
+    font-size: 16px;
+    text-indent: 10px;
+}
+
+.rating-1 > input:focus{
+    outline: none;
+}
+
+.textarea{
+    width: 100%;
+}
+.textarea > textarea{
+    width: 100%;
+    height: 337px;
+    border: 1px solid #C7C7C7;
+    padding: 10px;
+    font-size: 16px;
+}
+.textarea > textarea::placeholder{
+    color: #676767;
+}
+.textarea > textarea:focus{
+    outline: none;
+}
+.submit{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    margin: 20px 0;
+}
+.submit > button{
+    padding: 10px 20px;
+    background-color: #4083CF;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    font-size: 30px;
+    color: #fff;
+    cursor: pointer;
+}
+
+@media screen and (max-width:870px) {
+    .optional-inputs > input{
+        width: 100%;
+    }
+}
+@media screen and (max-width:540px) {
+    .checkboxes{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+}
+@media screen and (max-width:1400px) {
+    .wrapper-assist{
+        padding: 50px 20px;
+    }
 }

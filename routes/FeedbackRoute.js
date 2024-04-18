@@ -17,8 +17,8 @@ router.get('/', (req, res) => {
 router.post('/', [
     body('name').optional(),
     body('lastname').optional(),
-    body('rating').isInt({ min: 1, max: 3 }).optional(),
-    body('more_info').optional(),
+    body('rating').isIn(['1', '2', '3']).optional(),
+    body('more_info.*').optional(),
     body('difficulties').optional().isIn(['yes', 'no']),
     body('rating_satisfied').isInt({ min: 1, max: 10 }).optional(),
     body('recommend').optional().isIn(['yes', 'no']),
@@ -49,6 +49,7 @@ router.post('/', [
     } catch (err) {
         req.flash('danger', 'Feedback is not successful, try again later!');
         res.redirect('/feedback');
+        console.log(err)
     }
 });
 
