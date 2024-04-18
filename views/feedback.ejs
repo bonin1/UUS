@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <link rel="stylesheet" href="/static/css/feedback.css">
+</head>
+<body>
+    <%- include('partials/Navbar-light'); %>
+    <% if (successAlert && successAlert.length > 0) { %>
+        <div class="alert alert-success" id="success-alert">
+            <%= successAlert %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">X</span>
+            </button>
+        </div>
+    <% } %>
+    <% if (dangerAlert && dangerAlert.length > 0) { %>
+        <div class="alert alert-danger" id="danger-alert">
+            <%= dangerAlert %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">X</span>
+            </button>
+        </div>
+    <% } %>
+    <div class="title-wrapper">
+        <h1>Feedback & Suggestions</h1>
+    </div>
+    <div class="wrapper">
+        <div class="wrapper-assist">
+            <p>
+                Thank you for your participation in improving the Erasmus experience. Your feedback helps us enhance our services and ensure that Erasmus participants worldwide have an enriching and fulfilling journey. Please take a moment to share your thoughts with us.
+            </p>
+            <div class="forma">
+                <form action="/feedback" method="POST">
+                    <div class="optional-inputs">
+                        <input type="text" id="name" placeholder="Name(optional)" name="name" >
+                        <input type="email" id="lastname" placeholder="Email(optional)" name="lastname">
+                    </div>
+                    <!-- <br>
+                    <select id="rating" name="rating" >
+                        <option value="">Select Rating</option>
+                        <option value="1">1 - Poor</option>
+                        <option value="2">2 - Average</option>
+                        <option value="3">3 - Excellent</option>
+                    </select>
+                    <br>
+                    <textarea id="more_info" name="more_info" maxlength="255"></textarea>
+                    <br>
+                    <input type="radio" id="yes" name="difficulties" value="yes">
+                    <label for="yes">Yes</label>
+                    <input type="radio" id="no" name="difficulties" value="no">
+                    <label for="no">No</label>
+                    <br>
+                    <input type="number" id="rating_satisfied" name="rating_satisfied" min="1" max="10">
+                    <br>
+                    <input type="radio" id="recommend_yes" name="recommend" value="yes">
+                    <input type="radio" id="recommend_no" name="recommend" value="no">
+                    <br>
+                    <textarea id="text_box" name="text_box" maxlength="500"></textarea>
+                    <br>
+                    <button type="submit">Submit Feedback</button> -->
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <%- include('partials/footer'); %>
+    <script>
+        setTimeout(function() {
+            $('#success-alert').fadeOut('slow');
+        }, 10000);
+        setTimeout(function() {
+            $('#danger-alert').fadeOut('slow');
+        }, 10000);
+        $('.close').click(function(){
+            $(this).parent().hide();
+        });
+    </script>
+    <script>
+        AOS.init();
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

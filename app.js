@@ -9,8 +9,9 @@ app.set("view engine", "ejs");
 app.use("/static", express.static('static'));
 
 const apply = require('./routes/ApplyRoute')
-
+const feedback = require('./routes/FeedbackRoute')
 app.use('/apply',apply)
+app.use('/feedback',feedback)
 
 const User = require('./model/UsersModel')
 const Feedback = require('./model/FeedbackModel')

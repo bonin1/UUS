@@ -48,6 +48,7 @@ const Feedback = db.define('feedback', {
         allowNull: true,
     },
 },{
+    timestamps: false,
     freezeTableName: true,
 });
 
