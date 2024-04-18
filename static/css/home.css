@@ -149,7 +149,7 @@ video{
 /* study program */
 .Study_programs{
     width: 100%;
-    height: 100vh;
+    height: 60rem;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -311,7 +311,7 @@ video{
 /* galery */
 .Photo_Galery{
     width: 100%;
-    height: 149vh;
+    height: 90rem;
     display: flex;
     margin-top: 100px;
 }
@@ -371,7 +371,7 @@ video{
 }
 .working-div{
     width: 100%;
-    height: 350px;
+    height: 580px;
     position: relative;
 }
 .working-div > img{
@@ -493,19 +493,19 @@ video{
 }
 .apply_footer > h1{
     text-align: center;
-    padding: 50px 0;
     font-size: 30px;
+    padding: 50px 0;
 }
 .apply_section{
     width: 100%;
-    height: 100vh;
+    height: 40rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .apply_section > img{
     width: 100%;
-    height: 100vh;
+    height:90% !important;
     position: absolute;
     z-index: -1;
     object-fit: cover;
@@ -601,6 +601,9 @@ video{
         font-size: 20px;
         padding: 7px 15px;
     }
+    .apply_section{
+        height: 50rem;
+    }
 }
 @media screen and (max-width:568px){
     .welcome-text{
@@ -680,7 +683,7 @@ video{
     }
     .HalfG{
         width: 100%;
-        height: 150vh;
+        height: 90rem;
     }
     .container-div-galery{
         width: 100%;
