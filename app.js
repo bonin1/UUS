@@ -13,7 +13,7 @@ const apply = require('./routes/ApplyRoute')
 app.use('/apply',apply)
 
 const User = require('./model/UsersModel')
-
+const Feedback = require('./model/FeedbackModel')
 
 const routes = [
     { path: '/', view: 'home' },

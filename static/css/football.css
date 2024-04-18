@@ -16,7 +16,7 @@ body{
 }
 .container{
     width: 100%;
-    height: 100vh;
+    height: 70rem;
     background: no-repeat url('/static/image/footballbc.png');
     background-size: cover;
     background-position: center;

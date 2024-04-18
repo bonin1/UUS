@@ -29,12 +29,22 @@ body{
 .both-containers{
     width: 50%;
 }
+.first-container{
+    padding-top: 60px;
+}
 .first-container > a > img{
-    width: 100%;
+    width: 50%;
 }
 .first-container > h1 {
     font-size: 32px;
     text-align: center;
+}
+.first-container > a{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 .same{
     width: 100%;
@@ -45,6 +55,9 @@ body{
 .same > img{
     object-fit: contain;
 }
+.same > h1{
+    font-size: 25px;
+}
 .second-container {
     padding: 30px ;
     padding-top: 100px;
@@ -53,7 +66,6 @@ body{
     font-size: 40px ;
     color: #004492;
     padding-bottom: 30px;
-    text-decoration: underline;
 }
 .second-container > form{
     display: flex;
