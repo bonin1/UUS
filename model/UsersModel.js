@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
-const db = require('../database'); // Assuming you have configured your Sequelize connection
-const Department = require('./DepartmentModel'); // Importing the Department model
+const db = require('../database');
+const Department = require('./DepartmentModel');
 
 const User = db.define('User', {
     id: {
