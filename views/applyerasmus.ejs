@@ -7,6 +7,22 @@
     <link rel="stylesheet" href="/static/css/applyerasmus.css">
 </head>
 <body>
+    <% if (successAlert && successAlert.length > 0) { %>
+        <div class="alert alert-success" id="success-alert">
+            <%= successAlert %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">X</span>
+            </button>
+        </div>
+    <% } %>
+    <% if (dangerAlert && dangerAlert.length > 0) { %>
+        <div class="alert alert-danger" id="danger-alert">
+            <%= dangerAlert %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">X</span>
+            </button>
+        </div>
+    <% } %>
     <div class="wrapper">
         <div class="wrapper-assists">
             <div class="logo">
@@ -20,10 +36,10 @@
                 </div>
                 <div class="second_part both_part">
                     <form action="/apply-erasmus" method="post">
-                        <input type="text" name="" placeholder="Full Name:">
-                        <input type="text" name="" placeholder="Place you are interested:">
-                        <input type="text" name="" placeholder="Semester:">
-                        <input type="text" name="" placeholder="Department:">
+                        <input type="text" name="fullname" placeholder="Full Name:">
+                        <input type="text" name="place" placeholder="Place you are interested:">
+                        <input type="text" name="semester" placeholder="Semester:">
+                        <input type="text" name="dep_id" placeholder="Department:">
                         <button type="submit">Submit</button>
                     </form>
                 </div>

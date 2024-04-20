@@ -8,17 +8,21 @@ app.use(bodyParser.json());
 app.set("view engine", "ejs");
 app.use("/static", express.static('static'));
 
-const apply = require('./routes/ApplyRoute')
-const feedback = require('./routes/FeedbackRoute')
-app.use('/apply',apply)
-app.use('/feedback',feedback)
 
 const User = require('./model/UsersModel')
 const Feedback = require('./model/FeedbackModel')
 
+const apply = require('./routes/ApplyRoute')
+const feedback = require('./routes/FeedbackRoute')
+const ApplyErasmus = require('./routes/ApplyErasmusRoute')
+const login = require('./routes/LoginRoute')
+app.use('/apply',apply)
+app.use('/feedback',feedback)
+app.use('/apply-erasmus',ApplyErasmus)
+app.use('/login',login)
+
 const routes = [
     { path: '/', view: 'home' },
-    { path: '/login', view: 'login' },
     { path: '/change-pw', view: 'change-pw' },
     { path: '/confirm-change', view: 'confirm-change' },
     { path: '/about-us', view: 'aboutus' },
@@ -39,8 +43,7 @@ const routes = [
     { path: '/law-school', view: 'law-school' },
     { path: '/workat-uus', view: 'workat-uus' },
     { path: '/ourpartners', view: 'ourpartners' },
-    { path: '/contactus', view: 'contact-us' },
-    { path: '/apply-erasmus', view: 'applyerasmus' }
+    { path: '/contactus', view: 'contact-us' }
 ];
 
 routes.forEach(route => {

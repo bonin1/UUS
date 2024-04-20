@@ -1,7 +1,10 @@
 {
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.6",
     "crypto": "^1.0.1",
+    "csurf": "^1.11.0",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.9",
     "express": "^4.19.2",
@@ -11,7 +14,8 @@
     "helmet": "^7.1.0",
     "mysql2": "^3.9.4",
     "nodemon": "^3.1.0",
-    "sequelize": "^6.37.3"
+    "sequelize": "^6.37.3",
+    "validator": "^13.11.0"
   },
   "scripts": {
     "start": "nodemon app.js"
