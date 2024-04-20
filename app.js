@@ -39,8 +39,8 @@ const routes = [
     { path: '/law-school', view: 'law-school' },
     { path: '/workat-uus', view: 'workat-uus' },
     { path: '/ourpartners', view: 'ourpartners' },
-    { path: '/contactus', view: 'contact-us' }
-
+    { path: '/contactus', view: 'contact-us' },
+    { path: '/apply-erasmus', view: 'applyerasmus' }
 ];
 
 routes.forEach(route => {
