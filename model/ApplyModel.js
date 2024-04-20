@@ -42,7 +42,7 @@ const ApplyForm = db.define('apply_form', {
     },
     application_date: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: false,   
         defaultValue: DataTypes.NOW,
     },
     status: {
