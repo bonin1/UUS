@@ -15,18 +15,19 @@
     </div>
     <div class="second-part both-parts">
       <form action="/login" method="post">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <h1>Login</h1>
         <div class="input-box">
-          <input type="email" placeholder="Email adresa | Email" required>
+          <input type="email" name="email" placeholder="Email adresa | Email" required>
           <i class='bx bxs-user'></i>
         </div>
         <div class="input-box">
-          <input type="password" placeholder="Fjalkalimi | Password" required>
+          <input type="password" name="password" placeholder="Fjalkalimi | Password" required>
           <i class='bx bxs-lock-alt' ></i>
         </div>
         <br>
         <div class="remember-forgot">
-          <label><input type="checkbox">Remember Me</label>
+          <label><input type="checkbox" name="rememberMe">Remember Me</label>
           <a href ="/change-pw">
             <u>Forgot Password?</u>
           </a>
@@ -35,6 +36,7 @@
         <button type="submit" class="btn">Login</button>
         <br>
         <br>
+        <%= message %>
       </form>
     </div>
   </div>
