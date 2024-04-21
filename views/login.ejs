@@ -7,32 +7,38 @@
   <link rel="stylesheet" href="/static/css/login.css">
 </head>
 <body>
-  <a href="/">
-    <img class="Main_logo" src="/static/image/logo2.0black.png" alt="">
-  </a>
   <div class="wrapper">
-    <form action="/login" method="post">
-      <h1>Login</h1>
-      <div class="input-box">
-        <input type="email" placeholder="Email adresa | Email" required>
-        <i class='bx bxs-user'></i>
-      </div>
-      <div class="input-box">
-        <input type="password" placeholder="Fjalkalimi | Password" required>
-        <i class='bx bxs-lock-alt' ></i>
-      </div>
-      <br>
-      <div class="remember-forgot">
-        <label><input type="checkbox">Remember Me</label>
-        <a href ="/change-pw">
-          <u>Forgot Password?</u>
-        </a>
-      </div>
-      <br>
-      <button type="submit" class="btn">Login</button>
-      <br>
-      <br>
-    </form>
+    <div class="first-part both-parts">
+      <a href="/"  data-tilt data-tilt-glare data-tilt-max-glare="0.8">
+        <img class="Main_logo"  data-tilt data-tilt-glare data-tilt-max-glare="0.8" src="/static/image/logo2.0black.png" alt="">
+      </a>
+    </div>
+    <div class="second-part both-parts">
+      <form action="/login" method="post">
+        <h1>Login</h1>
+        <div class="input-box">
+          <input type="email" placeholder="Email adresa | Email" required>
+          <i class='bx bxs-user'></i>
+        </div>
+        <div class="input-box">
+          <input type="password" placeholder="Fjalkalimi | Password" required>
+          <i class='bx bxs-lock-alt' ></i>
+        </div>
+        <br>
+        <div class="remember-forgot">
+          <label><input type="checkbox">Remember Me</label>
+          <a href ="/change-pw">
+            <u>Forgot Password?</u>
+          </a>
+        </div>
+        <br>
+        <button type="submit" class="btn">Login</button>
+        <br>
+        <br>
+      </form>
+    </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
+  <script src="https://unpkg.com/tilt.js@1.1.21/dest/tilt.jquery.min.js"></script>
 </body>
 </html>

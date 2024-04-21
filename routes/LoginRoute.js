@@ -7,7 +7,6 @@ const csrf = require('csurf');
 const validator = require('validator');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const helmet = require('helmet');
 const router = express.Router();
 const crypto = require('crypto');
 require('dotenv').config();
@@ -17,7 +16,6 @@ const LoginInformation = require('../model/LoginModel')
 
 router.use(loginlimitter)
 
-router.use(helmet());
 router.use(cookieParser());
 router.use(session({ 
     secret: process.env.SESSION_SECRET, 

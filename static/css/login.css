@@ -18,20 +18,12 @@
     min-height: 100vh;
     background-color: #f1f1f1;
   }
-  .Main_logo{
-    width: 500px;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-  }
   .wrapper{
-    width: 420px;
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
-    color: #fff;
-    border-radius: 12px;
-    padding: 30px 40px;
-    background-color: #262626;
+    width: 1440px;
+    display: flex;
+  }
+  .Main_logo{
+    width: 50%;
   }
   .wrapper h1{
     font-size: 23px;
@@ -41,8 +33,30 @@
     position: relative;
     width: 100%;
     height: 50px;
-    
     margin: 30px 0;
+  }
+  .both-parts{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+  }
+  .first-part > a{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  form{
+    background-color: #262626;
+    padding: 40px 60px;
+    border-radius: 10px;
+    width: 100%;
+  }
+  form > h1{
+    color: #fff;
   }
   .input-box input{
     width: 100%;
@@ -77,12 +91,13 @@
   .remember-forgot label input{
     accent-color: #fff;
     margin-right: 3px;
-  
   }
   .remember-forgot a{
     color: #4285F4;
     text-decoration: none;
-  
+  }
+  .remember-forgot > label{
+    color: #fff;
   }
   .remember-forgot a:hover{
     text-decoration: underline;
@@ -160,5 +175,19 @@
 @media screen and (max-width:768px) {
   .Main_logo{
     width: 300px;
+  }
+}
+@media screen and (max-width:1400px){
+  .wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+} 
+@media screen and (max-width: 1000px) {
+  .both-parts{
+    width: 100%;
   }
 }

@@ -51,7 +51,9 @@ routes.forEach(route => {
         res.render(route.view);
     });
 });
-
+app.get('*', (req, res) => {
+    res.render('error');
+});
 
 app.listen(process.env.PORT, ()=>{
     console.log('Ready!')
