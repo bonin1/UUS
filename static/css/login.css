@@ -172,6 +172,13 @@
   align-items: center;
   height: 114px;
 }
+.span{
+  height: 30px;
+  width: 100%;
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+}
 @media screen and (max-width:768px) {
   .Main_logo{
     width: 300px;

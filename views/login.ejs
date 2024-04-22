@@ -7,6 +7,11 @@
   <link rel="stylesheet" href="/static/css/login.css">
 </head>
 <body>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
   <div class="wrapper">
     <div class="first-part both-parts">
       <a href="/"  data-tilt data-tilt-glare data-tilt-max-glare="0.8">
@@ -36,10 +41,20 @@
         <button type="submit" class="btn">Login</button>
         <br>
         <br>
-        <%= message %>
+        <div class="span">
+          <p id="messageContainer">
+            <%= message %>
+          </p>
+        </div>
       </form>
     </div>
   </div>
+  <script>
+    setTimeout(() => {
+      const messageContainer = document.getElementById('messageContainer');
+      messageContainer.classList.add('hidden');
+    }, 10000);
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
   <script src="https://unpkg.com/tilt.js@1.1.21/dest/tilt.jquery.min.js"></script>
 </body>
