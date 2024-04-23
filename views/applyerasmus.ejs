@@ -39,7 +39,9 @@
                         <input type="text" name="fullname" placeholder="Full Name:">
                         <input type="text" name="place" placeholder="Place you are interested:">
                         <input type="text" name="semester" placeholder="Semester:">
-                        <input type="text" name="dep_id" placeholder="Department:">
+                        <select class="status" name="dep_id">
+                            <option value="1" >Computer Science</option>
+                        </select>
                         <button type="submit">Submit</button>
                     </form>
                 </div>
@@ -48,5 +50,16 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
     <script src="https://unpkg.com/tilt.js@1.1.21/dest/tilt.jquery.min.js"></script>
+    <script>
+        setTimeout(function() {
+            $('#success-alert').fadeOut('slow');
+        }, 10000);
+        setTimeout(function() {
+            $('#danger-alert').fadeOut('slow');
+        }, 10000);
+        $('.close').click(function(){
+            $(this).parent().hide();
+        });
+    </script>   
 </body>
 </html>

@@ -6,6 +6,8 @@ const ApplyErasmus = require('../model/applyErasmusModel')
 router.use(express.urlencoded({ extended: true }));
 const loggingRateLimiter = require('../middleware/loginlimitter')
 const sessionMiddleware = require('../middleware/sesionMiddleware')
+const User = require('../model/UsersModel');
+
 
 router.use(flash());
 router.use(loggingRateLimiter)
@@ -28,10 +30,23 @@ async (req, res) => {
         req.flash('danger', errors.array().map(error => error.msg).join(' '));
         return res.redirect('/apply-erasmus');
     }
+
+    if (!req.session.userId) {
+        req.flash('danger', 'You must be logged in to submit an application.');
+        return res.redirect('/apply-erasmus');
+    }
+
     const { fullname, place, semester, dep_id } = req.body;
+    const userId = req.session.userId; 
+    console.log('User ID:', userId);
+    const user = await User.findByPk(userId);
+    if (!user) {
+        req.flash('danger', 'Invalid user. Please log in again.');
+        return res.redirect('/apply-erasmus');
+    }
 
     try {
-        await ApplyErasmus.create({ fullname, place, semester, dep_id });
+        await ApplyErasmus.create({ fullname, place, semester, dep_id, user_id: userId });
         req.flash('success', 'Application submitted successfully!');
         return res.redirect('/apply-erasmus');
     } catch (err) {
@@ -40,6 +55,5 @@ async (req, res) => {
         return res.redirect('/apply-erasmus');
     }
 });
-
 
 module.exports = router;

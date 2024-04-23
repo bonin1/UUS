@@ -7,41 +7,50 @@
     <link rel="stylesheet" href="/static/css/protected.css">
 </head>
 <body>
-    <% data.forEach(row=>{ %>
-        <div class="apply_card">
-            <div class="first-part">
-                <div class="apply_name">
-                    <span>
-                        <%= row.name %>
-                        <%= row.lastname %>
-                    </span>
+    <img class="logo" src="/static/image/logo2.0black.png" alt="">
+    <h1 style="text-align: center;">UUS Admin Pannel</h1>
+    <h1 style="text-align: center; margin: 50px 0;">New applications</h1>
+    <div class="apply_wrapper">
+        <% data.forEach(row=>{ %>
+            <div class="apply_card">
+                <div class="first-part">
+                    <div class="apply_name">
+                        <span>
+                            <%= row.name %>
+                            <%= row.lastname %>
+                        </span>
+                    </div>
+                    <div class="apply_phone_num">
+                        <%= row.phone_number %>
+                    </div>
+                    <div class="apply_email">
+                        <%= row.email %>
+                    </div>
+                    <div class="apply_high_school">
+                        <%= row.high_school %>
+                    </div>
+                    <div class="apply_study_level">
+                        <%= row.study_level %>
+                    </div>
+                    <div class="apply_department">
+                        <%= row.choose_dep %>
+                    </div>
                 </div>
-                <div class="apply_phone_num">
-                    <%= row.phone_number %>
-                </div>
-                <div class="apply_email">
-                    <%= row.email %>
-                </div>
-                <div class="apply_high_school">
-                    <%= row.high_school %>
-                </div>
-                <div class="apply_study_level">
-                    <%= row.study_level %>
-                </div>
-                <div class="apply_department">
-                    <%= row.choose_dep %>
+                <div class="second-part">
+                    <select class="status" data-id="<%= row.user_id %>">
+                        <option value="pending" <%= row.status == 'pending' ? 'selected' : '' %>>pending</option>
+                        <option value="accepted" <%= row.status == 'accepted' ? 'selected' : '' %>>accepted</option>
+                        <option value="rejected" <%= row.status == 'rejected' ? 'selected' : '' %>>rejected</option>
+                    </select>
                 </div>
             </div>
-            <div class="second-part">
-                <select class="status" data-id="<%= row.user_id %>">
-                    <option value="pending" <%= row.status == 'pending' ? 'selected' : '' %>>pending</option>
-                    <option value="accepted" <%= row.status == 'accepted' ? 'selected' : '' %>>accepted</option>
-                    <option value="rejected" <%= row.status == 'rejected' ? 'selected' : '' %>>rejected</option>
-                </select>
-            </div>
-        </div>
-    <% }) %>
-    
+        <% }) %>
+    </div>
+    <h1 style="text-align: center; margin: 50px 0;">Statistics</h1>
+    <h1>Number of Students: <%= studentCount %></h1>
+    <h1>Number of Professors: <%= professorCount %></h1>
+    <h1>Number of departments: <%=departmentCount%> </h1>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function(){
