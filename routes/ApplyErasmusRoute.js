@@ -38,7 +38,6 @@ async (req, res) => {
 
     const { fullname, place, semester, dep_id } = req.body;
     const userId = req.session.userId; 
-    console.log('User ID:', userId);
     const user = await User.findByPk(userId);
     if (!user) {
         req.flash('danger', 'Invalid user. Please log in again.');

@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const apply = require('../model/ApplyModel')
 const User = require('../model/UsersModel');
 const department = require('../model/DepartmentModel')
-
+const Feedback = require('../model/FeedbackModel');
 router.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -24,11 +24,39 @@ router.get('/', async (req, res) => {
         try {
             const studentCount = await User.count({ where: { role: 'student' } });
             const professorCount = await User.count({ where: { role: 'professor' } });
-            const departments = await department.findAll();
+            const departments = await department.findAll({ attributes: ['dep_id', 'dep_name'] });
             const departmentCount = departments.length;
+
+            const departmentStudentCounts = await Promise.all(departments.map(async (dep) => {
+                const count = await User.count({ where: { role: 'student', dep_id: dep.dep_id } });
+                return { dep_name: dep.dep_name, count };
+            }));
+            const feedbackData = await Feedback.findAll({
+                attributes: [
+                    'name', 
+                    'lastname', 
+                    'text_box',
+                    'rating',
+                    'rating_satisfied'
+                ],
+            });
+            const totalRatings = feedbackData.reduce((sum, feedback) => sum + feedback.rating, 0);
+            const averageRating = totalRatings / feedbackData.length;
+
+            const totalSatisfiedRatings = feedbackData.reduce((sum, feedback) => sum + feedback.rating_satisfied, 0);
+            const averageSatisfiedRating = totalSatisfiedRatings / feedbackData.length;
             apply.findAll()
                 .then(results => {
-                    res.render('protected', { data: results, studentCount,professorCount,departmentCount });
+                    res.render('protected', {
+                        row: feedbackData, 
+                        data: results, 
+                        studentCount, 
+                        professorCount, 
+                        departmentCount, 
+                        departmentStudentCounts, 
+                        averageRating ,
+                        averageSatisfiedRating
+                    });
                 })
                 .catch(err => {
                     console.error(err);
@@ -42,6 +70,7 @@ router.get('/', async (req, res) => {
         res.redirect('/admin');
     }
 });
+
 
 
 

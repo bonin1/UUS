@@ -44,13 +44,8 @@ body{
     display: flex;
 }
 .container{
-    display: flex;
-}
-.logo{
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
 }
 .both_part{
     width: 50%;
@@ -65,25 +60,32 @@ body{
     justify-content: center;
     align-items: center;
 }
-.our_logo > img{
-    width: 50%;
-}
 .second_part > form{
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
 }
-.second_part > form > input{
-    margin: 50px 0;
+.second_part > form > input,
+.status,
+form > button{
+    margin: 40px 0;
     padding: 10px 20px;
     border: 1px solid lightgray;
     font-size: 18px;
     border-radius: 10px;
+    width: 300px;
 }
-.second_part > form > input::placeholder{
+.second_part > form > input::placeholder,
+.status::placeholder{
     color: #9E9E9E;
 }
-.second_part > form > input:focus{
+.second_part > form > input:focus,
+.status:focus{
     outline: none;
+}
+form > button{
+    cursor: pointer;
+    background-color:#004492;
+    color: #fff;
 }

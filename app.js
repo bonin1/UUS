@@ -37,6 +37,7 @@ app.get('/e-learning',(req,res)=>{
 const User = require('./model/UsersModel')
 const Feedback = require('./model/FeedbackModel')
 const ApplyForm = require('./model/ApplyModel')
+const Department = require('./model/DepartmentModel')
 
 const apply = require('./routes/ApplyRoute')
 const feedback = require('./routes/FeedbackRoute')

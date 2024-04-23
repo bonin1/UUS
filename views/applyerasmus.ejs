@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/static/css/applyerasmus.css">
 </head>
 <body>
+    <%- include('partials/Navbar-light'); %>
     <% if (successAlert && successAlert.length > 0) { %>
         <div class="alert alert-success" id="success-alert">
             <%= successAlert %>
@@ -24,23 +25,26 @@
         </div>
     <% } %>
     <div class="wrapper">
-        <div class="wrapper-assists">
-            <div class="logo">
-                <img src="/static/image/erasmuslogo.png" alt="">
-            </div>
+        <div class="wrapper-assist">
             <div class="container">
                 <div class="first_part both_part">
                     <div class="our_logo">
-                        <img  data-tilt data-tilt-glare data-tilt-max-glare="0.8" src="/static/image/logo2.0black.png" alt="">
+                        <img  data-tilt data-tilt-glare data-tilt-max-glare="0.8" src="/static/image/erasmuslogo.png" alt="">
                     </div>
                 </div>
                 <div class="second_part both_part">
                     <form action="/apply-erasmus" method="post">
-                        <input type="text" name="fullname" placeholder="Full Name:">
-                        <input type="text" name="place" placeholder="Place you are interested:">
-                        <input type="text" name="semester" placeholder="Semester:">
-                        <select class="status" name="dep_id">
+                        <input type="text" required name="fullname" placeholder="Full Name:">
+                        <input type="text" required name="place" placeholder="Place you are interested:">
+                        <select class="status" required name="semester">
+                            <option value="" class="" disabled selected>Semester:</option>
+                            <option value="winter" >Winter</option>
+                            <option value="summer">Summer</option>
+                        </select>
+                        <select class="status" required name="dep_id">
+                            <option value="" class="" disabled selected>Department:</option>
                             <option value="1" >Computer Science</option>
+                            <option value="2">Cyber Security</option>
                         </select>
                         <button type="submit">Submit</button>
                     </form>
