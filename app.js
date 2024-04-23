@@ -19,30 +19,52 @@ app.use(session({
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
 app.use((req, res, next) => {
     res.locals.isLoggedIn = req.session.isLoggedIn;
     next();
 });
 
 app.get('/e-learning',(req,res)=>{
-    if (!req.session.isLogged) {
+    if (!req.session.isLoggedIn) {
         return res.redirect('/login');
     }
     res.render('e-learning')
 })
 
+
+
+
 const User = require('./model/UsersModel')
 const Feedback = require('./model/FeedbackModel')
+const ApplyForm = require('./model/ApplyModel')
 
 const apply = require('./routes/ApplyRoute')
 const feedback = require('./routes/FeedbackRoute')
 const ApplyErasmus = require('./routes/ApplyErasmusRoute')
 const login = require('./routes/LoginRoute')
+const adminRoutes = require('./routes/AdminRoute');
+const protected = require('./routes/ProtectedRoute')
 app.use('/apply',apply)
 app.use('/feedback',feedback)
 app.use('/apply-erasmus',ApplyErasmus)
 app.use('/login',login)
+app.use('/admin', adminRoutes)
+app.use('/protected',protected)
+
+
+
+app.post('/update_status', (req, res) => {
+    const { id, status } = req.body; 
+    ApplyForm.update({ status: status }, { where: { user_id: id } })
+        .then(() => {
+        res.sendStatus(200);
+        })
+        .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+        });
+});
+
 
 const routes = [
     { path: '/', view: 'home' },

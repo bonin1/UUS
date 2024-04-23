@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.apply_card{
+    width: 300px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #EFEFEF ;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 24px;
+}
+.apply_name{
+    margin: 10px 0;
+}
+.apply_name > span{
+    background-color: #373737;
+    color: #fff;
+    padding: 5px;
+    border-radius: 10px;
+    text-transform: capitalize;
+}
