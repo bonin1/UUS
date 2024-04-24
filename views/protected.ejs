@@ -93,12 +93,28 @@
             </div>
             <div style="border-top: 1px solid #fff;" class="both-part-one">
                 <h1>Average Rating 1=10</h1>
-                <span><%= averageSatisfiedRating %></span></div>
+                <span><%= averageSatisfiedRating %></span>
+            </div>
         </div>
 
-        <div class="feedback-two"></div>
+        <div class="feedback-two">
+            <div class="feedback-two-container">
+                <% Object.keys(moreInfoCounts).forEach(info => { %>
+                    <h1>
+                        <span class="text-counts"><%= info %>:</span> <span class="counts"><%= moreInfoCounts[info] %></span><br>
+                    </h1>
+                <% }); %>
+            </div>
+        </div>
 
-        <div class="feedback-three"></div>
+        <div class="feedback-three">
+            <div class="both-part-two">
+
+            </div>
+            <div style="border-top: 1px solid #fff;" class="both-part-two">
+                
+            </div>
+        </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>

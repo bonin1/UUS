@@ -37,7 +37,8 @@ router.get('/', async (req, res) => {
                     'lastname', 
                     'text_box',
                     'rating',
-                    'rating_satisfied'
+                    'rating_satisfied',
+                    'more_info',
                 ],
             });
             const totalRatings = feedbackData.reduce((sum, feedback) => sum + feedback.rating, 0);
@@ -45,6 +46,16 @@ router.get('/', async (req, res) => {
 
             const totalSatisfiedRatings = feedbackData.reduce((sum, feedback) => sum + feedback.rating_satisfied, 0);
             const averageSatisfiedRating = totalSatisfiedRatings / feedbackData.length;
+
+            const moreInfoCounts = {};
+            feedbackData.forEach(feedback => {
+                if (feedback.more_info in moreInfoCounts) {
+                    moreInfoCounts[feedback.more_info]++;
+                } else {
+                    moreInfoCounts[feedback.more_info] = 1;
+                }
+            });
+
             apply.findAll()
                 .then(results => {
                     res.render('protected', {
@@ -55,7 +66,8 @@ router.get('/', async (req, res) => {
                         departmentCount, 
                         departmentStudentCounts, 
                         averageRating ,
-                        averageSatisfiedRating
+                        averageSatisfiedRating,
+                        moreInfoCounts
                     });
                 })
                 .catch(err => {
