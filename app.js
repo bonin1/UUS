@@ -2,6 +2,11 @@ const express = require("express")
 const app = express()
 const bodyParser = require('body-parser');
 require('dotenv').config();
+const flash = require('connect-flash');
+
+const multer = require('multer');
+const fs = require('fs')
+
 
 app.set("view engine", "ejs");
 app.use("/static", express.static('static'));
@@ -24,11 +29,44 @@ app.use((req, res, next) => {
     next();
 });
 
+
+const storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, __dirname + '/uploads/');
+    },
+    filename: function (req, file, callback) {
+        callback(null, file.originalname);
+    }
+});
+
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 20 * 1024 * 1024 }
+});
+
+
+app.post('/upload', function(req, res) {
+    if (!req.files) {
+        console.log('No files uploaded');
+    } else {
+        req.files.forEach(file => {
+            console.log(file);
+            const image = {
+                name: file.originalname,
+                data: fs.readFileSync(file.path)
+            }
+        });
+    }
+});
+
+
+
 const User = require('./model/UsersModel')
 const Feedback = require('./model/FeedbackModel')
 const ApplyForm = require('./model/ApplyModel')
 const Department = require('./model/DepartmentModel')
 const ApplyErasmus = require('./model/applyErasmusModel') 
+const UserImage = require('./model/UserImageModel')
 
 app.get('/e-learning',(req,res)=>{
     if (!req.session.isLoggedIn) {
@@ -58,8 +96,70 @@ app.post('/deleteApplyErasmus/:id', async (req, res) => {
     }
 });
 
+app.post('/register/user', upload.array('files', 10), async (req, res) => {
+    const {
+        name,
+        lastname,
+        dep_id,
+        role,
+        email,
+        phone_number,
+        address
+    } = req.body;
+    
+    try {
+        const existingUser = await User.findOne({
+            where: {
+                email: email
+            }
+        });
+
+        if (existingUser) {
+            req.session.alert = { type: 'danger', message: 'User already exists' };
+            return res.redirect('/protected');
+        } else {
+            const newUser = await User.create({
+                name,
+                lastname,
+                dep_id,
+                role,
+                email,
+                phone_number,
+                address
+            });
+            req.session.alert = { type: 'success', message: 'User created successfully' };
 
 
+            try {
+                if (req.files) {
+                    const imagesPromises = req.files.map(async (file) => {
+                        const newImage = {
+                            name: file.originalname,
+                            data: fs.readFileSync(file.path)
+                        };
+                        const image = await UserImage.create({
+                            user_id: newUser.id,
+                            photo_user: newImage.data
+                        });
+                        await fs.promises.unlink(file.path);
+                        return image;
+                    });
+                    await Promise.all(imagesPromises);
+                    return res.redirect('/protected');
+                } else {
+                    console.log('No files were uploaded.');
+                    res.redirect('/protected')
+                }
+            } catch (err) {
+                console.error('Error processing files:', err);
+            }
+            
+        }
+    } catch (err) {
+        console.error('Error creating user:', err);
+        res.status(500).json({ error: 'An error occurred while creating user.' });
+    }
+});
 
 
 

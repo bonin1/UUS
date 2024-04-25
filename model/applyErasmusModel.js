@@ -1,7 +1,10 @@
 const { DataTypes } = require('sequelize');
 const db = require('../database');
+
+
 const Users = require('./UsersModel')
 const Department = require('./DepartmentModel')
+const Login  = require('./LoginModel')
 
 const ApplyErasmus = db.define('apply_erasmus', {
     application_id: {

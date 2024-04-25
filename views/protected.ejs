@@ -9,6 +9,9 @@
 <body>
     <img class="logo" src="/static/image/logo2.0black.png" alt="">
     <h1 style="text-align: center;">UUS Admin Pannel</h1>
+
+
+
     <h1 style="text-align: center; margin: 50px 0;">New applications</h1>
     <div class="apply_wrapper">
         <% data.forEach(row=>{ %>
@@ -46,6 +49,9 @@
             </div>
         <% }) %>
     </div>
+
+
+
     <h1 style="text-align: center; margin: 50px 0;">Statistics</h1>
     <div class="statistics">
         <div class="statistics-part-one statistics-both">
@@ -72,6 +78,9 @@
             </table>
         </div>
     </div>
+
+
+
     <h1 style="text-align: center; margin: 50px 0;">Feedback Statistics</h1>
     <div class="feedback">
         <div class="feedback-inside-container">
@@ -126,13 +135,22 @@
             </div>
         </div>
     </div>
+
+
+
     <h1 style="text-align: center; margin: 50px 0;">New Erasmus Applications</h1>
     <div class="new-erasmus-container">
         <% card.forEach(apply => { %>
             <div class="card-apply-erasmus">
-                <span>
-                    <%= apply.fullname %>
-                </span>
+                <div class="emri-delete">
+                    <span>
+                        <%= apply.fullname %>
+                    </span>
+                    <form action="/deleteApplyErasmus/<%= apply.application_id %>" method="POST">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit">X</button>
+                    </form>
+                </div>
                 <h1>
                     <%= apply.place %>
                 </h1>
@@ -146,11 +164,52 @@
                     <%= apply.User.email %>
                 </h1>
             </div>
-            <form action="/deleteApplyErasmus/<%= apply.application_id %>" method="POST">
-                <input type="hidden" name="_method" value="DELETE">
-                <button type="submit">Delete</button>
-            </form>
         <% }); %>
+    </div>
+
+
+    <% if (alert) { %>
+        <div class="alert <%= alert.type %>-alert" id="alert">
+            <%= alert.message %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">X</span>
+            </button>
+        </div>
+    <% } %>
+    
+    <h1 style="text-align: center; margin: 50px 0;">Register User</h1>
+    <div class="register-container">
+        <div class="register-one">
+            <div class="edit-container">
+                <a href="">Edit <img src="/static/image/editicon.png" alt=""></a>
+            </div>
+            <form action="/register/user" method="POST" enctype="multipart/form-data">
+                <input required type="text" name="name" placeholder="Name of the user:">
+                <input required type="text" name="lastname" placeholder="Lastname of the user:">
+                <input required type="text" name="address" placeholder="Adress of the user:" id="">
+                <input required type="email" name="email" placeholder="Personal email of user:" id="">
+                <input required type="text" name="phone_number" placeholder="Phone number of user:" id="">
+                <select required name="role" id="">
+                    <option value="" class="" disabled selected>Role</option>
+                    <option value="admin">Admin!!!</option>
+                    <option value="student">Student</option>
+                    <option value="professor">Professor</option>
+                </select>
+                <select required name="dep_id" id="">
+                    <option value="" class="" disabled selected>Department</option>
+                    <option value="1">Computer Science</option>
+                    <option value="2">Cyber Security</option>
+                </select>
+                <input type="file" name="files" multiple  id="file" onchange="loadFile(event)">
+                
+                <button type="submit">Create</button>
+            </form>
+        </div>
+        <div class="register-two">
+            <div id="output">
+                <img src="/static/image/default.png" alt="">
+            </div>
+        </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
@@ -174,6 +233,26 @@
                 });
             });
         });
+
+        setTimeout(function() {
+            $('#alert').fadeOut('slow');
+        }, 10000);
+        $('.close').click(function(){
+            $(this).parent().hide();
+        });
+        var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.innerHTML = "";
+    for(let i=0; i< event.target.files.length; i++){
+        var reader = new FileReader();
+        reader.onload = function(){
+            var img = document.createElement('img');
+            img.src = reader.result;
+            output.appendChild(img);
+        };
+        reader.readAsDataURL(event.target.files[i]);
+    }
+};
     </script>
 </body>
 </html>

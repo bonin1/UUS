@@ -3,11 +3,15 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+
+
+
 const Apply = require('../model/ApplyModel');
 const User = require('../model/UsersModel');
 const Department = require('../model/DepartmentModel');
 const Feedback = require('../model/FeedbackModel');
 const ApplyErasmus = require('../model/applyErasmusModel'); 
+const Login = require('../model/LoginModel')
 
 router.use(session({
     secret: process.env.SESSION_SECRET,
@@ -22,6 +26,8 @@ router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 
 router.get('/', async (req, res) => {
+    const alert = req.session.alert;
+    req.session.alert = null;
     try {
         if (!req.session.user || req.session.user.role !== 'admin') {
             return res.redirect('/admin');
@@ -87,12 +93,16 @@ router.get('/', async (req, res) => {
             averageSatisfiedRating,
             moreInfoCounts,
             difficulties,
-            recommend
+            recommend,
+            alert: alert 
         });
     } catch (err) {
         console.error('Error fetching data:', err);
         res.status(500).send('An error occurred.');
     }
 });
+
+
+
 
 module.exports = router;
