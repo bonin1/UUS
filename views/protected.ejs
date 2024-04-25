@@ -109,12 +109,48 @@
 
         <div class="feedback-three">
             <div class="both-part-two">
-
+                <h2>Difficulties</h2>
+                <% Object.keys(difficulties).forEach(info => { %>
+                    <h1>
+                        <span class="yes-no-counts"><%= info %>:</span> <span class="counts-yn"><%= difficulties[info] %></span><br>
+                    </h1>
+                <% }); %>
             </div>
             <div style="border-top: 1px solid #fff;" class="both-part-two">
-                
+                <h2>Recomment</h2>
+                <% Object.keys(recommend).forEach(info => { %>
+                    <h1>
+                        <span class="yes-no-counts"><%= info %>:</span> <span class="counts-yn"><%= recommend[info] %></span><br>
+                    </h1>
+                <% }); %>
             </div>
         </div>
+    </div>
+    <h1 style="text-align: center; margin: 50px 0;">New Erasmus Applications</h1>
+    <div class="new-erasmus-container">
+        <% card.forEach(apply => { %>
+            <div class="card-apply-erasmus">
+                <span>
+                    <%= apply.fullname %>
+                </span>
+                <h1>
+                    <%= apply.place %>
+                </h1>
+                <h1>
+                    <%= apply.semester %>
+                </h1>
+                <h1>
+                    <%= apply.Department.dep_name %>
+                </h1>
+                <h1>
+                    <%= apply.User.email %>
+                </h1>
+            </div>
+            <form action="/deleteApplyErasmus/<%= apply.application_id %>" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit">Delete</button>
+            </form>
+        <% }); %>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
@@ -138,7 +174,6 @@
                 });
             });
         });
-
     </script>
 </body>
 </html>

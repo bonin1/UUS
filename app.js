@@ -24,6 +24,12 @@ app.use((req, res, next) => {
     next();
 });
 
+const User = require('./model/UsersModel')
+const Feedback = require('./model/FeedbackModel')
+const ApplyForm = require('./model/ApplyModel')
+const Department = require('./model/DepartmentModel')
+const ApplyErasmus = require('./model/applyErasmusModel') 
+
 app.get('/e-learning',(req,res)=>{
     if (!req.session.isLoggedIn) {
         return res.redirect('/login');
@@ -31,23 +37,42 @@ app.get('/e-learning',(req,res)=>{
     res.render('e-learning')
 })
 
+app.post('/deleteApplyErasmus/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!id) {
+            return res.status(400).json({ error: 'Invalid ID parameter.' });
+        }
+
+        const deletedApply = await ApplyErasmus.destroy({ where: { application_id: id} });
+
+        if (!deletedApply) {
+            return res.status(404).json({ error: 'ApplyErasmus record not found.' });
+        }
+
+        res.redirect('/protected');
+    } catch (err) {
+        console.error('Error deleting ApplyErasmus record:', err);
+        res.status(500).json({ error: 'An error occurred while deleting the record.' });
+    }
+});
 
 
 
-const User = require('./model/UsersModel')
-const Feedback = require('./model/FeedbackModel')
-const ApplyForm = require('./model/ApplyModel')
-const Department = require('./model/DepartmentModel')
+
+
+
 
 const apply = require('./routes/ApplyRoute')
 const feedback = require('./routes/FeedbackRoute')
-const ApplyErasmus = require('./routes/ApplyErasmusRoute')
+const ApplyErasmusRoute = require('./routes/ApplyErasmusRoute')
 const login = require('./routes/LoginRoute')
 const adminRoutes = require('./routes/AdminRoute');
 const protected = require('./routes/ProtectedRoute')
 app.use('/apply',apply)
 app.use('/feedback',feedback)
-app.use('/apply-erasmus',ApplyErasmus)
+app.use('/apply-erasmus',ApplyErasmusRoute)
 app.use('/login',login)
 app.use('/admin', adminRoutes)
 app.use('/protected',protected)
