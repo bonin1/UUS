@@ -11,7 +11,7 @@ const session = require('express-session');
 app.set("view engine", "ejs");
 app.use("/static", express.static('static'));
 
-
+app.use(flash());
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -196,6 +196,9 @@ app.get("/user/:id", async (req, res) => {
             attributes: ['id', 'name', 'lastname', 'dep_id', 'role', 'email', 'phone_number', 'address']
         });
 
+        const images = await UserImage.findAll({
+            where: { user_id: userId }
+        });
         if (!user) {
             return res.status(404).send('User not found');
         }
@@ -212,11 +215,10 @@ app.get("/user/:id", async (req, res) => {
             role: user.role,
             email: user.email,
             phone_number: user.phone_number,
-            address: user.address,
-            photo_user: userImage.length > 0 ? userImage[0].photo_user.toString('base64') : null
+            address: user.address
         };
 
-        res.render('user', { data: userDataWithImage });
+        res.render('user', { data: userDataWithImage ,images ,userImage , successAlert: req.flash('success'), dangerAlert: req.flash('danger') });
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal server error');
@@ -228,7 +230,6 @@ app.get("/user/:id", async (req, res) => {
 app.post('/user/edit/:id', async (req, res) => {
     const userId = req.params.id;
     const { name, lastname, dep_id,role,email,phone_number,address } = req.body;
-
     try {
         const user = await User.findByPk(userId);
         if (!user) {
@@ -244,15 +245,85 @@ app.post('/user/edit/:id', async (req, res) => {
         user.address = address;
 
         await user.save();
-    
+        req.flash('success', 'User got edited successfully!');
         res.redirect(`/user/${userId}`);
         } catch (error) {
         console.error('Error updating user:', error);
-        res.status(500).send('Internal server error');
+        req.flash('danger', 'Error editing User!');
     }
 });
 
+app.post('/updateImage/:id', upload.single('file'), async (req, res) => {
+    const userId = req.params.id;
+    const newImage = {
+        name: req.file.originalname,
+        data: fs.readFileSync(req.file.path)
+    };
+    try {
+        const image = await UserImage.findByPk(userId);
+        if (!image) {
+            return res.json({ error: 'Image not found' });
+        }
+        image.photo_user = newImage.data;
+        await image.save();
+        await fs.promises.unlink(req.file.path);
 
+        req.flash('success', 'Image updated successfully!');
+        res.redirect(`/user/${userId}`);
+    } catch (error) {
+        console.error(error);
+        req.flash('danger', 'Error updating image!');
+        res.redirect(`/user/${userId}`);
+    }
+});
+app.post('/deleteImage/:id', async (req, res) => {
+    const userId = req.params.id;
+    try {
+        const image = await UserImage.findByPk(userId);
+        if (!image) {
+            return res.status(404).json({ error: 'Image not found' });
+        }
+        await image.destroy();
+        res.redirect(`/user/${userId}`);
+        req.flash('success', 'Image deleted successfully!');
+    } catch (error) {
+        console.error(error);
+        req.flash('danger', 'Error deleting image!');
+        res.redirect(`/user/${userId}`);
+    }
+});
+
+app.post('/insertImages/:id', upload.array('files', 10), async (req, res) => {
+    const userId = req.params.id;
+    try {
+        const existingImage = await UserImage.findOne({
+            where: { user_id: userId }
+        });
+        if (existingImage) {
+            return res.status(400).send('User already has an image. Cannot insert another.');
+        }
+
+        const imagesPromises = req.files.map(async (file) => {
+            const newImage = {
+                name: file.originalname,
+                data: fs.readFileSync(file.path)
+            };
+            const image = await UserImage.create({
+                user_id: userId,
+                photo_user: newImage.data
+            });
+            await fs.promises.unlink(file.path);
+            return image;
+        });
+        await Promise.all(imagesPromises);
+        req.flash('success', 'Insert is successful!');
+        res.redirect(`/user/${userId}`);
+    } catch (error) {
+        console.error(error);
+        req.flash('danger', 'Insert is not successful, try again later!');
+        res.redirect(`/user/${userId}`);
+    }
+});
 
 const apply = require('./routes/ApplyRoute')
 const feedback = require('./routes/FeedbackRoute')

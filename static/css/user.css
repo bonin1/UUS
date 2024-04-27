@@ -1,0 +1,90 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.wrapper{
+    width: 100%;
+    height: 100vh;
+}
+.container-user{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.alert{
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color:#4cbb17 ;
+    color: #fff;
+    padding: 20px 30px;
+    font-weight: 500;
+    border-radius: 10px;
+    z-index: 100000;
+}
+.close{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    width: 50px;
+    height: 40px;
+    font-size: 25px;
+}
+.alert-danger{
+    background-color: rgb(255, 64, 64);
+}
+.both-containers{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.first-user-container > form{
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+}
+.first-user-container > form > input,
+.first-user-container > form > select{
+    width: 300px;
+    padding: 10px 10px;
+    margin: 20px 0;
+    border: 1px solid lightgrey;
+}
+.first-user-container > form > input:focus{
+    outline: none;
+}
+.first-user-container > form > button,
+.images > form > button{
+    width: 300px;
+    padding: 10px 10px;
+    margin: 20px 0;
+    background-color: #004492;
+    color: #fff;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.images{
+    width: 300px;
+    height: 300px;
+}
+.images > img{
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+}
+.images > button{
+    width: 300px;
+    padding: 10px 10px;
+    margin: 20px 0;
+    background-color: red;
+    color: #fff;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}

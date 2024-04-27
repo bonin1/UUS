@@ -3,30 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>User <%= data.id %></title>
+    <link rel="stylesheet" href="/static/css/user.css">
 </head>
 <body>
-    <%= data.name %>
-    <%= data.lastname %>
-    <%= data.dep_id %>
-    <form action="/user/edit/<%= data.id %>" method="POST">
-        <input type="text" name="name" value="<%= data.name %>">
-        <input type="text" name="lastname" value="<%= data.lastname %>" id="">
-        <input type="text" name="dep_id" value="<%= data.dep_id %>" id="">
-        <input type="text" name="role" value="<%= data.role %>" id="">
-        <input type="text" name="email" value="<%= data.email %>" id="">
-        <input type="text" name="phone_number" value="<%= data.phone_number%>" id="">
-        <input type="text" name="address" value="<%= data.address %>" id="">
-        <button type="submit">
-            submit
-        </button>
-        
-        
-    </form>
-    <% if (data.photo_user) { %>
-            <img src="data:image/jpeg;base64,<%= data.photo_user.toString('base64') %>" alt="User Photo" width="200" height="200">
-    <% } else { %>
-        <p>No photo available</p>
+    <% if (successAlert && successAlert.length > 0) { %>
+        <div class="alert alert-success" id="success-alert">
+            <%= successAlert %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">X</span>
+            </button>
+        </div>
     <% } %>
+    <% if (dangerAlert && dangerAlert.length > 0) { %>
+        <div class="alert alert-danger" id="danger-alert">
+            <%= dangerAlert %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">X</span>
+            </button>
+        </div>
+    <% } %>
+    <div class="wrapper">
+        <div class="container-user">
+            <div class="first-user-container both-containers">
+                <form action="/user/edit/<%= data.id %>" method="POST">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" value="<%= data.name %>">
+                    <label for="lastname">Lastname:</label>
+                    <input type="text" name="lastname" value="<%= data.lastname %>" id="">
+                    <label for="role">Role:</label>
+                    <select required name="role" id="">
+                        <option value="" class="" disabled>Select Role</option>
+                        <option value="admin" <%= data.role === 'admin' ? 'selected' : '' %>>Admin</option>
+                        <option value="student" <%= data.role === 'student' ? 'selected' : '' %>>Student</option>
+                        <option value="professor" <%= data.role === 'professor' ? 'selected' : '' %>>Professor</option>
+                    </select>
+                    <label for="dep_id">Department:</label>
+                    <select required name="dep_id" id="">
+                        <option value="" class="" disabled selected>Department</option>
+                        <option value="1" <%= data.dep_id === 1 ? 'selected' : '' %>>Computer Science</option>
+                        <option value="2" <%= data.dep_id === 2 ? 'selected' : '' %>>Cyber Security</option>
+                    </select>
+                    <label for="email">Email:</label>
+                    <input type="text" name="email" value="<%= data.email %>" id="">
+                    <label for="phone_number">Phone Number:</label>
+                    <input type="text" name="phone_number" value="<%= data.phone_number%>" id="">
+                    <label for="address">Address</label>
+                    <input type="text" name="address" value="<%= data.address %>" id="">
+                    <button type="submit">
+                        submit
+                    </button>
+                </form>
+                <form action="/insertImages/<%= data.id %>" method="post" enctype="multipart/form-data">
+                    <input type="file" name="files" class="file-input" multiple >
+                    <button class="upload" type="submit">Upload Images</button>
+                </form>
+            </div>
+            <div class="second-user-container both-containers">
+                <% images.forEach((image, index) => { %>
+                    <div class="images">
+                        <img src="data:image/jpeg;base64,<%= image.photo_user.toString('base64') %>" alt="Product Image" width="200" height="200">
+                        <form action="/updateImage/<%= image.id %>" method="post" enctype="multipart/form-data">
+                            <input type="file" name="file" id="fileInput" class="file-input">
+                            <button type="submit">Edit Image</button>
+                        </form>
+                        <button class="delete-button" onclick="deleteImage('<%= image.id %>')">Delete image</button>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        async function deleteImage(imageId) {
+            try {
+                const response = await fetch(`/deleteImage/${imageId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    console.error('Failed to delete image');
+                }
+            } catch (error) {
+                console.error('Error deleting image:', error);
+            }
+        }
+        setTimeout(function() {
+            $('#success-alert').fadeOut('slow');
+        }, 10000);
+        setTimeout(function() {
+            $('#danger-alert').fadeOut('slow');
+        }, 10000);
+        $('.close').click(function(){
+            $(this).parent().hide();
+        });
+    </script>
 </body>
 </html>
