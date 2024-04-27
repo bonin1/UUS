@@ -107,6 +107,7 @@ table, th, td {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 .feedback-card{
     width: 300px;
@@ -371,8 +372,10 @@ table, th, td {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
-#search-form{
+#search-form,
+#search-form2{
     box-sizing: content-box;
     padding: 20px;
     display: flex;
@@ -381,7 +384,8 @@ table, th, td {
     position: sticky;
     top: 42px;
 }
-#search-input{
+#search-input,
+#search-input2{
     height: 35px;
     border: 1px solid gray;
     border-top-right-radius: 0px;
@@ -394,13 +398,16 @@ table, th, td {
     outline: none;
     color: #000;
 }
-#search-input::placeholder{
+#search-input::placeholder,
+#search-input2::placeholder{
     color: #AEAEAE;
 }
-#search-input:focus{
+#search-input:focus,
+#search-input2:focus{
     outline: none;
 }
-.search-submit{
+.search-submit,
+.search-submit2{
     border: none;
     background-color: transparent;
     font-size: 20px;
@@ -419,9 +426,10 @@ table, th, td {
     flex-direction: column;
     align-items: center;
 }
-#recommendations{
+#recommendations,
+#recommendations2{
     position: absolute;
-    top: 70px;
+    top: 50px;
     list-style-type: none;
     z-index: 100;
     background-color: white;
@@ -445,4 +453,12 @@ table, th, td {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.login-container{
+    width: 100%;
+    height: 300px;
+    background-color: #373737;
+    display: flex;
+    justify-content: center;
+    align-items: start;
 }

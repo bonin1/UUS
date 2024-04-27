@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Login Information</title>
+    <link rel="stylesheet" href="/static/css/logininformation.css">
+</head>
+<body>
+    <div class="additional-information">
+        <h1>
+            <span>
+                <%= data.name %>
+                <%= data.lastname %>
+            </span>
+        </h1>
+        <h3>Role: <%= data.role %></h3>
+        <h3>Phone Number: <%= data.phone_number %></h3>
+        <h3>Address: <%= data.address %></h3>
+    </div>
+    <div class="container">
+        <% if (login && login.email) { %>
+            <p>Email: <%= login.email %></p>
+            <p>Edit User: <%= data.name %> <%= data.lastname %></p>
+            <form action="/logininformation/<%= data.id %>" method="POST">
+                <input type="text" name="email" value="<%= login.email %>">
+                <input type="text" name="password" hidden>
+                <button type="submit">add</button>
+            </form>
+        <% } else { %>
+            <p>There is no email for this user</p>
+            <form action="/logininformation/<%= data.id %>" method="POST">
+                <input required type="text" name="email" placeholder="Email:">
+                <label for="password">Password by default: UUSuni123</label>
+                <input required type="text" name="password" value="UUSuni123">
+                <button type="submit">ADD / Update</button>
+            </form>
+        <% } %>
+    </div>
+</body>
+</html>

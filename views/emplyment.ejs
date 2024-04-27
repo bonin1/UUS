@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee benefits</title>
+    <link rel="stylesheet" href="/static/css/emplyment.css">
+</head>
+<body>
+    <%- include('partials/Navbar-light'); %>
+    <div class="wrapper">
+        <div class="wrapper-assist">
+            <div class="links-container">
+                <div class="links" id="links">
+                    <div class="list-container">
+                        <ul class="unordered">
+                            <li>
+                                <a href="/workat-uus">WORK AT UUS</a>
+                            </li>
+                            <li>
+                                <a href="/employee">EMPLOYEE BENEFITS</a>
+                            </li>
+                            <li>
+                                <a href="/research">RESEARCH SUPPORT</a>
+                            </li>
+                            <li>
+                                <a href="/employment">EMPLOYMENT OPPORTUNITIES</a>
+                            </li>
+                        </ul>
+                        <div id="hamburger" class="hamburger_undermenu" onclick="toggleMenu()">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </div>
+                    </div>
+                    
+                    
+                    <div id="container-hidden">
+                        <ul id="menu">
+                            <li>
+                                <a href="/workat-uus">WORK AT UUS</a>
+                            </li>
+                            <li>
+                                <a href="/employee">EMPLOYEE BENEFITS</a>
+                            </li>
+                            <li>
+                                <a href="/research">RESEARCH SUPPORT</a>
+                            </li>
+                            <li>
+                                <a href="/employment">EMPLOYMENT OPPORTUNITIES</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="backgroud-container">
+                <div class="part-one part">
+                    <h1>WORK AT UUS</h1>
+                </div>
+            </div>
+            <div class="campus">
+                <h1>
+                    EMPLOYMENT OPPORTUNITIES
+                </h1>
+                <br>
+                <p>
+                    Here are some positions that students could work in at UUS (University of United Students), allowing them to contribute to the university while gaining valuable experience:
+                    <br><br>
+                    <span>Student Ambassador:</span> Serve as a representative of UUS by giving campus tours, assisting with recruitment events, and engaging with prospective students and their families. Student ambassadors also help promote university programs and activities to the student body.
+                    <br><br>
+                    <span>Student Research Assistant:</span> Assist faculty members with research projects by conducting literature reviews, collecting and analyzing data, and preparing research materials. This role offers students hands-on experience in academic research and the opportunity to work closely with faculty mentors.
+                    <br><br>
+                    <span>Peer Tutor:</span> Provide academic support to fellow students by tutoring in specific subjects or academic skills such as writing, math, science, or foreign languages. Peer tutors help their peers succeed academically and foster a culture of collaborative learning on campus.
+                    <br><br>
+                    <span>Student Office Assistant:</span> Work in various university offices, such as admissions, financial aid, or student affairs, performing clerical tasks, answering phones, assisting with administrative duties, and providing customer service to students, faculty, and staff.
+                    <br><br>
+                    <span>Event Coordinator Assistant:</span> Assist in planning, organizing, and executing campus events, including orientations, conferences, workshops, and social activities. Student assistants help with logistics, promotion, registration, and on-site coordination to ensure successful events.
+                    <br><br>
+                    <span>Student Graphic Designer:</span> Create visual materials and graphics for university publications, marketing materials, websites, and social media channels. Student graphic designers contribute to the university's branding and communication efforts while gaining practical design experience.
+                    <br><br>
+                    <span>Social Media Coordinator:</span> Manage UUS's social media accounts, including posting content, responding to messages, monitoring engagement, and promoting university events and initiatives. Social media coordinators help increase UUS's online presence and engage with the university community.
+                    <br><br>
+                    <span>Library Assistant:</span> Assist library staff with circulation, shelving, cataloging, and customer service tasks. Student library assistants may also help patrons with research inquiries, technology support, and navigating library resources.
+                    <br><br>
+                    <span>Student Peer Advisor:</span> Provide academic and career advising to fellow students, assisting them with course selection, degree planning, goal setting, and exploring career pathways. Peer advisors offer guidance and support to help their peers navigate their academic journey successfully.
+                    <br><br>
+                    <span>Student Health Educator:</span> Assist in promoting health and wellness initiatives on campus by organizing events, workshops, and awareness campaigns. Student health educators may focus on topics such as mental health, nutrition, sexual health, or substance abuse prevention.
+                    <br><br>
+                    These positions offer UUS students the opportunity to gain practical experience, develop valuable skills, and contribute to the university community while balancing their academic commitments. UUS is committed to providing meaningful employment opportunities that support student success and professional growth.
+                </p>
+            </div>
+        </div>
+    </div>
+    <%- include('partials/footer'); %>
+    <script>
+        var path = window.location.pathname;
+        var links = document.querySelectorAll('.links a');
+    
+        for (var i = 0; i < links.length; i++) {
+            var href = links[i].getAttribute('href');
+            if(path.includes(href)) {
+                links[i].classList.add('active');
+            }
+        }
+        function toggleMenu() {
+        var menu = document.getElementById('container-hidden');
+        var hamburger = document.getElementById('hamburger');
+        var links = document.getElementById('links');
+        
+        if (menu.style.display === 'none') {
+            menu.style.display = 'block';
+            hamburger.classList.add('active_ham');
+            links.classList.add('active_links');
+        } else {
+            menu.style.display = 'none';
+            hamburger.classList.remove('active_ham');
+            links.classList.remove('active_links');
+        }
+    }
+    </script>
+</body>
+</html>

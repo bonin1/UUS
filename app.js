@@ -3,10 +3,12 @@ const app = express()
 const bodyParser = require('body-parser');
 require('dotenv').config();
 const flash = require('connect-flash');
-const {sequelize , Op, Model} = require('sequelize')
+const {sequelize , Op, Model, where} = require('sequelize')
 const multer = require('multer');
 const fs = require('fs')
 const session = require('express-session');
+const bcrypt = require('bcryptjs');
+
 
 app.set("view engine", "ejs");
 app.use("/static", express.static('static'));
@@ -67,6 +69,7 @@ const ApplyForm = require('./model/ApplyModel')
 const Department = require('./model/DepartmentModel')
 const ApplyErasmus = require('./model/applyErasmusModel') 
 const UserImage = require('./model/UserImageModel')
+const Login = require('./model/LoginModel')
 
 app.get('/e-learning',(req,res)=>{
     if (!req.session.isLoggedIn) {
@@ -325,6 +328,67 @@ app.post('/insertImages/:id', upload.array('files', 10), async (req, res) => {
     }
 });
 
+
+
+app.get("/logininformation/:id", async (req, res) => { 
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.redirect('/admin');
+    }
+    const userId = req.params.id;
+    try {
+        const user = await User.findOne({
+            where: { id: userId },
+            attributes: ['id', 'name', 'lastname', 'dep_id', 'role', 'email', 'phone_number', 'address']
+        });
+        const login = await Login.findOne({
+            where: {user_id:userId}
+        })
+        res.render('logininformation',{data : user, login})
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal server error');
+    }
+})
+
+
+app.post('/logininformation/:id', async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const { email, password } = req.body;
+
+        if (!email) {
+            return res.status(400).send('Email is required.');
+        }
+
+        const user = await User.findOne({
+            where: { id: userId },
+            attributes: ['id', 'name', 'lastname', 'dep_id', 'role', 'email', 'phone_number', 'address']
+        });
+
+        const hashPassword = await bcrypt.hash(password, 8);
+
+        const [login, created] = await Login.findOrCreate({
+            where: { user_id: userId },
+            defaults: {
+                email: email,
+                password: hashPassword
+            }
+        });
+
+        if (!created) {
+            await login.update({
+                email: email,
+                password: hashPassword
+            });
+        }
+
+        res.redirect(`/logininformation/${userId}`);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal server error');
+    }
+});
+
 const apply = require('./routes/ApplyRoute')
 const feedback = require('./routes/FeedbackRoute')
 const ApplyErasmusRoute = require('./routes/ApplyErasmusRoute')
@@ -337,7 +401,6 @@ app.use('/apply-erasmus',ApplyErasmusRoute)
 app.use('/login',login)
 app.use('/admin', adminRoutes)
 app.use('/protected',protected)
-
 
 
 app.post('/update_status', (req, res) => {
@@ -375,7 +438,10 @@ const routes = [
     { path: '/law-school', view: 'law-school' },
     { path: '/workat-uus', view: 'workat-uus' },
     { path: '/ourpartners', view: 'ourpartners' },
-    { path: '/contactus', view: 'contact-us' }
+    { path: '/contactus', view: 'contact-us' },
+    { path: '/employee', view: 'employee' },
+    { path: '/research', view: 'research' },
+    { path: '/employment', view: 'emplyment' }
 ];
 
 routes.forEach(route => {
