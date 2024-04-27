@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Protected Admin only!</title>
     <link rel="stylesheet" href="/static/css/protected.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 </head>
 <body>
     <img class="logo" src="/static/image/logo2.0black.png" alt="">
@@ -181,7 +182,7 @@
     <div class="register-container">
         <div class="register-one">
             <div class="edit-container">
-                <a href="">Edit <img src="/static/image/editicon.png" alt=""></a>
+                <button id="myBtn" href="">Edit <img src="/static/image/editicon.png" alt=""></button>
             </div>
             <form action="/register/user" method="POST" enctype="multipart/form-data">
                 <input required type="text" name="name" placeholder="Name of the user:">
@@ -205,54 +206,33 @@
                 <button type="submit">Create</button>
             </form>
         </div>
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="inside-modal">
+                    <span style="visibility: hidden;" class="close-btn">&times;</span>
+                    <div class="pjesa2">
+                        <div class="rcmn">
+                            <form id="search-form">
+                                <input type="text" id="search-input" placeholder="Search..." autocomplete="off">
+                                <button class="search-submit" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </form>
+                            <div id="recommendations"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="register-two">
             <div id="output">
                 <img src="/static/image/default.png" alt="">
             </div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $('.status').change(function(){
-                var status = $(this).val();
-                var id = $(this).data('id');
-                $.ajax({
-                    url: '/update_status', 
-                    type: 'POST',
-                    data: {
-                        'status': status,
-                        'id': id
-                    },
-                    success: function(result){
-                        
-                    },
-                    error: function(error){
-                        console.log(error)
-                    }
-                });
-            });
-        });
+    <h1 style="text-align: center; margin: 50px 0;">Add new login information</h1>
 
-        setTimeout(function() {
-            $('#alert').fadeOut('slow');
-        }, 10000);
-        $('.close').click(function(){
-            $(this).parent().hide();
-        });
-        var loadFile = function(event) {
-    var output = document.getElementById('output');
-    output.innerHTML = "";
-    for(let i=0; i< event.target.files.length; i++){
-        var reader = new FileReader();
-        reader.onload = function(){
-            var img = document.createElement('img');
-            img.src = reader.result;
-            output.appendChild(img);
-        };
-        reader.readAsDataURL(event.target.files[i]);
-    }
-};
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/static/js/protected.js" defer></script>
 </body>
 </html>

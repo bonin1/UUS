@@ -1,7 +1,6 @@
 const { DataTypes } = require('sequelize');
 const db = require('../database');
 const Department = require('./DepartmentModel');
-
 const User = db.define('User', {
     id: {
         type: DataTypes.INTEGER,
@@ -49,6 +48,7 @@ const User = db.define('User', {
 });
 
 User.belongsTo(Department, { foreignKey: 'dep_id' });
+
 User.sync({ force: false }).then(() => {
     console.log('User table synced');
 }).catch(err => {

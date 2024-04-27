@@ -3,14 +3,14 @@ const app = express()
 const bodyParser = require('body-parser');
 require('dotenv').config();
 const flash = require('connect-flash');
-
+const {sequelize , Op, Model} = require('sequelize')
 const multer = require('multer');
 const fs = require('fs')
-
+const session = require('express-session');
 
 app.set("view engine", "ejs");
 app.use("/static", express.static('static'));
-const session = require('express-session');
+
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -161,6 +161,96 @@ app.post('/register/user', upload.array('files', 10), async (req, res) => {
     }
 });
 
+app.post('/search', async (req, res) => {
+    try {
+        const query = req.body.query;
+
+        if (query === '') {
+            res.send([]);
+            return;
+        }
+        const results = await User.findAll({
+            where: {
+                name: {
+                    [Op.like]: `%${query}%`
+                }
+            }
+        });
+
+        res.send(results);
+    } catch (err) {
+        console.error(err);
+        res.send([]);
+    }
+});
+
+app.get("/user/:id", async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.redirect('/admin');
+    }
+    const userId = req.params.id;
+
+    try {
+        const user = await User.findOne({
+            where: { id: userId },
+            attributes: ['id', 'name', 'lastname', 'dep_id', 'role', 'email', 'phone_number', 'address']
+        });
+
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        const userImage = await UserImage.findAll({
+            where: { user_id: userId },
+            attributes: ['photo_user']
+        });
+        const userDataWithImage = {
+            id: user.id,
+            name: user.name,
+            lastname: user.lastname,
+            dep_id: user.dep_id,
+            role: user.role,
+            email: user.email,
+            phone_number: user.phone_number,
+            address: user.address,
+            photo_user: userImage.length > 0 ? userImage[0].photo_user.toString('base64') : null
+        };
+
+        res.render('user', { data: userDataWithImage });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal server error');
+    }
+});
+
+
+
+app.post('/user/edit/:id', async (req, res) => {
+    const userId = req.params.id;
+    const { name, lastname, dep_id,role,email,phone_number,address } = req.body;
+
+    try {
+        const user = await User.findByPk(userId);
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+    
+        user.name = name;
+        user.lastname = lastname;
+        user.dep_id = dep_id;
+        user.role = role;
+        user.email = email;
+        user.phone_number = phone_number;
+        user.address = address;
+
+        await user.save();
+    
+        res.redirect(`/user/${userId}`);
+        } catch (error) {
+        console.error('Error updating user:', error);
+        res.status(500).send('Internal server error');
+    }
+});
 
 
 

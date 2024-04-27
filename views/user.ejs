@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <%= data.name %>
+    <%= data.lastname %>
+    <%= data.dep_id %>
+    <form action="/user/edit/<%= data.id %>" method="POST">
+        <input type="text" name="name" value="<%= data.name %>">
+        <input type="text" name="lastname" value="<%= data.lastname %>" id="">
+        <input type="text" name="dep_id" value="<%= data.dep_id %>" id="">
+        <input type="text" name="role" value="<%= data.role %>" id="">
+        <input type="text" name="email" value="<%= data.email %>" id="">
+        <input type="text" name="phone_number" value="<%= data.phone_number%>" id="">
+        <input type="text" name="address" value="<%= data.address %>" id="">
+        <button type="submit">
+            submit
+        </button>
+        
+        
+    </form>
+    <% if (data.photo_user) { %>
+            <img src="data:image/jpeg;base64,<%= data.photo_user.toString('base64') %>" alt="User Photo" width="200" height="200">
+    <% } else { %>
+        <p>No photo available</p>
+    <% } %>
+</body>
+</html>
