@@ -394,14 +394,15 @@ const feedback = require('./routes/FeedbackRoute')
 const ApplyErasmusRoute = require('./routes/ApplyErasmusRoute')
 const login = require('./routes/LoginRoute')
 const adminRoutes = require('./routes/AdminRoute');
-const protected = require('./routes/ProtectedRoute')
+const protected = require('./routes/ProtectedRoute');
+const Partners = require('./routes/PartnersRoute')
 app.use('/apply',apply)
 app.use('/feedback',feedback)
 app.use('/apply-erasmus',ApplyErasmusRoute)
 app.use('/login',login)
 app.use('/admin', adminRoutes)
 app.use('/protected',protected)
-
+app.use('/partners',Partners)
 
 app.post('/update_status', (req, res) => {
     const { id, status } = req.body; 
