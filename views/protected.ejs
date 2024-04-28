@@ -230,6 +230,9 @@
             </div>
         </div>
     </div>
+
+
+
     <h1 style="text-align: center; margin: 50px 0;">Add new login information</h1>
     <div class="login-container">
         <div class="pjesa2">
@@ -242,8 +245,69 @@
             </div>
         </div>
     </div>
+
+    <h1 style="text-align: center; margin: 50px 0;">Partner Universities</h1>
+    <div class="partner-container">
+        <div class="edit-patners">
+            <div class="pjesa2">
+                <div class="rcmn">
+                    <form id="search-form3">
+                        <input type="text" id="search-input3" placeholder="Search..." autocomplete="off">
+                        <button class="search-submit" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    </form>
+                    <div id="recommendations3"></div>
+                </div>
+            </div>
+        </div>
+        <div class="partner-inside">
+            <div class="partner-one both-partners">
+                <form action="/createpartners" method="POST">
+                    <div class="form-one">
+                        <input  type="text" name="name" placeholder="Name:">
+                        <input  type="text" name="countries" placeholder="countries:">
+                        <input  type="number" name="open_scolars" placeholder="open_scolars:" id="">
+                        <input type="file" name="photos" multiple id="file" onchange="loadFile2(event)">
+                    </div>
+                    <div class="form-two">
+                        <select  name="level" id="">
+                            <option value="" class="" disabled selected>Level</option>
+                            <option value="Bachelor">Bachelor</option>
+                            <option value="Master">Master</option>
+                        </select>
+                        <select  name="semster" id="">
+                            <option value="" class="" disabled selected>Semster</option>
+                            <option value="Winter">Winter</option>
+                            <option value="Summer">Summer</option>
+                        </select>
+                        <select  name="dep_id" id="">
+                            <option value="" class="" disabled selected>Department</option>
+                            <option value="1">Computer Science</option>
+                            <option value="2">Cyber Security</option>
+                        </select>
+                        
+                    
+                        <button type="submit">Create</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="partner-two both-partners">
+                <div id="output2">
+                    <img src="/static/image/default.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/static/js/protected.js" defer></script>
     <script src="/static/js/loginInformation.js" defer></script>
+    <script src="/static/js/partners.js"></script>
+    <script>
+
+    </script>
 </body>
 </html>

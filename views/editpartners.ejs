@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Partners</title>
+    <link rel="stylesheet" href="/static/css/editpartners.css">
+</head>
+<body>
+    <% if (successAlert && successAlert.length > 0) { %>
+        <div class="alert alert-success" id="success-alert">
+            <%= successAlert %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">X</span>
+            </button>
+        </div>
+    <% } %>
+    <% if (dangerAlert && dangerAlert.length > 0) { %>
+        <div class="alert alert-danger" id="danger-alert">
+            <%= dangerAlert %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">X</span>
+            </button>
+        </div>
+    <% } %>
+    <div class="wrapper">
+        <div class="wrapper-assist">
+            <div class="partner-one both-partners">
+                <form action="/partners/edit/<%= data.id %>" method="POST">
+                    <div class="form-one">
+                        <input  type="text" name="name" value="<%= data.name %>" placeholder="Name:">
+                        <input  type="text" name="countries" value="<%= data.countries %>" placeholder="countries:">
+                        <input  type="number" name="open_scolars" value="<%= data.open_scolars %>" placeholder="open_scolars:" id="">
+                    </div>
+                    <div class="form-two">
+                        <select  name="level" id="">
+                            <option value="" class="" disabled selected>Level</option>
+                            <option value="Bachelor" <%= data.level === "Bachelor" ? 'selected' : '' %>>Bachelor</option>
+                            <option value="Master" <%= data.level === "Master" ? 'selected' : '' %>>Master</option>
+                        </select>
+                        <select  name="semester" id="">
+                            <option value="" class="" disabled selected>Semester</option>
+                            <option value="Winter" <%= data.semester === "Winter" ? 'selected' : '' %>>Winter</option>
+                            <option value="Summer" <%= data.semester === "Summer" ? 'selected' : '' %>>Summer</option>
+                        </select>
+                        <select name="dep_id" id="">
+                            <option value="" class="" disabled selected>Department</option>
+                            <option value="1" <%= data.dep_id === 1 ? 'selected' : '' %>>Computer Science</option>
+                            <option value="2" <%= data.dep_id === 2 ? 'selected' : '' %>>Cyber Security</option>
+                        </select>
+                        
+                    
+                        <button type="submit">Create</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="partner-two both-partners">
+                    <% if(data.partners_photos){ %>
+                        <div class="images">
+                            <img src="data:image/jpeg;base64,<%= data.partners_photos.toString('base64') %>" alt="Product Image">
+                            <form action="/partners/image/<%= data.id %>" method="post" enctype="multipart/form-data">
+                                <input type="file" name="photo" id="fileInput" class="file-input">
+                                <button type="submit">Edit Image</button>
+                            </form>
+                        </div>
+                    <% } else { %>
+                        <p>no image</p>
+                    <% } %>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        setTimeout(function() {
+            $('#success-alert').fadeOut('slow');
+        }, 10000);
+        setTimeout(function() {
+            $('#danger-alert').fadeOut('slow');
+        }, 10000);
+        $('.close').click(function(){
+            $(this).parent().hide();
+        });
+    </script>
+</body>
+</html>

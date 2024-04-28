@@ -4,24 +4,27 @@ const Department = require('./DepartmentModel')
 
 
 const Partners = db.define('Partners', {
-    Id: {
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    Countries: {
+    name: {
         type: DataTypes.STRING(255)
     },
-    Open_scolars: {
+    countries: {
+        type: DataTypes.STRING(255)
+    },
+    open_scolars: {
         type: DataTypes.INTEGER
     },
-    Partners_photos: {
+    partners_photos: {
         type: DataTypes.BLOB
     },
-    Level: {
+    level: {
         type: DataTypes.ENUM('Bachelor', 'Master')
     },
-    Semester: {
+    semester: {
         type: DataTypes.ENUM('Winter', 'Summer')
     },
     Dep_id: {

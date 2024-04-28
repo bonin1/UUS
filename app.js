@@ -70,6 +70,7 @@ const Department = require('./model/DepartmentModel')
 const ApplyErasmus = require('./model/applyErasmusModel') 
 const UserImage = require('./model/UserImageModel')
 const Login = require('./model/LoginModel')
+const PartnersModel = require('./model/Partners')
 
 app.get('/e-learning',(req,res)=>{
     if (!req.session.isLoggedIn) {
@@ -186,6 +187,30 @@ app.post('/search', async (req, res) => {
         res.send([]);
     }
 });
+
+app.post('/search/partners', async (req, res) => {
+    try {
+        const query = req.body.query;
+
+        if (query === '') {
+            res.send([]);
+            return;
+        }
+        const results = await PartnersModel.findAll({
+            where: {
+                name: {
+                    [Op.like]: `%${query}%`
+                }
+            }
+        });
+
+        res.send(results);
+    } catch (err) {
+        console.error(err);
+        res.send([]);
+    }
+});
+
 
 app.get("/user/:id", async (req, res) => {
     if (!req.session.user || req.session.user.role !== 'admin') {
@@ -388,6 +413,135 @@ app.post('/logininformation/:id', async (req, res) => {
         res.status(500).send('Internal server error');
     }
 });
+
+app.get('/editpartners/:id', async(req,res)=>{
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.redirect('/admin');
+    }
+    const userId = req.params.id;
+    try {
+        const partner = await PartnersModel.findOne({
+            where: { id: userId },
+            attributes: ['id','name','countries','open_scolars','level','semester','dep_id','partners_photos']
+        });
+        if (!partner) {
+            return res.status(404).send('Partner not found');
+        }
+        res.render('editpartners',{data : partner,  successAlert: req.flash('success'), dangerAlert: req.flash('danger')})
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal server error');
+    }
+})
+
+app.post('/createpartners', upload.fields([
+    { name: 'photos', maxCount: 1 },
+    { name: 'photos', maxCount: 10 }
+]), async (req, res) => {
+    const {
+        name,
+        countries,
+        open_scolars,
+        level,
+        semester,
+        dep_id
+    } = req.body;
+
+    try {
+        const existingPartner = await PartnersModel.findOne({
+            where: { name: name }
+        });
+
+        if (existingPartner) {
+            req.session.alert = { type: 'danger', message: 'Partner already exists' };
+            return res.redirect('/protected');
+        }
+
+        let partnerData = {
+            name,
+            countries,
+            open_scolars,
+            level,
+            semester,
+            dep_id
+        };
+
+        if (req.files['photos']) {
+            const file = req.files['photos'][0];
+            const newImage = {
+                name: file.originalname,
+                data: fs.readFileSync(file.path)
+            };
+            partnerData.partners_photos = newImage.data;
+            await fs.promises.unlink(file.path);
+            req.flash('success', 'Image uploaded successfully!');
+        }
+
+        const newPartner = await PartnersModel.create(partnerData);
+        req.session.alert = { type: 'success', message: 'Partner created successfully' };
+        res.redirect('/protected');
+    } catch (error) {
+        console.error('Error creating partner:', error);
+        req.flash('danger', 'Insert is not successful, try again later!');
+        res.redirect('/protected');
+    }
+});
+
+
+app.post('/partners/edit/:id', async (req, res) => {
+    const userId = req.params.id;
+    const { 
+        name, 
+        countries , 
+        open_scolars , 
+        level , 
+        semester , 
+        dep_id } = req.body;
+    try {
+        const partner = await PartnersModel.findByPk(userId);
+        if (!partner) {
+            return res.status(404).send('User not found');
+        }
+        partner.name = name;
+        partner.countries = countries;
+        partner.open_scolars = open_scolars;
+        partner.level = level;
+        partner.semester = semester;
+        partner.dep_id = dep_id;
+
+        await partner.save();
+        req.flash('success', 'Partner got edited successfully!');
+        res.redirect(`/editpartners/${userId}`);
+        } catch (error) {
+        console.error('Error updating user:', error);
+        req.flash('danger', 'Error editing Partner!');
+    }
+});
+
+app.post('/partners/image/:id', upload.single('photo'),async (req,res)=>{
+    const userId = req.params.id;
+    const newImage = {
+        name: req.file.originalname,
+        data: fs.readFileSync(req.file.path)
+    };
+    try {
+        const image = await PartnersModel.findByPk(userId);
+        if (!image) {
+            return res.json({ error: 'Image not found' });
+        }
+        image.partners_photos = newImage.data;
+        await image.save();
+        await fs.promises.unlink(req.file.path);
+
+        req.flash('success', 'Image updated successfully!');
+        res.redirect(`/editpartners/${userId}`);
+    } catch (error) {
+        console.error(error);
+        req.flash('danger', 'Error updating image!');
+        res.redirect(`/editpartners/${userId}`);
+    }
+})
+
 
 const apply = require('./routes/ApplyRoute')
 const feedback = require('./routes/FeedbackRoute')

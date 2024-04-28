@@ -25,8 +25,23 @@ setTimeout(function() {
 $('.close').click(function(){
     $(this).parent().hide();
 });
+
 var loadFile = function(event) {
     var output = document.getElementById('output');
+    output.innerHTML = "";
+    for(let i=0; i< event.target.files.length; i++){
+        var reader = new FileReader();
+        reader.onload = function(){
+            var img = document.createElement('img');
+            img.src = reader.result;
+            output.appendChild(img);
+        };
+        reader.readAsDataURL(event.target.files[i]);
+    }
+};
+
+var loadFile2 = function(event) {
+    var output = document.getElementById('output2');
     output.innerHTML = "";
     for(let i=0; i< event.target.files.length; i++){
         var reader = new FileReader();
