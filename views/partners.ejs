@@ -55,10 +55,22 @@
                 </div>
             </div>
             <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1QR6_dy1CiCo_Qe3dEglIO4tbis428WA&ehbc=2E312F&noprof=1" width="100% " height="580"></iframe>
+            <form class="Form_Categories_Button" action="/">
+                <select name="categorySelect" id="categorySelect">
+                    <option value="">All categories</option>
+                    <option value="Kosova">Kosova</option>
+                    <option value="Albania">Albania</option>
+                </select>
+                <input type="hidden" name="countries" id="selected-category" value="">
+            </form>
+            
+            <% data.forEach(row=>{ %>
+                <div class="card1" data-category="<%= row.countries %>">
+                    <%= row.name %>
+                </div>
+            <% }) %>
         </div>
     </div>
-
-
     <%- include('partials/footer'); %>
     <script>
         var path = window.location.pathname;
@@ -87,6 +99,33 @@
     }
     
     
+    document.addEventListener('DOMContentLoaded', () => {
+    const categorySelect = document.getElementById('categorySelect');
+    const selectedCategoryInput = document.getElementById('selected-category');
+
+    categorySelect.addEventListener('change', () => {
+        const selectedCategory = categorySelect.value;
+        selectedCategoryInput.value = selectedCategory;
+        filterProducts(selectedCategory);
+    });
+
+    function filterProducts(countries) {
+        const products = document.querySelectorAll('.card1');
+        products.forEach(product => {
+            const productCategory = product.getAttribute('data-category');
+            if (countries === '' || countries === productCategory) {
+                product.style.display = 'block';
+            } else {
+                product.style.display = 'none';
+            }
+        });
+    }
+});
+
+
+
+
+
     
         </script>
 </body>

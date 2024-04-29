@@ -3,7 +3,7 @@ const app = express()
 const bodyParser = require('body-parser');
 require('dotenv').config();
 const flash = require('connect-flash');
-const {sequelize , Op, Model, where} = require('sequelize')
+const {Sequelize , Op, Model, where} = require('sequelize')
 const multer = require('multer');
 const fs = require('fs')
 const session = require('express-session');
@@ -541,6 +541,7 @@ app.post('/partners/image/:id', upload.single('photo'),async (req,res)=>{
         res.redirect(`/editpartners/${userId}`);
     }
 })
+
 
 
 const apply = require('./routes/ApplyRoute')
