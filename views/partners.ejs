@@ -61,14 +61,37 @@
                     <option value="Kosova">Kosova</option>
                     <option value="Albania">Albania</option>
                 </select>
+                <select name="levelSelect" id="levelSelect">
+                    <option value="">All levels</option>
+                    <option value="Bachelor">Bachelor</option>
+                    <option value="Master">Master</option>
+                </select>
+                <select name="semesterSelect" id="semesterSelect">
+                    <option value="">All semesters</option>
+                    <option value="Winter">Winter</option>
+                    <option value="Summer">Summer</option>
+                </select>
+                <select name="depSelect" id="depSelect">
+                    <option value="">All departments</option>
+                    <option value="1">Computer Science</option>
+                    <option value="2">Cyber Security</option>
+                </select>
                 <input type="hidden" name="countries" id="selected-category" value="">
+                <input type="hidden" name="level" id="selected-level" value="">
+                <input type="hidden" name="semester" id="selected-semester" value="">
+                <input type="hidden" name="dep_id" id="selected-dep" value=""> 
             </form>
             
             <% data.forEach(row=>{ %>
-                <div class="card1" data-category="<%= row.countries %>">
+                <div class="card1" 
+                        data-category="<%= row.countries %>" 
+                        data-level="<%= row.level %>" 
+                        data-semester="<%= row.semester %>">
                     <%= row.name %>
                 </div>
             <% }) %>
+            
+            
         </div>
     </div>
     <%- include('partials/footer'); %>
@@ -101,19 +124,49 @@
     
     document.addEventListener('DOMContentLoaded', () => {
     const categorySelect = document.getElementById('categorySelect');
+    const levelSelect = document.getElementById('levelSelect');
+    const semesterSelect = document.getElementById('semesterSelect');
+    const depSelect = document.getElementById('depSelect'); 
     const selectedCategoryInput = document.getElementById('selected-category');
+    const selectedLevelInput = document.getElementById('selected-level');
+    const selectedSemesterInput = document.getElementById('selected-semester'); 
+    const selectedDepInput = document.getElementById('selected-dep'); 
 
     categorySelect.addEventListener('change', () => {
         const selectedCategory = categorySelect.value;
         selectedCategoryInput.value = selectedCategory;
-        filterProducts(selectedCategory);
+        filterProducts(selectedCategory, selectedLevelInput.value, selectedSemesterInput.value, selectedDepInput.value); 
     });
 
-    function filterProducts(countries) {
+    levelSelect.addEventListener('change', () => {
+        const selectedLevel = levelSelect.value;
+        selectedLevelInput.value = selectedLevel;
+        filterProducts(selectedCategoryInput.value, selectedLevel, selectedSemesterInput.value, selectedDepInput.value); 
+    });
+
+    semesterSelect.addEventListener('change', () => {
+        const selectedSemester = semesterSelect.value;
+        selectedSemesterInput.value = selectedSemester;
+        filterProducts(selectedCategoryInput.value, selectedLevelInput.value, selectedSemester, selectedDepInput.value); 
+    });
+
+    depSelect.addEventListener('change', () => {
+        const selectedDep = depSelect.value;
+        selectedDepInput.value = selectedDep;
+        filterProducts(selectedCategoryInput.value, selectedLevelInput.value, selectedSemesterInput.value, selectedDep); 
+    });
+
+    function filterProducts(countries, level, semester, dep) {
         const products = document.querySelectorAll('.card1');
         products.forEach(product => {
             const productCategory = product.getAttribute('data-category');
-            if (countries === '' || countries === productCategory) {
+            const productLevel = product.getAttribute('data-level');
+            const productSemester = product.getAttribute('data-semester');
+            const productDep = product.getAttribute('data-dep'); 
+            if ((countries === '' || countries === productCategory) && 
+                (level === '' || level === productLevel) && 
+                (semester === '' || semester === productSemester) && 
+                (dep === '' || dep === productDep)) {
                 product.style.display = 'block';
             } else {
                 product.style.display = 'none';
@@ -121,6 +174,8 @@
         });
     }
 });
+
+
 
 
 
