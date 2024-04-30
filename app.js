@@ -42,14 +42,15 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({
-    storage: storage,
-    limits: { fileSize: 20 * 1024 * 1024 }
+    storage: storage
 });
 
 
-app.post('/upload', function(req, res) {
-    if (!req.files) {
+
+app.post('/upload', upload.array('photos', 10), function(req, res) {
+    if (!req.files || req.files.length === 0) {
         console.log('No files uploaded');
+        return res.status(400).send('No files uploaded');
     } else {
         req.files.forEach(file => {
             console.log(file);
@@ -58,8 +59,11 @@ app.post('/upload', function(req, res) {
                 data: fs.readFileSync(file.path)
             }
         });
+
+        return res.status(200).send('Files uploaded successfully');
     }
 });
+
 
 
 
@@ -529,6 +533,7 @@ app.post('/partners/image/:id', upload.single('photo'),async (req,res)=>{
         if (!image) {
             return res.json({ error: 'Image not found' });
         }
+        console.log('New Image Data Size:', newImage.data.length);
         image.partners_photos = newImage.data;
         await image.save();
         await fs.promises.unlink(req.file.path);

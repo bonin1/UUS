@@ -1,7 +1,6 @@
 const { DataTypes } = require('sequelize');
 const db = require('../database');
-const Department = require('./DepartmentModel')
-
+const Department = require('./DepartmentModel');
 
 const Partners = db.define('Partners', {
     id: {
@@ -19,7 +18,7 @@ const Partners = db.define('Partners', {
         type: DataTypes.INTEGER
     },
     partners_photos: {
-        type: DataTypes.BLOB
+        type: DataTypes.BLOB('long') 
     },
     level: {
         type: DataTypes.ENUM('Bachelor', 'Master')
@@ -41,9 +40,7 @@ const Partners = db.define('Partners', {
     underscored: true
 });
 
-
 Partners.belongsTo(Department, { foreignKey: 'dep_id' });
-
 
 Partners.sync({ force: false }).then(() => {
     console.log('Partners table synced');

@@ -3,7 +3,6 @@ const router = express.Router();
 const Partner = require('../model/Partners');
 const { check, validationResult } = require('express-validator');
 
-
 router.get('/', [
     check('countries').optional().isString(),
     check('level').optional().isString(),
@@ -39,12 +38,19 @@ router.get('/', [
             where: whereCondition,
         });
 
+        for (const partner of partners) {
+            if (partner.partners_photos !== null) {
+                const blobData = partner.partners_photos;
+                const base64Data = blobData.toString('base64');
+                partner.partners_photos = base64Data;
+            }
+        }
+        
         res.render('partners', { data: partners });
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal server error');
     }
 });
-
 
 module.exports = router;
