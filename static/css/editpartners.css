@@ -122,3 +122,6 @@
     cursor: pointer;
     border-radius: 10px;
 }
+.forma > button{
+    background-color: red !important;
+}

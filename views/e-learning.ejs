@@ -4,8 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-learning</title>
+    <link rel="stylesheet" href="/static/css/e-learning.css">
 </head>
 <body>
-    aaaaa
+    <%- include('partials/Navbar'); %>
+    <video autoplay muted loop>
+        <source src="/static/image/pexels-olia-danilevich-8061030 (1080p).mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <main>
+        <h1>E-LEARNING</h1>
+        <a href="#bachelor">LEARN MORE</a>
+    </main>
+    <div class="wrapper">
+        <div class="wrapper-assist">
+            <h1 id="bachelor">BACHELOR</h1>
+            <h2>Choose the direction to continue</h2>
+            <div class="container">
+                <div class="card">
+                    <h1>Computer Science</h1>
+                </div>
+                <div class="card">
+                    <h1>Graphic Design</h1>
+                </div>
+                <div class="card">
+                    <h1>Cyber Security</h1>
+                </div>
+                <div class="card">
+                    <h1>Banking & Finance</h1>
+                </div>
+            </div>
+            <h1>MASTER</h1>
+            <h2>Choose the direction to continue</h2>
+            <div class="container">
+                <div class="card">
+                    <h1>Computer Science</h1>
+                </div>
+                <div class="card graphic">
+                    <h1>Graphic Design</h1>
+                </div>
+                <div class="card cyber">
+                    <h1>Cyber Security</h1>
+                </div>
+                <div class="card">
+                    <h1>Banking & Finance</h1>
+                </div>
+                <div class="card">
+                    <h1>Business & Managment</h1>
+                </div>
+                <div class="card">
+                    <h1>Food Science</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <%- include('partials/footer'); %>
 </body>
 </html>

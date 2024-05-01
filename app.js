@@ -257,7 +257,28 @@ app.get("/user/:id", async (req, res) => {
     }
 });
 
+app.post("/user/delete/:id", async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.redirect('/admin');
+    }
 
+    const userId = req.params.id;
+    try {
+
+        const login = await User.findOne({
+            where: { id: userId }
+        });
+
+        if (login) {
+            await User.destroy();
+        }
+
+        res.redirect(`/user/${userId}`);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal server error');
+    }
+});
 
 app.post('/user/edit/:id', async (req, res) => {
     const userId = req.params.id;
@@ -308,7 +329,7 @@ app.post('/updateImage/:id', upload.single('file'), async (req, res) => {
         res.redirect(`/user/${userId}`);
     }
 });
-app.post('/deleteImage/:id', async (req, res) => {
+app.delete('/deleteImage/:id', async (req, res) => {
     const userId = req.params.id;
     try {
         const image = await UserImage.findByPk(userId);
@@ -316,14 +337,15 @@ app.post('/deleteImage/:id', async (req, res) => {
             return res.status(404).json({ error: 'Image not found' });
         }
         await image.destroy();
-        res.redirect(`/user/${userId}`);
         req.flash('success', 'Image deleted successfully!');
+        res.redirect(`/user/${userId}`);
     } catch (error) {
         console.error(error);
         req.flash('danger', 'Error deleting image!');
         res.redirect(`/user/${userId}`);
     }
 });
+
 
 app.post('/insertImages/:id', upload.array('files', 10), async (req, res) => {
     const userId = req.params.id;
@@ -379,6 +401,28 @@ app.get("/logininformation/:id", async (req, res) => {
     }
 })
 
+app.post("/logininformation/delete/:id", async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.redirect('/admin');
+    }
+
+    const userId = req.params.id;
+    try {
+
+        const login = await Login.findOne({
+            where: { user_id: userId }
+        });
+
+        if (login) {
+            await login.destroy();
+        }
+
+        res.redirect(`/logininformation/${userId}`);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal server error');
+    }
+});
 
 app.post('/logininformation/:id', async (req, res) => {
     try {
@@ -437,6 +481,30 @@ app.get('/editpartners/:id', async(req,res)=>{
         res.status(500).send('Internal server error');
     }
 })
+
+app.post("/editpartners/delete/:id", async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.redirect('/admin');
+    }
+
+    const userId = req.params.id;
+    try {
+        const partner = await PartnersModel.findOne({
+            where: { id: userId }
+        });
+
+        if (!partner) {
+            return res.status(404).send('Partner not found');
+        }
+
+        await partner.destroy();
+        req.session.alert = { type: 'danger', message: 'Partner got deleted successfuly' };
+        res.redirect(`/protected`);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal server error');
+    }
+});
 
 app.post('/createpartners', upload.fields([
     { name: 'photos', maxCount: 1 },

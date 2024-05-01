@@ -68,6 +68,9 @@
                             <button type="submit">Edit Image</button>
                         </form>
                         <button class="delete-button" onclick="deleteImage('<%= image.id %>')">Delete image</button>
+                        <form action="/user/delete/<%= data.id %>" class="forma" method="post">
+                            <button type="submit">Delete User(after deleting image)</button>
+                        </form>
                     </div>
                 <% }); %>
             </div>
@@ -84,12 +87,15 @@
                 if (response.ok) {
                     location.reload();
                 } else {
-                    console.error('Failed to delete image');
+                    const errorMessage = await response.text();
+                    console.error(`Failed to delete image: ${errorMessage}`);
                 }
             } catch (error) {
                 console.error('Error deleting image:', error);
             }
         }
+
+
         setTimeout(function() {
             $('#success-alert').fadeOut('slow');
         }, 10000);

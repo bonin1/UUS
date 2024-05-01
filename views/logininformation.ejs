@@ -19,6 +19,9 @@
         <h3>Address: <%= data.address %></h3>
     </div>
     <div class="container">
+        <form action="/logininformation/delete/<%= data.id %>" method="POST">
+            <button type="submit">X</button>
+        </form>
         <% if (login && login.email) { %>
             <p>Email: <%= login.email %></p>
             <p>Edit User: <%= data.name %> <%= data.lastname %></p>
@@ -36,6 +39,7 @@
                 <button type="submit">ADD / Update</button>
             </form>
         <% } %>
+        
     </div>
 </body>
 </html>
