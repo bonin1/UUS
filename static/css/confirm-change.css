@@ -19,6 +19,30 @@ body{
   background-position: center;
   background-color: #f1f1f1;
 }
+.alert{
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color:#4cbb17 ;
+  color: #fff;
+  padding: 20px 30px;
+  font-weight: 500;
+  border-radius: 10px;
+  z-index: 100000;
+}
+.close{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  width: 50px;
+  height: 40px;
+  font-size: 25px;
+}
+.alert-danger{
+  background-color: rgb(255, 64, 64);
+}
+
 .Main_logo{
   width: 500px;
   position: absolute;

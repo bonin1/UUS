@@ -8,7 +8,7 @@ const multer = require('multer');
 const fs = require('fs')
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
-
+const { isEmail } = require('validator');
 
 app.set("view engine", "ejs");
 app.use("/static", express.static('static'));
@@ -634,6 +634,36 @@ app.post('/partners/image/:id', upload.single('photo'),async (req,res)=>{
 })
 
 
+app.get('/change-pw',(req,res)=>{
+    res.render('change-pw',{successAlert: req.flash('success'), dangerAlert: req.flash('danger')})
+})
+
+app.post('/change-password', async (req, res) => {
+    try {
+        const { email } = req.body;
+    
+        if (!isEmail(email)) {
+            req.flash('danger', 'Email is in wrong format!');
+            res.redirect('/change-pw')
+        }
+    
+        const user = await Login.findOne({ where: { email } });
+    
+        if (user) {
+            req.session.email = email;
+            return res.redirect('/confirm-change');
+        } else {
+            req.flash('danger', 'Email is not found!');
+            res.redirect('/change-pw')
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+});
+
+
+
 
 const apply = require('./routes/ApplyRoute')
 const feedback = require('./routes/FeedbackRoute')
@@ -642,6 +672,7 @@ const login = require('./routes/LoginRoute')
 const adminRoutes = require('./routes/AdminRoute');
 const protected = require('./routes/ProtectedRoute');
 const Partners = require('./routes/PartnersRoute')
+const Change = require('./routes/ChangeRoute')
 app.use('/apply',apply)
 app.use('/feedback',feedback)
 app.use('/apply-erasmus',ApplyErasmusRoute)
@@ -649,6 +680,7 @@ app.use('/login',login)
 app.use('/admin', adminRoutes)
 app.use('/protected',protected)
 app.use('/partners',Partners)
+app.use('/confirm-change',Change)
 
 app.post('/update_status', (req, res) => {
     const { id, status } = req.body; 
@@ -665,8 +697,6 @@ app.post('/update_status', (req, res) => {
 
 const routes = [
     { path: '/', view: 'home' },
-    { path: '/change-pw', view: 'change-pw' },
-    { path: '/confirm-change', view: 'confirm-change' },
     { path: '/about-us', view: 'aboutus' },
     { path: '/accreditation', view: 'accreditation' },
     { path: '/international-awards', view: 'international-awards' },

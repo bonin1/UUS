@@ -7,26 +7,59 @@
   <link rel="stylesheet" href="/static/css/confirm-change.css">
 </head>
 <body>
+  <% if (successAlert && successAlert.length > 0) { %>
+    <div class="alert alert-success" id="success-alert">
+        <%= successAlert %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">X</span>
+        </button>
+    </div>
+<% } %>
+<% if (dangerAlert && dangerAlert.length > 0) { %>
+    <div class="alert alert-danger" id="danger-alert">
+        <%= dangerAlert %>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">X</span>
+        </button>
+    </div>
+<% } %>
   <a href="/">
     <img class="Main_logo" src="/static/image/logo2.0black.png" alt="">
   </a>
   <div class="wrapper">
-    <form action="">
+    <form action="/confirm-change" method="POST">
+      <input type="hidden" name="email" value="<%= email %>">
       <h1>Change Password</h1>
       <div class="input-box">
-        <input type="password" placeholder="Fjalkalimi i ri | New Password" required>
+        <input type="password" name="oldPassword" placeholder="Old Password" required>
         <i class='bx bxs-user'></i>
       </div>
       <div class="input-box">
-        <input type="password" placeholder="Konfirmimi i Fjalkalimit | Confirm Password" required>
+        <input type="password" name="newPassword" placeholder="New Password" required>
         <i class='bx bxs-user'></i>
       </div>
-      <a href="/login">
-      <button type="submit" class="btn" formaction="/login">Confirm Change</button>
-      </a>
+      <div class="input-box">
+        <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
+        <i class='bx bxs-user'></i>
+      </div>
+      <button type="submit" class="btn">Confirm Change</button>
       <br>
       <br>
     </form>
+    
+    
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        setTimeout(function() {
+            $('#success-alert').fadeOut('slow');
+        }, 10000);
+        setTimeout(function() {
+            $('#danger-alert').fadeOut('slow');
+        }, 10000);
+        $('.close').click(function(){
+            $(this).parent().hide();
+        });
+    </script>
 </body>
 </html>
