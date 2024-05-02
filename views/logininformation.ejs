@@ -7,6 +7,23 @@
     <link rel="stylesheet" href="/static/css/logininformation.css">
 </head>
 <body>
+
+    <% if (successAlert && successAlert.length > 0) { %>
+        <div class="alert alert-success" id="success-alert">
+            <%= successAlert %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">X</span>
+            </button>
+        </div>
+    <% } %>
+    <% if (dangerAlert && dangerAlert.length > 0) { %>
+        <div class="alert alert-danger" id="danger-alert">
+            <%= dangerAlert %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">X</span>
+            </button>
+        </div>
+    <% } %>
     <div class="additional-information">
         <h1>
             <span>
@@ -25,7 +42,7 @@
         <% if (login && login.email) { %>
             <p>Email: <%= login.email %></p>
             <p>Edit User: <%= data.name %> <%= data.lastname %></p>
-            <form action="/logininformation/<%= data.id %>" method="POST">
+            <form action="/logininformation/edit/<%= data.id %>" method="POST">
                 <input type="text" name="email" value="<%= login.email %>">
                 <input type="text" name="password" hidden>
                 <button type="submit">add</button>
@@ -41,5 +58,17 @@
         <% } %>
         
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        setTimeout(function() {
+            $('#success-alert').fadeOut('slow');
+        }, 10000);
+        setTimeout(function() {
+            $('#danger-alert').fadeOut('slow');
+        }, 10000);
+        $('.close').click(function(){
+            $(this).parent().hide();
+        });
+    </script>
 </body>
 </html>

@@ -394,7 +394,7 @@ app.get("/logininformation/:id", async (req, res) => {
         const login = await Login.findOne({
             where: {user_id:userId}
         })
-        res.render('logininformation',{data : user, login})
+        res.render('logininformation',{data : user, login,  successAlert: req.flash('success'), dangerAlert: req.flash('danger')})
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal server error');
@@ -461,6 +461,24 @@ app.post('/logininformation/:id', async (req, res) => {
         res.status(500).send('Internal server error');
     }
 });
+
+app.post('/logininformation/edit/:id', async (req, res) => {
+    const userId = req.params.id;
+    const { email } = req.body; 
+    try {
+        const user_update = await Login.update({
+            email: email
+        }, {
+            where: { user_id: userId }
+        });
+        req.flash('success','User got edited successfuly!')
+        res.redirect(`/logininformation/${userId}`)
+    } catch (error) {
+        console.log("Error somewhere here: ", error);
+        res.status(500).send('Internal server error');
+    }
+});
+
 
 app.get('/editpartners/:id', async(req,res)=>{
     if (!req.session.user || req.session.user.role !== 'admin') {
