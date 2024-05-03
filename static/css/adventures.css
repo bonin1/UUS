@@ -1,0 +1,95 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    height: 100vh;
+    background-color: #EDEDED;
+    position: relative;
+}
+.container{
+    position: relative;
+}
+.back{
+    width: 100% !important;
+    height: 100vh;
+    z-index: -1;
+    object-fit: cover;
+    position: relative;
+}
+
+.wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper-assist{
+    width: 1400px;
+    height: auto;
+    padding: 50px 0;
+}
+
+.text{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    position: absolute;
+    top: 20px;
+    right: 50px;
+}
+.text > h1{
+    font-size: 40px;
+    color: #fff;
+}
+.wrapper-assist > h1{
+    font-size: 24px;
+    color: #000;
+    text-align: center;
+}
+
+.row{
+    width: 100%;
+    height: 40rem;
+    display: flex;
+    margin: 50px 0;
+}
+
+.both-parts{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: start;
+}
+.both-parts > img{
+    width: 100%;
+}
+.both-parts>h1{
+    font-size: 35px;
+    font-weight: 600;
+}
+.both-parts > p{
+    font-size: 30px;
+}
+
+@media screen and (max-width:800px){
+    .text > h1{
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width:1400px) {
+    .wrapper{
+        padding: 50px 20px;
+    }
+    .unordered > li > a{
+        font-size: 25px;
+    }
+    .news-card > p{
+        font-size: 20px;
+    }
+}

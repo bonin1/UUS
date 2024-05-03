@@ -718,7 +718,8 @@ const routes = [
     { path: '/contactus', view: 'contact-us' },
     { path: '/employee', view: 'employee' },
     { path: '/research', view: 'research' },
-    { path: '/employment', view: 'emplyment' }
+    { path: '/employment', view: 'emplyment' },
+    { path: '/adventures', view: 'adventures' }
 ];
 
 routes.forEach(route => {
