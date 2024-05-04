@@ -39,7 +39,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
-            sendDefaultMessages();
+            sendDefaultMessage();
 
             $('#message-form').submit(function(event) {
                 event.preventDefault();
@@ -82,11 +82,11 @@
                 });
             });
 
-            function sendDefaultMessages() {
+            function sendDefaultMessage() {
                 $.ajax({
                     type: 'POST',
                     url: '/message',
-                    data: { message: 'hello' },
+                    data: {},
                     success: function(response) {
                         $('#chat-box').append('<p><strong>Bot:</strong> ' + response.message + '</p>');
                     },
