@@ -663,6 +663,43 @@ app.post('/change-password', async (req, res) => {
 });
 
 
+const sessions = {};
+
+app.post('/message', (req, res) => {
+    const sessionId = req.body.sessionId;
+    const message = req.body.message;
+
+    let session = sessions[sessionId];
+    if (!session) {
+        session = { stage: 'start' }; 
+        sessions[sessionId] = session;
+    }
+
+    let responseMessage;
+
+    switch (session.stage) {
+        case 'start':
+            responseMessage = 'Welcome! What would you like to do?';
+            session.stage = 'chooseOption';
+            break;
+        case 'chooseOption':
+            if (message === 'Option 1') {
+                responseMessage = 'You chose Option 1. Redirecting to Option 1 page...';
+                session.stage = 'start';
+            } else if (message === 'Option 2') {
+                responseMessage = 'You chose Option 2. Redirecting to Option 2 page...';
+                session.stage = 'start';
+            } else {
+                responseMessage = 'Please choose a valid option (Option 1 or Option 2).';
+            }
+            break;
+        default:
+            responseMessage = 'Sorry, I didn\'t understand that.';
+            break;
+    }
+
+    res.json({ message: responseMessage });
+});
 
 
 const apply = require('./routes/ApplyRoute')

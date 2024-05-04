@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/static/css/aboutus.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     
@@ -27,7 +28,75 @@
             </p>
         </div>
     </main>
+    <div class="container mt-5">
+        <div id="chat-box" style="height: 300px; overflow-y: scroll;"></div>
+        <div id="options" class="mt-3">
+            <button type="button" class="btn btn-primary option-btn" data-value="Option 1">Option 1</button>
+            <button type="button" class="btn btn-primary option-btn" data-value="Option 2">Option 2</button>
+        </div>
+    </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            sendDefaultMessages();
+
+            $('#message-form').submit(function(event) {
+                event.preventDefault();
+                const userMessage = $('#user-message').val();
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/message',
+                    data: { message: userMessage },
+                    success: function(response) {
+                        $('#chat-box').append('<p><strong>You:</strong> ' + userMessage + '</p>');
+                        $('#chat-box').append('<p><strong>Bot:</strong> ' + response.message + '</p>');
+                        $('#user-message').val('');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+
+            $('.option-btn').click(function() {
+                const optionValue = $(this).data('value');
+                $('#chat-box').append('<p><strong>You:</strong> ' + optionValue + '</p>');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/message',
+                    data: { message: optionValue },
+                    success: function(response) {
+                        $('#chat-box').append('<p><strong>Bot:</strong> ' + response.message + '</p>');
+
+                        $('#options').html(`
+                            <button type="button" class="btn btn-primary option-btn" data-value="Option 3">Option 3</button>
+                            <button type="button" class="btn btn-primary option-btn" data-value="Option 4">Option 4</button>
+                        `);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+
+            function sendDefaultMessages() {
+                $.ajax({
+                    type: 'POST',
+                    url: '/message',
+                    data: { message: 'hello' },
+                    success: function(response) {
+                        $('#chat-box').append('<p><strong>Bot:</strong> ' + response.message + '</p>');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            }
+        });
+    </script>
     <%- include('partials/footer'); %>
 
     <script src="/static/js/Navbar_Light.js"></script>
