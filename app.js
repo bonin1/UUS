@@ -672,7 +672,7 @@ app.post('/message', (req, res) => {
     if (!message) {
         responseMessage = responses.default;
     } else {
-        const optionResponse = responses.options[message];
+        const optionResponse = responses[message];
         if (optionResponse) {
             responseMessage = optionResponse;
         } else {

@@ -42,8 +42,10 @@
             <div class="parent">
                 <div id="chat-box"></div>
                 <div id="options" >
-                    <button type="button" class="option-btn" data-value="Option 1">Option 1</button>
-                    <button type="button" class="option-btn" data-value="Option 2">Option 2</button>
+                    <button type="button" class="option-btn" data-value="courses">Courses</button>
+                    <button type="button" class="option-btn" data-value="OpenDays">Open days</button>
+                    <button type="button" class="option-btn" data-value="ContactUS">Contact us</button>
+                    <button type="button" class="option-btn" data-value="Howtoapply">How to apply?</button>
                 </div>
             </div>
         </div>
@@ -68,6 +70,7 @@
             });
         });
 
+
         $(document).ready(function() {
             let stopped = false; 
 
@@ -88,7 +91,6 @@
             });
 
             function sendMessage(message) {
-
                 $.ajax({
                     type: 'POST',
                     url: '/message',
@@ -101,15 +103,8 @@
                             </div>
                         `);
 
-                        if (response.message.includes('Redirecting')) {
-                            $('#options').html(`
-                                <button type="button" class="option-btn" data-value="Option 3">Option 3</button>
-                                <button type="button" class="option-btn" data-value="Option 4">Option 4</button>
-                            `);
-                        }
-
-                        if (response.message === 'You chose Option 4. Redirecting to Option 4 page...') {
-                            stopped = true;
+                        if (response.courses && response.courses[message]) {
+                            displayCourses(response.courses[message]);
                         }
                     },
                     error: function(xhr, status, error) {
@@ -136,9 +131,18 @@
                     }
                 });
             }
+            
+            function displayCourses(courses) {
+                $('#chat-box').append(`
+                    <div class="bot-message">
+                        <img src="/static/image/icon-park_robot.png" alt="Bot Image">
+                        <p><strong>Bot:</strong> ${courses}</p>
+                    </div>
+                `);
+            }
         });
 
-        
+
 
     </script>
     <%- include('partials/footer'); %>
