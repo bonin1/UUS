@@ -1,0 +1,9 @@
+{
+  "default": "Hello and Welcome!",
+  "options": {
+    "Option 1": "You chose Option 1. Redirecting to Option 1 page...",
+    "Option 2": "You chose Option 2. Redirecting to Option 2 page...",
+    "Option 3": "You chose Option 3. Redirecting to Option 3 page...",
+    "Option 4": "You chose Option 4. Redirecting to Option 4 page..."
+  }
+}
