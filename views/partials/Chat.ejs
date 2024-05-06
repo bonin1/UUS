@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            border: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        #chat-box::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        #chat-box::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        #chat-box::-webkit-scrollbar-thumb {
+            border-radius: 8px;
+            background-color: #004492;
+        }
+        #chat-box::-webkit-scrollbar-thumb:hover{
+            background-color: #01346e;
+        }
+        .chat-opener{
+            position: fixed;
+            bottom: 100px;
+            right: 100px;
+            background-color: #004492;
+            padding: 20px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .chat-container{
+            display: none;
+        }
+        .inside-container-chat{
+            position: fixed;
+            bottom: 100px;
+            right: 100px;
+            width: 300px;
+            height: 500px;
+            background-color: #BEBEBE;
+            border-radius: 10px;
+        }
+        .chat{
+            border-top-right-radius: 10px;
+            border-top-left-radius: 10px;
+            height: 100px;
+            background-color: #E5E4E4;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+        .chat > img{
+            width: 48px;
+            height: 48px;
+            background-color: #fff;
+            border-radius: 50%;
+            padding: 10px;
+        }
+        #chat-box{
+            height: 286px;
+            overflow: auto;
+        }
+        .parent{
+            width: 100%;
+        }
+        .bot-message{
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            margin: 10px 0;
+        }
+        .bot-message > img{
+            width: 30px;
+            height: 30px;
+            background-color: #fff;
+            border-radius: 50%;
+            padding: 5px;
+            margin: 4px 10px;
+        }
+        .bot-message > p{
+            margin-top: 7px;
+            font-size: 15px;
+            background-color: #ececec;
+            border-radius: 5px;
+            padding: 2px;
+        }
+        #options{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            flex-wrap: wrap;
+            bottom: 10px;
+            padding: 0 30px;
+        }
+        #options > button{
+            width: 100px;
+            border: 2px solid #2F88FF;
+            background-color: #D9D9D9;
+            padding: 5px 0;
+            margin: 10px 0;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-opener">
+        <img src="/static/image/chat2.0.png" alt="">
+    </div>
+    <div class="chat-container">
+        <div class="inside-container-chat">
+            <header class="chat">
+                <img src="/static/image/icon-park_robot.png" alt="">
+                <div class="insidetext">
+                    <h1>UNI ASSIST</h1>
+                    <p>online</p>
+                </div>
+            </header>
+            <div class="parent">
+                <div id="chat-box">
+                    <div class="bot-message">
+                        <img src="/static/image/icon-park_robot.png" alt="">
+                        <p>Hello and welcome!</p>
+                    </div>
+                </div>
+                <div id="options" >
+                    <button type="button" class="option-btn" data-value="courses">Courses</button>
+                    <button type="button" class="option-btn" data-value="OpenDays">Open days</button>
+                    <button type="button" class="option-btn" data-value="ContactUS">Contact us</button>
+                    <button type="button" class="option-btn" data-value="Howtoapply">How to apply?</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const chatOpener = document.querySelector(".chat-opener");
+            const chatContainer = document.querySelector(".chat-container");
+            const chatBox = document.querySelector("#chat-box");
+            let optionButtons = document.querySelectorAll(".option-btn");
+
+            chatOpener.addEventListener("click", function (event) {
+                event.stopPropagation();
+                chatContainer.style.display = "block";
+            });
+
+            document.addEventListener("click", function (event) {
+                if (!chatContainer.contains(event.target) && event.target !== chatOpener) {
+                    chatContainer.style.display = "none";
+                }
+            });
+
+            fetch('/data')
+                .then(response => response.json())
+                .then(data => {
+                    optionButtons.forEach(function(button, index) {
+                        button.addEventListener("click", function() {
+                            const value = this.getAttribute("data-value");
+                            const messageDiv = document.createElement("div");
+                            messageDiv.className = "time bot-message";
+
+                            const img = document.createElement("img");
+                            img.src = "/static/image/icon-park_robot.png"; 
+                            messageDiv.appendChild(img);
+
+                            const message = document.createElement("p");
+
+                            if (data[value]) {
+                                if (typeof data[value] === 'string') {
+                                    message.textContent = data[value];
+                                } else {
+                                    optionButtons.forEach((btn, i) => {
+                                        if (data[value].buttons[i]) {
+                                            btn.setAttribute("data-value", data[value].buttons[i]);
+                                            btn.textContent = data[value].buttons[i]; 
+                                        }
+                                    });
+                                    message.textContent = "You clicked: " + value;
+                                }
+                            } else if (Object.values(data).some(obj => obj.buttons && obj.buttons.includes(value))) {
+                                for (let key in data) {
+                                    if (data[key].buttons && data[key].buttons.includes(value)) {
+                                        message.textContent = data[key].messages[data[key].buttons.indexOf(value)];
+                                        break;
+                                    }
+                                }
+                            } else {
+                                message.textContent = "You clicked: " + value;
+                            }
+
+                            messageDiv.appendChild(message);
+                            chatBox.appendChild(messageDiv);
+                        });
+                    });
+                });
+        });
+    </script>
+</body>
+</html>

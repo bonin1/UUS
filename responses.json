@@ -1,22 +1,15 @@
 {
-  "default": "Hello and Welcome!",
-  "courses":{
-    "Whatweoffer":"We do offer a variety of courses including Data Science, Java programming etc.",
-    "Departments":"Our University has 2 departments: Computer Science & Cyber Security",
-    "Professors":"Our academic staff contains one of the most trained staff and professors",
-    "Campuses":"Our University has 2 campuses in Kosovo"
+  "courses": {
+      "buttons": ["newCourse1", "newCourse2", "newCourse3", "newCourse4"],
+      "messages": ["New Course 1a", "New Course 2", "New Course 3", "New Course 4"]
   },
-  "OpenDays":"Our university operates Monday through Friday, welcoming students, faculty, and visitors from 8:00 AM to 6:00 PM.",
+  "OpenDays":"open till it closes",
   "ContactUS":{
-    "Contactviamessage":"You can contact us using Instagram or Facebook @uus",
-    "Contactviaemail":"You can contact us via Email: uus_infomation@uus-edu.org",
-    "Contactviaphone":"You can contact us through oue phone numbers: +383 12 345 678 or +383 21 345 678",
-    "ContactCampus":"You can come to the campus area of the UUS and our staff will direct you to the correct office"
+    "buttons":["phone","email","example1","example2"],
+    "messages":["123456778","example@example.com","testtest","testtest"]
   },
   "Howtoapply":{
-    "Applyviaform":"In first page you shall see the apply button in the top-right corner there you fill the inputs and apply",
-    "Applyviaphone":"You can call one of our agents on our phone mubers +383 12 345 678 or +383 21 345 678",
-    "Applyviaemail":"You can apply via email by sending you CV and diplomas",
-    "ApplyFromCampus":"You can come in one of the campuses of UUS and apply physically"
+    "buttons":["homepage","email","phone","Campus"],
+    "messages":["home page","example@example.com","123456789","peja"]
   }
 }

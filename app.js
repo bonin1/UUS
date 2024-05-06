@@ -662,28 +662,15 @@ app.post('/change-password', async (req, res) => {
     }
 });
 
-
-const responses = require('./responses.json');
-
-app.post('/message', (req, res) => {
-    const message = req.body.message;
-    let responseMessage;
-
-    if (!message) {
-        responseMessage = responses.default;
-    } else {
-        const optionResponse = responses[message];
-        if (optionResponse) {
-            responseMessage = optionResponse;
+app.get('/data', (req, res) => {
+    fs.readFile('./responses.json', 'utf8', (err, data) => {
+        if (err) {
+            console.log(err);
         } else {
-            responseMessage = 'Please choose a valid option.';
+            res.send(JSON.parse(data));
         }
-    }
-
-    res.json({ message: responseMessage });
+    });
 });
-
-
 
 const apply = require('./routes/ApplyRoute')
 const feedback = require('./routes/FeedbackRoute')
