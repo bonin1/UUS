@@ -96,7 +96,7 @@
                         </h1>
                         <hr>
                         <p>
-                            When is the best time to study abroad?
+                            <button type="button" class="option-btn" data-value="Abroad">When is the best time to study abroad?</button>
                         </p>
                     </section>
                 </div>
@@ -108,7 +108,7 @@
                         </h1>
                         <hr>
                         <p>
-                            Top 10 Universities in Spain for International Students
+                            <button type="button" class="option-btn" data-value="10universities">Top 10 Universities in Spain for International Students</button>
                         </p>
                     </section>
                 </div>
@@ -120,7 +120,7 @@
                         </h1>
                         <hr>
                         <p>
-                            Top 10 places to study Art & History of Art
+                            <button type="button" class="option-btn" data-value="10art">Top 10 places to study Art & History of Art</button>
                         </p>
                     </section>
                 </div>
@@ -132,7 +132,7 @@
                         </h1>
                         <hr>
                         <p>
-                            How do I find accommodation while studying abroad?
+                            <button type="button" class="option-btn" data-value="accomodation">How do I find accommodation while studying abroad?</button>
                         </p>
                     </section>
                 </div>
@@ -144,7 +144,7 @@
                         </h1>
                         <hr>
                         <p>
-                            How long does a typical study abroad program last?
+                            <button type="button" class="option-btn" data-value="studyAbroad">How long does a typical study abroad program last?</button>
                         </p>
                     </section>
                 </div>
@@ -156,13 +156,129 @@
                         </h1>
                         <hr>
                         <p>
-                            How do I apply for a study abroad program?
+                            <button type="button" class="option-btn" data-value="abroadstudies">How do I apply for a study abroad program?</button>
                         </p>
                     </section>
                 </div>
             </div>
         </div>
     </div>
+    <div id="options">
+        
+        
+        
+        
+    </div>
+    <div class="chat-opener">
+        <img src="/static/image/chat2.0.png" alt="">
+    </div>
+    <div class="chat-container">
+        <div class="inside-container-chat">
+            <header class="chat">
+                <img src="/static/image/icon-park_robot.png" alt="">
+                <div class="insidetext">
+                    <h1>UNI ASSIST</h1>
+                    <p>online</p>
+                </div>
+            </header>
+            <div class="parent">
+                <div id="chat-box">
+                    <div class="bot-message">
+                        <img src="/static/image/icon-park_robot.png" alt="">
+                        <p>Hello and welcome!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const chatOpener = document.querySelector(".chat-opener");
+            const chatContainer = document.querySelector(".chat-container");
+            const chatBox = document.querySelector("#chat-box");
+            let optionButtons = document.querySelectorAll(".option-btn");
+
+            function openChat() {
+                chatContainer.style.display = "block";
+            }
+
+            chatOpener.addEventListener("click", function (event) {
+                event.stopPropagation();
+                openChat();
+            });
+
+            optionButtons.forEach(function(button) {
+                button.addEventListener("click", function(event) {
+                    event.stopPropagation();
+                    openChat();
+                });
+            });
+
+            document.addEventListener("click", function (event) {
+                if (!chatContainer.contains(event.target) && event.target !== chatOpener) {
+                    chatContainer.style.display = "none";
+                }
+            });
+
+            fetch('/data')
+                .then(response => response.json())
+                .then(data => {
+                    optionButtons.forEach(function(button, index) {
+                        button.addEventListener("click", function() {
+                            const value = this.getAttribute("data-value");
+                            const messageDiv = document.createElement("div");
+                            messageDiv.className = "time bot-message";
+
+                            const img = document.createElement("img");
+                            img.src = "/static/image/icon-park_robot.png"; 
+                            messageDiv.appendChild(img);
+
+                            const message = document.createElement("p");
+
+                            if (data[value]) {
+                                if (typeof data[value] === 'string') {
+                                    if (value === "10universities" || value === "10art") {
+                                        let universities = data[value].split(", ");
+
+                                        let ul = document.createElement("ul");
+
+                                        universities.forEach(function(university) {
+                                            let li = document.createElement("li");
+                                            li.textContent = university;
+                                            ul.appendChild(li);
+                                        });
+                                        message.appendChild(ul);
+                                    } else {
+                                        message.textContent = data[value];
+                                    }
+                                } else {
+                                    optionButtons.forEach((btn, i) => {
+                                        if (data[value].buttons[i]) {
+                                            btn.setAttribute("data-value", data[value].buttons[i]);
+                                            btn.textContent = data[value].buttons[i]; 
+                                        }
+                                    });
+                                    message.textContent = "You clicked: " + value;
+                                }
+                            } else if (Object.values(data).some(obj => obj.buttons && obj.buttons.includes(value))) {
+                                for (let key in data) {
+                                    if (data[key].buttons && data[key].buttons.includes(value)) {
+                                        message.textContent = data[key].messages[data[key].buttons.indexOf(value)];
+                                        break;
+                                    }
+                                }
+                            } else {
+                                message.textContent = "You clicked: " + value;
+                            }
+                            messageDiv.appendChild(message);
+                            chatBox.appendChild(messageDiv);
+                        });
+                    });
+                });
+        });
+
+    </script>
 
     <%- include('partials/footer'); %>
 </body>

@@ -82,17 +82,31 @@ body{
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    margin: 50px 0;
 }
 .Form_Categories_Button > select{
-    width: 200px;
-    padding: 10px;
-    font-size: 17px;
-    border: 1px solid gray;
+    width: auto;
+    font-size: 20px;
+    font-weight: 500;
+    color: #373737;
+    background-color: #fff;
+    border-radius: 10px;
+    border: none;
+    padding: 10px 20px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('/static/image/Polygon\ 2.png');
+    background-repeat: no-repeat;
+    background-position: 95%;
 }
+.Form_Categories_Button > select:nth-child(-n+3){
+    padding-right:40px;
+}
+
 .Form_Categories_Button > select:focus{
     outline: none;
 }
-
 .partners-container{
     padding: 50px 0;
     width: 100%;

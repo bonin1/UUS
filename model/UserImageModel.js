@@ -18,7 +18,7 @@ const UserImage = db.define('userimage', {
         },
     },
     photo_user:{
-        type: DataTypes.BLOB,
+        type: DataTypes.BLOB('long') ,
         allowNull: false
     }
 }, {
