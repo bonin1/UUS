@@ -26,6 +26,43 @@ $('.close').click(function(){
     $(this).parent().hide();
 });
 
+
+const toggleVisibility = (element) => {
+    element.classList.toggle('visible');
+    element.classList.toggle('hidden');
+}
+
+const hideElement = (element) => {
+    element.classList.add('hidden');
+    element.classList.remove('visible');
+}
+
+const toggleDivsBtn = document.getElementById('toggleDivs');
+const div1 = document.getElementById('div1');
+const div2 = document.getElementById('div2');
+const div3 = document.getElementById('div3');
+
+toggleDivsBtn.addEventListener('click', () => {
+    toggleVisibility(div1);
+    toggleVisibility(div2);
+
+    if (!div3.classList.contains('hidden')) {
+        hideElement(div3);
+    }
+});
+
+const toggleDiv2Btn = document.getElementById('toggleDiv2');
+
+toggleDiv2Btn.addEventListener('click', () => {
+    toggleVisibility(div3);
+
+    if (!div1.classList.contains('hidden') || !div2.classList.contains('hidden')) {
+        hideElement(div1);
+        hideElement(div2);
+    }
+});
+
+
 var loadFile = function(event) {
     var output = document.getElementById('output');
     output.innerHTML = "";
@@ -144,3 +181,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+
+
