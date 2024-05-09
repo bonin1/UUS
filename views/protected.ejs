@@ -18,24 +18,40 @@
     <% } %>
     <div class="wrapper">
         <div class="left-side">
-            <div class="logo">
-                <a href="/protected">
-                    <img src="/static/image/logo2.0black.png" alt="">
-                </a>
+            <div class="topSide">
+                <div class="logo">
+                    <a href="/protected">
+                        <img src="/static/image/logo2.0black.png" alt="">
+                    </a>
+                </div>
+                <div class="tabs">
+                    <button id="toggleDivs">
+                        <img src="/static/image/dashboard-3--app-application-dashboard-home-layout-vertical.png" alt="">
+                        Dashboard
+                    </button>
+                    <button id="toggleDiv2">
+                        <img src="/static/image/User-Multiple-Group--Streamline-Core.png" alt="">
+                        User Managment
+                    </button>
+                    <button id="toggleDiv3">
+                        <img src="/static/image/User-Multiple-Group--Streamline-Core.png" alt="">
+                        Login Managment
+                    </button>
+                    <button id="toggleDiv4">
+                        <img src="/static/image/Graph--Streamline-Core.png" alt="">
+                        Statistics
+                    </button>
+                    <button id="toggleDiv5">
+                        <img src="/static/image/la_university.png " alt="">
+                        Partner Universities
+                    </button>
+                </div>
             </div>
-            <div class="tabs">
-                <button id="toggleDivs">
-                    <img src="/static/image/dashboard-3--app-application-dashboard-home-layout-vertical.png" alt="">
-                    Dashboard
-                </button>
-                <button id="toggleDiv2">
-                    <img src="/static/image/User-Multiple-Group--Streamline-Core.png" alt="">
-                    User Managment
-                </button>
-                <button id="toggleDiv3">
-                    <img src="/static/image/User-Multiple-Group--Streamline-Core.png" alt="">
-                    Login Managment
-                </button>
+            <div class="bottomSide">
+                <a href="">Need Help?</a>
+                <form action="/logout" id="logout-form" method="POST">
+                    <input type="submit" id="a1" class="nav-link" value="Logout">
+                </form>
             </div>
         </div>
         <div class="right-side">
@@ -185,66 +201,150 @@
                 </div>
             </div>
 
+            <div class="main-container hidden" id="div5">
+                <h1 style="text-align: center; margin: 50px 0;">Feedback Statistics</h1>
+                <div class="feedback">
+                    <div class="feedback-inside-container">
+                        <% row.forEach(feedback => { %>
+                            <div class="feedback-card">
+                                <h1>Name: <%= feedback.name %>
+                                <br>Email: <%= feedback.lastname %></h1>
+                                <%= feedback.text_box %>
+                            </div>
+                        <% }); %>
+                    </div>
+                </div>
+                <div class="feedback-support">
+
+                    <div class="feedback-one">
+                        <div class="both-part-one">
+                            <h1>Overall experience 1-3</h1>
+                            <span><%= averageRating %></span>
+                        </div>
+                        <div style="border-top: 1px solid #fff;" class="both-part-one">
+                            <h1>Average Rating 1=10</h1>
+                            <span><%= averageSatisfiedRating %></span>
+                        </div>
+                    </div>
+
+                    <div class="feedback-two">
+                        <div class="feedback-two-container">
+                            <% Object.keys(moreInfoCounts).forEach(info => { %>
+                                <h1>
+                                    <span class="text-counts"><%= info %>:</span> <span class="counts"><%= moreInfoCounts[info] %></span><br>
+                                </h1>
+                            <% }); %>
+                        </div>
+                    </div>
+
+                    <div class="feedback-three">
+                        <div class="both-part-two">
+                            <h2>Difficulties</h2>
+                            <% Object.keys(difficulties).forEach(info => { %>
+                                <h1>
+                                    <span class="yes-no-counts"><%= info %>:</span> <span class="counts-yn"><%= difficulties[info] %></span><br>
+                                </h1>
+                            <% }); %>
+                        </div>
+                        <div style="border-top: 1px solid #fff;" class="both-part-two">
+                            <h2>Recomment</h2>
+                            <% Object.keys(recommend).forEach(info => { %>
+                                <h1>
+                                    <span class="yes-no-counts"><%= info %>:</span> <span class="counts-yn"><%= recommend[info] %></span><br>
+                                </h1>
+                            <% }); %>
+                        </div>
+                    </div>
+                </div>
+                <h1 style="text-align: center; margin: 50px 0;">Statistics</h1>
+                <div class="statistics">
+                    <div class="statistics-part-one statistics-both">
+                        <h1>Number of Students: <span class="stats"><%= studentCount %></span></h1>
+                        <h1>Number of Professors: <span class="stats"><%= professorCount %></span></h1>
+                        <h1>Number of departments: <span class="stats"><%=departmentCount%></span> </h1>
+                    </div>
+                    <div class="statistics-part-two statistics-both">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Department</th>
+                                    <th>Student Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% departmentStudentCounts.forEach(function(dep) { %>
+                                    <tr>
+                                        <td><%= dep.dep_name %></td>
+                                        <td><%= dep.count %></td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-container hidden" id="div6">
+                <h1 style="text-align: center; margin: 50px 0;">Partner Universities</h1>
+                <div class="partner-container">
+                    <div class="edit-patners">
+                        <div class="pjesa2">
+                            <div class="rcmn">
+                                <form id="search-form3">
+                                    <input type="text" id="search-input3" placeholder="Search..." autocomplete="off">
+                                    <button class="search-submit" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </form>
+                                <div id="recommendations3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="partner-inside">
+                        <div class="partner-one both-partners">
+                            <form action="/createpartners" method="POST" enctype="multipart/form-data">
+                                <div class="form-one">
+                                    <input  type="text" name="name" placeholder="Name:">
+                                    <input  type="text" name="countries" placeholder="countries:">
+                                    <input  type="number" name="open_scolars" placeholder="open_scolars:" id="">
+                                    <input type="file" name="photos" multiple id="file" onchange="loadFile2(event)">
+                                </div>
+                                <div class="form-two">
+                                    <select  name="level" id="">
+                                        <option value="" class="" disabled selected>Level</option>
+                                        <option value="Bachelor">Bachelor</option>
+                                        <option value="Master">Master</option>
+                                    </select>
+                                    <select  name="semster" id="">
+                                        <option value="" class="" disabled selected>Semster</option>
+                                        <option value="Winter">Winter</option>
+                                        <option value="Summer">Summer</option>
+                                    </select>
+                                    <select  name="dep_id" id="">
+                                        <option value="" class="" disabled selected>Department</option>
+                                        <option value="1">Computer Science</option>
+                                        <option value="2">Cyber Security</option>
+                                    </select>
+                                    
+                                
+                                    <button type="submit">Create</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <div class="partner-two both-partners">
+                            <div id="output2">
+                                <img src="/static/image/default.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
     <!-- 
 
 
 
-    <h1 style="text-align: center; margin: 50px 0;">Feedback Statistics</h1>
-    <div class="feedback">
-        <div class="feedback-inside-container">
-            <% row.forEach(feedback => { %>
-                <div class="feedback-card">
-                    <h1>Name: <%= feedback.name %>
-                    <br>Email: <%= feedback.lastname %></h1>
-                    <%= feedback.text_box %>
-                </div>
-            <% }); %>
-        </div>
-    </div>
-    <div class="feedback-support">
-
-        <div class="feedback-one">
-            <div class="both-part-one">
-                <h1>Overall experience 1-3</h1>
-                <span><%= averageRating %></span>
-            </div>
-            <div style="border-top: 1px solid #fff;" class="both-part-one">
-                <h1>Average Rating 1=10</h1>
-                <span><%= averageSatisfiedRating %></span>
-            </div>
-        </div>
-
-        <div class="feedback-two">
-            <div class="feedback-two-container">
-                <% Object.keys(moreInfoCounts).forEach(info => { %>
-                    <h1>
-                        <span class="text-counts"><%= info %>:</span> <span class="counts"><%= moreInfoCounts[info] %></span><br>
-                    </h1>
-                <% }); %>
-            </div>
-        </div>
-
-        <div class="feedback-three">
-            <div class="both-part-two">
-                <h2>Difficulties</h2>
-                <% Object.keys(difficulties).forEach(info => { %>
-                    <h1>
-                        <span class="yes-no-counts"><%= info %>:</span> <span class="counts-yn"><%= difficulties[info] %></span><br>
-                    </h1>
-                <% }); %>
-            </div>
-            <div style="border-top: 1px solid #fff;" class="both-part-two">
-                <h2>Recomment</h2>
-                <% Object.keys(recommend).forEach(info => { %>
-                    <h1>
-                        <span class="yes-no-counts"><%= info %>:</span> <span class="counts-yn"><%= recommend[info] %></span><br>
-                    </h1>
-                <% }); %>
-            </div>
-        </div>
-    </div>
 
 
 
@@ -255,60 +355,7 @@
     
 
 
-
-
-    <h1 style="text-align: center; margin: 50px 0;">Partner Universities</h1>
-    <div class="partner-container">
-        <div class="edit-patners">
-            <div class="pjesa2">
-                <div class="rcmn">
-                    <form id="search-form3">
-                        <input type="text" id="search-input3" placeholder="Search..." autocomplete="off">
-                        <button class="search-submit" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </form>
-                    <div id="recommendations3"></div>
-                </div>
-            </div>
-        </div>
-        <div class="partner-inside">
-            <div class="partner-one both-partners">
-                <form action="/createpartners" method="POST" enctype="multipart/form-data">
-                    <div class="form-one">
-                        <input  type="text" name="name" placeholder="Name:">
-                        <input  type="text" name="countries" placeholder="countries:">
-                        <input  type="number" name="open_scolars" placeholder="open_scolars:" id="">
-                        <input type="file" name="photos" multiple id="file" onchange="loadFile2(event)">
-                    </div>
-                    <div class="form-two">
-                        <select  name="level" id="">
-                            <option value="" class="" disabled selected>Level</option>
-                            <option value="Bachelor">Bachelor</option>
-                            <option value="Master">Master</option>
-                        </select>
-                        <select  name="semster" id="">
-                            <option value="" class="" disabled selected>Semster</option>
-                            <option value="Winter">Winter</option>
-                            <option value="Summer">Summer</option>
-                        </select>
-                        <select  name="dep_id" id="">
-                            <option value="" class="" disabled selected>Department</option>
-                            <option value="1">Computer Science</option>
-                            <option value="2">Cyber Security</option>
-                        </select>
-                        
-                    
-                        <button type="submit">Create</button>
-                    </div>
-                </form>
-            </div>
-            
-            <div class="partner-two both-partners">
-                <div id="output2">
-                    <img src="/static/image/default.png" alt="">
-                </div>
-            </div>
-        </div>
-    </div> -->
+-->
 
 
 

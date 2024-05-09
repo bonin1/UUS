@@ -29,9 +29,9 @@ router.get('/', async (req, res) => {
     const alert = req.session.alert;
     req.session.alert = null;
     try {
-        // if (!req.session.user || req.session.user.role !== 'admin') {
-        //     return res.redirect('/admin');
-        // }
+        if (!req.session.user || req.session.user.role !== 'admin') {
+            return res.redirect('/admin');
+        }
 
         const [studentCount, professorCount, departments, feedbackData, applies, applyErasmus] = await Promise.all([
             User.count({ where: { role: 'student' } }),
