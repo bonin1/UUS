@@ -37,30 +37,26 @@ const hideElement = (element) => {
     element.classList.remove('visible');
 }
 
-const toggleDivsBtn = document.getElementById('toggleDivs');
-const div1 = document.getElementById('div1');
-const div2 = document.getElementById('div2');
-const div3 = document.getElementById('div3');
+const divs = ['div1', 'div2', 'div3', 'div4'].map(id => document.getElementById(id));
+const toggles = [
+    { button: 'toggleDivs', divs: [0, 1] },
+    { button: 'toggleDiv2', divs: [2] },
+    { button: 'toggleDiv3', divs: [3] }
+].map(toggle => ({ ...toggle, button: document.getElementById(toggle.button) }));
 
-toggleDivsBtn.addEventListener('click', () => {
-    toggleVisibility(div1);
-    toggleVisibility(div2);
+toggles.forEach(({ button, divs: divIndices }) => {
+    button.addEventListener('click', () => {
+        divIndices.forEach(index => toggleVisibility(divs[index]));
 
-    if (!div3.classList.contains('hidden')) {
-        hideElement(div3);
-    }
+        divs.filter((_, i) => !divIndices.includes(i)).forEach(div => {
+            if (!div.classList.contains('hidden')) {
+                hideElement(div);
+            }
+        });
+    });
 });
 
-const toggleDiv2Btn = document.getElementById('toggleDiv2');
 
-toggleDiv2Btn.addEventListener('click', () => {
-    toggleVisibility(div3);
-
-    if (!div1.classList.contains('hidden') || !div2.classList.contains('hidden')) {
-        hideElement(div1);
-        hideElement(div2);
-    }
-});
 
 
 var loadFile = function(event) {
