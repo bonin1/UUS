@@ -48,6 +48,9 @@ const upload = multer({
 
 
 app.post('/upload', upload.array('photos', 10), function(req, res) {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.redirect('/admin');
+    }
     if (!req.files || req.files.length === 0) {
         console.log('No files uploaded');
         return res.status(400).send('No files uploaded');
@@ -75,6 +78,7 @@ const ApplyErasmus = require('./model/applyErasmusModel')
 const UserImage = require('./model/UserImageModel')
 const Login = require('./model/LoginModel')
 const PartnersModel = require('./model/Partners')
+const TasksModel = require('./model/TaskModel')
 
 app.get('/e-learning',(req,res)=>{
     if (!req.session.isLoggedIn) {
@@ -84,6 +88,9 @@ app.get('/e-learning',(req,res)=>{
 })
 
 app.post('/deleteApplyErasmus/:id', async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.redirect('/admin');
+    }
     try {
         const { id } = req.params;
 
@@ -105,6 +112,9 @@ app.post('/deleteApplyErasmus/:id', async (req, res) => {
 });
 
 app.post('/register/user', upload.array('files', 10), async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.redirect('/admin');
+    }
     const {
         name,
         lastname,
@@ -216,6 +226,8 @@ app.post('/search/partners', async (req, res) => {
 });
 
 
+
+
 app.get("/user/:id", async (req, res) => {
     if (!req.session.user || req.session.user.role !== 'admin') {
         return res.redirect('/admin');
@@ -281,6 +293,9 @@ app.post("/user/delete/:id", async (req, res) => {
 });
 
 app.post('/user/edit/:id', async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.redirect('/admin');
+    }
     const userId = req.params.id;
     const { name, lastname, dep_id,role,email,phone_number,address } = req.body;
     try {
@@ -307,6 +322,9 @@ app.post('/user/edit/:id', async (req, res) => {
 });
 
 app.post('/updateImage/:id', upload.single('file'), async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.redirect('/admin');
+    }
     const userId = req.params.id;
     const newImage = {
         name: req.file.originalname,
@@ -330,6 +348,9 @@ app.post('/updateImage/:id', upload.single('file'), async (req, res) => {
     }
 });
 app.delete('/deleteImage/:id', async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.redirect('/admin');
+    }
     const userId = req.params.id;
     try {
         const image = await UserImage.findByPk(userId);
@@ -348,6 +369,9 @@ app.delete('/deleteImage/:id', async (req, res) => {
 
 
 app.post('/insertImages/:id', upload.array('files', 10), async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.redirect('/admin');
+    }
     const userId = req.params.id;
     try {
         const existingImage = await UserImage.findOne({
@@ -425,6 +449,9 @@ app.post("/logininformation/delete/:id", async (req, res) => {
 });
 
 app.post('/logininformation/:id', async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.redirect('/admin');
+    }
     try {
         const userId = req.params.id;
         const { email, password } = req.body;
@@ -463,6 +490,9 @@ app.post('/logininformation/:id', async (req, res) => {
 });
 
 app.post('/logininformation/edit/:id', async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.redirect('/admin');
+    }
     const userId = req.params.id;
     const { email } = req.body; 
     try {
@@ -528,6 +558,9 @@ app.post('/createpartners', upload.fields([
     { name: 'photos', maxCount: 1 },
     { name: 'photos', maxCount: 10 }
 ]), async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.redirect('/admin');
+    }
     const {
         name,
         countries,
@@ -579,6 +612,9 @@ app.post('/createpartners', upload.fields([
 
 
 app.post('/partners/edit/:id', async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.redirect('/admin');
+    }
     const userId = req.params.id;
     const { 
         name, 
@@ -609,6 +645,9 @@ app.post('/partners/edit/:id', async (req, res) => {
 });
 
 app.post('/partners/image/:id', upload.single('photo'),async (req,res)=>{
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.redirect('/admin');
+    }
     const userId = req.params.id;
     const newImage = {
         name: req.file.originalname,
@@ -644,18 +683,18 @@ app.post('/change-password', async (req, res) => {
     
         if (!isEmail(email)) {
             req.flash('danger', 'Email is in wrong format!');
-            res.redirect('/change-pw')
-        }
-    
-        const user = await Login.findOne({ where: { email } });
-    
-        if (user) {
-            req.session.email = email;
-            return res.redirect('/confirm-change');
+            res.redirect('/change-pw');
         } else {
-            req.flash('danger', 'Email is not found!');
-            res.redirect('/change-pw')
+            const user = await Login.findOne({ where: { email: { [Op.eq]: email } } });
+            if (user) {
+                req.session.email = email;
+                res.redirect('/confirm-change');
+            } else {
+                req.flash('danger', 'Email is not found!');
+                res.redirect('/change-pw');
+            }
         }
+        
     } catch (error) {
         console.error(error);
         res.status(500).send('Server Error');
@@ -672,6 +711,26 @@ app.get('/data', (req, res) => {
     });
 });
 
+app.post('/task/delete/:id', async (req, res) => {
+    if (!req.session.user || req.session.user.role !== 'admin') {
+        return res.redirect('/admin');
+    }
+    const taskId = req.params.id;
+
+    try {
+        const deletedTask = await TasksModel.destroy({ where: { id: taskId } });
+        if (deletedTask === 0) {
+            res.status(404).json({ error: 'Task not found' });
+        } else {
+            res.redirect('/protected')
+        }
+    } catch (err) {
+        console.error('Error deleting task:', err);
+        res.status(500).json({ error: 'An error occurred while deleting the task' });
+    }
+});
+
+
 const apply = require('./routes/ApplyRoute')
 const feedback = require('./routes/FeedbackRoute')
 const ApplyErasmusRoute = require('./routes/ApplyErasmusRoute')
@@ -680,6 +739,7 @@ const adminRoutes = require('./routes/AdminRoute');
 const protected = require('./routes/ProtectedRoute');
 const Partners = require('./routes/PartnersRoute')
 const Change = require('./routes/ChangeRoute')
+const Tasks = require('./routes/TaskRoute')
 app.use('/apply',apply)
 app.use('/feedback',feedback)
 app.use('/apply-erasmus',ApplyErasmusRoute)
@@ -688,6 +748,7 @@ app.use('/admin', adminRoutes)
 app.use('/protected',protected)
 app.use('/partners',Partners)
 app.use('/confirm-change',Change)
+app.use('/insertTask',Tasks)
 
 app.post('/update_status', (req, res) => {
     const { id, status } = req.body; 
@@ -747,7 +808,15 @@ app.post('/logout', (req, res) => {
     });
 });
 
-
+app.post('/logout/admin', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            console.error(err);
+        }
+        res.clearCookie('rememberToken');
+        res.redirect('/admin');
+    });
+});
 
 
 app.listen(process.env.PORT, ()=>{

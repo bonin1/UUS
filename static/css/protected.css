@@ -45,10 +45,6 @@
 }
 .right-side{
     width: 75%;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
 }
 .logo{
     width: 100%;
@@ -632,4 +628,57 @@ table, th, td {
 }
 .hidden {
     display: none;
+}
+#calendar{
+    width: 100% !important;
+    height: 100vh !important;
+}
+.tasks{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.tasks > input{
+    border: none;
+    border-bottom: 1px solid gray;
+    padding: 5px 10px;
+    font-size: 18px;
+    color: #000;
+    width: 300px;
+}
+.tasks > input:focus{
+    outline: none;
+}
+.tasks > button{
+    width: 300px;
+    padding: 5px 10px;
+    background-color: #004492;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: .1s ;
+}
+.tasks > button:hover{
+    background-color: #013168;
+}
+.active-inactive{
+    display: flex;
+    overflow: auto;
+    height: 200px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.inside-active{
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px 20px;
+    border: 1px solid lightgrey;
 }

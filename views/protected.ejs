@@ -6,6 +6,7 @@
     <title>Protected Admin only!</title>
     <link rel="stylesheet" href="/static/css/protected.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    
 </head>
 <body>
     <% if (alert) { %>
@@ -45,11 +46,15 @@
                         <img src="/static/image/la_university.png " alt="">
                         Partner Universities
                     </button>
+                    <button id="toggleDiv6">
+                        <img src="/static/image/Calendar-Edit-1--Streamline-Ultimate.png " alt="">
+                        Events
+                    </button>
                 </div>
             </div>
             <div class="bottomSide">
                 <a href="">Need Help?</a>
-                <form action="/logout" id="logout-form" method="POST">
+                <form action="/logout/admin" id="logout-form" method="POST">
                     <input type="submit" id="a1" class="nav-link" value="Logout">
                 </form>
             </div>
@@ -339,32 +344,58 @@
                 </div>
             </div>
 
+            <div class="main-container hidden" id="div7">
+                <h1 style="text-align: center; margin: 50px 0;">Add Event or Task</h1>
+                <form class="tasks" action="/insertTask" method="POST">
+                    <label for="taskName">Task Name:</label>
+                    <input type="text" placeholder="Task/event name" id="taskName" name="taskName" required>
+                    <br>
+                    <label for="scheduledTime">Scheduled Time:</label>
+                    <input type="datetime-local" id="scheduledTime" name="scheduledTime" required>
+                    <br>
+                    <label for="duration">Duration (days):</label>
+                    <input type="number" id="duration" name="duration" value="0" required>
+                    <br>
+                    <button type="submit">Add Task</button>
+                </form>
+                
+                
+                <h2>Tasks List</h2>
+                <div class="active-inactive">
+                    <% tasks.forEach(task => { %>
+                        <div class="inside-active">
+                            <%= task.task_name %> -
+                            <% if (new Date(task.scheduled_time) > new Date()) { %>
+                                <span style="color: green;">Active</span>
+                                <% const timeDiff = new Date(task.scheduled_time) - new Date(); %>
+                                <% const daysLeft = Math.floor(timeDiff / (1000 * 60 * 60 * 24)); %>
+                                <% const hoursLeft = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); %>
+                                <% const minutesLeft = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60)); %>
+                                <h3>
+                                    <%= daysLeft %>d <%= hoursLeft %>h <%= minutesLeft %>m left
+                                </h3>
+                            <% } else { %>
+                                <span style="color: red;">Inactive</span>
+                                - Deadline passed
+                            <% } %>
+                            <br>
+                            Scheduled Time: <%= task.scheduled_time.toLocaleString() %>
+                            <form action="/task/delete/<%= task.id %>" method="POST">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </div>
+                    <% }); %>
+                </div>
+
+                <%- include('partials/Calendar'); %>
+            </div>
         </div>
     </div>
-    <!-- 
 
-
-
-
-
-
-    
-
-
-    
-    
-
-
--->
-
-
-
-    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <script src="/static/js/protected.js" defer></script>
     <script src="/static/js/loginInformation.js" defer></script>
     <script src="/static/js/partners.js"></script>
-    <script>
-    </script>
 </body>
 </html>

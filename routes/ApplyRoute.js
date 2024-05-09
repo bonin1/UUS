@@ -3,19 +3,16 @@ const ApplyForm = require('../model/ApplyModel');
 const flash = require('connect-flash');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
-
-const loggingRateLimiter = require('../middleware/loginlimitter')
-const sessionMiddleware = require('../middleware/sesionMiddleware')
-
+const loggingRateLimiter = require('../middleware/loginlimitter');
+const sessionMiddleware = require('../middleware/sesionMiddleware');
 
 router.use(flash());
-router.use(loggingRateLimiter)
+router.use(loggingRateLimiter);
 router.use(sessionMiddleware);
 
 router.get('/', (req, res) => {
     res.render('apply', { successAlert: req.flash('success'), dangerAlert: req.flash('danger') });
 });
-
 
 router.post('/', 
 [
@@ -49,7 +46,7 @@ async (req, res) => {
     } = req.body;
 
     try {
-        await ApplyForm.create({
+        const application = await ApplyForm.create({
             user_id,
             name,
             lastname,
@@ -62,6 +59,7 @@ async (req, res) => {
             application_date,
             status
         });
+
         req.flash('success', 'Application is successful!');
         res.redirect('/apply');
     } catch (err) {

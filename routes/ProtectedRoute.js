@@ -12,6 +12,7 @@ const Department = require('../model/DepartmentModel');
 const Feedback = require('../model/FeedbackModel');
 const ApplyErasmus = require('../model/applyErasmusModel'); 
 const Login = require('../model/LoginModel')
+const TasksModel = require('../model/TaskModel')
 
 router.use(session({
     secret: process.env.SESSION_SECRET,
@@ -81,6 +82,7 @@ router.get('/', async (req, res) => {
             recommend[feedback.recommend] = (recommend[feedback.recommend] || 0) + 1;
         });
 
+        const tasks = await TasksModel.findAll();
         res.render('protected', {
             row: feedbackData,
             data: applies,
@@ -94,8 +96,10 @@ router.get('/', async (req, res) => {
             moreInfoCounts,
             difficulties,
             recommend,
-            alert: alert 
+            alert: alert ,
+            tasks
         });
+
     } catch (err) {
         console.error('Error fetching data:', err);
         res.status(500).send('An error occurred.');
