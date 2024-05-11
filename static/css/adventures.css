@@ -291,3 +291,19 @@ body{
     }
 }
 
+@media screen and (max-width:900px) {
+    .chat-opener,
+    .inside-container-chat{
+        position: fixed;
+        right: 50px;
+        bottom: 50px;
+    }
+}
+@media screen and (max-width:500px){
+    .chat-opener,
+    .inside-container-chat{
+        position: fixed;
+        right: 30px !important;
+        bottom: 30px !important;
+    }
+}
