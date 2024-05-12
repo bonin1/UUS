@@ -13,40 +13,42 @@
     }
   </style>
   <div class="wrapper">
-    <div class="first-part both-parts">
-      <a href="/"  data-tilt data-tilt-glare data-tilt-max-glare="0.8">
-        <img class="Main_logo"  data-tilt data-tilt-glare data-tilt-max-glare="0.8" src="/static/image/logo2.0black.png" alt="">
-      </a>
-    </div>
-    <div class="second-part both-parts">
-      <form action="/login" method="post">
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-        <h1>Login</h1>
-        <div class="input-box">
-          <input type="email" name="email" placeholder="Email adresa | Email" required>
-          <i class='bx bxs-user'></i>
-        </div>
-        <div class="input-box">
-          <input type="password" name="password" placeholder="Fjalkalimi | Password" required>
-          <i class='bx bxs-lock-alt' ></i>
-        </div>
-        <br>
-        <div class="remember-forgot">
-          <label><input type="checkbox" name="rememberMe">Remember Me</label>
-          <a href ="/change-pw">
-            <u>Forgot Password?</u>
-          </a>
-        </div>
-        <br>
-        <button type="submit" class="btn">Login</button>
-        <br>
-        <br>
-        <div class="span">
-          <p id="messageContainer">
-            <%= message %>
-          </p>
-        </div>
-      </form>
+    <div class="wrapper-assist">
+      <div class="first-part both-parts">
+        <a href="/"  data-tilt data-tilt-glare data-tilt-max-glare="0.8">
+          <img class="Main_logo"  data-tilt data-tilt-glare data-tilt-max-glare="0.8" src="/static/image/logo2.0black.png" alt="">
+        </a>
+      </div>
+      <div class="second-part both-parts">
+        <form action="/login" method="post">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <h1>Login</h1>
+          <div class="input-box">
+            <input type="email" name="email" placeholder="Email adresa | Email" required>
+            <i class='bx bxs-user'></i>
+          </div>
+          <div class="input-box">
+            <input type="password" name="password" placeholder="Fjalkalimi | Password" required>
+            <i class='bx bxs-lock-alt' ></i>
+          </div>
+          <br>
+          <div class="remember-forgot">
+            <label><input type="checkbox" name="rememberMe">Remember Me</label>
+            <a href ="/change-pw">
+              <u>Forgot Password?</u>
+            </a>
+          </div>
+          <br>
+          <button type="submit" class="btn">Login</button>
+          <br>
+          <br>
+          <div class="span">
+            <p id="messageContainer">
+              <%= message %>
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
   <script>

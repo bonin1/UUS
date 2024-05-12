@@ -457,6 +457,7 @@ table, th, td {
     align-items: center;
     position: sticky;
     top: 42px;
+    width: 13rem;
 }
 #search-input,
 #search-input2,
@@ -493,7 +494,7 @@ table, th, td {
     font-size: 20px;
     cursor: pointer;
     height: 35px;
-    padding: 0px 10px;
+    width: 100%;
     background-color: #fff;
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
@@ -520,12 +521,18 @@ table, th, td {
 }
 
 #search-input2{
-    width: 600px;
+    width: 900px !important;
     color: #fff;
+}
+#search-form2{
+    width: 640px !important;
 }
 #search-input2,
 .search-submit2{
     background-color: #373737 !important;
+}
+.search-submit2{
+    width: 50px;
 }
 .search-submit2 > i{
     color: #fff !important;
@@ -681,4 +688,14 @@ table, th, td {
     flex-direction: column;
     margin: 20px 20px;
     border: 1px solid lightgrey;
+}
+@media screen and (max-width:1600px) {
+    .form-one > input,
+    .form-two > select{
+        width: 250px;
+    }
+    #output2 > img{
+        width: 400px;
+        height: 400px;
+    }
 }

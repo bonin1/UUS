@@ -48,8 +48,6 @@
                             <option value="1" <%= data.dep_id === 1 ? 'selected' : '' %>>Computer Science</option>
                             <option value="2" <%= data.dep_id === 2 ? 'selected' : '' %>>Cyber Security</option>
                         </select>
-                        
-                    
                         <button type="submit">Create</button>
                     </div>
                 </form>
@@ -63,12 +61,12 @@
                                 <input type="file" name="photo" id="fileInput" class="file-input">
                                 <button type="submit">Edit Image</button>
                             </form>
-                            <form action="/editpartners/delete/<%= data.id %>" class="forma" method="post">
-                                <button type="submit">X</button>
-                            </form>
                         </div>
                     <% } else { %>
                         <p>no image</p>
+                        <form action="/editpartners/delete/<%= data.id %>" class="forma" method="post">
+                            <button type="submit">Delete Partner</button>
+                        </form>
                     <% } %>
             </div>
         </div>

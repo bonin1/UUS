@@ -24,22 +24,15 @@ body{
     height: 100%;
     object-fit: cover;
 }
-.Name {
+.inside-div{
     position: absolute;
     bottom: 100px;
     left: 100px;
     color: #fff;
     text-shadow: 0 0 10px black;
     font-weight: 500;
-    font-size: 40px;
 }
-.Desc{
-    position: absolute;
-    bottom: 50px;
-    left: 100px;
-    color: #fff;
-    text-shadow: 0 0 10px black;
-    font-weight: 500;
+.inside-div > h1{
     font-size: 40px;
 }
 .same-card > h3{
@@ -49,11 +42,16 @@ body{
     color: #fff;
     text-shadow: 0 0 10px black;
 }
-@media screen and (max-width:700px) {
-    .Name,.Desc{
-        position: absolute;
-        left: 0px;
+@media screen and (max-width:1400px){
+    .wrapper-assist{
+        padding: 50px 20px;
+    }
+}
+@media screen and (max-width:768px) {
+    .inside-div{
+        left: 20px;
+    }
+    .inside-div > h1{
         font-size: 30px;
-        text-wrap: wrap;
     }
 }

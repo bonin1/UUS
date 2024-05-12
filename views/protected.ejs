@@ -307,10 +307,10 @@
                         <div class="partner-one both-partners">
                             <form action="/createpartners" method="POST" enctype="multipart/form-data">
                                 <div class="form-one">
-                                    <input  type="text" name="name" placeholder="Name:">
-                                    <input  type="text" name="countries" placeholder="countries:">
-                                    <input  type="number" name="open_scolars" placeholder="open_scolars:" id="">
-                                    <input type="file" name="photos" multiple id="file" onchange="loadFile2(event)">
+                                    <input required type="text" name="name" placeholder="Name:">
+                                    <input required type="text" name="countries" placeholder="countries:">
+                                    <input required type="number" name="open_scolars" placeholder="open_scolars:" id="">
+                                    <input required type="file" name="photos" multiple id="file" onchange="loadFile2(event)">
                                 </div>
                                 <div class="form-two">
                                     <select  name="level" id="">

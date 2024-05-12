@@ -8,14 +8,14 @@
   },
   "OpenDays":"Our university operates Monday through Friday, welcoming students, faculty, and visitors from 8:00 AM to 6:00 PM.",
   "ContactUS":{
-    "buttons":["Contact via message","Contact via email","Contact via phone","Contact Campus"],
+    "buttons":["Via message","Via email","Via phone","physically"],
     "messages":["You can contact us using Instagram or Facebook @uus",
     "You can contact us via Email: uus_infomation@uus-edu.org",
     "You can contact us through oue phone numbers: +383 12 345 678 or +383 21 345 678",
     "You can come to the campus area of the UUS and our staff will direct you to the correct office"]
   },
   "Howtoapply":{
-    "buttons":["Apply via form","Apply via phone","Apply via email","Apply From Campus"],
+    "buttons":["Via form","Via phone","Via email","From Campus"],
     "messages":["In first page you shall see the apply button in the top-right corner there you fill the inputs and apply",
     "You can call one of our agents on our phone mubers +383 12 345 678 or +383 21 345 678",
     "You can apply via email by sending you CV and diplomas",

@@ -91,7 +91,8 @@
 .form-two > input:focus{
     outline: none;
 }
-.images > form > button{
+.images > form > button,
+.forma > button{
     width: 300px;
     padding: 10px 10px;
     margin: 20px 0;

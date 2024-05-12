@@ -55,6 +55,7 @@ body{
   background-color: #262626;
   padding: 50px 0px;
   margin-top: 50px;
+  border-radius: 10px;
 }
 .logo{
   width: 100%;
@@ -124,6 +125,9 @@ form > button{
   .apply_container,
   .container{
     width: 100% !important;
+  }
+  .container{
+    padding: 0 20px;
   }
 }
 

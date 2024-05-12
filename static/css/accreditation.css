@@ -42,3 +42,19 @@ li > a{
     color: #006CE8;
     font-size: 30px;
 }
+@media screen and (max-width:1400px){
+    .wrapper-assist{
+        padding: 50px 20px;
+    }
+}
+@media screen and (max-width:768px) {
+    .title > h1{
+        font-size: 30px;
+    }
+    li{
+        font-size: 20px;
+    }
+    li > a{
+        font-size: 20px;
+    }
+}

@@ -29,8 +29,9 @@ body{
 
 .wrapper-assist > h1,
 .wrapper-assist > h2{
-    color: #000;
+    color: #fff;
     text-align: center;
+    text-shadow: 0 0 10px gray;
 }
 .wrapper-assist > h1{
     font-size: 48px;
