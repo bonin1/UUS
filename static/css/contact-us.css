@@ -55,8 +55,10 @@ body{
 .same > img{
     object-fit: contain;
 }
-.same > h1{
+.same > a{
     font-size: 25px;
+    text-decoration: none;
+    color: #000;
 }
 .second-container {
     padding: 30px ;
@@ -100,7 +102,7 @@ body{
     font-size: 32px;
     cursor: pointer;
 }
-.socials > img{
+.socials >a > img{
     width: 100px;
     height: 100px;
     margin: 0 40px;

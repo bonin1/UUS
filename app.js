@@ -788,7 +788,8 @@ const routes = [
     { path: '/research', view: 'research' },
     { path: '/employment', view: 'emplyment' },
     { path: '/adventures', view: 'adventures' },
-    { path: '/studyprograms', view: 'studyprograms' }
+    { path: '/studyprograms', view: 'studyprograms' },
+    { path: '/courses', view: 'courses'}
 ];
 
 routes.forEach(route => {
