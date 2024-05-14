@@ -737,9 +737,10 @@ const ApplyErasmusRoute = require('./routes/ApplyErasmusRoute')
 const login = require('./routes/LoginRoute')
 const adminRoutes = require('./routes/AdminRoute');
 const protected = require('./routes/ProtectedRoute');
-const Partners = require('./routes/PartnersRoute')
-const Change = require('./routes/ChangeRoute')
-const Tasks = require('./routes/TaskRoute')
+const Partners = require('./routes/PartnersRoute');
+const Change = require('./routes/ChangeRoute');
+const Tasks = require('./routes/TaskRoute');
+const Dmis = require('./routes/DmisRoute');
 app.use('/apply',apply)
 app.use('/feedback',feedback)
 app.use('/apply-erasmus',ApplyErasmusRoute)
@@ -749,6 +750,7 @@ app.use('/protected',protected)
 app.use('/partners',Partners)
 app.use('/confirm-change',Change)
 app.use('/insertTask',Tasks)
+app.use('/dmis', Dmis)
 
 app.post('/update_status', (req, res) => {
     const { id, status } = req.body; 
