@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/static/css/Profile.css">
+</head>
+<body>
+    <% if (successAlert && successAlert.length > 0) { %>
+        <div class="alert alert-success" id="success-alert">
+            <%= successAlert %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">X</span>
+            </button>
+        </div>
+    <% } %>
+    <% if (dangerAlert && dangerAlert.length > 0) { %>
+        <div class="alert alert-danger" id="danger-alert">
+            <%= dangerAlert %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">X</span>
+            </button>
+        </div>
+    <% } %>
+    <%- include('partials/Elearning'); %>
+    <div class="random"></div>
+    
+    <img class="banner" src="/static/image/banner.png" alt="">
+    <div class="wrapper">
+        <div class="wrapper-assist">
+            <main>
+                <div class="name all">
+                    <p>Name:</p>
+                    <div><%= userData.name %></div>
+                </div>
+                <div class="lastname all">
+                    <p>Lastname:</p>
+                    <div><%= userData.lastname %></div>
+                </div>
+                <div class="email all">
+                    <p>Personal Email:</p>
+                    <div><%= userData.email %></div>
+                </div>
+                <div class="phone all">
+                    <p>Phone Number:</p>
+                    <div><%= userData.phone_number %></div>
+                </div>
+                <div class="address all">
+                    <p>Address:</p>
+                    <div><%= userData.address %></div>
+                </div>
+                <div class="department all">
+                    <p>Department:</p>
+                    <div><%= userData.Department.dep_name %></div>
+                </div>
+                <div class="role all">
+                    <p>Role:</p>
+                    <div><%= userData.role %></div>
+                </div>
+                <div class="LoginEmail all">
+                    <p>UUS Email:</p>
+                    <div><%= loginInfo.email %></div>
+                </div>
+                <% images.forEach((image, index) => { %>
+                    <div class="images">
+                        <img src="data:image/jpeg;base64,<%= image.photo_user.toString('base64') %>" alt="Product Image" width="200" height="200">
+                    </div>
+                    <button class="delete-button" onclick="deleteImage('<%= image.id %>')">Delete image</button>
+                    <form action="/updateImage/profile/<%= image.id %>" method="post" enctype="multipart/form-data">
+                        <input type="file" name="file" id="fileInput" class="file-input">
+                        <button type="submit">Edit Image</button>
+                    </form>
+                <% }); %>
+                <form action="/insertImages/profile/<%= userData.id %>" method="post" enctype="multipart/form-data">
+                    <input type="file" name="files" class="file-input" multiple >
+                    <button class="upload" type="submit">Upload Images</button>
+                </form>
+            </main>
+        </div>
+    </div>
+
+    <%- include('partials/footer'); %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        async function deleteImage(imageId) {
+            try {
+                const response = await fetch(`/deleteImage/profile/${imageId}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    const errorMessage = await response.text();
+                    console.error(`Failed to delete image: ${errorMessage}`);
+                }
+            } catch (error) {
+                console.error('Error deleting image:', error);
+            }
+        }
+        setTimeout(function() {
+            $('#success-alert').fadeOut('slow');
+        }, 10000);
+        setTimeout(function() {
+            $('#danger-alert').fadeOut('slow');
+        }, 10000);
+        $('.close').click(function(){
+            $(this).parent().hide();
+        });
+    </script>
+</body>
+</html>

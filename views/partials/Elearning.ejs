@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,400&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Lato", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+
+        .header{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .navbar {
+            width: 1400px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 114px;
+        }
+        .hamburger {
+            display: none;
+        }
+
+        .bar {
+            display: block;
+            width: 35px;
+            height: 5px;
+            margin: 5px auto;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+            background-color: #000;
+            border-radius: 30px;
+        }
+
+        .bar.active {
+            background-color: #000000;
+        }
+
+
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-item {
+            margin-left: 5rem;
+        }
+
+        .nav-link{
+            font-size: 1.6rem;
+            font-weight: 400;
+        }
+
+        .nav-logo{
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+        }
+        .nav-logo > img{
+            height: 114px;
+        }
+        #logo {
+            transition: opacity 0.1s ease-in-out;
+            opacity: 1;
+        }
+
+        #logo.fade {
+            opacity: 0;
+        }
+        .nav-menu {
+            position: fixed;
+            right: -200%;
+            top: 0;
+            background-color: white;
+            width: 100%;
+            height: 100vh;
+            -webkit-transition:0.5s;
+            transition: 0.5s;
+        }
+
+        .nav-menu.active {
+            right: 0;
+            width: 100%;
+            height: 100vh ;
+        }
+
+
+        .hamburger {
+            display: block;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        body.overflow-hidden {
+            overflow: hidden;
+        }
+        .hamburger.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active .bar:nth-child(1) {
+            -webkit-transform: translateY(8px) rotate(45deg);
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active .bar:nth-child(3) {
+            -webkit-transform: translateY(-12px) rotate(-45deg);
+            transform: translateY(-12px) rotate(-45deg);
+        }
+
+        /* navbari-inside */
+        .nav_Main_wrapper{
+            width: 1400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .hover-container {
+            width: 1400px;
+            height: 40rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+
+        }
+        .hover-inside{
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            border-right: 3px solid black;
+        }
+        .hover-text {
+            display: inline-block;
+            padding: 10px;
+            margin: 5px;    
+            cursor: pointer;
+            -webkit-transition:color 0.3s ease-in-out;
+            transition: color 0.3s ease-in-out ;
+            font-weight: 600;
+        }
+        .hover-text:hover{
+            color: #969696;
+        }
+        .content-container {
+            width: 70%;
+            padding: 10px;
+            height: 600px;
+        }
+
+        .content {
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+            padding: 100px 150px;
+            opacity: 0;
+            visibility: hidden;
+            -webkit-transition:opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+            transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out;
+            position: absolute;
+        }
+        .content_div-1{
+            display: flex;
+            flex-direction: column;
+        }
+        .content_div-1 > a{
+            margin: 5px;
+            text-decoration: none;
+            color: #000;
+            font-size: 32px;
+            font-weight: 600;
+        }
+        .content_div-1 > a:hover{
+            color: #969696;
+        }
+        .login_container{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* padding: 100px 15px; */
+        }
+        .login_container > a{
+            color: #000;
+            text-decoration: none;
+        }
+        .apply-hamburger{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .apply-container{
+            padding: 0 50px;
+        }
+        .apply-container > a{
+            color: black;
+            text-decoration: none;
+            font-size: 22px;
+        }
+        #logout-form > input{
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        @media screen and (max-width:768px){
+            .content-container{
+                padding: 0;
+                height: auto;
+            }
+            .hover-container{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-items: start;
+                height: 40rem;
+                padding: 0 !important;
+            }
+            .navbar{
+                padding: 0 10px;
+            }
+            .nav_Main_wrapper{
+                width: 100%;
+                height: 100vh;
+                position: relative;
+                padding: 0 !important;
+            }
+            .hover-inside{
+                width: 100%;
+                border: none;
+                text-align: center;
+            }
+            .borderi{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 20px 0;
+            }
+            .inside-border{
+                width: 80%;
+                border-top: 3px solid black;
+            }
+            .nav-logo > img{
+                height: 84px;
+            }
+            .hover-inside .hover-text {
+                cursor: pointer;
+            }
+            .content-container{
+                width: 100%;
+            }
+            .content {
+                display: none;
+                position: absolute;
+                width: 100%;
+                z-index: 1;
+                visibility: visible;
+                opacity: 1;
+                text-align: center;
+                padding: 0;
+                margin: 0;
+            }
+            .content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+            .hover-text:hover + .content {
+                display: block;
+            }
+            .login_container{
+                flex-direction: column;
+                padding: 0;
+            }
+        }
+        @media screen and (max-width:568px){
+            .nav-logo > img{
+                height: 50px !important;
+            }
+        }
+        @media screen and (max-width:1310px){
+            .hover-container,
+            .nav_Main_wrapper,
+            .navbar{
+                width: 100%;
+                padding: 0 30px;
+            }
+        }
+        @media screen and (max-width:1400px) {
+            .hover-container{
+                width: 100%;
+            }
+        }
+    </style>
+    <header class="header">
+        <nav class="navbar">
+                <a href="/" class="nav-logo">
+                    <img id="logo" src="/static/image/logo2.0black.png" alt="">
+                </a>
+                <div class="nav-menu">
+                    <div class="nav_Main_wrapper">
+                        <div class="hover-container">
+                            <div class="hover-inside">
+                                <h1 class="hover-text hover-text-1">About us</h1>
+                                <h1 class="hover-text hover-text-2">Students</h1>
+                                <h1 class="hover-text hover-text-3">Campus</h1>
+                                <h1 class="hover-text hover-text-4">Library</h1>
+                                <h1 class="hover-text hover-text-5">Activities</h1>
+                                <h1 class="hover-text hover-text-6">Departments</h1>
+                                <div class="borderi">
+                                    <div class="inside-border"></div>
+                                </div>
+                            </div>
+                            <div class="content-container">
+                                <div class="content div-1">
+                                    <div class="content_div-1">
+                                        <a href="/Profile">Profile</a>
+                                        <a href="/">Grades</a>
+                                        <a href="/">Dashboard</a>
+                                        <a href="/">Messages</a>
+                                    </div>
+                                </div>
+                                <div class="content div-2">
+                                    <div class="content_div-1">
+                                        <a href="/transfer">Transfer</a>
+                                        <a href="/arrivals">Arrivals</a>
+                                    </div>
+                                </div>
+                                <div class="content div-3">
+                                    <div class="content_div-1">
+                                        <a href="">Prishtine</a>
+                                        <a href="">Prizren</a>
+                                    </div>
+                                </div>
+                                <div class="content div-4">
+                                    <div class="content_div-1">
+                                        <a href="/e-library">E-Library</a>
+                                    </div>
+                                </div>
+                                <div class="content div-5">
+                                    <div class="content_div-1">
+                                        <a href="/clubs">Clubs</a>
+                                    </div>
+                                </div>
+                                <div class="content div-6">
+                                    <div class="content_div-1">
+                                        <a href="/computer-science">Computer Science</a>
+                                        <a href="/cyber">Cyber Security</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="login_container">
+                            <% if (isLoggedIn) { %>
+                                <form action="/logout" id="logout-form" method="POST">
+                                    <input type="submit" id="a1" class="nav-link" value="Logout">
+                                </form>
+                            <% } else { %>
+                                <a id="a1" class="nav-link" href="/login">Login</a>
+                            <% } %>
+                            <a href="mailto:someone@example.com">info@uus-edu.org</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="apply-hamburger">
+                    <div class="apply-container">
+                        <a href="/apply"></a>
+                    </div>
+                    <div class="hamburger">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                </div>
+        </nav>
+    </header>
+
+    <script src="/static/js/Navbar_Light.js"></script>
+</body>
+</html>

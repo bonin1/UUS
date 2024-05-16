@@ -14,6 +14,7 @@ const Department = db.define('Department', {
 }
 ,{
     freezeTableName: true,
+    timestamps: false,
 });
 
 Department.sync({ force: false }).then(() => {

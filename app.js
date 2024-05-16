@@ -80,12 +80,125 @@ const Login = require('./model/LoginModel')
 const PartnersModel = require('./model/Partners')
 const TasksModel = require('./model/TaskModel')
 
-app.get('/e-learning',(req,res)=>{
+app.get('/e-learning', async(req,res)=>{
     if (!req.session.isLoggedIn) {
         return res.redirect('/login');
     }
-    res.render('e-learning')
+    const userId = req.session.userId;
+        const userData = await User.findByPk(userId, {
+            include: [{ model: Department }],
+        });
+
+        if (!userData) {
+            return res.status(404).send('User not found');
+        }
+
+    res.render('e-learning', { userData })
 })
+
+app.get('/profile', async(req,res)=>{
+    if (!req.session.isLoggedIn) {
+        return res.redirect('/login');
+    }
+    const userId = req.session.userId;
+    const userData = await User.findByPk(userId, {
+        include: [{ model: Department }],
+    });
+    const loginInfo = await Login.findOne({ where: { user_id: userId } });
+    const images = await UserImage.findAll({
+        where: { user_id: userId }
+    });
+
+    if (!userData || !loginInfo) {
+        return res.status(404).send('User not found');
+    }
+
+    res.render('Profile', { userData, loginInfo, images, successAlert: req.flash('success'), dangerAlert: req.flash('danger')})
+})
+
+
+app.post('/updateImage/profile/:id', upload.single('file'), async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        return res.redirect('/login');
+    }
+    const userId = req.params.id;
+    const newImage = {
+        name: req.file.originalname,
+        data: fs.readFileSync(req.file.path)
+    };
+    try {
+        const image = await UserImage.findByPk(userId);
+        if (!image) {
+            return res.json({ error: 'Image not found' });
+        }
+        image.photo_user = newImage.data;
+        await image.save();
+        await fs.promises.unlink(req.file.path);
+
+        req.flash('success', 'Image updated successfully!');
+        res.redirect('/Profile')
+    } catch (error) {
+        console.error(error);
+        req.flash('danger', 'Error updating image!');
+        res.redirect('/Profile')
+    }
+});
+
+
+app.delete('/deleteImage/profile/:id', async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        return res.redirect('/login');
+    }
+    const userId = req.params.id;
+    try {
+        const image = await UserImage.findByPk(userId);
+        if (!image) {
+            return res.status(404).json({ error: 'Image not found' });
+        }
+        await image.destroy();
+        req.flash('success', 'Image deleted successfully!');
+        res.redirect('/Profile')
+    } catch (error) {
+        console.error(error);
+        req.flash('danger', 'Error deleting image!');
+        res.redirect('/Profile')
+    }
+});
+
+app.post('/insertImages/profile/:id', upload.array('files', 10), async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        return res.redirect('/login');
+    }
+    const userId = req.params.id;
+    try {
+        const existingImage = await UserImage.findOne({
+            where: { user_id: userId }
+        });
+        if (existingImage) {
+            return res.status(400).send('User already has an image. Cannot insert another.');
+        }
+
+        const imagesPromises = req.files.map(async (file) => {
+            const newImage = {
+                name: file.originalname,
+                data: fs.readFileSync(file.path)
+            };
+            const image = await UserImage.create({
+                user_id: userId,
+                photo_user: newImage.data
+            });
+            await fs.promises.unlink(file.path);
+            return image;
+        });
+        await Promise.all(imagesPromises);
+        req.flash('success', 'Insert is successful!');
+        res.redirect('/Profile')
+    } catch (error) {
+        console.error(error);
+        req.flash('danger', 'Insert is not successful, try again later!');
+        res.redirect('/Profile')
+    }
+});
 
 app.post('/deleteApplyErasmus/:id', async (req, res) => {
     if (!req.session.user || req.session.user.role !== 'admin') {

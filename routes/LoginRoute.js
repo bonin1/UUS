@@ -83,7 +83,7 @@ router.post('/', async (req, res) => {
         }
         
         req.session.isLoggedIn = true;
-        req.session.userId = user.id;
+        req.session.userId = user.user_id;
         res.redirect('/e-learning');
     } catch (err) {
         console.log(err);

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/static/css/e-learning.css">
 </head>
 <body>
-    <%- include('partials/Navbar'); %>
+    <%- include('partials/Elearning-light'); %>
     <video autoplay muted loop>
         <source src="/static/image/pexels-olia-danilevich-8061030 (1080p).mp4" type="video/mp4">
         Your browser does not support the video tag.
@@ -56,7 +56,13 @@
                     <h1>Food Science</h1>
                 </div>
             </div>
-            <%- include('partials/Calendar'); %>
+            <p>Name: <%= userData.name %></p>
+            <p>Lastname: <%= userData.lastname %></p>
+            <p>Email: <%= userData.email %></p>
+            <p>Phone Number: <%= userData.phone_number %></p>
+            <p>Address: <%= userData.address %></p>
+            <p>Department: <%= userData.Department.department_name %></p>
+            <p>Role: <%= userData.role %></p>
         </div>
     </div>
     
