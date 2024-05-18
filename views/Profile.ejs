@@ -62,20 +62,28 @@
                     <p>UUS Email:</p>
                     <div><%= loginInfo.email %></div>
                 </div>
-                <% images.forEach((image, index) => { %>
-                    <div class="images">
-                        <img src="data:image/jpeg;base64,<%= image.photo_user.toString('base64') %>" alt="Product Image" width="200" height="200">
-                    </div>
-                    <button class="delete-button" onclick="deleteImage('<%= image.id %>')">Delete image</button>
-                    <form action="/updateImage/profile/<%= image.id %>" method="post" enctype="multipart/form-data">
-                        <input type="file" name="file" id="fileInput" class="file-input">
-                        <button type="submit">Edit Image</button>
+                <% if (images.length > 0) { %>
+                    <% images.forEach((image, index) => { %>
+                        <div class="container">
+                            <div class="images">
+                                <img src="data:image/jpeg;base64,<%= image.photo_user.toString('base64') %>" alt="Product Image" width="200" height="200">
+                            </div>
+                            <div class="delete">
+                                <button class="delete-button" onclick="deleteImage('<%= image.id %>')">Delete image</button>
+                                <form action="/updateImage/profile/<%= image.id %>" method="post" enctype="multipart/form-data">
+                                    <input type="file" name="file" id="fileInput" class="file-input">
+                                    <button type="submit">Edit Image</button>
+                                </form>
+                            </div>
+                        </div>
+                    <% }); %>
+                <% } else { %>
+                    <form class="upload" action="/insertImages/profile/<%= userData.id %>" method="post" enctype="multipart/form-data">
+                        <input type="file" name="files" class="file-input" multiple>
+                        <button class="upload" type="submit">Upload Images</button>
                     </form>
-                <% }); %>
-                <form action="/insertImages/profile/<%= userData.id %>" method="post" enctype="multipart/form-data">
-                    <input type="file" name="files" class="file-input" multiple >
-                    <button class="upload" type="submit">Upload Images</button>
-                </form>
+                <% } %>
+                
             </main>
         </div>
     </div>

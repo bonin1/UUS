@@ -877,6 +877,33 @@ app.post('/update_status', (req, res) => {
         });
 });
 
+app.get('/tasks', async (req, res) => {
+    if (!req.session.isLoggedIn) {
+        return res.redirect('/login');
+    }
+    try {
+        const tasks = await TasksModel.findAll();
+        res.json(tasks);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Unable to fetch tasks at the moment.' });
+    }
+});
+
+
+app.get('/calendar', async (req,res)=>{
+    if (!req.session.isLoggedIn) {
+        return res.redirect('/login');
+    }
+    try {
+        const tasks = await TasksModel.findAll();
+        res.render('Calendar',{ tasks })
+    } catch (error) {
+        console.log(error)
+        res.redirect('/calendar')
+    }
+})
+
 
 const routes = [
     { path: '/', view: 'home' },

@@ -77,14 +77,62 @@ main{
 .all > div{
     width: 70%;
     background-color: #fff;
-    -webkit-box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.42);
-    moz-box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.42);
-    box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.42);
+    -webkit-box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.06);
+    moz-box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.06);
+    box-shadow: 0px 0px 11px 3px rgba(0, 0, 0, 0.06);
     padding: 10px;
     border-radius: 10px;
 }
-.images{
-    width: 100%;
+.images,
+.delete{
+    width: 50%;
     display: flex;
     justify-content: start;
+    align-items: center;
+}
+.delete,
+.delete > form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.images > img{
+    border-radius: 50%;
+    object-position: center;
+    object-fit: cover;
+}
+.delete > button{
+    width: 300px;
+    padding: 10px 10px;
+    background-color: red;
+    color: #fff;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.delete > form > button,
+.upload > button{
+    width: 300px;
+    padding: 10px 10px;
+    background-color: #004492;
+    color: #fff;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.delete > form > input,
+.upload > input{
+    width: 300px;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+}
+.container{
+    width: 100%;
+    display: flex;
 }

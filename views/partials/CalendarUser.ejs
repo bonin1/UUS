@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="calendar"></div>
+    
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.11/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.11/index.global.min.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof FullCalendar !== 'undefined') {
+                var calendarEl = document.getElementById('calendar');
+                
+                fetch('/tasks')
+                    .then(response => response.json())
+                    .then(tasks => {
+                        var eventsData = tasks.map(task => {
+                            return {
+                                title: task.task_name,
+                                start: new Date(task.scheduled_time),
+                                end: new Date(task.end_time),
+                                color: new Date(task.scheduled_time) > new Date() ? 'green' : 'red'
+                            };
+                        });
+
+                        var calendar = new FullCalendar.Calendar(calendarEl, {
+                            initialView: 'dayGridMonth',
+                            events: eventsData
+                        });
+                        calendar.render();
+                    })
+                    .catch(error => console.error('Error fetching tasks:', error));
+            } else {
+                console.error('FullCalendar library is not loaded or defined.');
+            }
+        });
+    </script>
+</body>
+</html>
