@@ -844,6 +844,19 @@ app.post('/task/delete/:id', async (req, res) => {
 });
 
 
+app.get('/grades', async(req,res)=>{
+    if (!req.session.isLoggedIn) {
+        return res.redirect('/login');
+    }
+
+    res.render('grades', { successAlert: req.flash('success'), dangerAlert: req.flash('danger')})
+})
+
+
+
+
+
+
 const apply = require('./routes/ApplyRoute')
 const feedback = require('./routes/FeedbackRoute')
 const ApplyErasmusRoute = require('./routes/ApplyErasmusRoute')
