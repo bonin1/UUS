@@ -9,6 +9,7 @@ const fs = require('fs')
 const session = require('express-session');
 const bcrypt = require('bcryptjs');
 const { isEmail } = require('validator');
+const jwt = require('jsonwebtoken');
 
 app.set("view engine", "ejs");
 app.use("/static", express.static('static'));
@@ -80,11 +81,25 @@ const Login = require('./model/LoginModel')
 const PartnersModel = require('./model/Partners')
 const TasksModel = require('./model/TaskModel')
 
-app.get('/e-learning', async(req,res)=>{
+app.get('/e-learning', async (req, res) => {
     if (!req.session.isLoggedIn) {
-        return res.redirect('/login');
+        const rememberToken = req.cookies.rememberToken;
+        if (rememberToken) {
+            try {
+                const decoded = jwt.verify(rememberToken, process.env.JWT_SECRET);
+                req.session.isLoggedIn = true;
+                req.session.userId = decoded.userId;
+            } catch (err) {
+                console.error('Invalid or expired remember token:', err);
+                return res.redirect('/login');
+            }
+        } else {
+            return res.redirect('/login');
+        }
     }
+    
     const userId = req.session.userId;
+    try {
         const userData = await User.findByPk(userId, {
             include: [{ model: Department }],
         });
@@ -93,8 +108,12 @@ app.get('/e-learning', async(req,res)=>{
             return res.status(404).send('User not found');
         }
 
-    res.render('e-learning', { userData })
-})
+        res.render('e-learning', { userData });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send('An error occurred while fetching user data');
+    }
+});
 
 app.get('/profile', async(req,res)=>{
     if (!req.session.isLoggedIn) {
