@@ -7,6 +7,41 @@
     <link rel="stylesheet" href="/static/css/dmis.css">
 </head>
 <body>
-    
+    <div class="wrapper-assist">
+        <main>
+            <div class="name all">
+                <p>Name:</p>
+                <div><%= userData.name %></div>
+            </div>
+            <div class="lastname all">
+                <p>Lastname:</p>
+                <div><%= userData.lastname %></div>
+            </div>
+            <div class="email all">
+                <p>Personal Email:</p>
+                <div><%= userData.email %></div>
+            </div>
+            <div class="phone all">
+                <p>Phone Number:</p>
+                <div><%= userData.phone_number %></div>
+            </div>
+            <div class="address all">
+                <p>Address:</p>
+                <div><%= userData.address %></div>
+            </div>
+            <div class="department all">
+                <p>Department:</p>
+                <div><%= userData.Department.dep_name %></div>
+            </div>
+            <div class="role all">
+                <p>Role:</p>
+                <div><%= userData.role %></div>
+            </div>
+            <div class="LoginEmail all">
+                <p>UUS Email:</p>
+                <div><%= loginInfo.email %></div>
+            </div>
+        </main>
+    </div>
 </body>
 </html>

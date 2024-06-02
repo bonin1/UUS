@@ -10,10 +10,12 @@ const session = require('express-session');
 const bcrypt = require('bcryptjs');
 const { isEmail } = require('validator');
 const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 
 app.set("view engine", "ejs");
 app.use("/static", express.static('static'));
 
+app.use(cookieParser());
 app.use(flash());
 app.use(session({
     secret: process.env.SESSION_SECRET,
