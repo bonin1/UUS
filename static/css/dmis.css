@@ -17,7 +17,9 @@ body{
     width: 1400px;
     padding: 50px 0;
 }
-
+.wrapper-assist > h1{
+    text-align: center;
+}
 
 @media screen and (max-width:1400px) {
     .wrapper-assist{
