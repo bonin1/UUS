@@ -58,6 +58,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px;
+            position: relative;
         }
         .chat > img{
             width: 48px;
@@ -65,6 +66,19 @@
             background-color: #fff;
             border-radius: 50%;
             padding: 10px;
+        }
+        .chat > button{
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+            position: absolute;
+            bottom: 5px;
+            left: 10px;
+            background-color: transparent;
+        }
+        .chat > button > img{
+            width: 25px;
+            height: 25px;
         }
         #chat-box{
             height: 286px;
@@ -143,6 +157,9 @@
         <div class="inside-container-chat">
             <header class="chat">
                 <img src="/static/image/icon-park_robot.png" alt="">
+                <button type="button" id="back-btn" style="display: none;">
+                    <img src="/static/image/backicon.png" alt="">
+                </button>
                 <div class="insidetext">
                     <h1>UNI ASSIST</h1>
                     <p>online</p>
@@ -170,7 +187,11 @@
             const chatOpener = document.querySelector(".chat-opener");
             const chatContainer = document.querySelector(".chat-container");
             const chatBox = document.querySelector("#chat-box");
-            let optionButtons = document.querySelectorAll(".option-btn");
+            const optionButtons = document.querySelectorAll(".option-btn");
+            const backBtn = document.getElementById("back-btn");
+
+            let initialState = [];
+            let stateStack = [];
 
             chatOpener.addEventListener("click", function (event) {
                 event.stopPropagation();
@@ -186,7 +207,12 @@
             fetch('/data')
                 .then(response => response.json())
                 .then(data => {
-                    optionButtons.forEach(function(button, index) {
+                    initialState = [...optionButtons].map(btn => ({
+                        value: btn.getAttribute("data-value"),
+                        text: btn.textContent
+                    }));
+
+                    optionButtons.forEach(function(button) {
                         button.addEventListener("click", function() {
                             const value = this.getAttribute("data-value");
                             const messageDiv = document.createElement("div");
@@ -198,6 +224,11 @@
 
                             const message = document.createElement("p");
 
+                            stateStack.push([...optionButtons].map(btn => ({
+                                value: btn.getAttribute("data-value"),
+                                text: btn.textContent
+                            })));
+
                             if (data[value]) {
                                 if (typeof data[value] === 'string') {
                                     message.textContent = data[value];
@@ -206,6 +237,8 @@
                                         if (data[value].buttons[i]) {
                                             btn.setAttribute("data-value", data[value].buttons[i]);
                                             btn.textContent = data[value].buttons[i]; 
+                                        } else {
+                                            btn.style.display = 'none';
                                         }
                                     });
                                     message.textContent = "You clicked: " + value;
@@ -223,7 +256,20 @@
 
                             messageDiv.appendChild(message);
                             chatBox.appendChild(messageDiv);
+
+                            backBtn.style.display = 'inline-block';
                         });
+                    });
+
+                    backBtn.addEventListener("click", function() {
+                        initialState.forEach((state, i) => {
+                            optionButtons[i].setAttribute("data-value", state.value);
+                            optionButtons[i].textContent = state.text;
+                            optionButtons[i].style.display = 'inline-block';
+                        });
+
+                        stateStack = [];
+                        backBtn.style.display = 'none';
                     });
                 });
         });
