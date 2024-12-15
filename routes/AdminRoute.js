@@ -6,56 +6,58 @@ const bcrypt = require('bcryptjs');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 
-router.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        httpOnly: true,
-        sameSite: 'strict'
-    }
-}));
-router.use(bodyParser.urlencoded({ extended: false }));
-router.use(bodyParser.json());
+const { LoginInformationPath } = require('../controller/Admin/LoginInformation/Paths');
+const { DeleteLoginInformation, CreateLoginInformation, UpdateLoginInformation } = require('../controller/Admin/LoginInformation/CRUDoperations');
+const { adminLoginPath, adminLoginPost } = require('../controller/Admin/AdminLogin');
+const { GetUserPage } = require('../controller/Admin/UserManagementSystem/Paths');
+const { DeleteUser, EditUser } = require('../controller/Admin/UserManagementSystem/CRUDoperations');
+const { register } = require('../controller/Admin/UserManagementSystem/RegisterUser');
+const { ProtectedPath } = require('../controller/Admin/Protected/Path');
 
-async function isAdmin(req, res, next) {
-    try {
-        const email = req.body.email;
-        const password = req.body.password;
+const isAdmin = require('../middleware/isAdmin');
+const upload = require('../config/UploadImageConfig');
 
-        if (!email || !password) {
-            return res.status(400).send('Email and password are required.');
-        }
+// --------------------------------------------
 
-        const loginInfo = await LoginInformation.findOne({ where: { email: email } });
+// Get register user page
+router.post('/register', upload.array('files', 10), register)
 
-        if (!loginInfo || !(await bcrypt.compare(password, loginInfo.password))) {
-            res.status(401).send('Invalid email or password.');
-            return;
-        }
+// --------------------------------------------
 
-        const user = await User.findOne({ where: { id: loginInfo.user_id } });
-        if (!user) {
-            return res.status(401).send('User not found.');
-        }
-        if (user.role === 'admin') {
-            req.session.user = { id: user.id, role: user.role };
-            next();
-        } else {
-            res.status(403).send('You do not have permission to access this resource.');
-        }
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('An error occurred.');
-    }
-}
+// Get admin login page
+router.get('/', adminLoginPath);
 
-router.get('/', (req, res) => {
-    res.render('admin')
-});
+// Post login information
+router.post('/login', adminLoginPost);
 
-router.post('/', isAdmin, (req, res) => {
-    res.redirect('/protected');
-});
+// --------------------------------------------
+
+// Get login information page
+router.get('/LoginInformation/:id', LoginInformationPath);
+
+//CRUD operations
+// Create login information
+router.post('/create-login-information/:id', CreateLoginInformation);
+
+// Delete login information
+router.post('/delete-login-information/:id', DeleteLoginInformation);
+
+// Update login information
+router.post('/update-login-information/:id', UpdateLoginInformation);
+
+//--------------------------------------------
+
+// Get user page
+router.get('/user/:id', isAdmin, GetUserPage);
+
+router.post('/delete-user/:id', isAdmin, DeleteUser);
+
+router.post('/edit-user/:id', isAdmin, EditUser);
+
+//--------------------------------------------
+// Protected path
+router.get('/protected', isAdmin, ProtectedPath);
+
+// --------------------------------------------
 
 module.exports = router;

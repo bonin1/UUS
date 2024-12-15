@@ -103,7 +103,7 @@ main{
     object-position: center;
     object-fit: cover;
 }
-.delete > button{
+.delete-button{
     width: 300px;
     padding: 10px 10px;
     background-color: red;
@@ -113,7 +113,7 @@ main{
     cursor: pointer;
     border-radius: 10px;
 }
-.delete > form > button,
+.delete > form > .edit,
 .upload > button{
     width: 300px;
     padding: 10px 10px;

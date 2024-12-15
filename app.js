@@ -36,9 +36,6 @@ app.use((req, res, next) => {
 
 const upload = require('./config/UploadImageConfig');
 
-
-
-
 const User = require('./model/UsersModel')
 const Feedback = require('./model/FeedbackModel')
 const ApplyForm = require('./model/ApplyModel')
@@ -48,6 +45,15 @@ const UserImage = require('./model/UserImageModel')
 const Login = require('./model/LoginModel')
 const PartnersModel = require('./model/Partners')
 const TasksModel = require('./model/TaskModel')
+
+const auth = require('./routes/UserAuthRoute')
+app.use('/auth',auth)
+
+const userManagement = require('./routes/UserManagement')
+app.use('/user',userManagement)
+
+const adminRoutes = require('./routes/AdminRoute');
+app.use('/admin', adminRoutes)
 
 app.get('/e-learning', async (req, res) => {
     if (!req.session.isLoggedIn) {
@@ -83,88 +89,6 @@ app.get('/e-learning', async (req, res) => {
     }
 });
 
-app.post('/updateImage/profile/:id', upload.single('file'), async (req, res) => {
-    if (!req.session.isLoggedIn) {
-        return res.redirect('/login');
-    }
-    const userId = req.params.id;
-    const newImage = {
-        name: req.file.originalname,
-        data: fs.readFileSync(req.file.path)
-    };
-    try {
-        const image = await UserImage.findByPk(userId);
-        if (!image) {
-            return res.json({ error: 'Image not found' });
-        }
-        image.photo_user = newImage.data;
-        await image.save();
-        await fs.promises.unlink(req.file.path);
-
-        req.flash('success', 'Image updated successfully!');
-        res.redirect('/Profile')
-    } catch (error) {
-        console.error(error);
-        req.flash('danger', 'Error updating image!');
-        res.redirect('/Profile')
-    }
-});
-
-
-app.delete('/deleteImage/profile/:id', async (req, res) => {
-    if (!req.session.isLoggedIn) {
-        return res.redirect('/login');
-    }
-    const userId = req.params.id;
-    try {
-        const image = await UserImage.findByPk(userId);
-        if (!image) {
-            return res.status(404).json({ error: 'Image not found' });
-        }
-        await image.destroy();
-        req.flash('success', 'Image deleted successfully!');
-        res.redirect('/Profile')
-    } catch (error) {
-        console.error(error);
-        req.flash('danger', 'Error deleting image!');
-        res.redirect('/Profile')
-    }
-});
-
-app.post('/insertImages/profile/:id', upload.array('files', 10), async (req, res) => {
-    if (!req.session.isLoggedIn) {
-        return res.redirect('/login');
-    }
-    const userId = req.params.id;
-    try {
-        const existingImage = await UserImage.findOne({
-            where: { user_id: userId }
-        });
-        if (existingImage) {
-            return res.status(400).send('User already has an image. Cannot insert another.');
-        }
-
-        const imagesPromises = req.files.map(async (file) => {
-            const newImage = {
-                name: file.originalname,
-                data: fs.readFileSync(file.path)
-            };
-            const image = await UserImage.create({
-                user_id: userId,
-                photo_user: newImage.data
-            });
-            await fs.promises.unlink(file.path);
-            return image;
-        });
-        await Promise.all(imagesPromises);
-        req.flash('success', 'Insert is successful!');
-        res.redirect('/Profile')
-    } catch (error) {
-        console.error(error);
-        req.flash('danger', 'Insert is not successful, try again later!');
-        res.redirect('/Profile')
-    }
-});
 
 app.post('/deleteApplyErasmus/:id', async (req, res) => {
     if (!req.session.user || req.session.user.role !== 'admin') {
@@ -183,154 +107,13 @@ app.post('/deleteApplyErasmus/:id', async (req, res) => {
             return res.status(404).json({ error: 'ApplyErasmus record not found.' });
         }
 
-        res.redirect('/protected');
+        res.redirect('/admin/protected');
     } catch (err) {
         console.error('Error deleting ApplyErasmus record:', err);
         res.status(500).json({ error: 'An error occurred while deleting the record.' });
     }
 });
 
-app.post('/search', async (req, res) => {
-    try {
-        const query = req.body.query;
-
-        if (query === '') {
-            res.send([]);
-            return;
-        }
-        const results = await User.findAll({
-            where: {
-                name: {
-                    [Op.like]: `%${query}%`
-                }
-            }
-        });
-
-        res.send(results);
-    } catch (err) {
-        console.error(err);
-        res.send([]);
-    }
-});
-
-app.post('/search/partners', async (req, res) => {
-    try {
-        const query = req.body.query;
-
-        if (query === '') {
-            res.send([]);
-            return;
-        }
-        const results = await PartnersModel.findAll({
-            where: {
-                name: {
-                    [Op.like]: `%${query}%`
-                }
-            }
-        });
-
-        res.send(results);
-    } catch (err) {
-        console.error(err);
-        res.send([]);
-    }
-});
-
-
-
-
-app.get("/user/:id", async (req, res) => {
-    if (!req.session.user || req.session.user.role !== 'admin') {
-        return res.redirect('/admin');
-    }
-    const userId = req.params.id;
-
-    try {
-        const user = await User.findOne({
-            where: { id: userId },
-            attributes: ['id', 'name', 'lastname', 'dep_id', 'role', 'email', 'phone_number', 'address']
-        });
-
-        const images = await UserImage.findAll({
-            where: { user_id: userId }
-        });
-        if (!user) {
-            return res.status(404).send('User not found');
-        }
-
-        const userImage = await UserImage.findAll({
-            where: { user_id: userId },
-            attributes: ['photo_user']
-        });
-        const userDataWithImage = {
-            id: user.id,
-            name: user.name,
-            lastname: user.lastname,
-            dep_id: user.dep_id,
-            role: user.role,
-            email: user.email,
-            phone_number: user.phone_number,
-            address: user.address
-        };
-
-        res.render('user', { data: userDataWithImage ,images ,userImage , successAlert: req.flash('success'), dangerAlert: req.flash('danger') });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal server error');
-    }
-});
-
-app.post("/user/delete/:id", async (req, res) => {
-    if (!req.session.user || req.session.user.role !== 'admin') {
-        return res.redirect('/admin');
-    }
-
-    const userId = req.params.id;
-    try {
-
-        const login = await User.findOne({
-            where: { id: userId }
-        });
-
-        if (login) {
-            await User.destroy();
-        }
-
-        res.redirect(`/user/${userId}`);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal server error');
-    }
-});
-
-app.post('/user/edit/:id', async (req, res) => {
-    if (!req.session.user || req.session.user.role !== 'admin') {
-        return res.redirect('/admin');
-    }
-    const userId = req.params.id;
-    const { name, lastname, dep_id,role,email,phone_number,address } = req.body;
-    try {
-        const user = await User.findByPk(userId);
-        if (!user) {
-            return res.status(404).send('User not found');
-        }
-    
-        user.name = name;
-        user.lastname = lastname;
-        user.dep_id = dep_id;
-        user.role = role;
-        user.email = email;
-        user.phone_number = phone_number;
-        user.address = address;
-
-        await user.save();
-        req.flash('success', 'User got edited successfully!');
-        res.redirect(`/user/${userId}`);
-        } catch (error) {
-        console.error('Error updating user:', error);
-        req.flash('danger', 'Error editing User!');
-    }
-});
 
 app.post('/updateImage/:id', upload.single('file'), async (req, res) => {
     if (!req.session.user || req.session.user.role !== 'admin') {
@@ -416,111 +199,6 @@ app.post('/insertImages/:id', upload.array('files', 10), async (req, res) => {
 
 
 
-app.get("/logininformation/:id", async (req, res) => { 
-    if (!req.session.user || req.session.user.role !== 'admin') {
-        return res.redirect('/admin');
-    }
-    const userId = req.params.id;
-    try {
-        const user = await User.findOne({
-            where: { id: userId },
-            attributes: ['id', 'name', 'lastname', 'dep_id', 'role', 'email', 'phone_number', 'address']
-        });
-        const login = await Login.findOne({
-            where: {user_id:userId}
-        })
-        res.render('logininformation',{data : user, login,  successAlert: req.flash('success'), dangerAlert: req.flash('danger')})
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal server error');
-    }
-})
-
-app.post("/logininformation/delete/:id", async (req, res) => {
-    if (!req.session.user || req.session.user.role !== 'admin') {
-        return res.redirect('/admin');
-    }
-
-    const userId = req.params.id;
-    try {
-
-        const login = await Login.findOne({
-            where: { user_id: userId }
-        });
-
-        if (login) {
-            await login.destroy();
-        }
-
-        res.redirect(`/logininformation/${userId}`);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal server error');
-    }
-});
-
-app.post('/logininformation/:id', async (req, res) => {
-    if (!req.session.user || req.session.user.role !== 'admin') {
-        return res.redirect('/admin');
-    }
-    try {
-        const userId = req.params.id;
-        const { email, password } = req.body;
-
-        if (!email) {
-            return res.status(400).send('Email is required.');
-        }
-
-        const user = await User.findOne({
-            where: { id: userId },
-            attributes: ['id', 'name', 'lastname', 'dep_id', 'role', 'email', 'phone_number', 'address']
-        });
-
-        const hashPassword = await bcrypt.hash(password, 8);
-
-        const [login, created] = await Login.findOrCreate({
-            where: { user_id: userId },
-            defaults: {
-                email: email,
-                password: hashPassword
-            }
-        });
-
-        if (!created) {
-            await login.update({
-                email: email,
-                password: hashPassword
-            });
-        }
-
-        res.redirect(`/logininformation/${userId}`);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal server error');
-    }
-});
-
-app.post('/logininformation/edit/:id', async (req, res) => {
-    if (!req.session.user || req.session.user.role !== 'admin') {
-        return res.redirect('/admin');
-    }
-    const userId = req.params.id;
-    const { email } = req.body; 
-    try {
-        const user_update = await Login.update({
-            email: email
-        }, {
-            where: { user_id: userId }
-        });
-        req.flash('success','User got edited successfuly!')
-        res.redirect(`/logininformation/${userId}`)
-    } catch (error) {
-        console.log("Error somewhere here: ", error);
-        res.status(500).send('Internal server error');
-    }
-});
-
-
 app.get('/editpartners/:id', async(req,res)=>{
     if (!req.session.user || req.session.user.role !== 'admin') {
         return res.redirect('/admin');
@@ -558,7 +236,7 @@ app.post("/editpartners/delete/:id", async (req, res) => {
 
         await partner.destroy();
         req.session.alert = { type: 'danger', message: 'Partner got deleted successfuly' };
-        res.redirect(`/protected`);
+        res.redirect(`/admin/protected`);
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal server error');
@@ -588,7 +266,7 @@ app.post('/createpartners', upload.fields([
 
         if (existingPartner) {
             req.session.alert = { type: 'danger', message: 'Partner already exists' };
-            return res.redirect('/protected');
+            return res.redirect('/admin/protected');
         }
 
         let partnerData = {
@@ -613,11 +291,11 @@ app.post('/createpartners', upload.fields([
 
         const newPartner = await PartnersModel.create(partnerData);
         req.session.alert = { type: 'success', message: 'Partner created successfully' };
-        res.redirect('/protected');
+        res.redirect('/admin/protected');
     } catch (error) {
         console.error('Error creating partner:', error);
         req.flash('danger', 'Insert is not successful, try again later!');
-        res.redirect('/protected');
+        res.redirect('/admin/protected');
     }
 });
 
@@ -733,7 +411,7 @@ app.post('/task/delete/:id', async (req, res) => {
         if (deletedTask === 0) {
             res.status(404).json({ error: 'Task not found' });
         } else {
-            res.redirect('/protected')
+            res.redirect('/admin/protected')
         }
     } catch (err) {
         console.error('Error deleting task:', err);
@@ -752,18 +430,9 @@ app.get('/grades', async(req,res)=>{
 
 
 
-
-const auth = require('./routes/UserAuthRoute')
-app.use('/auth',auth)
-
-
-
-
 const apply = require('./routes/ApplyRoute')
 const feedback = require('./routes/FeedbackRoute')
 const ApplyErasmusRoute = require('./routes/ApplyErasmusRoute')
-const adminRoutes = require('./routes/AdminRoute');
-const protected = require('./routes/ProtectedRoute');
 const Partners = require('./routes/PartnersRoute');
 const Change = require('./routes/ChangeRoute');
 const Tasks = require('./routes/TaskRoute');
@@ -771,8 +440,6 @@ const Dmis = require('./routes/DmisRoute');
 app.use('/apply',apply)
 app.use('/feedback',feedback)
 app.use('/apply-erasmus',ApplyErasmusRoute)
-app.use('/admin', adminRoutes)
-app.use('/protected',protected)
 app.use('/partners',Partners)
 app.use('/confirm-change',Change)
 app.use('/insertTask',Tasks)

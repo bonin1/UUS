@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
         try {
-            const response = await fetch("/search", {
+            const response = await fetch("/user/search", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -157,26 +157,26 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function navigateToUser(userId) {
-        window.location.href = `/user/${userId}`;
+        window.location.href = `/admin/user/${userId}`;
     }
 
     searchInput.addEventListener("keydown", function (e) {
         if (e.key === "Enter" && recommendations.firstElementChild) {
             const userId = recommendations.firstElementChild.getAttribute("data-id");
-            window.location.href = `/user/${userId}`;
+            window.location.href = `/admin/user/${userId}`;
         }
     });
     searchForm.addEventListener("submit", function (e) {
         e.preventDefault();
         if (recommendations.firstElementChild) {
             const userId = recommendations.firstElementChild.getAttribute("data-id");
-            window.location.href = `/user/${userId}`;
+            window.location.href = `/admin/user/${userId}`;
         }
     });
     recommendations.addEventListener("click", function (e) {
         if (e.target.tagName === "LI") {
             const userId = e.target.getAttribute("data-id");
-            window.location.href = `/user/${userId}`;
+            window.location.href = `/admin/user/${userId}`;
         }
     });
 });

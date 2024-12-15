@@ -69,17 +69,19 @@
                                 <img src="data:image/jpeg;base64,<%= image.photo_user.toString('base64') %>" alt="Product Image" width="200" height="200">
                             </div>
                             <div class="delete">
-                                <button class="delete-button" onclick="deleteImage('<%= image.id %>')">Delete image</button>
-                                <form action="/updateImage/profile/<%= image.id %>" method="post" enctype="multipart/form-data">
+                                <form action="/user/profile/delete/<%= image.id %>" method="post">
+                                    <button class="delete-button">Delete image</button>
+                                </form>
+                                <form action="/user/profile/update/<%= image.id %>" method="post" enctype="multipart/form-data">
                                     <input type="file" name="file" id="fileInput" class="file-input">
-                                    <button type="submit">Edit Image</button>
+                                    <button type="submit" class="edit">Edit Image</button>
                                 </form>
                             </div>
                         </div>
                     <% }); %>
                 <% } else { %>
-                    <form class="upload" action="/insertImages/profile/<%= userData.id %>" method="post" enctype="multipart/form-data">
-                        <input type="file" name="files" class="file-input" multiple>
+                    <form class="upload" action="/user/profile/insert/<%= userData.id %>" method="post" enctype="multipart/form-data">
+                        <input type="file" name="file" class="file-input">
                         <button class="upload" type="submit">Upload Images</button>
                     </form>
                 <% } %>
@@ -91,22 +93,6 @@
     <%- include('partials/footer'); %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        async function deleteImage(imageId) {
-            try {
-                const response = await fetch(`/deleteImage/profile/${imageId}`, {
-                    method: 'DELETE'
-                });
-
-                if (response.ok) {
-                    location.reload();
-                } else {
-                    const errorMessage = await response.text();
-                    console.error(`Failed to delete image: ${errorMessage}`);
-                }
-            } catch (error) {
-                console.error('Error deleting image:', error);
-            }
-        }
         setTimeout(function() {
             $('#success-alert').fadeOut('slow');
         }, 10000);

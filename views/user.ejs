@@ -26,7 +26,7 @@
     <div class="wrapper">
         <div class="container-user">
             <div class="first-user-container both-containers">
-                <form action="/user/edit/<%= data.id %>" method="POST">
+                <form action="/admin/edit-user/<%= data.id %>" method="POST">
                     <label for="name">Name:</label>
                     <input type="text" name="name" value="<%= data.name %>">
                     <label for="lastname">Lastname:</label>
@@ -68,7 +68,7 @@
                             <button type="submit">Edit Image</button>
                         </form>
                         <button class="delete-button" onclick="deleteImage('<%= image.id %>')">Delete image</button>
-                        <form action="/user/delete/<%= data.id %>" class="forma" method="post">
+                        <form action="/admin/delete-user/<%= data.id %>" class="forma" method="post">
                             <button type="submit">Delete User(after deleting image)</button>
                         </form>
                     </div>
