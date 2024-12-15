@@ -16,6 +16,7 @@ const UserImage = db.define('userimage', {
             model: Users,
             key:"id",
         },
+        onDelete: 'CASCADE'
     },
     photo_user:{
         type: DataTypes.BLOB('long') ,

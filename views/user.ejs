@@ -54,7 +54,7 @@
                         submit
                     </button>
                 </form>
-                <form action="/insertImages/<%= data.id %>" method="post" enctype="multipart/form-data">
+                <form action="/admin/insert-user-image/<%= data.id %>" method="post" enctype="multipart/form-data">
                     <input type="file" name="files" class="file-input" multiple >
                     <button class="upload" type="submit">Upload Images</button>
                 </form>
@@ -63,11 +63,13 @@
                 <% images.forEach((image, index) => { %>
                     <div class="images">
                         <img src="data:image/jpeg;base64,<%= image.photo_user.toString('base64') %>" alt="Product Image" width="200" height="200">
-                        <form action="/updateImage/<%= image.id %>" method="post" enctype="multipart/form-data">
+                        <form action="/admin/update-user-image/<%= image.id %>" method="post" enctype="multipart/form-data">
                             <input type="file" name="file" id="fileInput" class="file-input">
                             <button type="submit">Edit Image</button>
                         </form>
-                        <button class="delete-button" onclick="deleteImage('<%= image.id %>')">Delete image</button>
+                        <form action="/admin/delete-user-image/<%= image.id %>" method="post">
+                            <button class="delete-button" type="submit">Delete image</button>
+                        </form>
                         <form action="/admin/delete-user/<%= data.id %>" class="forma" method="post">
                             <button type="submit">Delete User(after deleting image)</button>
                         </form>

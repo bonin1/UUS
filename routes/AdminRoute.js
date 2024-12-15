@@ -13,6 +13,8 @@ const { GetUserPage } = require('../controller/Admin/UserManagementSystem/Paths'
 const { DeleteUser, EditUser } = require('../controller/Admin/UserManagementSystem/CRUDoperations');
 const { register } = require('../controller/Admin/UserManagementSystem/RegisterUser');
 const { ProtectedPath } = require('../controller/Admin/Protected/Path');
+const { UpdateUserImage, DeleteUserImage, InsertUserImage} = require('../controller/Admin/UserManagementSystem/ImageCRUDoperations');
+
 
 const isAdmin = require('../middleware/isAdmin');
 const upload = require('../config/UploadImageConfig');
@@ -53,6 +55,16 @@ router.get('/user/:id', isAdmin, GetUserPage);
 router.post('/delete-user/:id', isAdmin, DeleteUser);
 
 router.post('/edit-user/:id', isAdmin, EditUser);
+
+//CRUD for images
+// Insert user image
+router.post('/insert-user-image/:id', upload.array('files'), InsertUserImage);
+
+// Update user image
+router.post('/update-user-image/:id', upload.single('file'), UpdateUserImage);
+
+// Delete user image
+router.post('/delete-user-image/:id', DeleteUserImage);
 
 //--------------------------------------------
 // Protected path
