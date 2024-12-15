@@ -1,6 +1,6 @@
 const express = require('express');
 const session = require('express-session');
-const db = require('../database');
+const db = require('../../database');
 const bcrypt = require('bcryptjs');
 const rateLimit = require('express-rate-limit');
 const csrf = require('csurf');
@@ -12,11 +12,10 @@ const crypto = require('crypto');
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
-const User = require('../model/UsersModel');
 
 
-const loginlimitter = require('../middleware/loginlimitter')
-const LoginInformation = require('../model/LoginModel')
+const loginlimitter = require('../../middleware/loginlimitter')
+const LoginInformation = require('../../model/LoginModel')
 router.use(loginlimitter)
 
 router.use(cookieParser());
@@ -43,17 +42,18 @@ router.use((req, res, next) => {
 });
 
 
-router.get('/', (req, res) => {
+
+exports.loginPath = (req, res) => {
     if (req.cookies.rememberToken) {
         return res.redirect('/e-learning');
     }
     const csrfToken = crypto.randomBytes(64).toString('hex');
     req.session.csrfToken = csrfToken;
     res.render('login', { message: '', csrfToken});
-});
+};
 
 
-router.post('/', async (req, res) => {
+exports.LoginPost = async (req, res) => {
     if(req.body._csrf !== req.session.csrfToken) {
         return res.status(401).send('Invalid CSRF token');
     }
@@ -93,6 +93,4 @@ router.post('/', async (req, res) => {
         console.error(err);
         return res.render('login', { message: 'An error occurred while processing your request', csrfToken: req.session.csrfToken });
     }
-});
-
-module.exports = router;
+};

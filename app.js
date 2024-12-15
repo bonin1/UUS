@@ -34,41 +34,7 @@ app.use((req, res, next) => {
     next();
 });
 
-
-const storage = multer.diskStorage({
-    destination: function (req, file, callback) {
-        callback(null, __dirname + '/uploads/');
-    },
-    filename: function (req, file, callback) {
-        callback(null, file.originalname);
-    }
-});
-
-const upload = multer({
-    storage: storage
-});
-
-
-
-app.post('/upload', upload.array('photos', 10), function(req, res) {
-    if (!req.session.user || req.session.user.role !== 'admin') {
-        return res.redirect('/admin');
-    }
-    if (!req.files || req.files.length === 0) {
-        console.log('No files uploaded');
-        return res.status(400).send('No files uploaded');
-    } else {
-        req.files.forEach(file => {
-            console.log(file);
-            const image = {
-                name: file.originalname,
-                data: fs.readFileSync(file.path)
-            }
-        });
-
-        return res.status(200).send('Files uploaded successfully');
-    }
-});
+const upload = require('./config/UploadImageConfig');
 
 
 
@@ -116,27 +82,6 @@ app.get('/e-learning', async (req, res) => {
         return res.status(500).send('An error occurred while fetching user data');
     }
 });
-
-app.get('/profile', async(req,res)=>{
-    if (!req.session.isLoggedIn) {
-        return res.redirect('/login');
-    }
-    const userId = req.session.userId;
-    const userData = await User.findByPk(userId, {
-        include: [{ model: Department }],
-    });
-    const loginInfo = await Login.findOne({ where: { user_id: userId } });
-    const images = await UserImage.findAll({
-        where: { user_id: userId }
-    });
-
-    if (!userData || !loginInfo) {
-        return res.status(404).send('User not found');
-    }
-
-    res.render('Profile', { userData, loginInfo, images, successAlert: req.flash('success'), dangerAlert: req.flash('danger')})
-})
-
 
 app.post('/updateImage/profile/:id', upload.single('file'), async (req, res) => {
     if (!req.session.isLoggedIn) {
@@ -242,74 +187,6 @@ app.post('/deleteApplyErasmus/:id', async (req, res) => {
     } catch (err) {
         console.error('Error deleting ApplyErasmus record:', err);
         res.status(500).json({ error: 'An error occurred while deleting the record.' });
-    }
-});
-
-app.post('/register/user', upload.array('files', 10), async (req, res) => {
-    if (!req.session.user || req.session.user.role !== 'admin') {
-        return res.redirect('/admin');
-    }
-    const {
-        name,
-        lastname,
-        dep_id,
-        role,
-        email,
-        phone_number,
-        address
-    } = req.body;
-    
-    try {
-        const existingUser = await User.findOne({
-            where: {
-                email: email
-            }
-        });
-
-        if (existingUser) {
-            req.session.alert = { type: 'danger', message: 'User already exists' };
-            return res.redirect('/protected');
-        } else {
-            const newUser = await User.create({
-                name,
-                lastname,
-                dep_id,
-                role,
-                email,
-                phone_number,
-                address
-            });
-            req.session.alert = { type: 'success', message: 'User created successfully' };
-
-
-            try {
-                if (req.files) {
-                    const imagesPromises = req.files.map(async (file) => {
-                        const newImage = {
-                            name: file.originalname,
-                            data: fs.readFileSync(file.path)
-                        };
-                        const image = await UserImage.create({
-                            user_id: newUser.id,
-                            photo_user: newImage.data
-                        });
-                        await fs.promises.unlink(file.path);
-                        return image;
-                    });
-                    await Promise.all(imagesPromises);
-                    return res.redirect('/protected');
-                } else {
-                    console.log('No files were uploaded.');
-                    res.redirect('/protected')
-                }
-            } catch (err) {
-                console.error('Error processing files:', err);
-            }
-            
-        }
-    } catch (err) {
-        console.error('Error creating user:', err);
-        res.status(500).json({ error: 'An error occurred while creating user.' });
     }
 });
 
@@ -876,12 +753,15 @@ app.get('/grades', async(req,res)=>{
 
 
 
+const auth = require('./routes/UserAuthRoute')
+app.use('/auth',auth)
+
+
 
 
 const apply = require('./routes/ApplyRoute')
 const feedback = require('./routes/FeedbackRoute')
 const ApplyErasmusRoute = require('./routes/ApplyErasmusRoute')
-const login = require('./routes/LoginRoute')
 const adminRoutes = require('./routes/AdminRoute');
 const protected = require('./routes/ProtectedRoute');
 const Partners = require('./routes/PartnersRoute');
@@ -891,7 +771,6 @@ const Dmis = require('./routes/DmisRoute');
 app.use('/apply',apply)
 app.use('/feedback',feedback)
 app.use('/apply-erasmus',ApplyErasmusRoute)
-app.use('/login',login)
 app.use('/admin', adminRoutes)
 app.use('/protected',protected)
 app.use('/partners',Partners)
