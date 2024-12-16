@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const { PartnersModel } = require('../../model/Partners');
+const PartnersModel = require('../../model/Partners');
 const { Op } = require('sequelize');
 
 

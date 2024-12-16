@@ -26,7 +26,7 @@
     <div class="wrapper">
         <div class="wrapper-assist">
             <div class="partner-one both-partners">
-                <form action="/partners/edit/<%= data.id %>" method="POST">
+                <form action="/admin/edit-partner/<%= data.id %>" method="POST">
                     <div class="form-one">
                         <input  type="text" name="name" value="<%= data.name %>" placeholder="Name:">
                         <input  type="text" name="countries" value="<%= data.countries %>" placeholder="countries:">
@@ -64,7 +64,7 @@
                         </div>
                     <% } else { %>
                         <p>no image</p>
-                        <form action="/editpartners/delete/<%= data.id %>" class="forma" method="post">
+                        <form action="/admin/delete-partner/<%= data.id %>" class="forma" method="post">
                             <button type="submit">Delete Partner</button>
                         </form>
                     <% } %>

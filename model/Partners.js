@@ -18,7 +18,7 @@ const Partners = db.define('Partners', {
         type: DataTypes.INTEGER
     },
     partners_photos: {
-        type: DataTypes.BLOB('long') 
+        type: DataTypes.BLOB('long')
     },
     level: {
         type: DataTypes.ENUM('Bachelor', 'Master')

@@ -14,6 +14,11 @@ const { DeleteUser, EditUser } = require('../controller/Admin/UserManagementSyst
 const { register } = require('../controller/Admin/UserManagementSystem/RegisterUser');
 const { ProtectedPath } = require('../controller/Admin/Protected/Path');
 const { UpdateUserImage, DeleteUserImage, InsertUserImage} = require('../controller/Admin/UserManagementSystem/ImageCRUDoperations');
+const { DeleteErasmusApplication } = require('../controller/Admin/DeleteErasmusApplication');
+const { PartnerPath } = require('../controller/Admin/Partners/Paths');
+const { SearchPartners } = require('../controller/SEARCH/SearchPartners')
+const { CreatePartner, DeletePartner, EditPartner } = require('../controller/Admin/Partners/CRUDoperations');
+const { UpdatePartnerImage } = require('../controller/Admin/Partners/ImageCRUDoperations');
 
 
 const isAdmin = require('../middleware/isAdmin');
@@ -23,6 +28,14 @@ const upload = require('../config/UploadImageConfig');
 
 // Get register user page
 router.post('/register', upload.array('files', 10), register)
+
+// --------------------------------------------
+
+// Get delete erasmus application page
+router.post('/delete-erasmus-application/:id', DeleteErasmusApplication);
+
+// search partners
+router.post('/search/partners', SearchPartners);
 
 // --------------------------------------------
 
@@ -69,6 +82,24 @@ router.post('/delete-user-image/:id', DeleteUserImage);
 //--------------------------------------------
 // Protected path
 router.get('/protected', isAdmin, ProtectedPath);
+
+// --------------------------------------------
+
+// Get partner page
+router.get('/partners/:id', PartnerPath);
+
+//CRUD operations
+// Insert partner image
+router.post('/create-partner', upload.single('photos'), CreatePartner);
+
+// Delete partner
+router.post('/delete-partner/:id', DeletePartner);
+
+// Edit partner
+router.post('/edit-partner/:id', EditPartner);
+
+// Update partner image
+router.post('/update-partner-image/:id', upload.single('photos'), UpdatePartnerImage);
 
 // --------------------------------------------
 
