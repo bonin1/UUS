@@ -50,7 +50,7 @@ exports.CreatePartner = async (req, res) => {
             semester,
             dep_id
         };  
-
+// error on image upload 
         if (req.file) {
             const file = req.file;
             const newImage = {
@@ -66,6 +66,12 @@ exports.CreatePartner = async (req, res) => {
         res.redirect('/admin/protected');
     } catch (error) {
         console.error('Error creating partner:', error);
+        console.error('Error details:', {
+            name: error.name,
+            message: error.message,
+            sql: error.sql,
+            parameters: error.parameters
+        });
         req.flash('danger', 'Insert is not successful, try again later!');
         res.redirect('/admin/protected');
     }

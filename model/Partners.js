@@ -26,7 +26,7 @@ const Partners = db.define('Partners', {
     semester: {
         type: DataTypes.ENUM('Winter', 'Summer')
     },
-    Dep_id: {
+    dep_id: {
         type: DataTypes.INTEGER,
         references: {
             model: Department,

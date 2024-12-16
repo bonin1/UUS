@@ -89,8 +89,8 @@ router.get('/protected', isAdmin, ProtectedPath);
 router.get('/partners/:id', PartnerPath);
 
 //CRUD operations
-// Insert partner image
-router.post('/create-partner', upload.single('photos'), CreatePartner);
+// Insert partner 
+router.post('/create-partner', upload.array('photos'), CreatePartner);
 
 // Delete partner
 router.post('/delete-partner/:id', DeletePartner);
