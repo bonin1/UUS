@@ -336,7 +336,7 @@
                                 <div class="content div-1">
                                     <div class="content_div-1">
                                         <a href="/user/Profile">Profile</a>
-                                        <a href="/calendar">Calendar</a>
+                                        <a href="/e-learning/calendar">Calendar</a>
                                         <a href="/">Grades</a>
                                         <a href="/">Dashboard</a>
                                         <a href="/">Messages</a>
@@ -374,7 +374,7 @@
                         </div>
                         <div class="login_container">
                             <% if (isLoggedIn) { %>
-                                <form action="/logout" id="logout-form" method="POST">
+                                <form action="/auth/logout" id="logout-form" method="POST">
                                     <input type="submit" id="a1" class="nav-link" value="Logout">
                                 </form>
                             <% } else { %>

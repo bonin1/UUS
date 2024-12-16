@@ -1,9 +1,6 @@
 const express = require('express');
 const session = require('express-session');
-const db = require('../../database');
 const bcrypt = require('bcryptjs');
-const rateLimit = require('express-rate-limit');
-const csrf = require('csurf');
 const validator = require('validator');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -17,30 +14,6 @@ const jwt = require('jsonwebtoken');
 const loginlimitter = require('../../middleware/loginlimitter')
 const LoginInformation = require('../../model/LoginModel')
 router.use(loginlimitter)
-
-router.use(cookieParser());
-router.use(session({ 
-    secret: process.env.SESSION_SECRET, 
-    resave: false, 
-    saveUninitialized: false,
-    cookie: {
-        httpOnly: true,
-        sameSite: 'strict'
-    }
-}));
-router.use(bodyParser.json({ limit: '50mb' }));
-router.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
-
-router.use((req, res, next) => {
-    if (req.cookies.rememberToken && !req.session.isLoggedIn) {
-        req.session.isLoggedIn = true;
-        req.session.userId = req.cookies.rememberToken;
-        return res.redirect('/e-learning');
-    } else {
-        next();
-    }
-});
-
 
 
 exports.loginPath = (req, res) => {

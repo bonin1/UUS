@@ -17,7 +17,7 @@
             if (typeof FullCalendar !== 'undefined') {
                 var calendarEl = document.getElementById('calendar');
                 
-                fetch('/tasks')
+                fetch('/e-learning/tasks')
                     .then(response => response.json())
                     .then(tasks => {
                         var eventsData = tasks.map(task => {

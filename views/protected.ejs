@@ -54,7 +54,7 @@
             </div>
             <div class="bottomSide">
                 <a href="">Need Help?</a>
-                <form action="/logout/admin" id="logout-form" method="POST">
+                <form action="/auth/logout-admin" id="logout-form" method="POST">
                     <input type="submit" id="a1" class="nav-link" value="Logout">
                 </form>
             </div>
@@ -346,7 +346,7 @@
 
             <div class="main-container hidden" id="div7">
                 <h1 style="text-align: center; margin: 50px 0;">Add Event or Task</h1>
-                <form class="tasks" action="/insertTask" method="POST">
+                <form class="tasks" action="/task/create" method="POST">
                     <label for="taskName">Task Name:</label>
                     <input type="text" placeholder="Task/event name" id="taskName" name="taskName" required>
                     <br>

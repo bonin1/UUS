@@ -50,15 +50,14 @@ exports.CreatePartner = async (req, res) => {
             semester,
             dep_id
         };  
-// error on image upload 
-        if (req.file) {
-            const file = req.file;
+        
+        if (req.files && req.files.length > 0) {
+            const file = req.files[0];
             const newImage = {
                 name: file.originalname,
                 data: file.buffer
             };
             partnerData.partners_photos = newImage.data;
-            req.flash('success', 'Image uploaded successfully!');
         }
 
         const newPartner = await PartnersModel.create(partnerData);

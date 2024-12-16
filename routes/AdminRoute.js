@@ -99,7 +99,7 @@ router.post('/delete-partner/:id', DeletePartner);
 router.post('/edit-partner/:id', EditPartner);
 
 // Update partner image
-router.post('/update-partner-image/:id', upload.single('photos'), UpdatePartnerImage);
+router.post('/update-partner-image/:id', upload.single('photo'), UpdatePartnerImage);
 
 // --------------------------------------------
 

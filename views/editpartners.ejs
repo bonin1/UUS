@@ -57,7 +57,7 @@
                     <% if(data.partners_photos){ %>
                         <div class="images">
                             <img src="data:image/jpeg;base64,<%= data.partners_photos.toString('base64') %>" alt="Product Image">
-                            <form action="/partners/image/<%= data.id %>" method="post" enctype="multipart/form-data">
+                            <form action="/admin/update-partner-image/<%= data.id %>" method="post" enctype="multipart/form-data">
                                 <input type="file" name="photo" id="fileInput" class="file-input">
                                 <button type="submit">Edit Image</button>
                             </form>
