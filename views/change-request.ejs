@@ -1,0 +1,103 @@
+<!-- views/admin/change-requests.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Requests Dashboard</title>
+    <link rel="stylesheet" href="/static/css/logininformation.css">
+    <style>
+        .change-request {
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .pending {
+            border-left: 4px solid orange;
+        }
+        .approved {
+            border-left: 4px solid green;
+        }
+        .rejected {
+            border-left: 4px solid red;
+        }
+        .actions {
+            margin-top: 10px;
+        }
+        .btn {
+            padding: 5px 15px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .btn-approve {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+        .btn-reject {
+            background-color: #f44336;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Change Requests Dashboard</h1>
+        
+        <div class="filters">
+            <button onclick="filterRequests('all')" class="btn">All</button>
+            <button onclick="filterRequests('pending')" class="btn">Pending</button>
+            <button onclick="filterRequests('approved')" class="btn">Approved</button>
+            <button onclick="filterRequests('rejected')" class="btn">Rejected</button>
+        </div>
+
+        <div class="requests-container">
+            <% changeRequests.forEach(request => { %>
+                <div class="change-request <%= request.status.toLowerCase() %>">
+                    <h3>Change Request #<%= request.id %></h3>
+                    <p><strong>Requested By:</strong> <%= request.requestedBy.name %> <%= request.requestedBy.lastname %></p>
+                    <p><strong>User Affected:</strong> <%= request.user.name %> <%= request.user.lastname %></p>
+                    <p><strong>Change Type:</strong> <%= request.change_type %></p>
+                    <p><strong>Current Email:</strong> <%= request.user.email %></p>
+                    <p><strong>Requested Email:</strong> <%= request.new_data.email %></p>
+                    <p><strong>Reason:</strong> <%= request.reason %></p>
+                    <p><strong>Status:</strong> <%= request.status %></p>
+                    <p>New Email: <%= request.new_data ? request.new_data.email : 'No email specified' %></p>
+                    
+                    <% if (request.status === 'PENDING') { %>
+                        <div class="actions">
+                            <form action="/admin/change-requests/<%= request.id %>/handle" method="POST">
+                                <div class="form-group">
+                                    <label for="adminReason">Admin Response:</label>
+                                    <textarea name="adminReason" required></textarea>
+                                </div>
+                                <button type="submit" name="action" value="approve" class="btn btn-approve">Approve</button>
+                                <button type="submit" name="action" value="reject" class="btn btn-reject">Reject</button>
+                            </form>
+                        </div>
+                    <% } else { %>
+                        <p><strong>Handled By:</strong> <%= request.approvedBy?.name %> <%= request.approvedBy?.lastname %></p>
+                        <p><strong>Admin Response:</strong> <%= request.adminReason %></p>
+                        <p><strong>Handled At:</strong> <%= new Date(request.approved_at).toLocaleString() %></p>
+                    <% } %>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+
+    <script>
+        function filterRequests(status) {
+            const requests = document.querySelectorAll('.change-request');
+            requests.forEach(request => {
+                if (status === 'all') {
+                    request.style.display = 'block';
+                } else {
+                    request.style.display = request.classList.contains(status) ? 'block' : 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

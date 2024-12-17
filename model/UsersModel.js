@@ -24,7 +24,7 @@ const User = db.define('User', {
         },
     },
     role: {
-        type: DataTypes.ENUM('student', 'admin', 'professor'),
+        type: DataTypes.ENUM('student', 'admin', 'professor', 'staff'),
         allowNull: false,
     },
     email: {

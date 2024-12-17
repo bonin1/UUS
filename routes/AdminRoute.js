@@ -19,7 +19,7 @@ const { PartnerPath } = require('../controller/Admin/Partners/Paths');
 const { SearchPartners } = require('../controller/SEARCH/SearchPartners')
 const { CreatePartner, DeletePartner, EditPartner } = require('../controller/Admin/Partners/CRUDoperations');
 const { UpdatePartnerImage } = require('../controller/Admin/Partners/ImageCRUDoperations');
-
+const { handleChangeRequest, viewChangeRequests } = require('../controller/Admin/Request');
 
 const isAdmin = require('../middleware/isAdmin');
 const upload = require('../config/UploadImageConfig');
@@ -36,6 +36,10 @@ router.post('/delete-erasmus-application/:id', DeleteErasmusApplication);
 
 // search partners
 router.post('/search/partners', SearchPartners);
+
+router.get('/change-requests', viewChangeRequests);
+
+router.post('/change-requests/:requestId/handle', handleChangeRequest);
 
 // --------------------------------------------
 

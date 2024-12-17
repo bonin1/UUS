@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const flash = require('connect-flash');
 const bodyParser = require('body-parser');
+const fs = require('fs');
 
 const sessionConfig = require('./config/session');
 const errorHandler = require('./middleware/errorHandler');
@@ -30,6 +31,7 @@ const Login = require('./model/LoginModel')
 const PartnersModel = require('./model/Partners')
 const TasksModel = require('./model/TaskModel')
 const AuditLog = require('./model/AuditLog')
+const ChangeRequest = require('./model/ChangeRequest')
 
 app.use((req, res, next) => {
     res.locals.isLoggedIn = req.session.isLoggedIn;
