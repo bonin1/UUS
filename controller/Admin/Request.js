@@ -55,12 +55,6 @@ exports.handleChangeRequest = async (req, res) => {
             ? JSON.parse(changeRequest.new_data) 
             : changeRequest.new_data;
 
-        console.log('Change Request Data:', {
-            id: changeRequest.id,
-            user_id: changeRequest.user_id,
-            new_data: newData
-        });
-
         if (changeRequest.status !== 'PENDING') {
             return res.status(400).send('This request has already been handled');
         }

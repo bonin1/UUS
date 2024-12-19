@@ -20,9 +20,6 @@ exports.InsertTask = async(req,res)=>{
 
 
 exports.DeleteTask = async (req, res) => {
-    if (!req.session.user || req.session.user.role !== 'admin') {
-        return res.redirect('/admin');
-    }
     const taskId = req.params.id;
 
     try {

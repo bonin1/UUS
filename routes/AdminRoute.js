@@ -1,10 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../model/UsersModel');
-const LoginInformation = require('../model/LoginModel');
-const bcrypt = require('bcryptjs');
-const session = require('express-session');
-const bodyParser = require('body-parser');
 
 const { LoginInformationPath } = require('../controller/Admin/LoginInformation/Paths');
 const { DeleteLoginInformation, CreateLoginInformation, UpdateLoginInformation } = require('../controller/Admin/LoginInformation/CRUDoperations');
