@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/static/css/apply.css" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     </head>
-     <body>
+    <body>
         <% if (successAlert && successAlert.length > 0) { %>
             <div class="alert alert-success" id="success-alert">
                 <%= successAlert %>
@@ -48,9 +48,10 @@
                             <option value="master">Master</option>
                         </select>
                         <select required name="choose_dep" id="">
-                            <option value="" class="" disabled selected>Zgjedh drejtimin | Select your study program</option>
-                            <option value="computer_science">Computer Science</option>
-                            <option value="cyber">Cyber Security</option>
+                            <option value="" disabled selected>Zgjedh drejtimin | Select your study program</option>
+                            <% department.forEach(dep => { %>
+                                <option value="<%= dep.dep_id %>"><%= dep.dep_name %></option>
+                            <% }); %>
                         </select>
                         <button type="submit">Apply</button>
                     </form>

@@ -37,14 +37,15 @@ const hideElement = (element) => {
     element.classList.remove('visible');
 }
 
-const divs = ['div1', 'div2', 'div3', 'div4', 'div5','div6','div7'].map(id => document.getElementById(id));
+const divs = ['div1', 'div2', 'div3', 'div4', 'div5','div6','div7','div8'].map(id => document.getElementById(id));
 const toggles = [
     { button: 'toggleDivs', divs: [0, 1] },
     { button: 'toggleDiv2', divs: [2] },
     { button: 'toggleDiv3', divs: [3] },
     { button: 'toggleDiv4', divs: [4] },
     { button: 'toggleDiv5', divs: [5] },
-    { button: 'toggleDiv6', divs: [6] }
+    { button: 'toggleDiv6', divs: [6] },
+    { button: 'toggleDiv7', divs: [7] }
 ].map(toggle => ({ ...toggle, button: document.getElementById(toggle.button) }));
 
 toggles.forEach(({ button, divs: divIndices }) => {
@@ -59,6 +60,35 @@ toggles.forEach(({ button, divs: divIndices }) => {
     });
 });
 
+    const Depmodal = document.getElementById('editModal');
+    const DepcloseModal = document.querySelector('.Department-close');
+    const editForm = document.getElementById('editForm');
+    const depNameInput = document.getElementById('dep_name');
+    const depIdInput = document.getElementById('dep_id');
+
+    document.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', event => {
+            const depId = button.getAttribute('data-id');
+            const depName = button.getAttribute('data-name');
+
+            depNameInput.value = depName;
+            depIdInput.value = depId;
+
+            editForm.action = `/admin/update-department/${depId}`;
+
+            Depmodal.style.display = 'block';
+        });
+    });
+
+    DepcloseModal.addEventListener('click', () => {
+        Depmodal.style.display = 'none';
+    });
+
+    window.addEventListener('click', event => {
+        if (event.target === Depmodal) {
+            Depmodal.style.display = 'none';
+        }
+    });
 
 
 

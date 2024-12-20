@@ -40,6 +40,8 @@ exports.ProtectedPath = async (req, res) => {
 
         const departmentCount = departments.length;
 
+        const department = await Department.findAll();
+
         const departmentStudentCounts = await Promise.all(departments.map(async (dep) => {
             const count = await User.count({ where: { role: 'student', dep_id: dep.dep_id } });
             return { dep_name: dep.dep_name, count };
@@ -76,7 +78,9 @@ exports.ProtectedPath = async (req, res) => {
             difficulties,
             recommend,
             alert: alert ,
-            tasks
+            tasks,
+            department,
+            successAlert: req.flash('success'), dangerAlert: req.flash('danger')
         });
 
     } catch (err) {

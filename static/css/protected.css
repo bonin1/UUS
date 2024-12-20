@@ -72,7 +72,8 @@
     align-items: center;
     padding: 10px 0;
 }
-.tabs > button > img {
+.tabs > button > img,
+.tabs > button > svg{
     padding-right: 15px;
     width: 48px;
 }
@@ -689,6 +690,45 @@ table, th, td {
     margin: 20px 20px;
     border: 1px solid lightgrey;
 }
+
+#editModal{
+    display: none;
+}
+
+.DepartmentModal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.Department-modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    border-radius: 8px;
+}
+
+.Department-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.Department-close:hover,
+.Department-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 @media screen and (max-width:1600px) {
     .form-one > input,
     .form-two > select{

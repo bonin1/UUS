@@ -15,6 +15,7 @@ const { SearchPartners } = require('../controller/SEARCH/SearchPartners')
 const { CreatePartner, DeletePartner, EditPartner } = require('../controller/Admin/Partners/CRUDoperations');
 const { UpdatePartnerImage } = require('../controller/Admin/Partners/ImageCRUDoperations');
 const { handleChangeRequest, viewChangeRequests } = require('../controller/Admin/Request');
+const { createDepartment, updateDepartment, deleteDepartment } = require('../controller/Admin/Department/CRUDoperations');
 
 const isAdmin = require('../middleware/isAdmin');
 const upload = require('../config/UploadImageConfig');
@@ -101,5 +102,18 @@ router.post('/edit-partner/:id', EditPartner);
 router.post('/update-partner-image/:id', upload.single('photo'), UpdatePartnerImage);
 
 // --------------------------------------------
+
+//CRUD operations for departments
+// Create department
+router.post('/create-department', createDepartment);
+
+// Update department
+router.post('/update-department/:id', updateDepartment);
+
+// Delete department
+router.post('/delete-department/:id', deleteDepartment);
+
+// --------------------------------------------
+
 
 module.exports = router;
