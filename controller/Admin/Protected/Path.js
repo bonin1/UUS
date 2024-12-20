@@ -5,7 +5,7 @@ const Department = require('../../../model/DepartmentModel');
 const Feedback = require('../../../model/FeedbackModel');
 const ApplyErasmus = require('../../../model/applyErasmusModel'); 
 const TasksModel = require('../../../model/TaskModel')
-
+const Studylevel = require('../../../model/StudyLevel');
 
 
 exports.ProtectedPath = async (req, res) => {
@@ -64,6 +64,14 @@ exports.ProtectedPath = async (req, res) => {
         });
 
         const tasks = await TasksModel.findAll();
+        
+        const studylevels = await Studylevel.findAll();
+
+        const StudyLevelCounts = await Promise.all(studylevels.map(async (level) => {
+            const count = await Studylevel.count({ where: {  study_level: level.study_level } });
+            return { study_level: level.study_level, count };
+        }));
+
         res.render('protected', {
             row: feedbackData,
             data: applies,
@@ -80,7 +88,9 @@ exports.ProtectedPath = async (req, res) => {
             alert: alert ,
             tasks,
             department,
-            successAlert: req.flash('success'), dangerAlert: req.flash('danger')
+            successAlert: req.flash('success'), dangerAlert: req.flash('danger'),
+            studylevels: studylevels.map(level => level.toJSON()),
+            StudyLevelCounts
         });
 
     } catch (err) {

@@ -6,6 +6,7 @@ const { body, validationResult } = require('express-validator');
 const loggingRateLimiter = require('../middleware/loginlimitter');
 const sessionMiddleware = require('../middleware/sesionMiddleware');
 const Department = require('../model/DepartmentModel');
+const StudyLevel = require('../model/StudyLevel');
 
 router.use(flash());
 router.use(loggingRateLimiter);
@@ -13,7 +14,8 @@ router.use(sessionMiddleware);
 
 router.get('/', async (req, res) => {
     const department = await Department.findAll();
-    res.render('apply', { successAlert: req.flash('success'), dangerAlert: req.flash('danger') , department});
+    const StudyLevels = await StudyLevel.findAll();
+    res.render('apply', { successAlert: req.flash('success'), dangerAlert: req.flash('danger') , department, StudyLevels });
 });
 
 router.post('/', 

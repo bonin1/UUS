@@ -32,6 +32,7 @@ const PartnersModel = require('./model/Partners')
 const TasksModel = require('./model/TaskModel')
 const AuditLog = require('./model/AuditLog')
 const ChangeRequest = require('./model/ChangeRequest')
+const StudyLevel = require('./model/StudyLevel')
 
 app.use((req, res, next) => {
     res.locals.isLoggedIn = req.session.isLoggedIn;

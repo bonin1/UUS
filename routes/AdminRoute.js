@@ -16,6 +16,7 @@ const { CreatePartner, DeletePartner, EditPartner } = require('../controller/Adm
 const { UpdatePartnerImage } = require('../controller/Admin/Partners/ImageCRUDoperations');
 const { handleChangeRequest, viewChangeRequests } = require('../controller/Admin/Request');
 const { createDepartment, updateDepartment, deleteDepartment } = require('../controller/Admin/Department/CRUDoperations');
+const { CreateStudyLevel, UpdateStudyLevel, DeleteStudyLevel } = require('../controller/Admin/StudyLevel/CRUDoperations');
 
 const isAdmin = require('../middleware/isAdmin');
 const upload = require('../config/UploadImageConfig');
@@ -112,6 +113,17 @@ router.post('/update-department/:id', updateDepartment);
 
 // Delete department
 router.post('/delete-department/:id', deleteDepartment);
+
+// --------------------------------------------
+//CRUD operations for study levels
+// Create study level
+router.post('/create-study-level', CreateStudyLevel);
+
+// Update study level
+router.post('/update-study-level/:study_level_id', UpdateStudyLevel);
+
+// Delete study level
+router.post('/delete-study-level/:study_level_id', DeleteStudyLevel);
 
 // --------------------------------------------
 

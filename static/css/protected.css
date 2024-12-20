@@ -729,6 +729,86 @@ table, th, td {
     cursor: pointer;
 }
 
+.department-count{
+    font-weight: 600;
+    font-style: normal;
+    font-size: 20px;
+}
+.departments{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.department{
+    width: 25%;
+    border: 1px solid lightgrey;
+    padding: 30px 0;
+}
+.department-buttons{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 40px;
+}
+
+.department-buttons > form > button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    background-color: red;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+.department-buttons > form > button:hover{
+    background-color: #9b1818;
+}
+
+.edit-btn{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    background-color: lightblue;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.edit-btn:hover{
+    background-color: #4a90e2;
+}
+
+.department-create{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.department-create > form > input{
+    width: 300px;
+    padding: 10px 10px;
+    margin: 20px 0;
+    border: 1px solid lightgrey;
+}
+.department-create > form > input:focus{
+    outline: none;
+}
+.department-create > form > button{
+    padding: 10px 10px;
+    margin: 20px 0;
+    background-color: #004492;
+    color: #fff;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
 @media screen and (max-width:1600px) {
     .form-one > input,
     .form-two > select{
