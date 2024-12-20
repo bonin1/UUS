@@ -44,8 +44,8 @@
                         <input type="text" required name="high_school" placeholder="Drejtimi i shkolles se mesme | High school department  ">
                         <select required name="study_level" id="">
                             <option value="" class="disabled" disabled selected>Niveli i studimeve | Level of studies</option>
-                            <% studyLevel.forEach(level => { %>
-                                <option value="<%= level.level_id %>"><%= level.level_name %></option>
+                            <% StudyLevels.forEach(level => { %>
+                                <option value="<%= level.study_level_id %>"><%= level.study_level %></option>
                             <% }); %>
                         </select>
                         <select required name="choose_dep" id="">
