@@ -19,24 +19,25 @@ const { createDepartment, updateDepartment, deleteDepartment } = require('../con
 const { CreateStudyLevel, UpdateStudyLevel, DeleteStudyLevel } = require('../controller/Admin/StudyLevel/CRUDoperations');
 
 const isAdmin = require('../middleware/isAdmin');
+const isAdminOrStaff = require('../middleware/isAdminorStaff');
 const upload = require('../config/UploadImageConfig');
 
 // --------------------------------------------
 
 // Get register user page
-router.post('/register', upload.array('files', 10), register)
+router.post('/register', isAdmin, upload.array('files', 10), register)
 
 // --------------------------------------------
 
 // Get delete erasmus application page
-router.post('/delete-erasmus-application/:id', DeleteErasmusApplication);
+router.post('/delete-erasmus-application/:id', isAdmin, DeleteErasmusApplication);
 
 // search partners
 router.post('/search/partners', SearchPartners);
 
-router.get('/change-requests', viewChangeRequests);
+router.get('/change-requests', isAdmin, viewChangeRequests);
 
-router.post('/change-requests/:requestId/handle', handleChangeRequest);
+router.post('/change-requests/:requestId/handle', isAdmin, handleChangeRequest);
 
 // --------------------------------------------
 
@@ -49,17 +50,17 @@ router.post('/login', adminLoginPost);
 // --------------------------------------------
 
 // Get login information page
-router.get('/LoginInformation/:id', LoginInformationPath);
+router.get('/LoginInformation/:id', isAdminOrStaff, LoginInformationPath);
 
 //CRUD operations
 // Create login information
-router.post('/create-login-information/:id', CreateLoginInformation);
+router.post('/create-login-information/:id', isAdminOrStaff, CreateLoginInformation);
 
 // Delete login information
-router.post('/delete-login-information/:id', DeleteLoginInformation);
+router.post('/delete-login-information/:id', isAdminOrStaff, DeleteLoginInformation);
 
 // Update login information
-router.post('/update-login-information/:id', UpdateLoginInformation);
+router.post('/update-login-information/:id', isAdminOrStaff, UpdateLoginInformation);
 
 //--------------------------------------------
 
@@ -72,58 +73,58 @@ router.post('/edit-user/:id', isAdmin, EditUser);
 
 //CRUD for images
 // Insert user image
-router.post('/insert-user-image/:id', upload.array('files'), InsertUserImage);
+router.post('/insert-user-image/:id', isAdmin, upload.array('files'), InsertUserImage);
 
 // Update user image
-router.post('/update-user-image/:id', upload.single('file'), UpdateUserImage);
+router.post('/update-user-image/:id', isAdmin, upload.single('file'), UpdateUserImage);
 
 // Delete user image
-router.post('/delete-user-image/:id', DeleteUserImage);
+router.post('/delete-user-image/:id', isAdmin, DeleteUserImage);
 
 //--------------------------------------------
 // Protected path
-router.get('/protected', isAdmin, ProtectedPath);
+router.get('/protected', isAdminOrStaff, ProtectedPath);
 
 // --------------------------------------------
 
 // Get partner page
-router.get('/partners/:id', PartnerPath);
+router.get('/partners/:id', isAdminOrStaff, PartnerPath);
 
 //CRUD operations
 // Insert partner 
-router.post('/create-partner', upload.array('photos'), CreatePartner);
+router.post('/create-partner', isAdminOrStaff, upload.array('photos'), CreatePartner);
 
 // Delete partner
-router.post('/delete-partner/:id', DeletePartner);
+router.post('/delete-partner/:id', isAdminOrStaff, DeletePartner);
 
 // Edit partner
-router.post('/edit-partner/:id', EditPartner);
+router.post('/edit-partner/:id', isAdminOrStaff, EditPartner);
 
 // Update partner image
-router.post('/update-partner-image/:id', upload.single('photo'), UpdatePartnerImage);
+router.post('/update-partner-image/:id', isAdminOrStaff, upload.single('photo'), UpdatePartnerImage);
 
 // --------------------------------------------
 
 //CRUD operations for departments
 // Create department
-router.post('/create-department', createDepartment);
+router.post('/create-department', isAdminOrStaff, createDepartment);
 
 // Update department
-router.post('/update-department/:id', updateDepartment);
+router.post('/update-department/:id', isAdminOrStaff, updateDepartment);
 
 // Delete department
-router.post('/delete-department/:id', deleteDepartment);
+router.post('/delete-department/:id', isAdminOrStaff, deleteDepartment);
 
 // --------------------------------------------
 //CRUD operations for study levels
 // Create study level
-router.post('/create-study-level', CreateStudyLevel);
+router.post('/create-study-level', isAdminOrStaff, CreateStudyLevel);
 
 // Update study level
-router.post('/update-study-level/:study_level_id', UpdateStudyLevel);
+router.post('/update-study-level/:study_level_id', isAdminOrStaff, UpdateStudyLevel);
 
 // Delete study level
-router.post('/delete-study-level/:study_level_id', DeleteStudyLevel);
+router.post('/delete-study-level/:study_level_id', isAdminOrStaff, DeleteStudyLevel);
 
 // --------------------------------------------
 

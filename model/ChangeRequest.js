@@ -25,7 +25,7 @@ const ChangeRequest = db.define('ChangeRequest', {
         },
     },
     change_type: {
-        type: DataTypes.ENUM('CREATE_LOGIN', 'UPDATE_LOGIN', 'DELETE_LOGIN'),
+        type: DataTypes.TEXT,
         allowNull: false,
     },
     new_data: {

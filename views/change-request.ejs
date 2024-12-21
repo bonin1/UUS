@@ -1,57 +1,23 @@
-<!-- views/admin/change-requests.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Change Requests Dashboard</title>
-    <link rel="stylesheet" href="/static/css/logininformation.css">
-    <style>
-        .change-request {
-            border: 1px solid #ddd;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 5px;
-        }
-        .pending {
-            border-left: 4px solid orange;
-        }
-        .approved {
-            border-left: 4px solid green;
-        }
-        .rejected {
-            border-left: 4px solid red;
-        }
-        .actions {
-            margin-top: 10px;
-        }
-        .btn {
-            padding: 5px 15px;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-        .btn-approve {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-        }
-        .btn-reject {
-            background-color: #f44336;
-            color: white;
-            border: none;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/css/change-request.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Change Requests Dashboard</h1>
+    <div class="container both">
+        <nav>
+            <h1>Change Requests Dashboard</h1>
         
-        <div class="filters">
-            <button onclick="filterRequests('all')" class="btn">All</button>
-            <button onclick="filterRequests('pending')" class="btn">Pending</button>
-            <button onclick="filterRequests('approved')" class="btn">Approved</button>
-            <button onclick="filterRequests('rejected')" class="btn">Rejected</button>
-        </div>
+            <div class="filters">
+                <button onclick="filterRequests('all')" class="btn">All</button>
+                <button onclick="filterRequests('pending')" class="btn">Pending</button>
+                <button onclick="filterRequests('approved')" class="btn">Approved</button>
+                <button onclick="filterRequests('rejected')" class="btn">Rejected</button>
+            </div>
+        </nav>
 
         <div class="requests-container">
             <% changeRequests.forEach(request => { %>
@@ -61,10 +27,21 @@
                     <p><strong>User Affected:</strong> <%= request.user.name %> <%= request.user.lastname %></p>
                     <p><strong>Change Type:</strong> <%= request.change_type %></p>
                     <p><strong>Current Email:</strong> <%= request.user.email %></p>
-                    <p><strong>Requested Email:</strong> <%= request.new_data.email %></p>
                     <p><strong>Reason:</strong> <%= request.reason %></p>
                     <p><strong>Status:</strong> <%= request.status %></p>
-                    <p>New Email: <%= request.new_data ? request.new_data.email : 'No email specified' %></p>
+
+                    <div class="change-details">
+                        <% request.changes.forEach(change => { %>
+                            <div class="change-field">
+                                <strong><%= change.field %>:</strong>
+                                <% if (change.field === 'password') { %>
+                                    <span class="text-muted">Password change requested</span>
+                                <% } else { %>
+                                    <%- helpers.highlightChanges(change.oldValue, change.newValue) %>
+                                <% } %>
+                            </div>
+                        <% }); %>
+                    </div>
                     
                     <% if (request.status === 'PENDING') { %>
                         <div class="actions">
@@ -78,12 +55,21 @@
                             </form>
                         </div>
                     <% } else { %>
-                        <p><strong>Handled By:</strong> <%= request.approvedBy?.name %> <%= request.approvedBy?.lastname %></p>
-                        <p><strong>Admin Response:</strong> <%= request.adminReason %></p>
-                        <p><strong>Handled At:</strong> <%= new Date(request.approved_at).toLocaleString() %></p>
+                        <div class="actions">
+                            <p><strong>Handled By:</strong> <%= request.approvedBy?.name %> <%= request.approvedBy?.lastname %></p>
+                            <p><strong>Handled At:</strong> <%= new Date(request.approved_at).toLocaleString() %></p>
+                        </div>
                     <% } %>
                 </div>
             <% }) %>
+        </div>
+    </div>
+
+    <div class="container_second both">
+        <div class="bulk-action">
+            <form action="/admin/change-requests/bulk-handle" method="POST">
+                <input type="text">
+            </form>
         </div>
     </div>
 

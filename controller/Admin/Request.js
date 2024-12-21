@@ -1,39 +1,38 @@
-const ChangeRequest = require('../../model/ChangeRequest')
-const User = require('../../model/UsersModel')
-const AuditLog = require('../../model/AuditLog')
-const Login = require('../../model/LoginModel');
+const ChangeRequestService = require('../../service/ChangeRequest/LoginChangeRequest');
+const { createAuditLog } = require('../../helpers/AuditHelper');
+const { ACTIONS, STATUS } = require('../../utils/Constrants');
 const { getUserFromToken } = require('../../middleware/GetAdminTokenId');
 
 exports.viewChangeRequests = async (req, res) => {
     try {
         const user = await getUserFromToken(req);
-        const changeRequests = await ChangeRequest.findAll({
-            include: [
-                {
-                    model: User,
-                    as: 'requestedBy',
-                    attributes: ['name', 'lastname', 'email']
-                },
-                {
-                    model: User,
-                    as: 'user',
-                    attributes: ['name', 'lastname', 'email']
-                },
-                {
-                    model: User,
-                    as: 'approvedBy',
-                    attributes: ['name', 'lastname']
-                }
-            ],
-            order: [['createdAt', 'DESC']]
-        });
+        
+        const changeRequests = await ChangeRequestService.getAllChangeRequests({
+            status: req.query.status,
+            type: req.query.type
+        }, user);
 
         res.render('change-request', { 
             changeRequests,
-            userRole: user.role
+            userRole: user.role,
+            currentUser: user,
+            filters: {
+                status: req.query.status,
+                type: req.query.type
+            },
+            currentDateTime: new Date().toISOString(),
+            currentUserLogin: user.login,
+            formatDate: (date) => new Date(date).toLocaleString(),
+            helpers: {
+                highlightChanges: (oldValue, newValue) => {
+                    if (oldValue === newValue) return oldValue;
+                    return `<span class="text-danger">${oldValue}</span> → <span class="text-success">${newValue}</span>`;
+                }
+            }
         });
     } catch (error) {
         console.error('Error fetching change requests:', error);
+        req.flash('error', 'Failed to fetch change requests');
         res.status(500).send('Internal server error');
     }
 };
@@ -43,83 +42,37 @@ exports.handleChangeRequest = async (req, res) => {
     const { action, adminReason } = req.body;
     
     try {
-        const user = await getUserFromToken(req);
+        const performer = await getUserFromToken(req);
 
-        const changeRequest = await ChangeRequest.findByPk(requestId);
+        const result = await ChangeRequestService.handleChangeRequest(
+            requestId,
+            action,
+            adminReason,
+            performer,
+            req
+        );
 
-        if (!changeRequest) {
-            return res.status(404).send('Change request not found');
-        }
-
-        const newData = typeof changeRequest.new_data === 'string' 
-            ? JSON.parse(changeRequest.new_data) 
-            : changeRequest.new_data;
-
-        if (changeRequest.status !== 'PENDING') {
-            return res.status(400).send('This request has already been handled');
-        }
-
-        const status = action === 'approve' ? 'APPROVED' : 'REJECTED';
-
-        await changeRequest.update({
-            status,
-            approved_by: user.id,
-            approved_at: new Date(),
-            adminReason
-        });
-
-        if (status === 'APPROVED') {
-            const newEmail = newData.email;
-
-            if (!newEmail) {
-                throw new Error('New email is missing from change request data');
-            }
-
-            const [updateCount] = await Login.update(
-                { email: newEmail },
-                { 
-                    where: { user_id: changeRequest.user_id }
-                }
-            );
-
-            if (updateCount === 0) {
-                throw new Error('Failed to update login information');
-            }
-
-            const verifyUpdate = await Login.findOne({
-                where: { user_id: changeRequest.user_id }
-            });
-
-            if (!verifyUpdate) {
-                throw new Error('Login record not found after update');
-            }
-
-            if (verifyUpdate.email !== newEmail) {
-                throw new Error(`Update verification failed. Expected: ${newEmail}, Got: ${verifyUpdate.email}`);
-            }
-        }
-
-        await AuditLog.create({
-            user_id: changeRequest.user_id,
-            action: `${status}_CHANGE_REQUEST`,
-            performed_by: user.id,
-            ip_address: req.ip,
-            user_agent: req.get('User-Agent'),
-            details: {
-                requestId,
-                newEmail: newData.email,
-                status: status,
-                adminReason: adminReason
-            },
-            status: 'SUCCESS'
-        });
-
-        req.flash('success', `Change request has been ${status.toLowerCase()} and changes have been applied`);
+        req.flash('success', result.message);
         res.redirect('/admin/change-requests');
 
     } catch (error) {
         console.error('Error handling change request:', error);
-        req.flash('danger', `Error: ${error.message}`);
-        res.status(500).send('Internal server error');
+        
+        await createAuditLog({
+            userId: req.params.userId,
+            action: ACTIONS.APPROVE_CHANGE_REQUEST,
+            performer: req.user,
+            req,
+            details: {
+                requestId,
+                error: error.message,
+                attemptedAt: new Date().toISOString(),
+                userLogin: req.user?.login || 'bonin1'
+            },
+            status: STATUS.FAILURE
+        });
+
+        req.flash('error', error.message);
+        res.redirect('/admin/change-requests');
     }
 };

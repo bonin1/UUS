@@ -17,18 +17,7 @@ const AuditLog = db.define('AuditLog', {
         },
     },
     action: {
-        type: DataTypes.ENUM(
-            'LOGIN_SUCCESS',
-            'LOGIN_FAILED',
-            'LOGOUT',
-            'PASSWORD_CHANGE',
-            'EMAIL_CHANGE',
-            'CREATE_LOGIN',
-            'UPDATE_LOGIN',
-            'DELETE_LOGIN',
-            'PASSWORD_RESET_REQUEST',
-            'PASSWORD_RESET_COMPLETE'
-        ),
+        type: DataTypes.TEXT,
         allowNull: false,
     },
     performed_by: {

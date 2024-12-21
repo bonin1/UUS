@@ -1,0 +1,96 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+}
+nav{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 50px 0;
+}
+.both{
+    width: 50%;
+}
+.requests-container{
+    width: 100%;
+    display: flex;
+    gap: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.change-request {
+    width: 300px;
+    height: 450px;
+    border: 1px solid #ddd;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 5px;
+    position: relative;
+}
+.change-request h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.change-request p {
+    margin-bottom: 10px;
+}
+.pending {
+    border-left: 4px solid orange;
+}
+.approved {
+    border-left: 4px solid green;
+}
+.rejected {
+    border-left: 4px solid red;
+}
+.actions {
+    padding: 0 10px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.form-group > textarea{
+    width: 100% !important;
+    height: 50px !important;
+}
+.btn {
+    padding: 5px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: lightblue;
+    border: none;
+    border-radius: 8px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.btn-approve {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+.btn-reject {
+    background-color: #f44336;
+    color: white;
+    border: none;
+}
