@@ -1,6 +1,10 @@
 
 exports.GetPasswordChangePage = (req,res)=>{
-    res.render('change-pw',{successAlert: req.flash('success'), dangerAlert: req.flash('danger')})
+    const token = req.query.token;
+    if (!token) {
+        return res.send("Invalid token");
+    }
+    res.render('change-pw',{successAlert: req.flash('success'), dangerAlert: req.flash('danger') , token})
 };
 
 

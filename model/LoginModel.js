@@ -25,6 +25,14 @@ const LoginInformation = db.define('login_information', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    passwordResetToken: {
+        type: DataTypes.STRING,
+        defaultValue: null
+    },
+    passwordResetExpires: {
+        type: DataTypes.DATE,
+        defaultValue: null
+    }
 }, {
     timestamps: false,
     freezeTableName: true,

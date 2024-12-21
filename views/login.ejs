@@ -34,7 +34,7 @@
           <br>
           <div class="remember-forgot">
             <label><input type="checkbox" name="rememberMe">Remember Me</label>
-            <a href ="/auth/change-pw">
+            <a href="#" onclick="openModal(event)">
               <u>Forgot Password?</u>
             </a>
           </div>
@@ -51,11 +51,43 @@
       </div>
     </div>
   </div>
+
+  <div id="emailModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Password Reset</h2>
+      <p>Please enter your email address to reset your password.</p>
+      <form id="resetPasswordForm" method="post" action="/auth/reset-password">
+        <div class="form-group">
+          <input type="email" id="email" placeholder="Enter your email" required>
+        </div>
+        <button type="submit">Send Reset Link</button>
+      </form>
+    </div>
+  </div>
+
   <script>
     setTimeout(() => {
       const messageContainer = document.getElementById('messageContainer');
       messageContainer.classList.add('hidden');
     }, 10000);
+    function openModal(event) {
+  event.preventDefault();
+  document.getElementById('emailModal').style.display = 'block';
+}
+
+function closeModal() {
+  document.getElementById('emailModal').style.display = 'none';
+}
+
+
+
+window.onclick = function(event) {
+  const modal = document.getElementById('emailModal');
+  if (event.target === modal) {
+    closeModal();
+  }
+}
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
   <script src="https://unpkg.com/tilt.js@1.1.21/dest/tilt.jquery.min.js"></script>
