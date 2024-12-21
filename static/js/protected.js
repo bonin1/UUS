@@ -91,6 +91,36 @@ toggles.forEach(({ button, divs: divIndices }) => {
         }
     });
 
+    const studyModal = document.getElementById('studyModal');
+    const StudyClose = document.querySelector('.Study-close');
+    const StudyForm = document.getElementById('StudyForm');
+    const studyLevelInput = document.getElementById('study_level');
+    const studyLevelId = document.getElementById('study_level_id');
+
+    document.querySelectorAll('.edit-study').forEach(button => {
+        button.addEventListener('click', event => {
+            const studyId = button.getAttribute('data-id');
+            const studyName = button.getAttribute('data-name');
+
+            studyLevelInput.value = studyName;
+            studyLevelId.value = studyId;
+
+            StudyForm.action = `/admin/update-study-level/${studyId}`;
+
+            studyModal.style.display = 'block';
+        });
+    });
+
+    StudyClose.addEventListener('click', () => {
+        studyModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', event => {
+        if (event.target === studyModal) {
+            studyModal.style.display = 'none';
+        }
+    });
+
 
 
 var loadFile = function(event) {

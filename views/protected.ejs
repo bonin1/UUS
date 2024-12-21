@@ -177,8 +177,9 @@
                             </select>
                             <select required name="dep_id" id="">
                                 <option value="" class="" disabled selected>Department</option>
-                                <option value="1">Computer Science</option>
-                                <option value="2">Cyber Security</option>
+                                <% department.forEach(dep => { %>
+                                    <option value="<%= dep.dep_id %>"><%= dep.dep_name %></option>
+                                <% }); %>
                             </select>
                             <input type="file" name="files" multiple  id="file" onchange="loadFile(event)">
                             
@@ -349,8 +350,9 @@
                                     </select>
                                     <select  name="dep_id" id="">
                                         <option value="" class="" disabled selected>Department</option>
-                                        <option value="1">Computer Science</option>
-                                        <option value="2">Cyber Security</option>
+                                        <% department.forEach(dep => { %>
+                                            <option value="<%= dep.dep_id %>"><%= dep.dep_name %></option>
+                                        <% }); %>
                                     </select>
                                     
                                 
@@ -458,13 +460,37 @@
             </div>
 
             <div class="main-container hidden" id="div9">
-                <h1>Study Level</h1>
-                <%= studylevels %>
-                <% StudyLevelCounts.forEach(item => { %>
-                    <%= item.count %>
-                <% }) %>
+                <h1 style="text-align: center; margin: 50px 0;">Study Level</h1>
+                <p style="text-align: center;">Total Study Levels: <span style="font-weight: 600;"><%= totalStudyLevels %></span></p>
+                <div class="study-main">
+                    <% StudyLevels.forEach(level => { %>
+                        <div class="study-container">
+                            <%= level.study_level %>
 
-                <div class="department-create">
+                            <div class="study-section">
+                                <form action="/admin/delete-study-level/<%= level.study_level_id %>" method="POST">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit">Delete</button>
+                                </form>
+                                <button class="edit-study" data-id="<%= level.study_level_id %>" data-name="<%= level.study_level %>">Edit</button>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+                
+                <div id="studyModal" class="StudyModal">
+                    <div class="Study-modal-content">
+                        <span class="Study-close">&times;</span>
+                        <form id="StudyForm" action="/admin/update-study-level/" method="POST">
+                            <label for="study_level">Study Level Name:</label>
+                            <input type="text" id="study_level" name="study_level" required>
+                            <input type="hidden" id="study_level_id" name="study_level_id">
+                            <button type="submit">Update</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="study-create">
                     <form action="/admin/create-study-level" method="post">
                         <input type="text" name="study_level" placeholder="Study Level Name" required>
                         <button type="submit">Create</button>

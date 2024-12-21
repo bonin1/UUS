@@ -65,12 +65,9 @@ exports.ProtectedPath = async (req, res) => {
 
         const tasks = await TasksModel.findAll();
         
-        const studylevels = await Studylevel.findAll();
+        const StudyLevels = await Studylevel.findAll();
 
-        const StudyLevelCounts = await Promise.all(studylevels.map(async (level) => {
-            const count = await Studylevel.count({ where: {  study_level: level.study_level } });
-            return { study_level: level.study_level, count };
-        }));
+        const totalStudyLevels = await Studylevel.count();
 
         res.render('protected', {
             row: feedbackData,
@@ -89,8 +86,8 @@ exports.ProtectedPath = async (req, res) => {
             tasks,
             department,
             successAlert: req.flash('success'), dangerAlert: req.flash('danger'),
-            studylevels: studylevels.map(level => level.toJSON()),
-            StudyLevelCounts
+            StudyLevels,
+            totalStudyLevels
         });
 
     } catch (err) {

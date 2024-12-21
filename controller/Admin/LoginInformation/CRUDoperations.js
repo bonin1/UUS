@@ -5,6 +5,9 @@ const bcrypt = require('bcryptjs');
 const ChangeRequest = require('../../../model/ChangeRequest');
 
 const { getUserFromToken } = require('../../../middleware/GetAdminTokenId');
+const { createAuditLog } = require('../../../helpers/AuditHelper');
+const { handleLoginUpdateRequest } = require('../../../service/LoginManagement');
+const { ACTIONS, STATUS, ROLES } = require('../../../utils/Constrants');
 
 exports.DeleteLoginInformation = async (req, res) => {
     const userId = req.params.id;
@@ -119,70 +122,49 @@ exports.CreateLoginInformation = async (req, res) => {
 
 exports.UpdateLoginInformation = async (req, res) => {
     const userId = req.params.id;
-    const { email } = req.body;
+    const { email, reason } = req.body;
+    let performer;
+
     try {
-        const performer = await getUserFromToken(req);
+        performer = await getUserFromToken(req);
         
-        if (performer.role === 'staff') {
-            await ChangeRequest.create({
-                user_id: userId,
-                requested_by: performer.id,
-                change_type: 'UPDATE_LOGIN',
-                new_data: { 
-                    email: email 
-                },
-                status: 'PENDING',
-                reason: req.body.reason 
+        if (performer.role !== ROLES.ADMIN) {
+            await handleLoginUpdateRequest({ 
+                userId, 
+                email, 
+                performer, 
+                req, 
+                reason 
             });
-
-            await AuditLog.create({
-                user_id: userId,
-                action: 'REQUEST_UPDATE_LOGIN',
-                performed_by: performer.id,
-                ip_address: req.ip,
-                user_agent: req.get('User-Agent'),
-                details: { email },
-                status: 'SUCCESS'
-            });
-
             req.flash('info', 'Change request submitted for admin approval');
-            return res.redirect(`/admin/logininformation/${userId}`);
+        } else {
+            await handleLoginUpdateRequest({ 
+                userId, 
+                email, 
+                performer, 
+                req, 
+                reason 
+            });
+            req.flash('info', 'Change request created. Please approve through the admin panel.');
         }
 
-        const user_update = await Login.update({
-            email: email
-        }, {
-            where: { user_id: userId }
-        });
+        return res.redirect(`/admin/logininformation/${userId}`);
 
-        await AuditLog.create({
-            user_id: userId,
-            action: 'UPDATE_LOGIN',
-            performed_by: performer.id,
-            ip_address: req.ip,
-            user_agent: req.get('User-Agent'),
-            details: { email },
-            status: 'SUCCESS'
-        });
-
-        req.flash('success', 'User got edited successfully!');
-        res.redirect(`/admin/logininformation/${userId}`);
     } catch (error) {
-        console.log("Error somewhere here: ", error);
+        console.error('Error updating login information:', error);
+        
+        if (performer) {
+            await createAuditLog({
+                userId,
+                action: ACTIONS.UPDATE_LOGIN,
+                performer,
+                req,
+                details: { email },
+                status: STATUS.FAILURE,
+                errorMessage: error.message
+            });
+        }
 
-        const performer = await getUserFromToken(req);
-
-        await AuditLog.create({
-            user_id: userId,
-            action: 'UPDATE_LOGIN',
-            performed_by: performer.id, 
-            ip_address: req.ip,
-            user_agent: req.get('User-Agent'),
-            details: { email },
-            status: 'FAILURE',
-            error_message: error.message
-        });
-
-        res.status(500).send('Internal server error');
+        return res.status(500).send('Internal server error');
     }
 };

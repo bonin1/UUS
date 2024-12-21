@@ -48,6 +48,7 @@ const ChangeRequest = db.define('ChangeRequest', {
     },
     reason: {
         type: DataTypes.TEXT,
+        allowNull: true,
     }
 }, {
     freezeTableName: true,
