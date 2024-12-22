@@ -14,7 +14,7 @@ const { PartnerPath } = require('../controller/Admin/Partners/Paths');
 const { SearchPartners } = require('../controller/SEARCH/SearchPartners')
 const { CreatePartner, DeletePartner, EditPartner } = require('../controller/Admin/Partners/CRUDoperations');
 const { UpdatePartnerImage } = require('../controller/Admin/Partners/ImageCRUDoperations');
-const { handleChangeRequest, viewChangeRequests } = require('../controller/Admin/Request');
+const { handleChangeRequest, viewChangeRequests, handleBulkChangeRequests } = require('../controller/Admin/Request');
 const { createDepartment, updateDepartment, deleteDepartment } = require('../controller/Admin/Department/CRUDoperations');
 const { CreateStudyLevel, UpdateStudyLevel, DeleteStudyLevel } = require('../controller/Admin/StudyLevel/CRUDoperations');
 
@@ -38,6 +38,8 @@ router.post('/search/partners', SearchPartners);
 router.get('/change-requests', isAdmin, viewChangeRequests);
 
 router.post('/change-requests/:requestId/handle', isAdmin, handleChangeRequest);
+
+router.post('/change-requests/bulk', handleBulkChangeRequests);
 
 // --------------------------------------------
 

@@ -33,11 +33,19 @@
             </button>
         </div>
     <% } %>
+
+    <% if (userRole === 'admin') { %>
+        <div class="admin-button-container">
+            <a href="/admin/change-requests" class="admin-button">
+                <i class="fas fa-cog"></i> Change Requests
+            </a>
+        </div>
+    <% } %>
     <div class="wrapper">
         <div class="left-side">
             <div class="topSide">
                 <div class="logo">
-                    <a href="/protected">
+                    <a href="/admin/protected">
                         <img src="/static/image/logo2.0black.png" alt="">
                     </a>
                 </div>

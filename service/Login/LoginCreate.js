@@ -85,7 +85,8 @@ class LoginService {
             throw new Error('Login already exists for this user');
         }
 
-        const hashedPassword = await bcrypt.hash(data.password, 8);
+        const saltRounds = 12;
+        const hashedPassword = await bcrypt.hash(data.password, saltRounds);
 
         return Login.create({
             user_id: userId,
@@ -115,7 +116,8 @@ class LoginService {
         };
 
         if (data.password) {
-            updateData.password = await bcrypt.hash(data.password, 8);
+            const saltRounds = 12;
+            updateData.password = await bcrypt.hash(data.password, saltRounds);
         }
 
         await login.update(updateData, { transaction });

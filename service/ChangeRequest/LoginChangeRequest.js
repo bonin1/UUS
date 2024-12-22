@@ -37,24 +37,50 @@ class ChangeRequestService {
         });
 
         const enrichedRequests = await Promise.all(changeRequests.map(async (request) => {
-            const oldData = await this.getOldData(request);
-            const newData = typeof request.new_data === 'string' 
-                ? JSON.parse(request.new_data) 
-                : request.new_data;
+            try {
+                let oldData = await this.getOldData(request);
+                let newData;
 
-            const changes = this.compareData(oldData, newData);
+                try {
+                    newData = typeof request.new_data === 'string' 
+                        ? JSON.parse(request.new_data) 
+                        : request.new_data;
+                } catch (error) {
+                    console.error(`Error parsing new_data for request ${request.id}:`, error);
+                    newData = {};
+                }
 
-            return {
-                ...request.toJSON(),
-                oldData,
-                changes,
-                requestedAt: request.createdAt,
-                formattedDate: new Date(request.createdAt).toLocaleString(),
-                statusBadgeClass: this.getStatusBadgeClass(request.status)
-            };
+                const changes = this.compareData(oldData, newData);
+
+                return {
+                    ...request.toJSON(),
+                    oldData,
+                    newData,
+                    changes,
+                    requestedAt: request.createdAt,
+                    formattedDate: new Date(request.createdAt).toLocaleString(),
+                    statusBadgeClass: this.getStatusBadgeClass(request.status),
+                    hasInvalidData: changes.some(change => change.isValid === false)
+                };
+            } catch (error) {
+                console.error(`Error processing request ${request.id}:`, error);
+                return {
+                    ...request.toJSON(),
+                    oldData: {},
+                    newData: {},
+                    changes: [],
+                    requestedAt: request.createdAt,
+                    formattedDate: new Date(request.createdAt).toLocaleString(),
+                    statusBadgeClass: this.getStatusBadgeClass(request.status),
+                    hasInvalidData: true
+                };
+            }
         }));
 
         return enrichedRequests;
+    } catch (error) {
+        console.error('Error in getAllChangeRequests:', error);
+        throw error;
     }
 
     static async getOldData(changeRequest) {
@@ -66,28 +92,54 @@ class ChangeRequestService {
         return login ? { email: login.email } : { email: 'N/A' };
     }
 
+    static validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
     static compareData(oldData, newData) {
         const changes = [];
+        
+        oldData = oldData || {};
+        newData = newData || {};
 
-        if (oldData.email !== newData.email) {
-            changes.push({
-                field: 'email',
-                oldValue: oldData.email,
-                newValue: newData.email,
-                type: 'modified'
-            });
+        try {
+            if (newData.email) {
+                if (!this.validateEmail(newData.email)) {
+                    changes.push({
+                        field: 'email',
+                        oldValue: oldData.email || 'Not set',
+                        newValue: 'Invalid email format',
+                        originalValue: newData.email,
+                        type: 'modified',
+                        isValid: false
+                    });
+                } else if (oldData.email !== newData.email) {
+                    changes.push({
+                        field: 'email',
+                        oldValue: oldData.email || 'Not set',
+                        newValue: newData.email,
+                        type: 'modified',
+                        isValid: true
+                    });
+                }
+            }
+
+            if (newData.password) {
+                changes.push({
+                    field: 'password',
+                    oldValue: '••••••••',
+                    newValue: '••••••••',
+                    type: 'modified',
+                    isValid: true
+                });
+            }
+
+            return changes;
+        } catch (error) {
+            console.error('Error in compareData:', error);
+            return [];
         }
-
-        if (newData.password) {
-            changes.push({
-                field: 'password',
-                oldValue: '********',
-                newValue: '********',
-                type: 'modified'
-            });
-        }
-
-        return changes;
     }
 
     static getStatusBadgeClass(status) {
@@ -112,20 +164,18 @@ class ChangeRequestService {
 
             const status = action === 'approve' ? STATUS.APPROVED : STATUS.REJECTED;
 
-            // Update change request
             await changeRequest.update({
                 status,
                 approved_by: performer.id,
                 approved_at: new Date(),
                 adminReason,
-                approved_by_login: performer.login // Add approver's login
+                approved_by_login: performer.login 
             }, { transaction });
 
             if (status === STATUS.APPROVED) {
                 await this.processApprovedRequest(changeRequest, newData, transaction);
             }
 
-            // Create audit log
             await createAuditLog({
                 userId: changeRequest.user_id,
                 action: status === STATUS.APPROVED ? ACTIONS.APPROVE_CHANGE_REQUEST : ACTIONS.REJECT_CHANGE_REQUEST,
@@ -188,6 +238,10 @@ class ChangeRequestService {
             throw new Error('New email is missing from change request data');
         }
 
+        if (!this.validateEmail(newData.email)) {
+            throw new Error('Invalid email format');
+        }
+
         const [updateCount] = await Login.update(
             { email: newData.email },
             { 
@@ -211,6 +265,10 @@ class ChangeRequestService {
     }
 
     static async handleLoginCreate(changeRequest, newData, transaction) {
+        if (!newData.email || !this.validateEmail(newData.email)) {
+            throw new Error('Invalid or missing email address');
+        }
+
         const existingLogin = await Login.findOne({
             where: { user_id: changeRequest.user_id },
             transaction

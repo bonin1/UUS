@@ -6,12 +6,22 @@ const Feedback = require('../../../model/FeedbackModel');
 const ApplyErasmus = require('../../../model/applyErasmusModel'); 
 const TasksModel = require('../../../model/TaskModel')
 const Studylevel = require('../../../model/StudyLevel');
+const jwt = require('jsonwebtoken');
 
 
 exports.ProtectedPath = async (req, res) => {
     const alert = req.session.alert;
     req.session.alert = null;
     try {
+
+        const token = req.cookies.authToken;
+        let userRole = null;
+        
+        if (token) {
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            userRole = decoded.role;
+        }
+
 
         const [studentCount, professorCount, departments, feedbackData, applies, applyErasmus] = await Promise.all([
             User.count({ where: { role: 'student' } }),
@@ -87,7 +97,8 @@ exports.ProtectedPath = async (req, res) => {
             department,
             successAlert: req.flash('success'), dangerAlert: req.flash('danger'),
             StudyLevels,
-            totalStudyLevels
+            totalStudyLevels,
+            userRole
         });
 
     } catch (err) {

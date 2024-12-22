@@ -37,7 +37,7 @@ exports.adminLoginPost = async (req, res) => {
         }
 
         const user = await User.findOne({ where: { id: loginInfo.user_id } });
-        if (!user || user.role !== 'admin') {
+        if (!user || user.role !== 'admin' && user.role !== 'staff') {
             return res.send('Unauthorized access admin only');
         }
 

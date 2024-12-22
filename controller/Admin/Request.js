@@ -76,3 +76,81 @@ exports.handleChangeRequest = async (req, res) => {
         res.redirect('/admin/change-requests');
     }
 };
+
+
+exports.handleBulkChangeRequests = async (req, res) => {
+    const { requestIds, action, adminReason } = req.body;
+    
+    const ids = Array.isArray(requestIds) ? requestIds : [requestIds];
+    
+    if (!ids || ids.length === 0) {
+        req.flash('error', 'No requests selected for bulk action');
+        return res.redirect('/admin/change-requests');
+    }
+
+    try {
+        const performer = await getUserFromToken(req);
+        let successCount = 0;
+        let errorCount = 0;
+        const errors = [];
+
+        for (const requestId of ids) {
+            try {
+                await ChangeRequestService.handleChangeRequest(
+                    requestId,
+                    action,
+                    adminReason,
+                    performer,
+                    req
+                );
+                successCount++;
+            } catch (error) {
+                errorCount++;
+                errors.push(`Request ${requestId}: ${error.message}`);
+                
+                await createAuditLog({
+                    userId: performer.id,
+                    action: ACTIONS.BULK_CHANGE_REQUEST,
+                    performer,
+                    req,
+                    details: {
+                        requestId,
+                        error: error.message,
+                        attemptedAt: new Date().toISOString(),
+                        userLogin: performer.login
+                    },
+                    status: STATUS.FAILURE
+                });
+            }
+        }
+
+        await createAuditLog({
+            userId: performer.id,
+            action: ACTIONS.BULK_CHANGE_REQUEST,
+            performer,
+            req,
+            details: {
+                totalRequests: ids.length,
+                successCount,
+                errorCount,
+                action,
+                processedAt: new Date().toISOString(),
+                userLogin: performer.login
+            },
+            status: errorCount === 0 ? STATUS.SUCCESS : STATUS.PARTIAL_SUCCESS
+        });
+
+        if (errorCount > 0) {
+            req.flash('warning', `Processed ${successCount} requests successfully. ${errorCount} requests failed.`);
+            req.flash('error', errors.join('\n'));
+        } else {
+            req.flash('success', `Successfully processed ${successCount} requests.`);
+        }
+        
+    } catch (error) {
+        console.error('Error in bulk processing:', error);
+        req.flash('error', 'Failed to process bulk action: ' + error.message);
+    }
+
+    res.redirect('/admin/change-requests');
+};

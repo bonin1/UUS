@@ -1,5 +1,6 @@
 const User = require('../../../model/UsersModel');
 const UserImage = require('../../../model/UserImageModel');
+const Department = require('../../../model/DepartmentModel');
 
 exports.GetUserPage = async (req, res) => {
     const userId = req.params.id;
@@ -10,17 +11,18 @@ exports.GetUserPage = async (req, res) => {
             attributes: ['id', 'name', 'lastname', 'dep_id', 'role', 'email', 'phone_number', 'address']
         });
 
-        const images = await UserImage.findAll({
-            where: { user_id: userId }
-        });
         if (!user) {
             return res.status(404).send('User not found');
         }
 
-        const userImage = await UserImage.findAll({
-            where: { user_id: userId },
-            attributes: ['photo_user']
+        const images = await UserImage.findAll({
+            where: { user_id: userId }
         });
+
+        const departments = await Department.findAll();
+
+        const availableRoles = User.rawAttributes.role.values;
+
         const userDataWithImage = {
             id: user.id,
             name: user.name,
@@ -32,7 +34,14 @@ exports.GetUserPage = async (req, res) => {
             address: user.address
         };
 
-        res.render('user', { data: userDataWithImage ,images ,userImage , successAlert: req.flash('success'), dangerAlert: req.flash('danger') });
+        res.render('user', { 
+            data: userDataWithImage,
+            images,
+            departments,
+            availableRoles,
+            successAlert: req.flash('success'), 
+            dangerAlert: req.flash('danger') 
+        });
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal server error');
