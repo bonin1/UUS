@@ -179,9 +179,11 @@
                             <input required type="text" name="phone_number" placeholder="Phone number of user:" id="">
                             <select required name="role" id="">
                                 <option value="" class="" disabled selected>Role</option>
-                                <option value="admin">Admin!!!</option>
-                                <option value="student">Student</option>
-                                <option value="professor">Professor</option>
+                                <% availableRoles.forEach(role => { %>
+                                    <option value="<%= role %>" <%= data.role === role ? 'selected' : '' %>>
+                                        <%= role.charAt(0).toUpperCase() + role.slice(1) %>
+                                    </option>
+                                <% }); %>
                             </select>
                             <select required name="dep_id" id="">
                                 <option value="" class="" disabled selected>Department</option>
