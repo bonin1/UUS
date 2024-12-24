@@ -1,138 +1,81 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
+:root {
+    --primary-color: #004492;
+    --secondary-color: #f8f9fa;
 }
 
+body {
+    background-color: var(--secondary-color);
+}
 
-body{
-    width: 100%;
-    height: 100vh;
-    background-color: #EDEDED;
+.banner-container {
     position: relative;
+    height: 300px;
+    overflow: hidden;
 }
 
-.alert{
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background-color:#4cbb17 ;
-    color: #fff;
-    padding: 20px 30px;
-    font-weight: 500;
-    border-radius: 10px;
-    z-index: 100000;
-}
-.close{
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    width: 50px;
-    height: 40px;
-    font-size: 25px;
-}
-.alert-danger{
-    background-color: rgb(255, 64, 64);
-}
-
-.wrapper {
+.banner {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.wrapper-assist{
-    width: 1400px;
-    padding: 50px 0;
-}
-.banner{
-    width: 100% !important;
-    height: 100vh;
-    z-index: -1;
+    height: 100%;
     object-fit: cover;
 }
-main{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-color: #ffffff9a;
+
+.profile-container {
+    position: relative;
+    margin-top: -100px;
+    padding: 30px;
+}
+
+.profile-card {
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-    border-radius: 10px;
-    padding: 50px 30px;
-}
-.all{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 20px 0;
-}
-.all > p{
-    width: 30%;
-}
-.all > div{
-    width: 70%;
-    background-color: #fff;
-    -webkit-box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.06);
-    moz-box-shadow: 0px 0px 11px 3px rgba(0,0,0,0.06);
-    box-shadow: 0px 0px 11px 3px rgba(0, 0, 0, 0.06);
-    padding: 10px;
-    border-radius: 10px;
-}
-.images,
-.delete{
-    width: 50%;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-}
-.delete,
-.delete > form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    padding: 2rem;
 }
 
-.images > img{
+.profile-info {
+    margin-bottom: 1.5rem;
+}
+
+.info-label {
+    color: #6c757d;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.info-value {
+    background: white;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.profile-image {
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-    object-position: center;
     object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
-.delete-button{
-    width: 300px;
-    padding: 10px 10px;
-    background-color: red;
-    color: #fff;
+
+.alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    min-width: 300px;
+}
+
+.custom-file-upload {
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    padding: 1rem;
     text-align: center;
-    border: none;
     cursor: pointer;
-    border-radius: 10px;
+    transition: all 0.3s ease;
 }
-.delete > form > .edit,
-.upload > button{
-    width: 300px;
-    padding: 10px 10px;
-    background-color: #004492;
-    color: #fff;
-    text-align: center;
-    border: none;
-    cursor: pointer;
-    border-radius: 10px;
-}
-.delete > form > input,
-.upload > input{
-    width: 300px;
-    border: 1px solid black;
-    padding: 10px;
-    border-radius: 10px;
-    margin: 10px 0;
-}
-.container{
-    width: 100%;
-    display: flex;
+
+.custom-file-upload:hover {
+    border-color: var(--primary-color);
 }

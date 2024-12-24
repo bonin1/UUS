@@ -3,196 +3,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adventures</title>
-    <link rel="stylesheet" href="/static/css/adventures.css">
+    <title>Adventures | UUS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <style>
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .hero-section img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-title {
+            color: white;
+            font-size: 4rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .story-card {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .info-card {
+            border: none;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .chat-opener {
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1030;
+        }
+
+        .chat-container {
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1040;
+            width: 350px;
+            background-color: white;
+        }
+    </style>
 </head>
 <body>
     <%- include('partials/Navbar-light'); %>
-    <div class="container">
-        <img class="back" src="/static/image/erasmusstudent 1.png" alt="">
-        <div class="text">
-            <h1>
-                Adventures of Students
-            </h1>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <img src="/static/image/erasmusstudent 1.png" alt="Erasmus Students" class="w-100">
+        <div class="hero-content">
+            <h1 class="hero-title" data-aos="fade-up">Adventures of Students</h1>
         </div>
-    </div>
-    <div class="wrapper">
-        <div class="wrapper-assist">
-            <h1>Welcome to our Erasmus adventures page, where we invite you to embark on a journey filled with stories of exploration, growth, and cultural exchange. Here, our students share their unforgettable experiences from their Erasmus exchanges, weaving tales of adventure, friendship, and personal discovery.</h1>
-            <div class="row">
-                <div class="both-parts">
-                    <h1>
-                        STUDYING IN ROME ITALY
-                    </h1>
-                    <div class="start">
-                        <img src="/static/adventures/italy.png" alt="">
+    </section>
+
+    <div class="container py-5">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h2 class="display-4 mb-4" data-aos="fade-up">Welcome to our Erasmus Adventures</h2>
+                <p class="lead" data-aos="fade-up" data-aos-delay="100">
+                    Embark on a journey filled with stories of exploration, growth, and cultural exchange. 
+                    Here, our students share their unforgettable experiences from their Erasmus exchanges.
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <div class="col-12 mb-5" data-aos="fade-up">
+                <div class="story-card bg-white">
+                    <div class="row g-0">
+                        <div class="col-md-6">
+                            <img src="/static/adventures/italy.png" class="img-fluid h-100 object-fit-cover" alt="Rome">
+                        </div>
+                        <div class="col-md-6 d-flex flex-column justify-content-center p-4">
+                            <h3 class="h2 mb-3">Studying in Rome, Italy</h3>
+                            <p class="lead">Discover the allure of studying abroad in Rome, Italy, just like Ammy did. 
+                            Immerse yourself in the rich tapestry of Italian culture, from iconic landmarks like the Colosseum 
+                            to the cobblestone streets of Trastevere.</p>
+                            <img src="/static/adventures/Colosseum-Rome-Italy 1.png" class="img-fluid mt-3" alt="Colosseum">
+                        </div>
                     </div>
-                </div>
-                <div class="both-parts">
-                    <p>
-                        Discover the allure of studying abroad in Rome, Italy, just like Ammy did. Immerse yourself in the rich tapestry of Italian culture, from iconic landmarks like the Colosseum to the cobblestone streets of Trastevere.
-                    </p>
-                    <img src="/static/adventures/Colosseum-Rome-Italy 1.png" alt="">
                 </div>
             </div>
 
-            <div class="row">
-                <div class="both-parts">
-                    <h1>
-                        STUDYING IN PARIS FRANCE
-                    </h1>
-                    <div class="start">
-                        <img src="/static/adventures/paris.png" alt="">
+            <div class="col-12 mb-5" data-aos="fade-up">
+                <div class="story-card bg-white">
+                    <div class="row g-0">
+                        <div class="col-md-6">
+                            <img src="/static/adventures/paris.png" class="img-fluid h-100 object-fit-cover" alt="Paris">
+                        </div>
+                        <div class="col-md-6 d-flex flex-column justify-content-center p-4">
+                            <h3 class="h2 mb-3">Studying in Paris, France</h3>
+                            <p class="lead">Studying in Paris is never a bad idea, just ask Ema and Sara. Their journey to the City of Light was a dream come true, filled with endless opportunities for academic growth and cultural exploration. From attending lectures at prestigious universities to picnicking in the shadow of the Eiffel Tower, every day was an adventure in this cosmopolitan metropolis.</p>
+                            <img src="/static/adventures/eifel.png" class="img-fluid mt-3" alt="Eiffel Tower">
+                        </div>
                     </div>
-                    <p>
-                        Studying in Paris is never a bad idea, just ask Ema and Sara. Their journey to the City of Light was a dream come true, filled with endless opportunities for academic growth and cultural exploration. From attending lectures at prestigious universities to picnicking in the shadow of the Eiffel Tower, every day was an adventure in this cosmopolitan metropolis.
-                    </p>
-                </div>
-                <div class="both-parts">
-                    <img src="/static/adventures/eifel.png" alt="">
                 </div>
             </div>
 
-            <div class="row">
-                <div class="both-parts">
-                    <h1>
-                        STUDYING IN SEVILLE SPAIN
-                    </h1>
-                    <div class="start">
-                        <img src="/static/adventures/spain.png" alt="">
+            <div class="col-12 mb-5" data-aos="fade-up">
+                <div class="story-card bg-white">
+                    <div class="row g-0">
+                        <div class="col-md-6">
+                            <img src="/static/adventures/spain.png" class="img-fluid h-100 object-fit-cover" alt="Seville">
+                        </div>
+                        <div class="col-md-6 d-flex flex-column justify-content-center p-4">
+                            <h3 class="h2 mb-3">Studying in Seville, Spain</h3>
+                            <p class="lead">Meet Tina, the intrepid student who embarked on an unforgettable academic journey in Seville, Spain. From the moment she arrived in this charming Spanish city, Tina was captivated by its rich history and vibrant culture.</p>
+                            <img src="/static/adventures/spain2.png" class="img-fluid mt-3" alt="Seville">
+                        </div>
                     </div>
-                </div>
-                <div class="both-parts">
-                    <p>
-                        Meet Tina, the intrepid student who embarked on an unforgettable academic journey in Seville, Spain. From the moment she arrived in this charming Spanish city, Tina was captivated by its rich history and vibrant culture.
-                    </p>
-                    <img src="/static/adventures/spain2.png" alt="">
                 </div>
             </div>
 
-            <div class="row">
-                <div class="both-parts first">
-                    <h1>
-                        STUDYING IN BERLIN GERMANY
-                    </h1>
-                    <div class="start">
-                        <img src="/static/adventures/germans.png" alt="">
+            <div class="col-12 mb-5" data-aos="fade-up">
+                <div class="story-card bg-white">
+                    <div class="row g-0">
+                        <div class="col-md-6">
+                            <img src="/static/adventures/germans.png" class="img-fluid h-100 object-fit-cover" alt="Berlin">
+                        </div>
+                        <div class="col-md-6 d-flex flex-column justify-content-center p-4">
+                            <h3 class="h2 mb-3">Studying in Berlin, Germany</h3>
+                            <p class="lead">Enter the world of Dua, the adventurous student who embarked on a transformative journey to study in Germany. From the bustling streets of Berlin to the picturesque landscapes of Bavaria, Dua embraced the opportunity to immerse herself in German culture and academia.</p>
+                            <img src="/static/adventures/germany.png" class="img-fluid mt-3" alt="Berlin">
+                        </div>
                     </div>
-                    <p>
-                        Enter the world of Dua, the adventurous student who embarked on a transformative journey to study in Germany. From the bustling streets of Berlin to the picturesque landscapes of Bavaria, Dua embraced the opportunity to immerse herself in German culture and academia.
-                    </p>
-                </div>
-                <div class="both-parts">
-                    <img src="/static/adventures/germany.png" alt="">
-                </div>
-            </div>
-            <h1 class="bold">YOU MAY WANT TO KNOW</h1>
-            <div class="container-infomations">
-                <div class="card">
-                    <img src="/static/adventures/1.png" alt="">
-                    <section>
-                        <h1>
-                            Erasmus informations
-                        </h1>
-                        <hr>
-                        <p>
-                            <button type="button" class="option-btn" data-value="Abroad">When is the best time to study abroad?</button>
-                        </p>
-                    </section>
-                </div>
-                <div class="card">
-                    <img src="/static/adventures/2.png" alt="">
-                    <section>
-                        <h1>
-                            Erasmus informations
-                        </h1>
-                        <hr>
-                        <p>
-                            <button type="button" class="option-btn" data-value="10universities">Top 10 Universities in Spain for International Students</button>
-                        </p>
-                    </section>
-                </div>
-                <div class="card">
-                    <img src="/static/adventures/3.png" alt="">
-                    <section>
-                        <h1>
-                            Erasmus informations
-                        </h1>
-                        <hr>
-                        <p>
-                            <button type="button" class="option-btn" data-value="10art">Top 10 places to study Art & History of Art</button>
-                        </p>
-                    </section>
-                </div>
-                <div class="card">
-                    <img src="/static/adventures/4.png" alt="">
-                    <section>
-                        <h1>
-                            Erasmus informations
-                        </h1>
-                        <hr>
-                        <p>
-                            <button type="button" class="option-btn" data-value="accomodation">How do I find accommodation while studying abroad?</button>
-                        </p>
-                    </section>
-                </div>
-                <div class="card">
-                    <img src="/static/adventures/5.png" alt="">
-                    <section>
-                        <h1>
-                            Erasmus informations
-                        </h1>
-                        <hr>
-                        <p>
-                            <button type="button" class="option-btn" data-value="studyAbroad">How long does a typical study abroad program last?</button>
-                        </p>
-                    </section>
-                </div>
-                <div class="card">
-                    <img src="/static/adventures/6.png" alt="">
-                    <section>
-                        <h1>
-                            Erasmus informations
-                        </h1>
-                        <hr>
-                        <p>
-                            <button type="button" class="option-btn" data-value="abroadstudies">How do I apply for a study abroad program?</button>
-                        </p>
-                    </section>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="options">
-        
-        
-        
-        
-    </div>
-    <div class="chat-opener">
-        <img src="/static/image/chat2.0.png" alt="">
-    </div>
-    <div class="chat-container">
-        <div class="inside-container-chat">
-            <header class="chat">
-                <img src="/static/image/icon-park_robot.png" alt="">
-                <div class="insidetext">
-                    <h1>UNI ASSIST</h1>
-                    <p>online</p>
+
+        <!-- Information Cards -->
+        <h2 class="text-center mb-5" data-aos="fade-up">You May Want to Know</h2>
+        <div class="row g-4">
+            <!-- Info Cards -->
+            <div class="col-md-4" data-aos="fade-up">
+                <div class="info-card card h-100">
+                    <img src="/static/adventures/1.png" class="card-img-top" alt="">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Erasmus Information</h5>
+                        <hr>
+                        <button class="btn btn-outline-primary w-100 option-btn" data-value="Abroad" onclick="handleAdventureClick(this)">
+                            When is the best time to study abroad?
+                        </button>
+                    </div>
                 </div>
-            </header>
-            <div class="parent">
-                <div id="chat-box">
-                    <div class="bot-message">
-                        <img src="/static/image/icon-park_robot.png" alt="">
-                        <p>Hello and welcome!</p>
+            </div>
+            <div class="col-md-4" data-aos="fade-up">
+                <div class="info-card card h-100">
+                    <img src="/static/adventures/2.png" class="card-img-top" alt="">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Erasmus Information</h5>
+                        <hr>
+                        <button class="btn btn-outline-primary w-100 option-btn" data-value="10universities" onclick="handleAdventureClick(this)">
+                            Top 10 Universities in Spain for International Students
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up">
+                <div class="info-card card h-100">
+                    <img src="/static/adventures/3.png" class="card-img-top" alt="">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Erasmus Information</h5>
+                        <hr>
+                        <button class="btn btn-outline-primary w-100 option-btn" data-value="10art" onclick="handleAdventureClick(this)">
+                            Top 10 places to study Art & History of Art
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up">
+                <div class="info-card card h-100">
+                    <img src="/static/adventures/4.png" class="card-img-top" alt="">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Erasmus Information</h5>
+                        <hr>
+                        <button class="btn btn-outline-primary w-100 option-btn" data-value="accomodation" onclick="handleAdventureClick(this)">
+                            How do I find accommodation while studying abroad?
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up">
+                <div class="info-card card h-100">
+                    <img src="/static/adventures/5.png" class="card-img-top" alt="">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Erasmus Information</h5>
+                        <hr>
+                        <button class="btn btn-outline-primary w-100 option-btn" data-value="studyAbroad" onclick="handleAdventureClick(this)">
+                            How long does a typical study abroad program last?
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up">
+                <div class="info-card card h-100">
+                    <img src="/static/adventures/6.png" class="card-img-top" alt="">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Erasmus Information</h5>
+                        <hr>
+                        <button class="btn btn-outline-primary w-100 option-btn" data-value="abroadstudies" onclick="handleAdventureClick(this)">
+                            How do I apply for a study abroad program?
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <%- include('partials/Chatbot'); %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            once: true
+        });
+        
         document.addEventListener("DOMContentLoaded", function () {
             const chatOpener = document.querySelector(".chat-opener");
             const chatContainer = document.querySelector(".chat-container");
@@ -200,7 +258,7 @@
             let optionButtons = document.querySelectorAll(".option-btn");
 
             function openChat() {
-                chatContainer.style.display = "block";
+                chatContainer.classList.remove("d-none");
             }
 
             chatOpener.addEventListener("click", function (event) {
@@ -217,7 +275,7 @@
 
             document.addEventListener("click", function (event) {
                 if (!chatContainer.contains(event.target) && event.target !== chatOpener) {
-                    chatContainer.style.display = "none";
+                    chatContainer.classList.add("d-none");
                 }
             });
 
@@ -278,6 +336,27 @@
                 });
         });
 
+        function handleAdventureClick(button) {
+            const chatContainer = document.querySelector(".chat-container");
+            const value = button.getAttribute("data-value");
+            const text = button.textContent.trim();
+            
+            const event = new CustomEvent('adventureClick', {
+                detail: { value, text }
+            });
+            document.dispatchEvent(event);
+        }
+        document.addEventListener('adventureClick', function(e) {
+            const chatContainer = document.querySelector(".chat-container");
+            chatContainer.style.display = "block";
+            
+            const chatButton = document.querySelector(`.chat-container .option-btn[data-value="${e.detail.value}"]`);
+            if (chatButton) {
+                chatButton.click();
+            } else {
+                handleButtonClick(e.detail.value, e.detail.text);
+            }
+        });
     </script>
 
     <%- include('partials/footer'); %>

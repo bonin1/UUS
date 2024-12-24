@@ -4,114 +4,184 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="/static/css/Profile.css">
 </head>
 <body>
     <% if (successAlert && successAlert.length > 0) { %>
-        <div class="alert alert-success" id="success-alert">
+        <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
+            <i class="fas fa-check-circle me-2"></i>
             <%= successAlert %>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">X</span>
-            </button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <% } %>
+
     <% if (dangerAlert && dangerAlert.length > 0) { %>
-        <div class="alert alert-danger" id="danger-alert">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert" id="danger-alert">
+            <i class="fas fa-exclamation-circle me-2"></i>
             <%= dangerAlert %>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">X</span>
-            </button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     <% } %>
+
     <%- include('partials/Elearning'); %>
-    <div class="random"></div>
-    
-    <img class="banner" src="/static/image/banner.png" alt="">
-    <div class="wrapper">
-        <div class="wrapper-assist">
-            <main>
-                <div class="name all">
-                    <p>Name:</p>
-                    <div><%= userData.name %></div>
-                </div>
-                <div class="lastname all">
-                    <p>Lastname:</p>
-                    <div><%= userData.lastname %></div>
-                </div>
-                <div class="email all">
-                    <p>Personal Email:</p>
-                    <div><%= userData.email %></div>
-                </div>
-                <div class="phone all">
-                    <p>Phone Number:</p>
-                    <div><%= userData.phone_number %></div>
-                </div>
-                <div class="address all">
-                    <p>Address:</p>
-                    <div><%= userData.address %></div>
-                </div>
-                <div class="department all">
-                    <p>Department:</p>
-                    <div><%= userData.Department.dep_name %></div>
-                </div>
-                <div class="role all">
-                    <p>Role:</p>
-                    <div><%= userData.role %></div>
-                </div>
-                <div class="LoginEmail all">
-                    <p>UUS Email:</p>
-                    <div><%= loginInfo.email %></div>
-                </div>
-                <% if (images.length > 0) { %>
-                    <% images.forEach((image, index) => { %>
-                        <div class="container">
-                            <div class="images">
-                                <img src="data:image/jpeg;base64,<%= image.photo_user.toString('base64') %>" alt="Product Image" width="200" height="200">
+
+    <div class="banner-container">
+        <img class="banner" src="/static/image/banner.png" alt="Profile Banner">
+    </div>
+
+    <div class="container profile-container">
+        <div class="profile-card">
+            <div class="row">
+                <div class="col-md-4 text-center mb-4">
+                    <% if (images.length > 0) { %>
+                        <% images.forEach((image, index) => { %>
+                            <div class="mb-4">
+                                <img src="data:image/jpeg;base64,<%= image.photo_user.toString('base64') %>" 
+                                     alt="Profile Image" 
+                                     class="profile-image mb-3">
+                                <div class="d-grid gap-2">
+                                    <form action="/user/profile/delete/<%= image.id %>" method="post">
+                                        <button class="btn btn-danger w-100 mb-2">
+                                            <i class="fas fa-trash-alt me-2"></i>Delete Image
+                                        </button>
+                                    </form>
+                                    <form action="/user/profile/update/<%= image.id %>" method="post" enctype="multipart/form-data">
+                                        <label class="custom-file-upload w-100 mb-2">
+                                            <input type="file" name="file" class="d-none">
+                                            <i class="fas fa-upload me-2"></i>Choose New Image
+                                        </label>
+                                        <button type="submit" class="btn btn-primary w-100">
+                                            <i class="fas fa-save me-2"></i>Update Image
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
-                            <div class="delete">
-                                <form action="/user/profile/delete/<%= image.id %>" method="post">
-                                    <button class="delete-button">Delete image</button>
-                                </form>
-                                <form action="/user/profile/update/<%= image.id %>" method="post" enctype="multipart/form-data">
-                                    <input type="file" name="file" id="fileInput" class="file-input">
-                                    <button type="submit" class="edit">Edit Image</button>
-                                </form>
+                        <% }); %>
+                    <% } else { %>
+                        <form action="/user/profile/insert/<%= userData.id %>" method="post" enctype="multipart/form-data">
+                            <label class="custom-file-upload w-100 mb-3">
+                                <input type="file" name="file" class="d-none">
+                                <i class="fas fa-cloud-upload-alt fa-2x mb-2"></i>
+                                <p class="mb-0">Drop your profile image here<br>or click to upload</p>
+                            </label>
+                            <button class="btn btn-primary w-100" type="submit">
+                                <i class="fas fa-upload me-2"></i>Upload Image
+                            </button>
+                        </form>
+                    <% } %>
+                </div>
+
+                <div class="col-md-8">
+                    <h2 class="mb-4">Profile Information</h2>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="profile-info">
+                                <div class="info-label">Name</div>
+                                <div class="info-value"><%= userData.name %></div>
                             </div>
                         </div>
-                    <% }); %>
-                <% } else { %>
-                    <form class="upload" action="/user/profile/insert/<%= userData.id %>" method="post" enctype="multipart/form-data">
-                        <input type="file" name="file" class="file-input">
-                        <button class="upload" type="submit">Upload Images</button>
-                    </form>
-                <% } %>
+                        <div class="col-md-6">
+                            <div class="profile-info">
+                                <div class="info-label">Lastname</div>
+                                <div class="info-value"><%= userData.lastname %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="profile-info">
+                                <div class="info-label">Personal Email</div>
+                                <div class="info-value"><%= userData.email %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="profile-info">
+                                <div class="info-label">Phone Number</div>
+                                <div class="info-value"><%= userData.phone_number %></div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="profile-info">
+                                <div class="info-label">Address</div>
+                                <div class="info-value"><%= userData.address %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="profile-info">
+                                <div class="info-label">Department</div>
+                                <div class="info-value"><%= userData.Department.dep_name %></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="profile-info">
+                                <div class="info-label">Role</div>
+                                <div class="info-value"><%= userData.role %></div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="profile-info">
+                                <div class="info-label">UUS Email</div>
+                                <div class="info-value"><%= loginInfo.email %></div>
+                            </div>
+                        </div>
+                    </div>
 
-                <form action="/auth/forgot-password" method="POST">
-                    <div class="form-group">
-                        <label for="email">Enter your email address</label>
-                        <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+                    <div class="mt-4">
+                        <h3 class="h5 mb-3">Password Reset</h3>
+                        <form action="/auth/forgot-password" method="POST" class="needs-validation" novalidate>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email address</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-key me-2"></i>Request Password Reset
+                            </button>
+                        </form>
                     </div>
-            
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Request Password Reset</button>
-                    </div>
-                </form>
-            </main>
+                </div>
+            </div>
         </div>
     </div>
 
     <%- include('partials/footer'); %>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        setTimeout(function() {
-            $('#success-alert').fadeOut('slow');
-        }, 10000);
-        setTimeout(function() {
-            $('#danger-alert').fadeOut('slow');
-        }, 10000);
-        $('.close').click(function(){
-            $(this).parent().hide();
+        document.addEventListener('DOMContentLoaded', function() {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    const bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+                    bsAlert.close();
+                }, 10000);
+            });
         });
+
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function() {
+                const label = this.parentElement;
+                if (this.files && this.files[0]) {
+                    label.innerHTML = `<i class="fas fa-check me-2"></i>${this.files[0].name}`;
+                }
+            });
+        });
+
+        (() => {
+            'use strict'
+            const forms = document.querySelectorAll('.needs-validation')
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
     </script>
 </body>
 </html>

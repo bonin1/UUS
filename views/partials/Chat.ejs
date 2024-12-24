@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Chat Interface</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        *{
-            border: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
         #chat-box::-webkit-scrollbar {
             width: 7px;
         }
@@ -22,10 +19,12 @@
             border-radius: 8px;
             background-color: #004492;
         }
-        #chat-box::-webkit-scrollbar-thumb:hover{
+        
+        #chat-box::-webkit-scrollbar-thumb:hover {
             background-color: #01346e;
         }
-        .chat-opener{
+
+        .chat-opener {
             position: fixed;
             bottom: 100px;
             right: 100px;
@@ -36,65 +35,56 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
+            z-index: 1000;
         }
-        .chat-container{
+
+        .chat-container {
             display: none;
         }
-        .inside-container-chat{
+
+        .inside-container-chat {
             position: fixed;
             bottom: 100px;
             right: 100px;
             width: 300px;
             height: 500px;
-            background-color: #dddddd;
+            background-color: #f8f9fa;
             border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            z-index: 1000;
         }
-        .chat{
+
+        .chat {
             border-top-right-radius: 10px;
             border-top-left-radius: 10px;
             height: 100px;
-            background-color: #cecece;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background-color: #004492;
+            color: white;
             padding: 20px;
             position: relative;
         }
-        .chat > img{
+
+        .chat img {
             width: 48px;
             height: 48px;
             background-color: #fff;
             border-radius: 50%;
             padding: 10px;
         }
-        .chat > button{
-            border-radius: 5px;
-            cursor: pointer;
-            display: none;
-            position: absolute;
-            bottom: 5px;
-            left: 10px;
-            background-color: transparent;
-        }
-        .chat > button > img{
-            width: 25px;
-            height: 25px;
-        }
-        #chat-box{
+
+        #chat-box {
             height: 286px;
             overflow: auto;
-            padding-right: 10px;
+            padding: 15px;
         }
-        .parent{
-            width: 100%;
-        }
-        .bot-message{
+
+        .bot-message {
             display: flex;
-            justify-content: flex-start;
             align-items: flex-start;
             margin: 10px 0;
         }
-        .bot-message > img{
+
+        .bot-message img {
             width: 30px;
             height: 30px;
             background-color: #fff;
@@ -102,47 +92,39 @@
             padding: 5px;
             margin: 4px 10px;
         }
-        .bot-message > p{
+
+        .bot-message p {
             margin-top: 7px;
             font-size: 15px;
-            background-color: #ececec;
+            background-color: #e9ecef;
             border-radius: 5px;
-            padding: 2px;
+            padding: 8px;
         }
-        #options{
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
+
+        #options {
             position: absolute;
-            flex-wrap: wrap;
             bottom: 10px;
-            padding: 0 30px;
+            left: 0;
+            right: 0;
+            padding: 0 15px;
         }
-        #options > button{
-            width: 100px;
-            background-color: #ffffff;
-            padding: 5px 0;
-            margin: 10px 0;
-            border-radius: 6px;
-            font-size: 15px;
-            cursor: pointer;
-            transition: .2s;
+
+        .option-btn {
+            width: calc(50% - 10px);
+            margin: 5px;
         }
-        #options > button:hover{
-            background-color: #d4d4d4;
-        }
-        @media screen and (max-width:900px) {
+
+        @media screen and (max-width: 900px) {
             .chat-opener,
-            .inside-container-chat{
-                position: fixed;
+            .inside-container-chat {
                 right: 50px;
                 bottom: 50px;
             }
         }
-        @media screen and (max-width:500px){
+
+        @media screen and (max-width: 500px) {
             .chat-opener,
-            .inside-container-chat{
-                position: fixed;
+            .inside-container-chat {
                 right: 30px !important;
                 bottom: 30px !important;
             }
@@ -151,39 +133,47 @@
 </head>
 <body>
     <div class="chat-opener">
-        <img src="/static/image/chat2.0.png" alt="">
+        <img src="/static/image/chat2.0.png" alt="Chat" class="img-fluid">
     </div>
+
     <div class="chat-container">
         <div class="inside-container-chat">
-            <header class="chat">
-                <img src="/static/image/icon-park_robot.png" alt="">
-                <button type="button" id="back-btn" style="display: none;">
-                    <img src="/static/image/backicon.png" alt="">
+            <header class="chat d-flex justify-content-between align-items-center">
+                <img src="/static/image/icon-park_robot.png" alt="Robot" class="img-fluid">
+                <button type="button" id="back-btn" class="btn btn-link text-white p-0" style="display: none;">
+                    <img src="/static/image/backicon.png" alt="Back" class="img-fluid">
                 </button>
                 <div class="insidetext">
-                    <h1>UNI ASSIST</h1>
-                    <p>online</p>
+                    <h5 class="mb-0">UNI ASSIST</h5>
+                    <small>online</small>
                 </div>
             </header>
+
             <div class="parent">
                 <div id="chat-box">
                     <div class="bot-message">
-                        <img src="/static/image/icon-park_robot.png" alt="">
-                        <p>Hello and welcome!</p>
+                        <img src="/static/image/icon-park_robot.png" alt="Robot" class="img-fluid">
+                        <p class="mb-0">Hello and welcome!</p>
                     </div>
                 </div>
-                <div id="options" >
-                    <button type="button" class="option-btn" data-value="courses">Courses</button>
-                    <button type="button" class="option-btn" data-value="OpenDays">Open days</button>
-                    <button type="button" class="option-btn" data-value="ContactUS">Contact us</button>
-                    <button type="button" class="option-btn" data-value="Howtoapply">How to apply?</button>
+                
+                <div id="options" class="d-flex flex-wrap justify-content-between">
+                    <button type="button" class="btn btn-light option-btn" data-value="courses">Courses</button>
+                    <button type="button" class="btn btn-light option-btn" data-value="OpenDays">Open days</button>
+                    <button type="button" class="btn btn-light option-btn" data-value="ContactUS">Contact us</button>
+                    <button type="button" class="btn btn-light option-btn" data-value="Howtoapply">How to apply?</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Your existing JavaScript code remains the same -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            // Your existing JavaScript code here - unchanged
             const chatOpener = document.querySelector(".chat-opener");
             const chatContainer = document.querySelector(".chat-container");
             const chatBox = document.querySelector("#chat-box");

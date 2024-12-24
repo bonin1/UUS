@@ -36,107 +36,36 @@
 .alert-danger{
   background-color: rgb(255, 64, 64);
 }
-body{
-  width: 100%;
-  height: 100vh;
+body {
+  min-height: 100vh;
 }
-
-.wrapper{
-  width: 100%;
-  height: 80rem;
-  display: flex;
-  justify-content: center;
-  align-items: start;
-}
-.apply_container{
-  width: 1000px;
-  display: flex;
-  flex-direction: column;
-  background-color: #262626;
-  padding: 50px 0px;
-  margin-top: 50px;
-  border-radius: 10px;
-}
-.logo{
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-.logo > a > img{
-  width: 433px;
-}
-.apply_container > h1{
-  color: #fff;
-  font-size: 36px;
-  text-align: center;
+.wrapper {
   padding: 40px 0;
-  font-weight: 500;
 }
-form{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.apply_container {
+  background-color: #262626;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
 }
-form > input,
-form > select{
-  width:445px ;
-  margin: 10px 0;
-  height: 58px;
-  font-size: 16px;
-  text-indent: 10px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-}
-form > input::placeholder,
-.disabled{
-  color: #676767;
-  font-weight: 500;
-}
-form > button{
-  color: #fff;
-  background-color: #004492;
-  width: 217px;
-  height: 53px;
+.logo {
+  margin-bottom: 25px;
   text-align: center;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  font-size: 24px;
-  border-radius: 10px;
-  margin-top: 40px;
 }
-.container > h2{
-  font-size: 24px;
-  color: #000;
-  font-weight: 500;
-  margin: 20px 0;
+.logo img {
+  max-height: 80px;
 }
-.container > a{
-  text-decoration: none;
-  font-size: 24px;
-  font-weight: 500;
-  color: #8f8f8f;
-  cursor: pointer;
+h1 {
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  text-align: center;
 }
-@media screen and (max-width:1400px) {
-  .apply_container,
-  .container{
-    width: 100% !important;
-  }
-  .container{
-    padding: 0 20px;
-  }
+.form-floating {
+  margin-bottom: 1rem;
 }
-
-@media screen and (max-width: 470px) {
-  .logo > a > img{
-    width: 300px;
-  }
-  form > input,
-  form > select{
-    width: 300px !important; 
-  }
+.contact-info {
+  text-align: center;
+  margin-top: 30px;
 }
