@@ -60,18 +60,10 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        .chat-opener {
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 1030;
-        }
-
-        .chat-container {
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 1040;
-            width: 350px;
-            background-color: white;
+        .chat-opener,
+        .chat-container,
+        .inside-container-chat {
+            z-index: 1050; /* Increased z-index to ensure chat appears above other content */
         }
     </style>
 </head>
@@ -171,7 +163,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Erasmus Information</h5>
                         <hr>
-                        <button class="btn btn-outline-primary w-100 option-btn" data-value="Abroad" onclick="handleAdventureClick(this)">
+                        <button class="btn btn-outline-primary w-100 adventure-btn" data-adventure-value="Abroad">
                             When is the best time to study abroad?
                         </button>
                     </div>
@@ -183,7 +175,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Erasmus Information</h5>
                         <hr>
-                        <button class="btn btn-outline-primary w-100 option-btn" data-value="10universities" onclick="handleAdventureClick(this)">
+                        <button class="btn btn-outline-primary w-100 adventure-btn" data-adventure-value="10universities">
                             Top 10 Universities in Spain for International Students
                         </button>
                     </div>
@@ -195,7 +187,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Erasmus Information</h5>
                         <hr>
-                        <button class="btn btn-outline-primary w-100 option-btn" data-value="10art" onclick="handleAdventureClick(this)">
+                        <button class="btn btn-outline-primary w-100 adventure-btn" data-adventure-value="10art">
                             Top 10 places to study Art & History of Art
                         </button>
                     </div>
@@ -207,7 +199,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Erasmus Information</h5>
                         <hr>
-                        <button class="btn btn-outline-primary w-100 option-btn" data-value="accomodation" onclick="handleAdventureClick(this)">
+                        <button class="btn btn-outline-primary w-100 adventure-btn" data-adventure-value="accomodation">
                             How do I find accommodation while studying abroad?
                         </button>
                     </div>
@@ -219,7 +211,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Erasmus Information</h5>
                         <hr>
-                        <button class="btn btn-outline-primary w-100 option-btn" data-value="studyAbroad" onclick="handleAdventureClick(this)">
+                        <button class="btn btn-outline-primary w-100 adventure-btn" data-adventure-value="studyAbroad">
                             How long does a typical study abroad program last?
                         </button>
                     </div>
@@ -231,7 +223,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Erasmus Information</h5>
                         <hr>
-                        <button class="btn btn-outline-primary w-100 option-btn" data-value="abroadstudies" onclick="handleAdventureClick(this)">
+                        <button class="btn btn-outline-primary w-100 adventure-btn" data-adventure-value="abroadstudies">
                             How do I apply for a study abroad program?
                         </button>
                     </div>
@@ -240,7 +232,7 @@
         </div>
     </div>
 
-    <%- include('partials/Chatbot'); %>
+    <%- include('partials/Chat'); %>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
@@ -250,112 +242,33 @@
             offset: 100,
             once: true
         });
-        
-        document.addEventListener("DOMContentLoaded", function () {
-            const chatOpener = document.querySelector(".chat-opener");
-            const chatContainer = document.querySelector(".chat-container");
-            const chatBox = document.querySelector("#chat-box");
-            let optionButtons = document.querySelectorAll(".option-btn");
 
-            function openChat() {
-                chatContainer.classList.remove("d-none");
-            }
-
-            chatOpener.addEventListener("click", function (event) {
-                event.stopPropagation();
-                openChat();
-            });
-
-            optionButtons.forEach(function(button) {
-                button.addEventListener("click", function(event) {
-                    event.stopPropagation();
-                    openChat();
-                });
-            });
-
-            document.addEventListener("click", function (event) {
-                if (!chatContainer.contains(event.target) && event.target !== chatOpener) {
-                    chatContainer.classList.add("d-none");
-                }
-            });
-
-            fetch('/data')
-                .then(response => response.json())
-                .then(data => {
-                    optionButtons.forEach(function(button, index) {
-                        button.addEventListener("click", function() {
-                            const value = this.getAttribute("data-value");
-                            const messageDiv = document.createElement("div");
-                            messageDiv.className = "time bot-message";
-
-                            const img = document.createElement("img");
-                            img.src = "/static/image/icon-park_robot.png"; 
-                            messageDiv.appendChild(img);
-
-                            const message = document.createElement("p");
-
-                            if (data[value]) {
-                                if (typeof data[value] === 'string') {
-                                    if (value === "10universities" || value === "10art") {
-                                        let universities = data[value].split(", ");
-
-                                        let ul = document.createElement("ul");
-
-                                        universities.forEach(function(university) {
-                                            let li = document.createElement("li");
-                                            li.textContent = university;
-                                            ul.appendChild(li);
-                                        });
-                                        message.appendChild(ul);
-                                    } else {
-                                        message.textContent = data[value];
-                                    }
-                                } else {
-                                    optionButtons.forEach((btn, i) => {
-                                        if (data[value].buttons[i]) {
-                                            btn.setAttribute("data-value", data[value].buttons[i]);
-                                            btn.textContent = data[value].buttons[i]; 
-                                        }
-                                    });
-                                    message.textContent = "You clicked: " + value;
-                                }
-                            } else if (Object.values(data).some(obj => obj.buttons && obj.buttons.includes(value))) {
-                                for (let key in data) {
-                                    if (data[key].buttons && data[key].buttons.includes(value)) {
-                                        message.textContent = data[key].messages[data[key].buttons.indexOf(value)];
-                                        break;
-                                    }
-                                }
-                            } else {
-                                message.textContent = "You clicked: " + value;
-                            }
-                            messageDiv.appendChild(message);
-                            chatBox.appendChild(messageDiv);
-                        });
+        document.querySelectorAll('.adventure-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const value = this.getAttribute('data-adventure-value');
+                
+                document.querySelector('.chat-container').style.display = 'block';
+                
+                const chatBox = document.querySelector('#chat-box');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'bot-message';
+                
+                const img = document.createElement('img');
+                img.src = '/static/image/icon-park_robot.png';
+                messageDiv.appendChild(img);
+                
+                const message = document.createElement('p');
+                message.className = 'mb-0';
+                
+                fetch('/data')
+                    .then(response => response.json())
+                    .then(data => {
+                        message.textContent = data[value] || 'No information available.';
+                        messageDiv.appendChild(message);
+                        chatBox.appendChild(messageDiv);
+                        chatBox.scrollTop = chatBox.scrollHeight;
                     });
-                });
-        });
-
-        function handleAdventureClick(button) {
-            const chatContainer = document.querySelector(".chat-container");
-            const value = button.getAttribute("data-value");
-            const text = button.textContent.trim();
-            
-            const event = new CustomEvent('adventureClick', {
-                detail: { value, text }
             });
-            document.dispatchEvent(event);
-        }
-        document.addEventListener('adventureClick', function(e) {
-            const chatContainer = document.querySelector(".chat-container");
-            chatContainer.style.display = "block";
-            
-            const chatButton = document.querySelector(`.chat-container .option-btn[data-value="${e.detail.value}"]`);
-            if (chatButton) {
-                chatButton.click();
-            } else {
-                handleButtonClick(e.detail.value, e.detail.text);
-            }
         });
     </script>
 
