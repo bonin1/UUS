@@ -25,7 +25,9 @@ const staticRoutes = [
     { path: '/employment', view: 'emplyment' },
     { path: '/adventures', view: 'adventures' },
     { path: '/studyprograms', view: 'studyprograms' },
-    { path: '/courses', view: 'courses'}
+    { path: '/courses', view: 'courses'},
+    { path: '/prishtine', view: 'prishtina' },
+    { path: '/prizren', view: 'prizren' },
 ];
 
 exports.setupStaticRoutes = (app) => {

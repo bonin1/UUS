@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UUS - Prizren Campus</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/prizren.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+</head>
+<body>
+    <%- include('partials/Navbar-light') %>
+
+    <div class="hero-section mb-5">
+        <div class="container text-center">
+            <h1 class="display-3 fw-bold" data-aos="fade-up">Discover Prizren Campus</h1>
+            <p class="lead" data-aos="fade-up" data-aos-delay="100">Where Tradition Meets Innovation</p>
+            <a href="#explore" class="btn btn-success btn-lg mt-3" data-aos="fade-up" data-aos-delay="200">Explore Campus</a>
+        </div>
+    </div>
+
+    <div class="container" id="explore">
+        <div class="row mb-5" data-aos="fade-up">
+            <div class="col-md-3">
+                <div class="stats-box">
+                    <div class="stats-number">3000+</div>
+                    <div>Students</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-box">
+                    <div class="stats-number">150+</div>
+                    <div>Academic Staff</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-box">
+                    <div class="stats-number">40+</div>
+                    <div>Degree Programs</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-box">
+                    <div class="stats-number">25+</div>
+                    <div>Student Clubs</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6 order-md-2" data-aos="fade-left">
+                <img src="../static/image/college2.png" class="img-fluid rounded-3 shadow-lg" alt="Prizren Campus">
+            </div>
+            <div class="col-md-6 order-md-1" data-aos="fade-right">
+                <h2 class="display-6 mb-4">Historic Excellence</h2>
+                <p class="lead">Located in the historic city of Prizren, our campus combines traditional architecture with modern educational facilities.</p>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start mb-3">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i>
+                            <div>Cultural Heritage</div>
+                        </div>
+                        <div class="d-flex align-items-start mb-3">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i>
+                            <div>Innovation Hub</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start mb-3">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i>
+                            <div>Art Studios</div>
+                        </div>
+                        <div class="d-flex align-items-start mb-3">
+                            <i class="bi bi-check-circle-fill text-success me-2"></i>
+                            <div>Tech Labs</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                <div class="card h-100 text-center p-4">
+                    <div class="card-body">
+                        <i class="bi bi-bank feature-icon"></i>
+                        <h5 class="card-title">Historic Setting</h5>
+                        <p class="card-text">Experience education in one of Kosovo's most culturally rich cities.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                <div class="card h-100 text-center p-4">
+                    <div class="card-body">
+                        <i class="bi bi-palette feature-icon"></i>
+                        <h5 class="card-title">Creative Environment</h5>
+                        <p class="card-text">State-of-the-art facilities for arts and cultural studies.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+                <div class="card h-100 text-center p-4">
+                    <div class="card-body">
+                        <i class="bi bi-globe2 feature-icon"></i>
+                        <h5 class="card-title">Global Community</h5>
+                        <p class="card-text">Connect with students from diverse cultural backgrounds.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/footer') %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+</body>
+</html>

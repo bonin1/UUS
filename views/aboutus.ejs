@@ -3,34 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>About Us - UUS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/aboutus.css">
 </head>
 <body>
     
     <%- include('partials/Navbar-light'); %>
-    <main class="wrapper">
-        <div class="wrapper-assist">
-            <div class="title">
-                <h1>About us</h1>
-                <div class="underline"></div>
-            </div>
-            <p>
-                WELCOME TO THE CAMPUS WHERE UNLOCKING OF AN INTELLECTUAL JOURNEY IS SUPPLEMENTED BY ENTHUSIASTIC GROUSSES OF LEARNERS.
-                <br><br><br>
-
-            Leadership tomorrow has a mission to build reinforced in a multi-faceted and multi-layered personality. This is our pride of having a platform to build a disposition in tune with the tags of leadership available in our institute. 
-                <br><br>
-            Our faculty rich with skilled academicians will actively blend the learning of how to think critically, invent and innovate among our student population. The central goal is to teach and lead the students of the future by providing them with wide selection of programs, modern facilities, and disciplines at the same time, and also impart on them a sense a solidity and well-roundedness in order to graduate on time. 
-                <br><br>
-            The opinion held by our university about education is that it lies in transforming the world and understanding it, subjects to be researched and later collaboration. Immerse yourself alongside us in this journey of learning and enlightening the unforeseeable future, and propelling others to become tomorrow's world leaders.
-            </p>
-        </div>
-    </main>
     
+    <div class="container-fluid py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1 class="display-4 fw-bold">About Us</h1>
+                    <div class="border-bottom border-primary w-25 mb-4"></div>
+                    <p class="lead">WELCOME TO THE CAMPUS WHERE UNLOCKING OF AN INTELLECTUAL JOURNEY IS SUPPLEMENTED BY ENTHUSIASTIC GROUSSES OF LEARNERS.</p>
+                </div>
+                <div class="col-md-6">
+                    <img src="../static/image/campus.png" alt="Campus" class="img-fluid rounded shadow">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow">
+                    <div class="card-body">
+                        <h3 class="card-title">Our Mission</h3>
+                        <p class="card-text">Leadership tomorrow has a mission to build reinforced in a multi-faceted and multi-layered personality. This is our pride of having a platform to build a disposition in tune with the tags of leadership available in our institute.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow">
+                    <div class="card-body">
+                        <h3 class="card-title">Our Vision</h3>
+                        <p class="card-text">Our faculty rich with skilled academicians will actively blend the learning of how to think critically, invent and innovate among our student population.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Our Facilities</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="../static/image/modernLibrary.jpg" class="card-img-top" alt="Library">
+                        <div class="card-body">
+                            <h5 class="card-title">Modern Library</h5>
+                            <p class="card-text">State-of-the-art library with vast collections of books and digital resources.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="../static/image/advancedLabs.jpg" class="card-img-top" alt="Laboratory">
+                        <div class="card-body">
+                            <h5 class="card-title">Advanced Laboratories</h5>
+                            <p class="card-text">Well-equipped laboratories for practical learning and research.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="../static/image/SportsComplex.jpg" class="card-img-top" alt="Sports">
+                        <div class="card-body">
+                            <h5 class="card-title">Sports Complex</h5>
+                            <p class="card-text">Comprehensive sports facilities for physical development.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <h2 class="text-center mb-5">Our Values</h2>
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="p-3">
+                    <i class="fas fa-graduation-cap fa-3x mb-3 text-primary"></i>
+                    <h4>Excellence</h4>
+                    <p>Striving for academic and research excellence</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="p-3">
+                    <i class="fas fa-users fa-3x mb-3 text-primary"></i>
+                    <h4>Innovation</h4>
+                    <p>Fostering creativity and innovative thinking</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="p-3">
+                    <i class="fas fa-globe fa-3x mb-3 text-primary"></i>
+                    <h4>Diversity</h4>
+                    <p>Embracing diversity and inclusive education</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <%- include('partials/Chat'); %>
     <%- include('partials/footer'); %>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/your-kit-code.js"></script>
     <script src="/static/js/Navbar_Light.js"></script>
 </body>
 </html>

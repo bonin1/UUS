@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accreditation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/Footer.css">
     <link rel="stylesheet" href="/static/css/Navbar_light.css">
     <link rel="stylesheet" href="/static/css/accreditation.css">
@@ -11,37 +12,157 @@
 <body>
     <%- include('partials/Navbar-light'); %>
 
-
-    <main class="wrapper">
-        <div class="wrapper-assist">
-            <div class="title">
-                <h1>Accreditation</h1>
-                <div class="underline"></div>
+    <main class="container py-5">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <h1 class="display-4">Accreditation</h1>
+                <div class="border-bottom border-primary w-25 mx-auto my-4"></div>
             </div>
-            <ol>
-                <li>
-                    <a href="">Status</a>
-                </li>
-                <li>
-                    <a href="">Regulation bachelor</a>
-                </li>
-                <li>
-                    <a href="">Regulation Master</a>
-                </li>
-                <li>
-                    <a href="">Code of Ethics</a>
-                </li>
-                <li>
-                    <a href="">Strategic Plan 2022-2026</a>
-                </li>
-            </ol>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title h4 mb-4">Quick Links</h3>
+                        <div class="list-group">
+                            <a href="#status" class="list-group-item list-group-item-action">Status</a>
+                            <a href="#bachelor" class="list-group-item list-group-item-action">Regulation Bachelor</a>
+                            <a href="#master" class="list-group-item list-group-item-action">Regulation Master</a>
+                            <a href="#ethics" class="list-group-item list-group-item-action">Code of Ethics</a>
+                            <a href="#strategic" class="list-group-item list-group-item-action">Strategic Plan 2022-2026</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Sections -->
+            <div class="col-lg-8">
+                <section id="status" class="mb-5">
+                    <h2 class="h3 mb-4">Accreditation Status</h2>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <p class="card-text">Our institution maintains the highest standards of educational quality through various national and international accreditations.</p>
+                            <div class="d-flex gap-3">
+                                <span class="badge bg-success p-2">Nationally Accredited</span>
+                                <span class="badge bg-primary p-2">ISO Certified</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="bachelor" class="mb-5">
+                    <h2 class="h3 mb-4">Bachelor's Program Regulations</h2>
+                    <div class="accordion" id="bachelorAccordion">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bachelorContent">
+                                    Program Overview
+                                </button>
+                            </h3>
+                            <div id="bachelorContent" class="accordion-collapse collapse show">
+                                <div class="accordion-body">
+                                    <p>Our Bachelor's programs offer comprehensive education with a focus on practical skills and theoretical knowledge in various fields.</p>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2">✓ Duration: 4 years</li>
+                                        <li class="mb-2">✓ Credit Hours: 240 ECTS</li>
+                                        <li class="mb-2">✓ Graduation Project: Required</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="master" class="mb-5">
+                    <h2 class="h3 mb-4">Master's Program Regulations</h2>
+                    <div class="accordion" id="masterAccordion">
+                        <div class="accordion-item">
+                            <h3 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#masterContent">
+                                    Program Overview
+                                </button>
+                            </h3>
+                            <div id="masterContent" class="accordion-collapse collapse show">
+                                <div class="accordion-body">
+                                    <p>Our Master's programs are designed to provide advanced education and research opportunities in specialized fields.</p>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2">✓ Duration: 2 years</li>
+                                        <li class="mb-2">✓ Credit Hours: 120 ECTS</li>
+                                        <li class="mb-2">✓ Research Component: Required</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="ethics" class="mb-5">
+                    <h2 class="h3 mb-4">Code of Ethics</h2>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h3 class="h5 mb-3">Core Values</h3>
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="badge bg-primary p-2 me-3">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                        <h4 class="h6 mb-0">Academic Integrity</h4>
+                                    </div>
+                                    <p class="small">Maintaining highest standards of academic honesty and research ethics</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="badge bg-primary p-2 me-3">
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                        <h4 class="h6 mb-0">Professional Conduct</h4>
+                                    </div>
+                                    <p class="small">Promoting respectful and professional behavior in all interactions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="strategic" class="mb-5">
+                    <h2 class="h3 mb-4">Strategic Plan 2022-2026</h2>
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="timeline">
+                                <div class="mb-4">
+                                    <h3 class="h5 text-primary">Phase 1: 2022-2023</h3>
+                                    <p class="mb-3">Infrastructure Development and Digital Transformation</p>
+                                    <div class="progress mb-2" style="height: 10px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <h3 class="h5 text-primary">Phase 2: 2024-2025</h3>
+                                    <p class="mb-3">Research Excellence and International Partnerships</p>
+                                    <div class="progress mb-2" style="height: 10px;">
+                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 45%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="h5 text-primary">Phase 3: 2025-2026</h3>
+                                    <p class="mb-3">Innovation Hub and Sustainable Development</p>
+                                    <div class="progress mb-2" style="height: 10px;">
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 25%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
     </main>
 
-
-
     <%- include('partials/footer'); %>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/static/js/Navbar_Light.js"></script>
 </body>
 </html>

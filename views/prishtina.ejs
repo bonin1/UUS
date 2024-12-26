@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UUS - Prishtina Campus</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/prishtine.css">
+</head>
+<body>
+    <%- include('partials/Navbar-light') %>
+
+    <div class="hero-section mb-5">
+        <div class="container text-center">
+            <h1 class="display-3 fw-bold" data-aos="fade-up">Welcome to Prishtina Campus</h1>
+            <p class="lead" data-aos="fade-up" data-aos-delay="100">Shaping Tomorrow's Leaders Today</p>
+            <a href="#learn-more" class="btn btn-light btn-lg mt-3" data-aos="fade-up" data-aos-delay="200">Learn More</a>
+        </div>
+    </div>
+
+    <div class="container" id="learn-more">
+        <div class="row mb-5" data-aos="fade-up">
+            <div class="col-md-3">
+                <div class="stats-box">
+                    <div class="stats-number">5000+</div>
+                    <div>Students</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-box">
+                    <div class="stats-number">200+</div>
+                    <div>Faculty Members</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-box">
+                    <div class="stats-number">50+</div>
+                    <div>Programs</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-box">
+                    <div class="stats-number">30+</div>
+                    <div>Student Clubs</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6" data-aos="fade-right">
+                <img src="../static/image/college2.png" class="img-fluid rounded-3 shadow-lg" alt="Prishtina Campus">
+            </div>
+            <div class="col-md-6" data-aos="fade-left">
+                <h2 class="display-6 mb-4">Experience Excellence</h2>
+                <p class="lead">Our campus combines modern architecture with state-of-the-art facilities to create the perfect learning environment.</p>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start mb-3">
+                            <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                            <div>Modern Labs & Classrooms</div>
+                        </div>
+                        <div class="d-flex align-items-start mb-3">
+                            <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                            <div>Research Centers</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start mb-3">
+                            <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                            <div>Sports Facilities</div>
+                        </div>
+                        <div class="d-flex align-items-start mb-3">
+                            <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                            <div>Digital Library</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                <div class="card h-100 text-center p-4">
+                    <div class="card-body">
+                        <i class="bi bi-geo-alt feature-icon"></i>
+                        <h5 class="card-title">Prime Location</h5>
+                        <p class="card-text">Situated in the heart of Prishtina, offering easy access to cultural and social venues.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                <div class="card h-100 text-center p-4">
+                    <div class="card-body">
+                        <i class="bi bi-book feature-icon"></i>
+                        <h5 class="card-title">Academic Excellence</h5>
+                        <p class="card-text">Comprehensive programs designed to meet international standards.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+                <div class="card h-100 text-center p-4">
+                    <div class="card-body">
+                        <i class="bi bi-people feature-icon"></i>
+                        <h5 class="card-title">Vibrant Community</h5>
+                        <p class="card-text">Join a diverse community of learners from around the world.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/footer') %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
+</body>
+</html>
