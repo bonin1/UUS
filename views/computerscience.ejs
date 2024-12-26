@@ -3,63 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Computer Sciece</title>
+    <title>Computer Science</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/computerscience.css">
 </head>
 <body>
-    <%- include('partials/Navbar'); %>
-    <img class="main-image" src="/static/image/main.png" alt="">
-    <div class="wrapper">
-        <div class="wrapper-assist">
-            <div class="title">
-                <h1>Computer Science</h1>
-                <div class="underline"></div>
-            </div>
-            <p>
-                The Faculty of Computer Science is fully focused on providing teaching in modern, practical ways and in line with world technological developments, so that tomorrow our students can compete in global markets as individuals or as integral parts of prestigious organizations.
-            </p>
-            <div class="container-card">
-                <div class="card">
-                    <h1>Academic Staff</h1>
-                </div>
-                <div class="card">
-                    <h1>Dean</h1>
-                </div>
-                <div class="card">
-                    <h1>News</h1>
-                </div>
-            </div>
-            <section class="academic-staff sections">
-                <div class="card-ac">
-                    <img src="/static/image/Windows_10_Default_Profile_Picture.svg.png" alt="">
-                    <h1>Prof. Filan Fisteki</h1>
-                </div>
-                <div class="card-ac">
-                    <img src="/static/image/Windows_10_Default_Profile_Picture.svg.png" alt="">
-                    <h1>Prof. Ass. Filan Fisteki</h1>
-                </div>
-            </section>
-            <section class="dean sections">
-                <div class="card-de">
-                    <div class="card-ac">
-                        <img src="/static/image/Windows_10_Default_Profile_Picture.svg.png" alt="">
-                        <h1>Dean Filan Fisteki</h1>
+    <%- include('partials/Navbar-light'); %>
+    
+    <div class="hero-section position-relative mb-5">
+        <img class="main-image" src="/static/image/main.png" alt="">
+        <div class="container position-relative py-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="title text-white">
+                        <h1 class="display-4">Computer Science</h1>
+                        <div class="underline"></div>
                     </div>
+                    <p class="lead text-white mt-4">
+                        The Faculty of Computer Science is fully focused on providing teaching in modern, practical ways and in line with world technological developments, so that tomorrow our students can compete in global markets as individuals or as integral parts of prestigious organizations.
+                    </p>
                 </div>
-            </section>
-            <section class="news sections">
-                ne
-            </section>
+            </div>
         </div>
     </div>
-    <%- include('partials/footer'); %>
-    <script>
-        var cards = document.querySelectorAll('.card');
 
+    <div class="container mb-5">
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-3">
+                <div class="card nav-card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Academic Staff</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card nav-card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Dean</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card nav-card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">News</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card nav-card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Programs</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="academic-staff sections">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card academic-card h-100">
+                        <img src="/static/image/Windows_10_Default_Profile_Picture.svg.png" class="card-img-top academic-img" alt="Staff">
+                        <div class="card-body">
+                            <h5 class="card-title">Prof. Filan Fisteki</h5>
+                            <p class="text-muted mb-3">PhD in Computer Science</p>
+                            <p class="card-text">Specializes in Artificial Intelligence and Machine Learning. Leading researcher in deep learning applications.</p>
+                            <a href="/staff/filan-fisteki" class="btn btn-primary mt-3">View Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="dean sections">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card dean-card h-100">
+                        <img src="/static/image/Windows_10_Default_Profile_Picture.svg.png" class="card-img-top dean-img" alt="Dean">
+                        <div class="card-body">
+                            <h5 class="card-title">Dean Filan Fisteki</h5>
+                            <p class="text-muted mb-3">Dean of Computer Science Faculty</p>
+                            <p class="card-text">Leading the Computer Science Faculty with over 15 years of academic and industry experience. Committed to excellence in education and research.</p>
+                            <a href="/staff/dean" class="btn btn-primary mt-3">Contact Dean</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="news sections">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <a href="/news/1" class="text-decoration-none">
+                        <div class="card news-card h-100">
+                            <img src="static/image/Windows_10_Default_Profile_Picture.svg.png" class="card-img-top news-img" alt="News 1">
+                            <div class="card-body">
+                                <div class="news-date mb-2">January 15, 2024</div>
+                                <h5 class="card-title">New Computer Lab Opening</h5>
+                                <p class="card-text">State-of-the-art computer laboratory opens for computer science students...</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <a href="/news/2" class="text-decoration-none">
+                        <div class="card news-card h-100">
+                            <img src="static/image/Windows_10_Default_Profile_Picture.svg.png" class="card-img-top news-img" alt="News 2">
+                            <div class="card-body">
+                                <div class="news-date mb-2">January 10, 2024</div>
+                                <h5 class="card-title">Student Achievement</h5>
+                                <p class="card-text">Our students won first place in the National Programming Competition...</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <a href="/news/3" class="text-decoration-none">
+                        <div class="card news-card h-100">
+                            <img src="static/image/Windows_10_Default_Profile_Picture.svg.png" class="card-img-top news-img" alt="News 3">
+                            <div class="card-body">
+                                <div class="news-date mb-2">January 5, 2024</div>
+                                <h5 class="card-title">Industry Partnership</h5>
+                                <p class="card-text">New partnership with leading tech companies for internship opportunities...</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="programs sections">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card program-card h-100">
+                        <img src="/static/image/program-cs.jpg" class="card-img-top program-img" alt="Bachelor in Computer Science">
+                        <div class="card-body">
+                            <h5 class="card-title">Bachelor in Computer Science</h5>
+                            <p class="card-text">A comprehensive program covering programming, algorithms, databases, and software engineering. Prepare for a career in technology with hands-on experience.</p>
+                            <a href="/programs/cs-bachelor" class="btn btn-primary mt-3">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card program-card h-100">
+                        <img src="/static/image/program-se.jpg" class="card-img-top program-img" alt="Master in Software Engineering">
+                        <div class="card-body">
+                            <h5 class="card-title">Master in Software Engineering</h5>
+                            <p class="card-text">Advanced studies in software development, project management, and system architecture. Take your career to the next level.</p>
+                            <a href="/programs/se-master" class="btn btn-primary mt-3">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card program-card h-100">
+                        <img src="/static/image/program-ai.jpg" class="card-img-top program-img" alt="Master in Artificial Intelligence">
+                        <div class="card-body">
+                            <h5 class="card-title">Master in Artificial Intelligence</h5>
+                            <p class="card-text">Specialized program in AI, machine learning, and data science. Be at the forefront of technological innovation.</p>
+                            <a href="/programs/ai-master" class="btn btn-primary mt-3">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <%- include('partials/footer'); %>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var cards = document.querySelectorAll('.nav-card');
+        
         var sections = {
             'Academic Staff': document.querySelector('.academic-staff'),
             'Dean': document.querySelector('.dean'),
-            'News': document.querySelector('.news')
+            'News': document.querySelector('.news'),
+            'Programs': document.querySelector('.programs')
         };
 
         function hideAllSections() {
@@ -70,38 +195,24 @@
 
         cards.forEach(function(card) {
             card.addEventListener('click', function() {
-                var h1Text = card.querySelector('h1').innerText;
-
-                for (var section in sections) {
-                    sections[section].style.display = 'none';
-                    sections[section].classList.remove('active1');
-                    cards.forEach(function(card) {
-                        card.classList.remove('active1');
-                    });
-                }
-                if (sections[h1Text]) {
-                    sections[h1Text].style.display = 'flex';
-                    sections[h1Text].classList.add('active1');
+                var cardText = card.querySelector('.card-title').innerText;
+                
+                cards.forEach(function(c) {
+                    c.classList.remove('active1');
+                });
+                
+                hideAllSections();
+                
+                if (sections[cardText]) {
+                    sections[cardText].style.display = 'flex';
                     card.classList.add('active1');
                 }
             });
         });
 
         hideAllSections();
-
         sections['Academic Staff'].style.display = 'flex';
-        sections['Academic Staff'].classList.add('active1');
-
-        var academicCard = Array.from(cards).find(function(card) {
-            return card.querySelector('h1').innerText === 'Academic Staff';
-        });
-        if (academicCard) {
-            academicCard.classList.add('active1');
-        }
-        hideAllSections();
-        sections['Academic Staff'].style.display = 'flex';
-        sections['Dean'].style.display = 'none';
-
+        cards[0].classList.add('active1');
     </script>
 </body>
 </html>
