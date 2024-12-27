@@ -3,63 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyber</title>
-    <link rel="stylesheet" href="/static/css/cyber.css">
+    <title>Cyber Security</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/computerscience.css">
 </head>
 <body>
-    <%- include('partials/Navbar'); %>
-    <img class="main-image" src="/static/image/main.png" alt="">
-    <div class="wrapper">
-        <div class="wrapper-assist">
-            <div class="title">
-                <h1>Cyber Security</h1>
-                <div class="underline"></div>
-            </div>
-            <p>
-                The Cybersecurity study program aims to build a community of experts and improve the institutional competencies of users through cyber security education, training and awareness. 
-            </p>
-            <div class="container-card">
-                <div class="card">
-                    <h1>Academic Staff</h1>
-                </div>
-                <div class="card">
-                    <h1>Dean</h1>
-                </div>
-                <div class="card">
-                    <h1>News</h1>
-                </div>
-            </div>
-            <section class="academic-staff sections">
-                <div class="card-ac">
-                    <img src="/static/image/Windows_10_Default_Profile_Picture.svg.png" alt="">
-                    <h1>Prof. Filan Fisteki</h1>
-                </div>
-                <div class="card-ac">
-                    <img src="/static/image/Windows_10_Default_Profile_Picture.svg.png" alt="">
-                    <h1>Prof. Ass. Filan Fisteki</h1>
-                </div>
-            </section>
-            <section class="dean sections">
-                <div class="card-de">
-                    <div class="card-ac">
-                        <img src="/static/image/Windows_10_Default_Profile_Picture.svg.png" alt="">
-                        <h1>Dean Filan Fisteki</h1>
+    <%- include('partials/Navbar-light'); %>
+    
+    <div class="hero-section position-relative mb-5">
+        <img class="main-image" src="/static/image/cyber.png" alt="Cyber Security Background">
+        <div class="container position-relative py-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="title text-white">
+                        <h1 class="display-4">Cyber Security</h1>
+                        <div class="underline"></div>
                     </div>
+                    <p class="lead text-white mt-4">
+                        Our Cyber Security program prepares students to become digital defenders in an increasingly interconnected world. With focus on network security, ethical hacking, digital forensics, and cyber defense strategies, we equip our students with the skills to protect organizations against evolving cyber threats.
+                    </p>
                 </div>
-            </section>
-            <section class="news sections">
-                ne
-            </section>
+            </div>
         </div>
     </div>
-    <%- include('partials/footer'); %>
-    <script>
-        var cards = document.querySelectorAll('.card');
 
+    <div class="container mb-5">
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-3">
+                <div class="card nav-card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Academic Staff</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card nav-card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Dean</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card nav-card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">News</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card nav-card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Programs</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="academic-staff sections">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card academic-card h-100">
+                        <img src="../static/image/Windows_10_Default_Profile_Picture.svg.png" class="card-img-top academic-img" alt="Staff">
+                        <div class="card-body">
+                            <h5 class="card-title">Dr. Marcus Shield</h5>
+                            <p class="text-muted mb-3">PhD in Network Security</p>
+                            <p class="card-text">Expert in penetration testing and network defense systems. Leading researcher in advanced threat detection and incident response.</p>
+                            <a href="/staff/marcus-shield" class="btn btn-primary mt-3">View Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="dean sections">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card dean-card h-100">
+                        <img src="../static/image/Windows_10_Default_Profile_Picture.svg.png" class="card-img-top dean-img" alt="Dean">
+                        <div class="card-body">
+                            <h5 class="card-title">Dean Filan Fisteki</h5>
+                            <p class="text-muted mb-3">Dean of Cyber Security Faculty</p>
+                            <p class="card-text">Leading the Computer Science Faculty with over 15 years of academic and industry experience. Committed to excellence in education and research.</p>
+                            <a href="/staff/dean" class="btn btn-primary mt-3">Contact Dean</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="news sections">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <a href="/news/cyber-1" class="text-decoration-none">
+                        <div class="card news-card h-100">
+                            <img src="static/image/cyber-lab.jpg" class="card-img-top news-img" alt="Cyber News 1">
+                            <div class="card-body">
+                                <div class="news-date mb-2">January 15, 2024</div>
+                                <h5 class="card-title">New Cyber Defense Lab Launch</h5>
+                                <p class="card-text">State-of-the-art cyber security laboratory featuring advanced threat simulation and defense systems...</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <a href="/news/cyber-2" class="text-decoration-none">
+                        <div class="card news-card h-100">
+                            <img src="static/image/ctf-event.jpg" class="card-img-top news-img" alt="CTF Competition">
+                            <div class="card-body">
+                                <div class="news-date mb-2">January 10, 2024</div>
+                                <h5 class="card-title">CTF Competition Success</h5>
+                                <p class="card-text">Our students secured first place in the National Capture The Flag Cybersecurity Competition...</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <a href="/news/3" class="text-decoration-none">
+                        <div class="card news-card h-100">
+                            <img src="static/image/Windows_10_Default_Profile_Picture.svg.png" class="card-img-top news-img" alt="News 3">
+                            <div class="card-body">
+                                <div class="news-date mb-2">January 5, 2024</div>
+                                <h5 class="card-title">Industry Partnership</h5>
+                                <p class="card-text">New partnership with leading tech companies for internship opportunities...</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="programs sections">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card program-card h-100">
+                        <img src="/static/image/cyber-bachelor.jpg" class="card-img-top program-img" alt="Bachelor in Cyber Security">
+                        <div class="card-body">
+                            <h5 class="card-title">Bachelor in Cyber Security</h5>
+                            <p class="card-text">Comprehensive program covering network security, ethical hacking, digital forensics, and security operations. Prepare for a career in cyber defense.</p>
+                            <a href="/programs/cyber-bachelor" class="btn btn-primary mt-3">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card program-card h-100">
+                        <img src="/static/image/incident-response.jpg" class="card-img-top program-img" alt="Master in Incident Response">
+                        <div class="card-body">
+                            <h5 class="card-title">Master in Incident Response</h5>
+                            <p class="card-text">Advanced studies in cyber incident response, threat hunting, and security operations center management.</p>
+                            <a href="/programs/incident-response-master" class="btn btn-primary mt-3">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card program-card h-100">
+                        <img src="/static/image/digital-forensics.jpg" class="card-img-top program-img" alt="Master in Digital Forensics">
+                        <div class="card-body">
+                            <h5 class="card-title">Master in Digital Forensics</h5>
+                            <p class="card-text">Specialized program in digital forensics, malware analysis, and cyber crime investigation.</p>
+                            <a href="/programs/digital-forensics-master" class="btn btn-primary mt-3">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <%- include('partials/footer'); %>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var cards = document.querySelectorAll('.nav-card');
+        
         var sections = {
             'Academic Staff': document.querySelector('.academic-staff'),
             'Dean': document.querySelector('.dean'),
-            'News': document.querySelector('.news')
+            'News': document.querySelector('.news'),
+            'Programs': document.querySelector('.programs')
         };
 
         function hideAllSections() {
@@ -70,38 +194,24 @@
 
         cards.forEach(function(card) {
             card.addEventListener('click', function() {
-                var h1Text = card.querySelector('h1').innerText;
-
-                for (var section in sections) {
-                    sections[section].style.display = 'none';
-                    sections[section].classList.remove('active1');
-                    cards.forEach(function(card) {
-                        card.classList.remove('active1');
-                    });
-                }
-                if (sections[h1Text]) {
-                    sections[h1Text].style.display = 'flex';
-                    sections[h1Text].classList.add('active1');
+                var cardText = card.querySelector('.card-title').innerText;
+                
+                cards.forEach(function(c) {
+                    c.classList.remove('active1');
+                });
+                
+                hideAllSections();
+                
+                if (sections[cardText]) {
+                    sections[cardText].style.display = 'flex';
                     card.classList.add('active1');
                 }
             });
         });
 
         hideAllSections();
-
         sections['Academic Staff'].style.display = 'flex';
-        sections['Academic Staff'].classList.add('active1');
-
-        var academicCard = Array.from(cards).find(function(card) {
-            return card.querySelector('h1').innerText === 'Academic Staff';
-        });
-        if (academicCard) {
-            academicCard.classList.add('active1');
-        }
-        hideAllSections();
-        sections['Academic Staff'].style.display = 'flex';
-        sections['Dean'].style.display = 'none';
-
+        cards[0].classList.add('active1');
     </script>
 </body>
 </html>
