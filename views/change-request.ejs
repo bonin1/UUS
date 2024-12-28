@@ -377,19 +377,53 @@
             const approveButtons = document.querySelectorAll('button[value="approve"]');
             approveButtons.forEach(button => {
                 const card = button.closest('.change-request');
-                if (card && card.querySelector('.badge.bg-warning')) {
-                    button.disabled = true;
-                    button.title = 'Cannot approve request with invalid data';
+                if (card) {
+                    const invalidData = card.querySelector('.invalid-email-hover');
+                    const hasInvalidClass = card.classList.contains('has-invalid-data');
                     
-                    const warningDiv = document.createElement('div');
-                    warningDiv.className = 'alert alert-warning mt-2';
-                    warningDiv.innerHTML = `
-                        <i class="fas fa-exclamation-triangle me-2"></i>
-                        Cannot approve request with invalid data. Please ask for a new request with valid information.
-                    `;
-                    button.parentElement.appendChild(warningDiv);
+                    if (invalidData || hasInvalidClass) {
+                        button.disabled = true;
+                        button.title = 'Cannot approve request with invalid data';
+                        
+                        if (!card.querySelector('.alert.alert-warning')) {
+                            const warningDiv = document.createElement('div');
+                            warningDiv.className = 'alert alert-warning mt-2';
+                            warningDiv.innerHTML = `
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                Cannot approve request with invalid data. Please ask for a new request with valid information.
+                            `;
+                            button.parentElement.appendChild(warningDiv);
+                        }
+                    } else {
+                        button.disabled = false;
+                        button.title = '';
+                    }
                 }
             });
+        });
+        
+        function updateBulkActionButtons() {
+            const selectedRequests = document.querySelectorAll('.bulk-select-checkbox:checked');
+            const bulkApproveButton = document.querySelector('button[value="approve"][form="bulkActionForm"]');
+            
+            if (bulkApproveButton) {
+                let hasInvalidData = false;
+                selectedRequests.forEach(checkbox => {
+                    const card = checkbox.closest('.change-request');
+                    if (card && (card.querySelector('.invalid-email-hover') || card.classList.contains('has-invalid-data'))) {
+                        hasInvalidData = true;
+                    }
+                });
+                
+                bulkApproveButton.disabled = hasInvalidData;
+                bulkApproveButton.title = hasInvalidData ? 'Cannot approve requests with invalid data' : '';
+            }
+        }
+
+        document.addEventListener('change', function(e) {
+            if (e.target.classList.contains('bulk-select-checkbox')) {
+                updateBulkActionButtons();
+            }
         });
 
         document.addEventListener('DOMContentLoaded', function() {

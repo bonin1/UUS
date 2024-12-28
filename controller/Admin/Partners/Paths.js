@@ -1,19 +1,38 @@
 const PartnersModel = require('../../../model/Partners');
+const Department = require('../../../model/DepartmentModel');
+const StudyLevel = require('../../../model/StudyLevel');
+const { StatusCodes } = require('http-status-codes');
 
+exports.PartnerPath = async (req, res, next) => {
+    const { id: userId } = req.params;
 
-exports.PartnerPath = async(req,res)=>{
-    const userId = req.params.id;
-    try {
-        const partner = await PartnersModel.findOne({
-            where: { id: userId },
-            attributes: ['id','name','countries','open_scolars','level','semester','dep_id','partners_photos']
+    if (!userId) {
+        return res.status(StatusCodes.BAD_REQUEST).json({
+            message: 'Partner ID is required'
         });
+    }
+
+    try {
+        const [partner, departments, studyLevels] = await Promise.all([
+            PartnersModel.findOne({ where: { id: userId } }),
+            Department.findAll(),
+            StudyLevel.findAll()
+        ]);
+
         if (!partner) {
-            return res.status(404).send('Partner not found');
+            return res.status(StatusCodes.NOT_FOUND).json({
+                message: 'Partner not found'
+            });
         }
-        res.render('editpartners',{data : partner,  successAlert: req.flash('success'), dangerAlert: req.flash('danger')})
+
+        return res.render('editpartners', {
+            data: partner,
+            successAlert: req.flash('success'),
+            dangerAlert: req.flash('danger'),
+            departments,
+            studyLevels
+        });
     } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal server error');
+        next(error);
     }
 };
