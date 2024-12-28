@@ -4,154 +4,206 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/static/css/Footer.css">
 </head>
 <body>
     <style>
-        footer{
-            background-color: #373737;
+        footer {
+            background-color: #1a1a1a;
             width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-        .logo_footer{
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-        .logo_footer > img{
-            width: 500px;
-        }
-        .footer_container{
-            width: 1400px;
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .wrapper_footer{
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-        }
-        .footer_groops{
-            width: 33.33333%;
-            display: flex;
-            justify-content: center;
+            padding: 60px 0 20px 0;
+            font-family: 'Arial', sans-serif;
         }
 
-        .div_sectors{
-            display: flex;
-            flex-direction: column;
-            margin-top: 30px;
-        }
-        .div_sectors > a{
-            color: #fff;
-            text-decoration: none;
-            font-size: 24px;
-            margin-top: 20px;
-        }
-        .footer_groops_inside > h1{
-            color: #fff;
-            font-size: 36px;
-            font-weight: 600;
-        }
-        .underline{
-            width: 150px;
-            background-color: #004492;
-            height: 5px;
-            margin: 20px 0;
-        }
-        .lower_footer{
-            padding: 50px 0;
+        .logo_footer {
             width: 100%;
             display: flex;
             justify-content: center;
-            align-items: center;
-            flex-direction: column;
+            margin-bottom: 40px;
         }
-        .lower_footer > h1{
-            font-size: 20px;
+
+        .logo_footer > img {
+            width: 300px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo_footer > img:hover {
+            transform: scale(1.05);
+        }
+
+        .footer_container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .wrapper_footer {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 30px;
+        }
+
+        .footer_groops_inside h1 {
             color: #fff;
+            font-size: 24px;
             font-weight: 600;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer_groops_inside h1:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 50px;
+            height: 3px;
+            background-color: #004492;
+        }
+
+        .div_sectors {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .div_sectors > a {
+            color: #919191;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .div_sectors > a:hover {
+            color: #fff;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            color: #919191;
+            font-size: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #004492;
+        }
+
+        .lower_footer {
+            margin-top: 50px;
+            padding: 20px 0;
+            border-top: 1px solid #333;
             text-align: center;
         }
-        .disabled_a{
-            pointer-events: none;
+
+        .lower_footer h1 {
+            font-size: 14px;
+            color: #919191;
         }
 
-        @media screen and (max-width:1400px) {
-            .footer_container{
-                width: 100%;
+        @media screen and (max-width: 1200px) {
+            .wrapper_footer {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
-        @media screen and (max-width:880px) {
-            .wrapper_footer{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
+
+        @media screen and (max-width: 768px) {
+            .wrapper_footer {
+                grid-template-columns: repeat(2, 1fr);
             }
-            .footer_groops{
-                width: 100% ;
-                margin: 50px 0;
+        }
+
+        @media screen and (max-width: 480px) {
+            .wrapper_footer {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer_groops_inside h1:after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .footer_groops_inside {
                 text-align: center;
             }
-            .logo_footer > img{
-                width: 300px;
+
+            .social-icons {
+                justify-content: center;
             }
         }
     </style>
 
-
-
-<!-- FOOTER -->
-
-<footer>
-    <div class="logo_footer">
-        <img src="/static/image/logo2.0white.png" alt="">
-    </div>
-    <div class="footer_container">
-        <div class="wrapper_footer">
-            <div class="studies_footer footer_groops">
-                <div class="studies_container_inside footer_groops_inside">
-                    <h1>Studies</h1>
+    <footer>
+        <div class="logo_footer">
+            <img src="/static/image/logo2.0white.png" alt="UUS Logo">
+        </div>
+        <div class="footer_container">
+            <div class="wrapper_footer">
+                <div class="footer_groops_inside">
+                    <h1>Academics</h1>
                     <div class="div_sectors">
-                        <a href="/bachelor">Bachelor</a>
+                        <a href="/bachelor">Bachelor Programs</a>
                         <a href="/master">Master Studies</a>
+                        <a href="/phd">PhD Programs</a>
+                        <a href="/research">Research</a>
                     </div>
                 </div>
-            </div>
-            <div class="e_service_footer footer_groops">
-                <div class="e-service_container_inside footer_groops_inside">
-                    <h1>E-Service</h1>
+
+                <div class="footer_groops_inside">
+                    <h1>Student Life</h1>
+                    <div class="div_sectors">
+                        <a href="/campus">Campus Life</a>
+                        <a href="/housing">Housing</a>
+                        <a href="/clubs">Student Clubs</a>
+                        <a href="/sports">Sports</a>
+                    </div>
+                </div>
+
+                <div class="footer_groops_inside">
+                    <h1>E-Services</h1>
                     <div class="div_sectors">
                         <a href="/dmis">DMIS - Student</a>
-                        <a href="">DMIS - Staff</a>
+                        <a href="/staff">DMIS - Staff</a>
                         <a href="/e-learning">E-Learning</a>
                         <a href="/e-library">E-Library</a>
                     </div>
                 </div>
-            </div>
-            <div class="contact_footer footer_groops">
-                <div class="contact_container_inside footer_groops_inside">
+
+                <div class="footer_groops_inside">
+                    <h1>Resources</h1>
+                    <div class="div_sectors">
+                        <a href="/calendar">Academic Calendar</a>
+                        <a href="/publications">Publications</a>
+                        <a href="/careers">Career Center</a>
+                        <a href="/alumni">Alumni</a>
+                    </div>
+                </div>
+
+                <div class="footer_groops_inside">
                     <h1>Contact</h1>
                     <div class="div_sectors">
-                        <a href="mailto: info@uus-edu.org" style="color: #006CE8;">info@uus-edu.com</a>
-                        <a href="tel: +383 44 123 456">+383 44 123 456</a>
-                        <a href="" class="disabled_a">Str. Hasan Prishtina 1,1,<br> Konjuh, Lipjan, 14000,<br> Kosovo</a>
+                        <a href="mailto:info@uus-edu.org">info@uus-edu.com</a>
+                        <a href="tel:+38344123456">+383 44 123 456</a>
+                        <a class="disabled_a">Str. Hasan Prishtina 1,1,<br> Konjuh, Lipjan, 14000,<br> Kosovo</a>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="lower_footer">
-        <div class="underline"></div>
-        <h1>© 2024 University of United Students. All Rights Reserved</h1>
-    </div>
-</footer>
-
-<!-- FOOTER -->
-</body> 
+        <div class="lower_footer">
+            <h1>© 2024 University of United Students. All Rights Reserved</h1>
+        </div>
+    </footer>
+</body>
 </html>
