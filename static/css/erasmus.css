@@ -95,26 +95,30 @@ body{
     display: flex;
 }
 .both-parts{
-    width: 50%;
+    width: 100%;
 }
 .both-parts > p{
-    font-size: 34px;
-    color: #000;
-    text-align: justify;
-    font-weight: 500;
-    padding: 30px 0;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
 }
 .first-part{
     padding-right: 20px;
 }
 .both-parts > img{
     width: 100%;
+    border-radius: 15px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
+.both-parts > img:hover {
+    transform: scale(1.02);
+}
 
 /* mainsection */
-
-
 
 /* requirements */
 .requirements > h1{
@@ -124,43 +128,105 @@ body{
     text-align: center;
     padding-top: 60px;
 }
-.cards{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.requirements h2 {
+    font-size: 2.5rem;
+    color: #004392;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 1rem;
 }
+
+.requirements h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: #004392;
+    border-radius: 2px;
+}
+
 .cars-requirement{
-    width:600px;
-    height: 180px;
-    margin: 50px;
-    border: 3px solid #004392;
-    border-radius: 10px;
-    font-size: 25px;
-    padding: 20px;
+    height: 100%;
+    margin: 0;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.cars-requirement strong {
+    color: #004392;
+    font-size: 1.25rem;
+    display: block;
+    margin-bottom: 1rem;
 }
 
 /* requirements */
 
+/* apply-erasmus section */
+.apply_erasmus {
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 10px 30px rgba(0, 67, 146, 0.1);
+}
 
-/* apply-erasmus */
-.apply_erasmus >h1{
+.apply_erasmus > h1 {
+    font-size: 2.5rem;
     color: #004392;
-    font-weight: 500;
-    font-size: 40px;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 1.5rem;
     text-align: center;
-    padding-top: 60px;
 }
-.apply_erasmus > p{
-    padding-top: 60px;
-    font-size: 30px;
-    font-weight: 500;
-    color: #000;
+
+.apply_erasmus > h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: #004392;
+    border-radius: 2px;
 }
-.apply_erasmus > p > a{
+
+.apply_erasmus > p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #2c3e50;
+}
+
+.apply_erasmus > p > a {
     color: #004392;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 2px solid #004392;
+    border-radius: 30px;
+    transition: all 0.3s ease;
 }
-/* apply-erasmus */
+
+.apply_erasmus > p > a:hover {
+    background-color: #004392;
+    color: white;
+}
+
+/* Hero Banner */
+.hero-banner {
+    background: linear-gradient(rgba(0, 67, 146, 0.8), rgba(0, 67, 146, 0.9)), 
+                url('/static/image/erasmus2 1.png') center/cover;
+    min-height: 75vh;
+    display: flex;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
 @media screen and (max-width:1400px) {
     .wrapper{
         padding: 0px 20px;
@@ -227,13 +293,34 @@ body{
     }
     .parts-container{
         flex-direction: column;
+        padding: 0 15px;
     }
     .both-parts{
         width: 100%;
+    }
+    .both-parts > p{
+        font-size: 1.1rem;
     }
     .cars-requirement{
         width: 100%;
         margin: 50px 0;
         height: auto;
+    }
+    .hero-banner {
+        min-height: 60vh;
+        text-align: center;
+    }
+    
+    .requirements h2,
+    .apply_erasmus h1 {
+        font-size: 2rem;
+    }
+    
+    .apply_erasmus {
+        padding: 2rem;
+    }
+    
+    .apply_erasmus > p {
+        font-size: 1.1rem;
     }
 }

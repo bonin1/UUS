@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our partners</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/ourpartners.css">
 </head>
 <body>
     <%- include('partials/Navbar-light'); %>
+    
+    <!-- Navigation Pills -->
     <div class="wrapper">
         <div class="wrapper-assist">
             <div class="links-container">
@@ -53,213 +56,313 @@
                     </div>
                 </div>
             </div>
-            <div class="backgroud-container">
-                <div class="part-one part">
-                    <h1>ERASMUS</h1>
-                    <br>
-                    <p>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="container-fluid py-5 my-4 bg-primary text-white" style="background: url('/static/image/erasmus3.png') no-repeat center center; background-size: cover; min-height: 500px;">
+        <div class="container">
+            <div class="row min-vh-50">
+                <div class="col-md-6 d-flex flex-column justify-content-center">
+                    <h1 class="display-4">ERASMUS</h1>
+                    <p class="lead mt-3">
                         "Erasmus: where classrooms have no walls, curiosity knows no bounds, and learning is a global adventure."
                     </p>
                 </div>
-                <div class="part-two part"></div>
             </div>
-            <div class="paragraph-background" id="erasmus">
-                <p>
-                    "Erasmus, named after the renowned Dutch philosopher Desiderius Erasmus, is a flagship European Union program that has been transforming the lives of students since its inception in 1987. Designed to promote international exchange and cooperation in higher education, Erasmus offers students the opportunity to study or train abroad in one of the program's participating countries.
-                </p>
-            </div>
-            <div class="container-information">
-                <h1>Top 5 reasons why to study abroad</h1>
-                <p>
-                    Studying abroad offers numerous benefits that can enrich your academic, personal, and professional life. Here are some compelling reasons why studying abroad can be an invaluable experience: 
-                    <br><br>
-                    <strong>Cultural Immersion:</strong> Studying abroad allows you to immerse yourself in a new culture, gaining firsthand experience of different customs, traditions, and perspectives.
-                    <br><br>
-                    <strong>Academic Enrichment:</strong> Many study abroad programs offer unique academic opportunities, including specialized coursework, research opportunities, and access to experts in your field.
-                    <br><br>
-                    <strong>Personal Growth:</strong> Living abroad challenges you to step outside your comfort zone, fostering personal growth, resilience, and adaptability.
-                    <br><br>
-                    <strong>Global Networking:</strong> Studying abroad provides opportunities to build a global network of friends, classmates, and professionals from diverse backgrounds, enhancing your personal and professional network.
-                    <br><br>
-                    <strong>Career Advancement:</strong> International experience is highly valued by employers and can enhance your resume, demonstrating skills such as cultural competency, adaptability, and global perspective.
-                </p>
-            </div>
-            <div id="partner-universities">
-                <h1>PARTNER UNIVERSITIES</h1>
-                <div class="element">
-                    <div class="first-half both-halfs">
-                        <img src="/static/universitypartners/standfort.png" alt="">
+        </div>
+    </div>
+
+    <!-- Erasmus Info Section -->
+    <div class="container mb-5" id="erasmus">
+        <div class="bg-light p-4 rounded">
+            <p class="lead text-center">
+                "Erasmus, named after the renowned Dutch philosopher Desiderius Erasmus, is a flagship European Union program that has been transforming the lives of students since its inception in 1987. Designed to promote international exchange and cooperation in higher education, Erasmus offers students the opportunity to study or train abroad in one of the program's participating countries."
+            </p>
+        </div>
+    </div>
+
+    <!-- Why Study Abroad Section -->
+    <div class="container mb-5">
+        <h2 class="mb-4">Top 5 reasons why to study abroad</h2>
+        <div class="card">
+            <div class="card-body">
+                <p class="card-text">
+                    <!-- Keep existing content for reasons, just wrapped in Bootstrap classes -->
+                    <div class="mb-3">
+                        <strong>Cultural Immersion:</strong> Studying abroad allows you to immerse yourself in a new culture, gaining firsthand experience of different customs, traditions, and perspectives.
                     </div>
-                    <div class="second-half both-halfs">
-                        <h1>Stanford University</h1>
-                        <ul>
-                            <li>Location: Stanford, California, United States</li>
-                            <li>Subjecs: Technology, Engineering, Business, 
-                                Medicine, Humanities</li>
-                        </ul>
+                    <div class="mb-3">
+                        <strong>Academic Enrichment:</strong> Many study abroad programs offer unique academic opportunities, including specialized coursework, research opportunities, and access to experts in your field.
                     </div>
-                </div>
-                <div class="element">
-                    <div class="first-half both-halfs">
-                        <img src="/static/universitypartners/melbourne.png" alt="">
+                    <div class="mb-3">
+                        <strong>Personal Growth:</strong> Living abroad challenges you to step outside your comfort zone, fostering personal growth, resilience, and adaptability.
                     </div>
-                    <div class="second-half both-halfs">
-                        <h1>University of Melbourne</h1>
-                        <ul>
-                            <li>Location: Melbourne, Victoria, Australia</li>
-                            <li>Subjecs: Sciences, Medicine, Education
-                                Arts, Business</li>
-                        </ul>
+                    <div class="mb-3">
+                        <strong>Global Networking:</strong> Studying abroad provides opportunities to build a global network of friends, classmates, and professionals from diverse backgrounds, enhancing your personal and professional network.
                     </div>
-                </div>
-                <div class="element">
-                    <div class="first-half both-halfs">
-                        <img src="/static/universitypartners/zurich.png" alt="">
+                    <div class="mb-3">
+                        <strong>Career Advancement:</strong> International experience is highly valued by employers and can enhance your resume, demonstrating skills such as cultural competency, adaptability, and global perspective.
                     </div>
-                    <div class="second-half both-halfs">
-                        <h1>ETH Zurich - Swiss Federal Institute of Technology</h1>
-                        <ul>
-                            <li>Location: Zurich, Switzerland</li>
-                            <li>Subjecs: Engineering, Sciences, Mathematics, 
-                                Computer Science, Architecture</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="element">
-                    <div class="first-half both-halfs">
-                        <img src="/static/universitypartners/melbourne2.png" alt="">
-                    </div>
-                    <div class="second-half both-halfs">
-                        <h1>University of Melbourne:</h1>
-                        <ul>
-                            <li>Location: Melbourne, Victoria, Australia</li>
-                            <li>Subjecs: Sciences, Medicine, Education, Arts, Business.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="element hidden">
-                    <div class="first-half both-halfs">
-                        <img src="/static/universitypartners/ocfort.png" alt="">
-                    </div>
-                    <div class="second-half both-halfs">
-                        <h1>University of Oxford</h1>
-                        <ul>
-                            <li>Location: Oxford, England, United Kingdom</li>
-                            <li>Subjecs: Humanities, Sciences, Social Sciences, Medicine</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="element hidden">
-                    <div class="first-half both-halfs">
-                        <img src="/static/universitypartners/ecole.png" alt="">
-                    </div>
-                    <div class="second-half both-halfs">
-                        <h1>École Polytechnique</h1>
-                        <ul>
-                            <li>Location: Palaiseau, France</li>
-                            <li>Subjecs: Engineering, Sciences, Mathematics, Economics</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="element hidden">
-                    <div class="first-half both-halfs">
-                        <img src="/static/universitypartners/cambridge.png" alt="">
-                    </div>
-                    <div class="second-half both-halfs">
-                        <h1>University of Cambridge</h1>
-                        <ul>
-                            <li>Location: Cambridge, England, United Kingdom</li>
-                            <li>Subjecs: Sciences, Humanities, Engineering, Law, Medicine</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="element hidden">
-                    <div class="first-half both-halfs">
-                        <img src="/static/universitypartners/sorobonne.png" alt="">
-                    </div>
-                    <div class="second-half both-halfs">
-                        <h1>Sorbonne University</h1>
-                        <ul>
-                            <li>Location: Paris, France</li>
-                            <li>Subjecs: Humanities, Sciences, Social Sciences, Medicine, Law</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="element hidden">
-                    <div class="first-half both-halfs">
-                        <img src="/static/universitypartners/university of sanpao.png" alt="">
-                    </div>
-                    <div class="second-half both-halfs">
-                        <h1>University of São Paulo</h1>
-                        <ul>
-                            <li>Location: São Paulo, Brazil</li>
-                            <li>Subjecs: Sciences, Engineering, Medicine, Social Sciences, Humanities</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="element hidden">
-                    <div class="first-half both-halfs">
-                        <img src="/static/universitypartners/singaport.png" alt="">
-                    </div>
-                    <div class="second-half both-halfs">
-                        <h1>National University of Singapore (NUS)</h1>
-                        <ul>
-                            <li>Location: Singapore</li>
-                            <li>Subjecs: Business, Engineering, Sciences, Medicine</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="element hidden">
-                    <div class="first-half both-halfs">
-                        <img src="/static/universitypartners/amsterdam.png" alt="">
-                    </div>
-                    <div class="second-half both-halfs">
-                        <h1>University of Amsterdam</h1>
-                        <ul>
-                            <li>Location: Amsterdam, Netherlands</li>
-                            <li>Subjecs: Humanities, Social Sciences, Sciences, Law, Economics</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="element hidden">
-                    <div class="first-half both-halfs">
-                        <img src="/static/universitypartners/sorbonne.png" alt="">
-                    </div>
-                    <div class="second-half both-halfs">
-                        <h1>Sorbonne University</h1>
-                        <ul>
-                            <li>Location: Paris, France</li>
-                            <li>Subjecs: Humanities, Sciences, Social Sciences, Medicine, Law</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="button-container">
-                <button id="seeMore">See More</button>
-            </div>
-            <h1 class="title-erasmus">
-                "Exploring Erasmus: Your Guide to Destinations, Application Process, and More"
-            </h1>
-            <div class="exploring-more">
-                <h1>
-                    Erasmus students have the opportunity to study abroad in a wide range of destinations across Europe and beyond. These destinations include:
-                </h1>
-                <p>
-                    <strong>European Union Countries:</strong> Erasmus primarily focuses on study exchanges within European Union (EU) member states. This includes countries such as France, Germany, Spain, Italy, the United Kingdom, and many others.
-                    <br><br>
-                    <strong>Non-EU Countries:</strong> In addition to EU member states, Erasmus also offers study opportunities in non-EU countries that participate in the program. These countries may include Iceland, Norway, Liechtenstein, Turkey, North Macedonia, and Serbia, among others.
-                    <br><br>
-                    <strong>Partner Universities:</strong> Erasmus students can choose from a network of partner universities within their host country. These partner universities have established agreements with the student's home institution, allowing for seamless credit transfer and academic recognition.
-                    <br><br>
-                    <strong>Travel Opportunities:</strong> Studying abroad with Erasmus opens doors to travel opportunities within the host country and neighboring regions. Students can explore historic landmarks, natural wonders, and cultural attractions, creating unforgettable memories during their time abroad.
                 </p>
             </div>
         </div>
     </div>
+
+    <!-- Partner Universities Section -->
+    <div class="container mb-5" id="partner-universities">
+        <h2 class="text-primary mb-4">PARTNER UNIVERSITIES</h2>
+        <div class="row g-4" id="universities-container">
+            <!-- University Card Template -->
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="row g-0">
+                        <div class="col-md-4 p-3 text-center">
+                            <img src="/static/universitypartners/standfort.png" class="img-fluid" alt="Stanford University">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Stanford University</h5>
+                                <ul class="list-unstyled">
+                                    <li>Location: Stanford, California, United States</li>
+                                    <li>Subjects: Technology, Engineering, Business, Medicine, Humanities</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="row g-0">
+                        <div class="col-md-4 p-3 text-center">
+                            <img src="/static/universitypartners/melbourne.png" class="img-fluid" alt="University of Melbourne">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">University of Melbourne</h5>
+                                <ul class="list-unstyled">
+                                    <li>Location: Melbourne, Victoria, Australia</li>
+                                    <li>Subjects: Sciences, Medicine, Education, Arts, Business</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="row g-0">
+                        <div class="col-md-4 p-3 text-center">
+                            <img src="/static/universitypartners/zurich.png" class="img-fluid" alt="ETH Zurich - Swiss Federal Institute of Technology">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">ETH Zurich - Swiss Federal Institute of Technology</h5>
+                                <ul class="list-unstyled">
+                                    <li>Location: Zurich, Switzerland</li>
+                                    <li>Subjects: Engineering, Sciences, Mathematics, Computer Science, Architecture</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="row g-0">
+                        <div class="col-md-4 p-3 text-center">
+                            <img src="/static/universitypartners/melbourne2.png" class="img-fluid" alt="University of Melbourne">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">University of Melbourne</h5>
+                                <ul class="list-unstyled">
+                                    <li>Location: Melbourne, Victoria, Australia</li>
+                                    <li>Subjects: Sciences, Medicine, Education, Arts, Business</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4 hidden">
+                <div class="card h-100">
+                    <div class="row g-0">
+                        <div class="col-md-4 p-3 text-center">
+                            <img src="/static/universitypartners/ocfort.png" class="img-fluid" alt="University of Oxford">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">University of Oxford</h5>
+                                <ul class="list-unstyled">
+                                    <li>Location: Oxford, England, United Kingdom</li>
+                                    <li>Subjects: Humanities, Sciences, Social Sciences, Medicine</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4 hidden">
+                <div class="card h-100">
+                    <div class="row g-0">
+                        <div class="col-md-4 p-3 text-center">
+                            <img src="/static/universitypartners/ecole.png" class="img-fluid" alt="École Polytechnique">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">École Polytechnique</h5>
+                                <ul class="list-unstyled">
+                                    <li>Location: Palaiseau, France</li>
+                                    <li>Subjects: Engineering, Sciences, Mathematics, Economics</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4 hidden">
+                <div class="card h-100">
+                    <div class="row g-0">
+                        <div class="col-md-4 p-3 text-center">
+                            <img src="/static/universitypartners/cambridge.png" class="img-fluid" alt="University of Cambridge">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">University of Cambridge</h5>
+                                <ul class="list-unstyled">
+                                    <li>Location: Cambridge, England, United Kingdom</li>
+                                    <li>Subjects: Sciences, Humanities, Engineering, Law, Medicine</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4 hidden">
+                <div class="card h-100">
+                    <div class="row g-0">
+                        <div class="col-md-4 p-3 text-center">
+                            <img src="/static/universitypartners/sorobonne.png" class="img-fluid" alt="Sorbonne University">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Sorbonne University</h5>
+                                <ul class="list-unstyled">
+                                    <li>Location: Paris, France</li>
+                                    <li>Subjects: Humanities, Sciences, Social Sciences, Medicine, Law</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4 hidden">
+                <div class="card h-100">
+                    <div class="row g-0">
+                        <div class="col-md-4 p-3 text-center">
+                            <img src="/static/universitypartners/university of sanpao.png" class="img-fluid" alt="University of São Paulo">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">University of São Paulo</h5>
+                                <ul class="list-unstyled">
+                                    <li>Location: São Paulo, Brazil</li>
+                                    <li>Subjects: Sciences, Engineering, Medicine, Social Sciences, Humanities</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4 hidden">
+                <div class="card h-100">
+                    <div class="row g-0">
+                        <div class="col-md-4 p-3 text-center">
+                            <img src="/static/universitypartners/singaport.png" class="img-fluid" alt="National University of Singapore (NUS)">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">National University of Singapore (NUS)</h5>
+                                <ul class="list-unstyled">
+                                    <li>Location: Singapore</li>
+                                    <li>Subjects: Business, Engineering, Sciences, Medicine</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4 hidden">
+                <div class="card h-100">
+                    <div class="row g-0">
+                        <div class="col-md-4 p-3 text-center">
+                            <img src="/static/universitypartners/amsterdam.png" class="img-fluid" alt="University of Amsterdam">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">University of Amsterdam</h5>
+                                <ul class="list-unstyled">
+                                    <li>Location: Amsterdam, Netherlands</li>
+                                    <li>Subjects: Humanities, Social Sciences, Sciences, Law, Economics</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4 hidden">
+                <div class="card h-100">
+                    <div class="row g-0">
+                        <div class="col-md-4 p-3 text-center">
+                            <img src="/static/universitypartners/sorbonne.png" class="img-fluid" alt="Sorbonne University">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Sorbonne University</h5>
+                                <ul class="list-unstyled">
+                                    <li>Location: Paris, France</li>
+                                    <li>Subjects: Humanities, Sciences, Social Sciences, Medicine, Law</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <button class="btn btn-primary" id="seeMore">See More</button>
+        </div>
+    </div>
+
+    <!-- Exploring Erasmus Section -->
+    <div class="container mb-5">
+        <h2 class="text-center text-primary mb-4">
+            "Exploring Erasmus: Your Guide to Destinations, Application Process, and More"
+        </h2>
+        <div class="bg-light p-4 rounded">
+            <h1>
+                Erasmus students have the opportunity to study abroad in a wide range of destinations across Europe and beyond. These destinations include:
+            </h1>
+            <p>
+                <strong>European Union Countries:</strong> Erasmus primarily focuses on study exchanges within European Union (EU) member states. This includes countries such as France, Germany, Spain, Italy, the United Kingdom, and many others.
+                <br><br>
+                <strong>Non-EU Countries:</strong> In addition to EU member states, Erasmus also offers study opportunities in non-EU countries that participate in the program. These countries may include Iceland, Norway, Liechtenstein, Turkey, North Macedonia, and Serbia, among others.
+                <br><br>
+                <strong>Partner Universities:</strong> Erasmus students can choose from a network of partner universities within their host country. These partner universities have established agreements with the student's home institution, allowing for seamless credit transfer and academic recognition.
+                <br><br>
+                <strong>Travel Opportunities:</strong> Studying abroad with Erasmus opens doors to travel opportunities within the host country and neighboring regions. Students can explore historic landmarks, natural wonders, and cultural attractions, creating unforgettable memories during their time abroad.
+            </p>
+        </div>
+    </div>
+
     <%- include('partials/footer'); %>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         var path = window.location.pathname;
-        var links = document.querySelectorAll('.links a');
+        var links = document.querySelectorAll('.nav-link');
     
         for (var i = 0; i < links.length; i++) {
             var href = links[i].getAttribute('href');
