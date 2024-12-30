@@ -47,26 +47,26 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function navigateToUser(courseId) {
-        window.location.href = `/admin/course/${courseId}`;
+        window.location.href = `/admin/courses/${courseId}`;
     }
 
     searchInput.addEventListener("keydown", function (e) {
         if (e.key === "Enter" && recommendations.firstElementChild) {
             const courseId = recommendations.firstElementChild.getAttribute("data-id");
-            window.location.href = `/admin/course/${courseId}`;
+            window.location.href = `/admin/courses/${courseId}`;
         }
     });
     searchForm.addEventListener("submit", function (e) {
         e.preventDefault();
         if (recommendations.firstElementChild) {
             const courseId = recommendations.firstElementChild.getAttribute("data-id");
-            window.location.href = `/admin/course/${courseId}`;
+            window.location.href = `/admin/courses/${courseId}`;
         }
     });
     recommendations.addEventListener("click", function (e) {
         if (e.target.tagName === "LI") {
             const courseId = e.target.getAttribute("data-id");
-            window.location.href = `/admin/course/${courseId}`;
+            window.location.href = `/admin/courses/${courseId}`;
         }
     });
 });
