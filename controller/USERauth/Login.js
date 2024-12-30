@@ -8,6 +8,7 @@ const router = express.Router();
 const crypto = require('crypto');
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
+const Users = require('../../model/UsersModel');
 
 
 
@@ -53,11 +54,16 @@ exports.LoginPost = async (req, res) => {
             return res.render('login', { message: 'Incorrect email or password', csrfToken: req.session.csrfToken });
         }
 
+        const userData = await Users.findByPk(userLogin.user_id);
+        if (!userData) {
+            return res.render('login', { message: 'User not found', csrfToken: req.session.csrfToken });
+        }
+
         const sessionToken = jwt.sign(
             { 
                 userId: userLogin.user_id, 
                 email: userLogin.email,
-                role: userLogin.role 
+                role: userData.role
             }, 
             process.env.JWT_SECRET
         );
@@ -69,7 +75,7 @@ exports.LoginPost = async (req, res) => {
                 { 
                     userId: userLogin.user_id, 
                     email: userLogin.email,
-                    role: userLogin.role 
+                    role: userData.role
                 }, 
                 process.env.JWT_SECRET, 
                 { expiresIn: '30d' }
@@ -79,7 +85,7 @@ exports.LoginPost = async (req, res) => {
         
         req.session.isLoggedIn = true;
         req.session.userId = userLogin.user_id;
-        req.session.userRole = userLogin.role;
+        req.session.userRole = userData.role; 
         res.redirect('/e-learning');
     } catch (err) {
         console.error(err);

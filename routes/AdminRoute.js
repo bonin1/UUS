@@ -17,6 +17,10 @@ const { UpdatePartnerImage } = require('../controller/Admin/Partners/ImageCRUDop
 const { handleChangeRequest, viewChangeRequests, handleBulkChangeRequests } = require('../controller/Admin/Request');
 const { createDepartment, updateDepartment, deleteDepartment } = require('../controller/Admin/Department/CRUDoperations');
 const { CreateStudyLevel, UpdateStudyLevel, DeleteStudyLevel } = require('../controller/Admin/StudyLevel/CRUDoperations');
+const { SearchCourses } = require('../controller/SEARCH/SearchCourses');
+const { CoursePathById , ViewAllCourses } = require('../controller/Admin/Courses/Paths');
+const { CreateCourse, UpdateCourse, DeleteCourse } = require('../controller/Admin/Courses/CRUDoperations');
+
 
 const isAdmin = require('../middleware/isAdmin');
 const isAdminOrStaff = require('../middleware/isAdminorStaff');
@@ -34,6 +38,8 @@ router.post('/delete-erasmus-application/:id', isAdmin, DeleteErasmusApplication
 
 // search partners
 router.post('/search/partners', SearchPartners);
+
+router.post('/search/courses', SearchCourses);
 
 router.get('/change-requests', isAdmin, viewChangeRequests);
 
@@ -129,6 +135,25 @@ router.post('/update-study-level/:study_level_id', isAdminOrStaff, UpdateStudyLe
 router.post('/delete-study-level/:study_level_id', isAdminOrStaff, DeleteStudyLevel);
 
 // --------------------------------------------
+
+// Get all courses page
+router.get('/viewAll/courses', isAdminOrStaff, ViewAllCourses);
+
+// Get course page by id
+router.get('/courses/:id', isAdminOrStaff, CoursePathById);
+
+//CRUD operations
+// Create course
+router.post('/create-course', isAdminOrStaff, CreateCourse);
+
+// Update course
+router.post('/update-course/:id', isAdminOrStaff, UpdateCourse);
+
+// Delete course
+router.post('/delete-course/:id', isAdminOrStaff, DeleteCourse);
+
+// --------------------------------------------
+
 
 
 module.exports = router;

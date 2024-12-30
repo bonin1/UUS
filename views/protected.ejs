@@ -82,6 +82,10 @@
                         <img src="/static/image/Graph--Streamline-Core.png" alt="">
                         Study Level
                     </button>
+                    <button id="toggleDiv9">
+                        <img src="/static/image/Courses.png" alt="">
+                        Courses
+                    </button>
                 </div>
             </div>
             <div class="bottomSide">
@@ -507,6 +511,26 @@
                     </form>
                 </div>
             </div>
+
+            <div class="main-container hidden" id="div10">
+                <h1 style="text-align: center; margin: 50px 0;">Courses</h1>
+
+                <div class="courses-container">
+                    <div class="pjesa2">
+                        <div class="rcmn">
+                            <form id="courses-search-form">
+                                <input type="text" id="courses-search-input" placeholder="Search..." autocomplete="off">
+                                <button class="courses-search-submit" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </form>
+                            <div id="courses-recommendations"></div>
+                        </div>
+                    </div>
+
+                    <a href="/admin/viewAll/courses">View all</a>
+                </div>
+                <h1>Total Courses: <%= courses.length %></h1>
+            </div>
+
         </div>
     </div>
 
@@ -515,5 +539,6 @@
     <script src="/static/js/protected.js" defer></script>
     <script src="/static/js/loginInformation.js" defer></script>
     <script src="/static/js/partners.js"></script>
+    <script src="/static/js/Courses.js" defer></script>
 </body>
 </html>

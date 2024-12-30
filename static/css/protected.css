@@ -450,7 +450,8 @@ table, th, td {
 }
 #search-form,
 #search-form2,
-#search-form3{
+#search-form3,
+#courses-search-form{
     box-sizing: content-box;
     padding: 20px;
     display: flex;
@@ -462,7 +463,8 @@ table, th, td {
 }
 #search-input,
 #search-input2,
-#search-input3{
+#search-input3,
+#courses-search-input{
     height: 35px;
     border: 1px solid gray;
     border-top-right-radius: 0px;
@@ -475,21 +477,29 @@ table, th, td {
     outline: none;
     color: #000;
 }
-
+#courses-search-input,
+.courses-search-submit,
+#courses-search-input::placeholder{
+    background-color: #4a90e2 !important;
+    color: #fff !important;
+}
 
 #search-input::placeholder,
 #search-input2::placeholder,
-#search-input3::placeholder{
+#search-input3::placeholder,
+#courses-search-input::placeholder{
     color: #AEAEAE;
 }
 #search-input:focus,
 #search-input2:focus,
-#search-input3:focus{
+#search-input3:focus,
+#courses-search-input:focus{
     outline: none;
 }
 .search-submit,
 .search-submit2,
-.search-submit3{
+.search-submit3,
+.courses-search-submit{
     border: none;
     background-color: transparent;
     font-size: 20px;
@@ -510,7 +520,8 @@ table, th, td {
 }
 #recommendations,
 #recommendations2,
-#recommendations3{
+#recommendations3,
+#courses-recommendations{
     position: absolute;
     top: 50px;
     list-style-type: none;
@@ -894,6 +905,26 @@ table, th, td {
     margin-right: 5px;
 }
 
+#div10{
+    width: 100%;
+    height: 100%;
+}
+.courses-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.courses-container > a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+    padding: 5px 15px;
+    background-color: #004492;
+    border-radius: 10px;
+    cursor: pointer;
+}
 @media screen and (max-width:1600px) {
     .form-one > input,
     .form-two > select{

@@ -6,6 +6,7 @@ const Feedback = require('../../../model/FeedbackModel');
 const ApplyErasmus = require('../../../model/applyErasmusModel'); 
 const TasksModel = require('../../../model/TaskModel')
 const Studylevel = require('../../../model/StudyLevelModel');
+const Courses = require('../../../model/CoursesModel');
 const jwt = require('jsonwebtoken');
 
 
@@ -23,7 +24,7 @@ exports.ProtectedPath = async (req, res) => {
         }
 
 
-        const [studentCount, professorCount, departments, feedbackData, applies, applyErasmus] = await Promise.all([
+        const [studentCount, professorCount, departments, feedbackData, applies, applyErasmus, courses] = await Promise.all([
             User.count({ where: { role: 'student' } }),
             User.count({ where: { role: 'professor' } }),
             Department.findAll({ attributes: ['dep_id', 'dep_name'] }),
@@ -45,7 +46,8 @@ exports.ProtectedPath = async (req, res) => {
                     { model: Department, attributes: ['dep_name'] },
                     { model: User, attributes: ['email'] }
                 ]
-            })
+            }),
+            Courses.findAll()
         ]);
 
         const departmentCount = departments.length;
@@ -101,7 +103,8 @@ exports.ProtectedPath = async (req, res) => {
             StudyLevels,
             totalStudyLevels,
             userRole,
-            availableRoles
+            availableRoles,
+            courses
         });
 
     } catch (err) {

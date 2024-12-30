@@ -37,6 +37,7 @@ const StudyLevel = require('./model/StudyLevelModel')
 const Course = require('./model/CoursesModel')
 const Enrollment = require('./model/EnrollmentModel')
 const Grade = require('./model/GradesModel')
+const Semester = require('./model/SemesterModel')
 
 
 app.use((req, res, next) => {

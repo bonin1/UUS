@@ -55,6 +55,7 @@ const Course = db.define('Course', {
     available: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: true 
     }
 }, {
     freezeTableName: true,
