@@ -21,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
+
 const User = require('./model/UsersModel')
 const Feedback = require('./model/FeedbackModel')
 const ApplyForm = require('./model/ApplyModel')
@@ -28,11 +29,15 @@ const Department = require('./model/DepartmentModel')
 const ApplyErasmus = require('./model/applyErasmusModel') 
 const UserImage = require('./model/UserImageModel')
 const Login = require('./model/LoginModel')
-const PartnersModel = require('./model/Partners')
+const PartnersModel = require('./model/PartnersModel')
 const TasksModel = require('./model/TaskModel')
-const AuditLog = require('./model/AuditLog')
-const ChangeRequest = require('./model/ChangeRequest')
-const StudyLevel = require('./model/StudyLevel')
+const AuditLog = require('./model/AuditLogModel')
+const ChangeRequest = require('./model/ChangeRequestModel')
+const StudyLevel = require('./model/StudyLevelModel')
+const Course = require('./model/CoursesModel')
+const Enrollment = require('./model/EnrollmentModel')
+const Grade = require('./model/GradesModel')
+
 
 app.use((req, res, next) => {
     res.locals.isLoggedIn = req.session.isLoggedIn;
@@ -49,6 +54,7 @@ app.use('/feedback', require('./routes/FeedbackRoute'));
 app.use('/apply-erasmus', require('./routes/ApplyErasmusRoute'));
 app.use('/partners', require('./routes/PartnersRoute'));
 app.use('/dmis', require('./routes/DmisRoute'));
+app.use('/professor', require('./routes/ProfessorRoute'));
 
 //temporary
 app.get('/data', (req, res) => {

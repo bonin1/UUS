@@ -6,7 +6,7 @@ const { body, validationResult } = require('express-validator');
 const loggingRateLimiter = require('../middleware/loginlimitter');
 const sessionMiddleware = require('../middleware/sesionMiddleware');
 const Department = require('../model/DepartmentModel');
-const StudyLevel = require('../model/StudyLevel');
+const StudyLevel = require('../model/StudyLevelModel');
 
 router.use(flash());
 router.use(loggingRateLimiter);

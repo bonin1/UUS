@@ -1,4 +1,4 @@
-const StudyLevel = require('../../../model/StudyLevel');
+const StudyLevel = require('../../../model/StudyLevelModel');
 
 exports.CreateStudyLevel = async (req, res) => {
     const { study_level } = req.body;

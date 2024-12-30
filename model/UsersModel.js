@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 const db = require('../database');
 const Department = require('./DepartmentModel');
+
 const User = db.define('User', {
     id: {
         type: DataTypes.INTEGER,
@@ -22,6 +23,7 @@ const User = db.define('User', {
             model: Department,
             key: 'dep_id',
         },
+        onDelete: 'CASCADE',
     },
     role: {
         type: DataTypes.ENUM('student', 'admin', 'professor', 'staff'),
@@ -42,7 +44,7 @@ const User = db.define('User', {
     address: {
         type: DataTypes.STRING,
         allowNull: false,
-    },
+    }
 },{
     freezeTableName: true,
 });
@@ -54,4 +56,5 @@ User.sync({ force: false }).then(() => {
 }).catch(err => {
     console.error('Error syncing User table:', err);
 });
+
 module.exports = User;

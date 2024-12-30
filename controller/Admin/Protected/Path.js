@@ -5,7 +5,7 @@ const Department = require('../../../model/DepartmentModel');
 const Feedback = require('../../../model/FeedbackModel');
 const ApplyErasmus = require('../../../model/applyErasmusModel'); 
 const TasksModel = require('../../../model/TaskModel')
-const Studylevel = require('../../../model/StudyLevel');
+const Studylevel = require('../../../model/StudyLevelModel');
 const jwt = require('jsonwebtoken');
 
 

@@ -1,4 +1,4 @@
-const AuditLog = require('../model/AuditLog');
+const AuditLog = require('../model/AuditLogModel');
 
 exports.createAuditLog = async ({ userId, action, performer, req, details, status, errorMessage = null }) => {
     return AuditLog.create({

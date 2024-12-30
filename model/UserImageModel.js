@@ -31,11 +31,5 @@ const UserImage = db.define('userimage', {
 
 UserImage.belongsTo(Users, { foreignKey: 'user_id' });
 
-UserImage.sync({ force: false }).then(() => {
-    console.log('UserImage table synced');
-}).catch(err => {
-    console.error('Error syncing UserImage table:', err);
-});
-
 
 module.exports = UserImage

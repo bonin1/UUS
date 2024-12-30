@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const db = require('../database');
+const Course = require('./CoursesModel');
 
 const Department = db.define('Department', {
     dep_id: {
@@ -17,10 +18,5 @@ const Department = db.define('Department', {
     timestamps: false,
 });
 
-Department.sync({ force: false }).then(() => {
-    console.log('Department table synced');
-}).catch(err => {
-    console.error('Error syncing Department table:', err);
-});
 
 module.exports = Department;

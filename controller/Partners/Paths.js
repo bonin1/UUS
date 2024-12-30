@@ -1,5 +1,5 @@
 const { validationResult } = require('express-validator');
-const Partner = require('../../model/Partners');
+const Partner = require('../../model/PartnersModel');
 
 
 exports.PartnersPath = async (req, res) => {

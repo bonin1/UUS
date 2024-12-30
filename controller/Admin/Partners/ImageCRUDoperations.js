@@ -1,4 +1,4 @@
-const PartnersModel = require('../../../model/Partners');
+const PartnersModel = require('../../../model/PartnersModel');
 
 exports.UpdatePartnerImage = async (req, res) => {
     const userId = req.params.id;

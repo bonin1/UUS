@@ -1,6 +1,6 @@
-const PartnersModel = require('../../../model/Partners');
+const PartnersModel = require('../../../model/PartnersModel');
 const Department = require('../../../model/DepartmentModel');
-const StudyLevel = require('../../../model/StudyLevel');
+const StudyLevel = require('../../../model/StudyLevelModel');
 const { StatusCodes } = require('http-status-codes');
 
 exports.PartnerPath = async (req, res, next) => {

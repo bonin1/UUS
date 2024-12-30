@@ -65,17 +65,18 @@ body{
     list-style-type: none;
     display: flex;
     justify-content: space-between;
+    padding: 0px !important;
 }
-.unordered > li > a{
+.unordered-list > li > a{
     color: #000;
     font-size: 30px;
     text-decoration: none;
     transition: .1s;
 }
-.unordered > li > a.active{
+.unordered-list > li > a.active{
     color: #004392 !important;
 }
-.unordered > li > a:hover{
+.unordered-list > li > a:hover{
     color: #004392;
 }
 #container-hidden{

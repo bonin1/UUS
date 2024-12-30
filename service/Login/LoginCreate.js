@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const Login = require('../../model/LoginModel');
-const ChangeRequest = require('../../model/ChangeRequest');
+const ChangeRequest = require('../../model/ChangeRequestModel');
 const { createAuditLog } = require('../../helpers/AuditHelper');
 const { ACTIONS, STATUS, ROLES } = require('../../utils/Constrants');
 

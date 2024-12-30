@@ -53,14 +53,33 @@ exports.LoginPost = async (req, res) => {
             return res.render('login', { message: 'Incorrect email or password', csrfToken: req.session.csrfToken });
         }
 
+        const sessionToken = jwt.sign(
+            { 
+                userId: userLogin.user_id, 
+                email: userLogin.email,
+                role: userLogin.role 
+            }, 
+            process.env.JWT_SECRET
+        );
+        res.cookie('sessionToken', sessionToken, { httpOnly: true, secure: true });
+
         const rememberMe = req.body.rememberMe === 'on';
         if (rememberMe) {
-            const token = jwt.sign({ userId: userLogin.user_id, email: userLogin.email },  process.env.JWT_SECRET, { expiresIn: '30d' });
-            res.cookie('rememberToken', token, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true, secure: true });
+            const rememberToken = jwt.sign(
+                { 
+                    userId: userLogin.user_id, 
+                    email: userLogin.email,
+                    role: userLogin.role 
+                }, 
+                process.env.JWT_SECRET, 
+                { expiresIn: '30d' }
+            );
+            res.cookie('rememberToken', rememberToken, { maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true, secure: true });
         }
         
         req.session.isLoggedIn = true;
         req.session.userId = userLogin.user_id;
+        req.session.userRole = userLogin.role;
         res.redirect('/e-learning');
     } catch (err) {
         console.error(err);

@@ -1,4 +1,4 @@
-const ChangeRequest= require('../../model/ChangeRequest');
+const ChangeRequest= require('../../model/ChangeRequestModel');
 const User = require('../../model/UsersModel');
 const Login = require('../../model/LoginModel');
 const { createAuditLog } = require('../../helpers/AuditHelper');
