@@ -38,6 +38,11 @@ const Course = require('./model/CoursesModel')
 const Enrollment = require('./model/EnrollmentModel')
 const Grade = require('./model/GradesModel')
 const Semester = require('./model/SemesterModel')
+const News = require('./model/NewsModel')
+const NewsMedia = require('./model/NewsMedia')
+const NewsTag = require('./model/NewsTag')
+const ArticleTag = require('./model/ArticleTag')
+const NewsCategories = require('./model/NewsCategory')
 
 
 app.use((req, res, next) => {

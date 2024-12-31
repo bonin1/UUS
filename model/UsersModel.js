@@ -26,7 +26,7 @@ const User = db.define('User', {
         onDelete: 'CASCADE',
     },
     role: {
-        type: DataTypes.ENUM('student', 'admin', 'professor', 'staff'),
+        type: DataTypes.ENUM('student', 'admin', 'professor', 'staff', 'author'),
         allowNull: false,
     },
     email: {
