@@ -37,7 +37,7 @@ const hideElement = (element) => {
     element.classList.remove('visible');
 }
 
-const divs = ['div1', 'div2', 'div3', 'div4', 'div5','div6','div7','div8','div9','div10'].map(id => document.getElementById(id));
+const divs = ['div1', 'div2', 'div3', 'div4', 'div5','div6','div7','div8','div9','div10','div11'].map(id => document.getElementById(id));
 const toggles = [
     { button: 'toggleDivs', divs: [0, 1] },
     { button: 'toggleDiv2', divs: [2] },
@@ -48,6 +48,7 @@ const toggles = [
     { button: 'toggleDiv7', divs: [7] },
     { button: 'toggleDiv8', divs: [8] },
     { button: 'toggleDiv9', divs: [9] },
+    { button: 'toggleDiv10', divs: [10] },
 ].map(toggle => ({ ...toggle, button: document.getElementById(toggle.button) }));
 
 toggles.forEach(({ button, divs: divIndices }) => {
