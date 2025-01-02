@@ -28,6 +28,7 @@ const staticRoutes = [
     { path: '/courses', view: 'courses'},
     { path: '/prishtine', view: 'prishtina' },
     { path: '/prizren', view: 'prizren' },
+    {  path: '/phd', view: 'phd' },
 ];
 
 exports.setupStaticRoutes = (app) => {

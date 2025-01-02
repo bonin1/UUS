@@ -1,0 +1,56 @@
+.hero-section {
+    background: linear-gradient(45deg, #1a237e, #0d47a1) !important;
+    padding: 120px 0;
+}
+
+.stat-card {
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.faculty-card {
+    transition: transform 0.3s ease;
+}
+
+.faculty-card:hover {
+    transform: translateY(-5px);
+}
+
+.faculty-card img {
+    height: 200px;
+    object-fit: cover;
+}
+
+.funding-card {
+    transition: transform 0.3s ease;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.funding-card:hover {
+    transform: translateY(-5px);
+}
+
+.facility-card {
+    transition: transform 0.3s ease;
+}
+
+.facility-card:hover {
+    transform: translateY(-5px);
+}
+
+.icon-box {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.bg-dark-subtle {
+    background: rgba(255,255,255,0.1);
+}

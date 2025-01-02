@@ -3,22 +3,22 @@ const db = require('../database');
 const News = require('./NewsModel');
 const Tag = require('./NewsTag');
 
-const NewsTag = db.define('NewsTag', {
-    articleID:{
+const ArticleTag = db.define('ArticleTag', {
+    news_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         references: {
             model: News,
-            key: 'articleID',
+            key: 'news_id',
         },
         onDelete: 'CASCADE',
     },
-    tagID:{
+    tag_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         references: {
             model: Tag,
-            key: 'tagID',
+            key: 'tag_id',
         },
         onDelete: 'CASCADE',
     }
@@ -26,10 +26,10 @@ const NewsTag = db.define('NewsTag', {
     freezeTableName: true,
 });
 
-NewsTag.sync({ force: false }).then(() => {
-    console.log('NewsTag table synced');
+ArticleTag.sync({ force: false }).then(() => {
+    console.log('ArticleTag table synced');
 }).catch(err => {
-    console.error('Error syncing NewsTag table:', err);
+    console.error('Error syncing ArticleTag table:', err);
 });
 
-module.exports = NewsTag;
+module.exports = ArticleTag;

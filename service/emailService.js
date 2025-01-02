@@ -51,6 +51,31 @@ const sendResetEmail = async (toEmail, token, name) => {
     }
 };
 
+const sendNewsNotification = async (toEmail, newsTitle, newsContent) => {
+    const templatePath = path.resolve(__dirname, '../template/NewsNotification.html');
+    
+    try {
+        let emailTemplate = fs.readFileSync(templatePath, 'utf8');
+
+        emailTemplate = emailTemplate
+            .replace('{{newsTitle}}', newsTitle)
+            .replace('{{newsPreview}}', newsContent.substring(0, 200) + '...');
+
+        const mailOptions = {
+            from: `<${process.env.EMAIL_ADMIN}>`,
+            to: toEmail,
+            subject: "New News Article Published",
+            html: emailTemplate
+        };
+
+        await sendEmail(mailOptions);
+    } catch (error) {
+        console.error("Error sending news notification:", error);
+        throw error;
+    }
+};
+
 module.exports = {
     sendResetEmail,
+    sendNewsNotification,
 };

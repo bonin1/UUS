@@ -605,7 +605,31 @@
                 </div>
 
                 <div class="create-news-container">
-                    <!-- create news -->
+                    <form action="/admin/create-news" method="post" enctype="multipart/form-data">
+                        <input type="text" name="title" placeholder="Title" required>
+                        <textarea name="content" placeholder="Content" required></textarea>
+                        
+                        <select name="category_id" required>
+                            <option value="" class="" disabled selected>Category</option>
+                            <% NewsCategorys.forEach(category => { %>
+                                <option value="<%= category.category_id %>"><%= category.category_name %></option>
+                            <% }); %>
+                        </select>
+                        
+                        <select name="tag_id" required>
+                            <option value="" class="" disabled selected>Tag</option>
+                            <% NewsTags.forEach(tag => { %>
+                                <option value="<%= tag.tag_id %>"><%= tag.tag %></option>
+                            <% }); %>
+                        </select>
+                        <input type="file" name="primary_image" accept="image/*">
+                        <input type="file" name="additional_media" accept="image/*,video/*">
+                        <div class="notify-users">
+                            <input type="checkbox" id="notify_users" name="notify_users">
+                            <label for="notify_users">Notify users about this news via email</label>
+                        </div>
+                        <button type="submit">Create</button>
+                    </form>
                 </div>
 
             </div>

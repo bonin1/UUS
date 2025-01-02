@@ -1,6 +1,7 @@
 const { DataTypes } = require('sequelize');
 const db = require('../database');
 const User = require('./UsersModel');
+const NewsCategory = require('./NewsCategory');
 
 const News = db.define('News', {
     news_id: {
@@ -26,6 +27,15 @@ const News = db.define('News', {
         references: {
             model: User,
             key: 'id',
+        },
+        onDelete: 'CASCADE',
+    },
+    category_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: NewsCategory,
+            key: 'category_id',
         },
         onDelete: 'CASCADE',
     }

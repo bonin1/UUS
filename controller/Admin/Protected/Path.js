@@ -89,6 +89,8 @@ exports.ProtectedPath = async (req, res) => {
 
         const NewsCategorys = await NewsCategory.findAll();
 
+        const UserFind = await User.findAll();
+
         res.render('protected', {
             row: feedbackData,
             data: applies,
@@ -112,7 +114,8 @@ exports.ProtectedPath = async (req, res) => {
             availableRoles,
             courses,
             NewsTags,
-            NewsCategorys
+            NewsCategorys,
+            UserFind
         });
 
     } catch (err) {

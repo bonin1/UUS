@@ -22,6 +22,7 @@ const { CoursePathById , ViewAllCourses } = require('../controller/Admin/Courses
 const { CreateCourse, UpdateCourse, DeleteCourse } = require('../controller/Admin/Courses/CRUDoperations');
 const { CreateNewsTag, DeleteNewsTag } = require('../controller/Admin/News/TagManagement/CRUDoperations');
 const { CreateNewsCategory, UpdateNewsCategory, DeleteNewsCategory } = require('../controller/Admin/News/CategoryManagement/CRUDoperations');
+const { CreateNews } = require('../controller/Admin/News/NewsManagement');
 
 
 const isAdmin = require('../middleware/isAdmin');
@@ -173,6 +174,14 @@ router.post('/update-news-category/:id', isAdminOrStaff, UpdateNewsCategory);
 
 // Delete news category
 router.post('/delete-news-category/:id', isAdminOrStaff, DeleteNewsCategory);
+
+// --------------------------------------------
+//CRUD operations for news
+// Create news
+router.post('/create-news', upload.fields([
+    { name: 'primary_image', maxCount: 1 },
+    { name: 'additional_media', maxCount: 1 }
+]), isAdminOrStaff, CreateNews);
 
 // --------------------------------------------
 
