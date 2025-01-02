@@ -925,6 +925,114 @@ table, th, td {
     border-radius: 10px;
     cursor: pointer;
 }
+
+.main-tag-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.create-tag-container > form > input{
+    width: 300px;
+    padding: 10px 10px;
+    border: 1px solid lightgrey;
+}
+.create-tag-container > form > input:focus{
+    outline: none;
+}
+.create-tag-container > form > button,
+#news-tag-button,
+#news-category-button{
+    padding: 10px 10px; 
+    background-color: #004492;
+    color: #fff;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+}
+
+#news-tag-modal,
+#category-news-modal{
+    display: none;
+}
+.modal-container-news-tag,
+.modal-container-news-category{
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.inside-modal-news-tag,
+.inside-modal-news-category{
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    width: 50%;
+    border-radius: 8px;
+    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    max-height: 600px;
+    overflow: auto;
+}
+#news-tag-close,
+#news-category-close{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    padding: 5px;
+    border-radius: 8px;
+}
+.news-tag,
+.news-category{
+    background-color: lightblue;
+    border-radius: 10px;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.news-tag-buttons > form > button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 600;
+    color: white;
+    background-color: red;
+    padding: 5px;
+    margin-left: 10px;
+    border-radius: 8px;
+}
+.news-category > form > input{
+    width: 300px;
+    padding: 10px 10px;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+}
+.news-category > form > input:focus{
+    outline: none;
+}
+.news-category > form > button{
+    padding: 10px 10px;
+    background-color: #0056b3;
+    color: #fff;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+}
 @media screen and (max-width:1600px) {
     .form-one > input,
     .form-two > select{

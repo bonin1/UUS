@@ -123,7 +123,42 @@ toggles.forEach(({ button, divs: divIndices }) => {
         }
     });
 
+    const NewsTagModal = document.getElementById('news-tag-modal');
+    const NewsTagButton = document.getElementById('news-tag-button');
+    const NewsTagClose = document.getElementById('news-tag-close');
 
+    NewsTagButton.addEventListener('click', () => {
+        NewsTagModal.style.display = 'block';
+    });
+
+    NewsTagClose.addEventListener('click', () => {
+        NewsTagModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', event => {
+        if (event.target === NewsTagModal) {
+            NewsTagModal.style.display = 'none';
+        }
+    });
+
+
+    const NewsCategoryModal = document.getElementById('category-news-modal');
+    const NewsCategoryButton = document.getElementById('news-category-button');
+    const NewsCategoryClose = document.getElementById('news-category-close');
+
+    NewsCategoryButton.addEventListener('click', () => {
+        NewsCategoryModal.style.display = 'block';
+    });
+
+    NewsCategoryClose.addEventListener('click', () => {
+        NewsCategoryModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', event => {
+        if (event.target === NewsCategoryModal) {
+            NewsCategoryModal.style.display = 'none';
+        }
+    });
 
 var loadFile = function(event) {
     var output = document.getElementById('output');

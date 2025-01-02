@@ -20,6 +20,8 @@ const { CreateStudyLevel, UpdateStudyLevel, DeleteStudyLevel } = require('../con
 const { SearchCourses } = require('../controller/SEARCH/SearchCourses');
 const { CoursePathById , ViewAllCourses } = require('../controller/Admin/Courses/Paths');
 const { CreateCourse, UpdateCourse, DeleteCourse } = require('../controller/Admin/Courses/CRUDoperations');
+const { CreateNewsTag, DeleteNewsTag } = require('../controller/Admin/News/TagManagement/CRUDoperations');
+const { CreateNewsCategory, UpdateNewsCategory, DeleteNewsCategory } = require('../controller/Admin/News/CategoryManagement/CRUDoperations');
 
 
 const isAdmin = require('../middleware/isAdmin');
@@ -151,6 +153,26 @@ router.post('/update-course/:id', isAdminOrStaff, UpdateCourse);
 
 // Delete course
 router.post('/delete-course/:id', isAdminOrStaff, DeleteCourse);
+
+// --------------------------------------------
+//CRUD operations for news tags
+// Create news tag
+router.post('/create-news-tag', isAdminOrStaff, CreateNewsTag);
+
+// Delete news tag
+router.post('/delete-news-tag/:id', isAdminOrStaff, DeleteNewsTag);
+
+// --------------------------------------------
+
+//CRUD operations for news categories
+// Create news category
+router.post('/create-news-category', isAdminOrStaff, CreateNewsCategory);
+
+// Update news category
+router.post('/update-news-category/:id', isAdminOrStaff, UpdateNewsCategory);
+
+// Delete news category
+router.post('/delete-news-category/:id', isAdminOrStaff, DeleteNewsCategory);
 
 // --------------------------------------------
 

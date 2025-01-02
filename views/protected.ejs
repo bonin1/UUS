@@ -538,8 +538,77 @@
             <div class="main-container hidden" id="div11">
                 <h1 style="text-align: center; margin: 50px 0;">News</h1>
 
-            </div>
+                <div class="news-tag-container">
+                    <h1 style="text-align: center; margin: 50px 0;">Tag list management: <span><%= NewsTags.length %></span></h1>
+                    <div class="main-tag-container">
+                        <div class="view-all-tag-container">
+                            <button id="news-tag-button">View all</button>
+                        </div>
+    
+                        <div class="create-tag-container">
+                            <form action="/admin/create-news-tag" method="POST">
+                                <input type="text" name="tag" placeholder="Tag name" required>
+                                <button type="submit">Create</button>
+                            </form>
+                        </div>
+                        <div class="modal-container-news-tag" id="news-tag-modal">
+                            <div class="inside-modal-news-tag">
+                                <button id="news-tag-close">X</button>
+                                <% NewsTags.forEach(tag => { %>
+                                    <div class="news-tag">
+                                        <h2><%= tag.tag %></h2>
+                                        <div class="news-tag-buttons">
+                                            <form action="/admin/delete-news-tag/<%= tag.tag_id %>" method="POST">
+                                                <button type="submit">X</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                <% }); %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="news-category-container">
+                    <h1 style="text-align: center; margin: 50px 0;">Category list management: <span><%= NewsCategorys.length %></span></h1>
+                    <div class="main-tag-container">
+                        <div class="view-all-category-container">
+                            <button id="news-category-button">View all</button>
+                        </div>
+    
+                        <div class="create-tag-container">
+                            <form action="/admin/create-news-category" method="POST">
+                                <input type="text" name="category" placeholder="Category name" required>
+                                <button type="submit">Create</button>
+                            </form>
+                        </div>
+
+                        <div class="modal-container-news-category" id="category-news-modal">
+                            <div class="inside-modal-news-category">
+                                <button id="news-category-close">X</button>
+                                <% NewsCategorys.forEach(category => { %>
+                                    <div class="news-category">
+                                        <form action="/admin/update-news-category/<%= category.category_id %>" method="post">
+                                            <input type="text" name="category_name" value="<%= category.category_name %>" required>
+                                            <button type="submit">Update</button>
+                                        </form>
+                                        <div class="news-tag-buttons">
+                                            <form action="/admin/delete-news-category/<%= category.category_id %>" method="POST">
+                                                <button type="submit">X</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                <% }); %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="create-news-container">
+                    <!-- create news -->
+                </div>
+
+            </div>
         </div>
     </div>
 

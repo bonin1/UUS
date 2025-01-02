@@ -18,7 +18,7 @@ const NewsTag = db.define('NewsTag', {
 NewsTag.sync({ force: false }).then(async() => {
     console.log('NewsTag table synced');
 
-    const defaultTags = ['Computer', 'Science', 'Cyber', 'Security', 'General'];
+    const defaultTags = ['Computer', 'Science',];
     for (const tagName of defaultTags) {
         const exists = await NewsTag.findOne({ where: { tag: tagName }});
         if (!exists) {

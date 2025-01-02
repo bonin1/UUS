@@ -7,6 +7,8 @@ const ApplyErasmus = require('../../../model/applyErasmusModel');
 const TasksModel = require('../../../model/TaskModel')
 const Studylevel = require('../../../model/StudyLevelModel');
 const Courses = require('../../../model/CoursesModel');
+const NewsTag = require('../../../model/NewsTag');
+const NewsCategory = require('../../../model/NewsCategory');
 const jwt = require('jsonwebtoken');
 
 
@@ -83,6 +85,10 @@ exports.ProtectedPath = async (req, res) => {
 
         const totalStudyLevels = await Studylevel.count();
 
+        const NewsTags = await NewsTag.findAll();
+
+        const NewsCategorys = await NewsCategory.findAll();
+
         res.render('protected', {
             row: feedbackData,
             data: applies,
@@ -104,7 +110,9 @@ exports.ProtectedPath = async (req, res) => {
             totalStudyLevels,
             userRole,
             availableRoles,
-            courses
+            courses,
+            NewsTags,
+            NewsCategorys
         });
 
     } catch (err) {

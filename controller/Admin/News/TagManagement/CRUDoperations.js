@@ -3,8 +3,8 @@ const NewsTag = require('../../../../model/NewsTag');
 
 exports.CreateNewsTag = async (req, res) => {
     try {
-        const { tag_name } = req.body;
-        const tag = await NewsTag.create({ tag_name });
+        const { tag } = req.body;
+        const tagName = await NewsTag.create({ tag });
 
         req.flash('success', 'Tag created successfully');
         res.redirect('/admin/protected');
@@ -15,31 +15,10 @@ exports.CreateNewsTag = async (req, res) => {
     }
 }
 
-exports.UpdateNewsTag = async (req, res) => {
-    try {
-        const { tag_id, tag_name } = req.body;
-        const tag = await NewsTag.findByPk(tag_id);
-        if (!tag) {
-            req.flash('danger', 'Tag not found');
-            return res.redirect('/admin/protected');
-        }
-
-        tag.tag_name = tag_name;
-        await tag.save();
-
-        req.flash('success', 'Tag updated successfully');
-        res.redirect('/admin/protected/news');
-    } catch (error) {
-        console.error('Error in UpdateNewsTag:', error);
-        req.flash('danger', 'Error updating tag');
-        res.redirect('/admin/protected');
-    }
-}
-
 exports.DeleteNewsTag = async (req, res) => {
     try {
-        const { tag_id } = req.body;
-        const tag = await NewsTag.findByPk(tag_id);
+        const tag_id = req.params.id; 
+        const tag = await NewsTag.findOne({ where: { tag_id } });
         if (!tag) {
             req.flash('danger', 'Tag not found');
             return res.redirect('/admin/protected');
@@ -48,10 +27,10 @@ exports.DeleteNewsTag = async (req, res) => {
         await tag.destroy();
 
         req.flash('success', 'Tag deleted successfully');
-        res.redirect('/admin/protected/news');
+        res.redirect('/admin/protected');
     } catch (error) {
         console.error('Error in DeleteNewsTag:', error);
         req.flash('danger', 'Error deleting tag');
-        res.redirect('/admin/protected/news');
+        res.redirect('/admin/protected');
     }
 }
