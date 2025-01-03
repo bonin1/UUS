@@ -14,7 +14,6 @@ const staticRoutes = [
     { path: '/bachelor', view: 'bachelor' },
     { path: '/master', view: 'master' },
     { path: '/college', view: 'college' },
-    { path: '/computer-science', view: 'computerscience' },
     { path: '/cyber', view: 'cyber' },
     { path: '/law-school', view: 'law-school' },
     { path: '/workat-uus', view: 'workat-uus' },

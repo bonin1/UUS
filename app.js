@@ -61,6 +61,7 @@ app.use('/apply-erasmus', require('./routes/ApplyErasmusRoute'));
 app.use('/partners', require('./routes/PartnersRoute'));
 app.use('/dmis', require('./routes/DmisRoute'));
 app.use('/professor', require('./routes/ProfessorRoute'));
+app.use('/department', require('./routes/UniDepartments'));
 
 //temporary
 app.get('/data', (req, res) => {

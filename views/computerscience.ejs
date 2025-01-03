@@ -94,45 +94,30 @@
         </section>
 
         <section class="news sections">
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4">
-                    <a href="/news/1" class="text-decoration-none">
+            <div class="row g-5">
+                <% news.slice(0, 4).forEach(function(newsItem) { %>
+                    <div class="col-md-6 col-lg-3">
                         <div class="card news-card h-100">
-                            <img src="static/image/Windows_10_Default_Profile_Picture.svg.png" class="card-img-top news-img" alt="News 1">
+                            <% if (newsItem.NewsMedia && newsItem.NewsMedia[0] && newsItem.NewsMedia[0].primary_image) { %>
+                                <img src="data:image/jpeg;base64,<%= Buffer.from(newsItem.NewsMedia[0].primary_image).toString('base64') %>" class="card-img-top news-img" alt="<%= newsItem.title %>">
+                            <% } else { %>
+                                <img src="/static/image/Windows_10_Default_Profile_Picture.svg.png" class="card-img-top news-img" alt="Default News Image">
+                            <% } %>
                             <div class="card-body">
-                                <div class="news-date mb-2">January 15, 2024</div>
-                                <h5 class="card-title">New Computer Lab Opening</h5>
-                                <p class="card-text">State-of-the-art computer laboratory opens for computer science students...</p>
+                                <div class="news-date mb-2">
+                                    <%= new Date(newsItem.publish_date).toLocaleDateString('en-US', 
+                                        { year: 'numeric', month: 'long', day: 'numeric' }) %>
+                                </div>
+                                <h5 class="card-title"><%= newsItem.title %></h5>
+                                <p class="card-text"><%= newsItem.content.substring(0, 100) %>...</p>
+                                <small class="text-muted">
+                                    By <%= newsItem.User ? `${newsItem.User.name} ${newsItem.User.lastname}` : 'Unknown' %>
+                                </small>
                             </div>
                         </div>
-                    </a>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <a href="/news/2" class="text-decoration-none">
-                        <div class="card news-card h-100">
-                            <img src="static/image/Windows_10_Default_Profile_Picture.svg.png" class="card-img-top news-img" alt="News 2">
-                            <div class="card-body">
-                                <div class="news-date mb-2">January 10, 2024</div>
-                                <h5 class="card-title">Student Achievement</h5>
-                                <p class="card-text">Our students won first place in the National Programming Competition...</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-md-6 col-lg-4">
-                    <a href="/news/3" class="text-decoration-none">
-                        <div class="card news-card h-100">
-                            <img src="static/image/Windows_10_Default_Profile_Picture.svg.png" class="card-img-top news-img" alt="News 3">
-                            <div class="card-body">
-                                <div class="news-date mb-2">January 5, 2024</div>
-                                <h5 class="card-title">Industry Partnership</h5>
-                                <p class="card-text">New partnership with leading tech companies for internship opportunities...</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                    </div>
+                <% }); %> 
+                <!-- need pagination -->
             </div>
         </section>
 
