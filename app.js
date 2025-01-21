@@ -4,6 +4,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const axios = require('axios');
 
 const sessionConfig = require('./config/session');
 const errorHandler = require('./middleware/errorHandler');
@@ -62,6 +63,20 @@ app.use('/partners', require('./routes/PartnersRoute'));
 app.use('/dmis', require('./routes/DmisRoute'));
 app.use('/professor', require('./routes/ProfessorRoute'));
 app.use('/department', require('./routes/UniDepartments'));
+
+app.use('/java-api', async (req, res) => {
+    try {
+        const response = await axios({
+            method: req.method,
+            url: `http://localhost:8081${req.path}`,
+            data: req.body,
+            headers: req.headers
+        });
+        res.status(response.status).send(response.data);
+    } catch (error) {
+        res.status(error.response?.status || 500).send(error.response?.data || error.message);
+    }
+});
 
 //temporary
 app.get('/data', (req, res) => {
