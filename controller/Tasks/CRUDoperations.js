@@ -11,7 +11,7 @@ exports.InsertTask = async(req,res)=>{
             scheduled_time: scheduledTime,
             end_time: endTime
         });
-        res.redirect('/protected')
+        res.redirect('/admin/protected')
     } catch (err) {
         console.error('Error adding task:', err);
         res.status(500).json({ error: 'An error occurred while adding the task' });

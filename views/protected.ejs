@@ -408,22 +408,14 @@
                 <div class="active-inactive">
                     <% tasks.forEach(task => { %>
                         <div class="inside-active">
-                            <%= task.task_name %> -
-                            <% if (new Date(task.scheduled_time) > new Date()) { %>
-                                <span style="color: green;">Active</span>
-                                <% const timeDiff = new Date(task.scheduled_time) - new Date(); %>
-                                <% const daysLeft = Math.floor(timeDiff / (1000 * 60 * 60 * 24)); %>
-                                <% const hoursLeft = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); %>
-                                <% const minutesLeft = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60)); %>
-                                <h3>
-                                    <%= daysLeft %>d <%= hoursLeft %>h <%= minutesLeft %>m left
-                                </h3>
-                            <% } else { %>
-                                <span style="color: red;">Inactive</span>
-                                - Deadline passed
-                            <% } %>
-                            <br>
-                            Scheduled Time: <%= task.scheduled_time.toLocaleString() %>
+                            <form action="/api/tasks/<%= task.id %>/update" method="POST">
+                                <input type="text" name="taskName" value="<%= task.task_name %>" required>
+                                <input type="datetime-local" name="scheduledTime" 
+                                       value="<%= new Date(task.scheduled_time).toISOString().slice(0, 16) %>" required>
+                                <input type="number" name="duration" 
+                                       value="<%= Math.floor((new Date(task.end_time) - new Date(task.scheduled_time)) / (1000 * 60 * 60 * 24)) %>" required>
+                                <button type="submit">Update</button>
+                            </form>
                             <form action="/task/delete/<%= task.id %>" method="POST">
                                 <button type="submit">Delete</button>
                             </form>

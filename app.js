@@ -5,6 +5,7 @@ const flash = require('connect-flash');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const axios = require('axios');
+const qs = require('qs');
 
 const sessionConfig = require('./config/session');
 const errorHandler = require('./middleware/errorHandler');
@@ -63,6 +64,32 @@ app.use('/partners', require('./routes/PartnersRoute'));
 app.use('/dmis', require('./routes/DmisRoute'));
 app.use('/professor', require('./routes/ProfessorRoute'));
 app.use('/department', require('./routes/UniDepartments'));
+
+app.post('/api/tasks/:id/update', async (req, res) => {
+    try {
+        const rawDate = new Date(req.body.scheduledTime);
+        const scheduledTime = rawDate.toISOString(); 
+
+        const response = await axios({
+            method: 'POST',
+            url: `http://localhost:8081/api/tasks/${req.params.id}/update`,
+            data: qs.stringify({
+                taskName: req.body.taskName,
+                scheduledTime,
+                duration: req.body.duration
+            }),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
+
+        res.redirect('/admin/protected');
+    } catch (error) {
+        console.error('Update error:', error.response?.data || error.message);
+        req.flash('error', 'Failed to update task: ' + (error.response?.data?.error || error.message));
+        res.redirect('/protected');
+    }
+});
 
 app.use('/java-api', async (req, res) => {
     try {
