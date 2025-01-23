@@ -1,4 +1,3 @@
-
 const Apply = require('../../../model/ApplyModel');
 const User = require('../../../model/UsersModel');
 const Department = require('../../../model/DepartmentModel');
@@ -10,12 +9,14 @@ const Courses = require('../../../model/CoursesModel');
 const NewsTag = require('../../../model/NewsTag');
 const NewsCategory = require('../../../model/NewsCategory');
 const jwt = require('jsonwebtoken');
-
+const axios = require('axios');
 
 exports.ProtectedPath = async (req, res) => {
     const alert = req.session.alert;
     req.session.alert = null;
     try {
+        const statisticsResponse = await axios.get('http://localhost:8081/api/statistics');
+        const statistics = statisticsResponse.data;
 
         const token = req.cookies.authToken;
         let userRole = null;
@@ -115,7 +116,14 @@ exports.ProtectedPath = async (req, res) => {
             courses,
             NewsTags,
             NewsCategorys,
-            UserFind
+            UserFind,
+            totalPartners: statistics.totalPartners,
+            partnersByLevel: statistics.partnersByLevel,
+            partnersBySemester: statistics.partnersBySemester,
+            partnersByCountry: statistics.partnersByCountry,
+            openScholarsByCountry: statistics.openScholarsByCountry,
+            totalStudyLevelsFromStats: statistics.totalStudyLevels,
+            studyLevelDistribution: statistics.studyLevelDistribution
         });
 
     } catch (err) {
