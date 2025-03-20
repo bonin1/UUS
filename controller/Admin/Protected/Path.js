@@ -15,8 +15,8 @@ exports.ProtectedPath = async (req, res) => {
     const alert = req.session.alert;
     req.session.alert = null;
     try {
-        const statisticsResponse = await axios.get('http://localhost:8081/api/statistics');
-        const statistics = statisticsResponse.data;
+        // const statisticsResponse = await axios.get('http://localhost:8081/api/statistics');
+        // const statistics = statisticsResponse.data;
 
         const token = req.cookies.authToken;
         let userRole = null;
@@ -117,13 +117,13 @@ exports.ProtectedPath = async (req, res) => {
             NewsTags,
             NewsCategorys,
             UserFind,
-            totalPartners: statistics.totalPartners,
-            partnersByLevel: statistics.partnersByLevel,
-            partnersBySemester: statistics.partnersBySemester,
-            partnersByCountry: statistics.partnersByCountry,
-            openScholarsByCountry: statistics.openScholarsByCountry,
-            totalStudyLevelsFromStats: statistics.totalStudyLevels,
-            studyLevelDistribution: statistics.studyLevelDistribution
+            // totalPartners: statistics.totalPartners,
+            // partnersByLevel: statistics.partnersByLevel,
+            // partnersBySemester: statistics.partnersBySemester,
+            // partnersByCountry: statistics.partnersByCountry,
+            // openScholarsByCountry: statistics.openScholarsByCountry,
+            // totalStudyLevelsFromStats: statistics.totalStudyLevels,
+            // studyLevelDistribution: statistics.studyLevelDistribution
         });
 
     } catch (err) {

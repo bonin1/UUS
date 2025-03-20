@@ -28,6 +28,8 @@ const staticRoutes = [
     { path: '/prishtine', view: 'prishtina' },
     { path: '/prizren', view: 'prizren' },
     {  path: '/phd', view: 'phd' },
+    { path: '/campus', view: 'campus' },
+    { path: '/housing', view: 'housing' },
 ];
 
 exports.setupStaticRoutes = (app) => {

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus | UUS</title>
+    <link rel="stylesheet" href="/static/css/campus.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <%- include('partials/Navbar-light'); %>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>OUR CAMPUS</h1>
+            <p>Where innovation meets tradition in a vibrant learning environment</p>
+            <a href="#explore" class="cta-button">Explore Campus <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+
+    <section id="explore" class="overview">
+        <div class="container">
+            <h2>CAMPUS OVERVIEW</h2>
+            <div class="overview-content">
+                <div class="overview-text">
+                    <p>UUS Campus is a sprawling 150-acre estate designed to inspire creativity and foster intellectual growth. Our state-of-the-art facilities blend harmoniously with natural landscapes, creating an ideal environment for academic excellence and personal development.</p>
+                    <p>The campus architecture reflects our commitment to sustainability, with LEED-certified buildings, solar panels, and rainwater harvesting systems that reduce our environmental footprint while providing students with real-world examples of responsible design.</p>
+                </div>
+                <div class="overview-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">150</span>
+                        <span class="stat-label">Acres</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">25</span>
+                        <span class="stat-label">Buildings</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">12</span>
+                        <span class="stat-label">Research Centers</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">8</span>
+                        <span class="stat-label">Dining Options</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="facilities">
+        <div class="container">
+            <h2>WORLD-CLASS FACILITIES</h2>
+            <div class="facilities-grid">
+                <div class="facility-card">
+                    <div class="facility-icon"><i class="fas fa-books"></i></div>
+                    <h3>Libraries</h3>
+                    <p>Our three libraries house over 2 million volumes and provide 24/7 digital access to global research databases.</p>
+                </div>
+                <div class="facility-card">
+                    <div class="facility-icon"><i class="fas fa-flask"></i></div>
+                    <h3>Research Labs</h3>
+                    <p>Advanced research facilities equipped with cutting-edge technology across scientific disciplines.</p>
+                </div>
+                <div class="facility-card">
+                    <div class="facility-icon"><i class="fas fa-dumbbell"></i></div>
+                    <h3>Sports Complex</h3>
+                    <p>Olympic-sized swimming pool, fitness centers, and multiple courts for various sports activities.</p>
+                </div>
+                <div class="facility-card">
+                    <div class="facility-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Tech Hubs</h3>
+                    <p>Collaborative spaces with the latest technology for innovation and digital creation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="campus-life">
+        <div class="container">
+            <h2>CAMPUS LIFE</h2>
+            <div class="life-content">
+                <div class="life-image"></div>
+                <div class="life-text">
+                    <p>At UUS, campus life extends far beyond the classroom. Our vibrant community offers countless opportunities for personal growth, recreation, and meaningful connections.</p>
+                    <ul class="life-features">
+                        <li><i class="fas fa-check-circle"></i> Over 100 student-led organizations</li>
+                        <li><i class="fas fa-check-circle"></i> Regular cultural events and festivals</li>
+                        <li><i class="fas fa-check-circle"></i> Intramural and competitive sports programs</li>
+                        <li><i class="fas fa-check-circle"></i> Community service and volunteering opportunities</li>
+                        <li><i class="fas fa-check-circle"></i> Entrepreneurship hubs and innovation spaces</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="photo-gallery">
+        <div class="container">
+            <h2>CAMPUS GALLERY</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item gallery-item-1"></div>
+                <div class="gallery-item gallery-item-2"></div>
+                <div class="gallery-item gallery-item-3"></div>
+                <div class="gallery-item gallery-item-4"></div>
+                <div class="gallery-item gallery-item-5"></div>
+                <div class="gallery-item gallery-item-6"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="virtual-tour">
+        <div class="container">
+            <h2>TAKE A VIRTUAL TOUR</h2>
+            <p>Can't visit in person? Explore our interactive 3D campus tour to get a feel for life at UUS.</p>
+            <a href="#" class="tour-button">Start Virtual Tour <i class="fas fa-vr-cardboard"></i></a>
+        </div>
+    </section>
+
+    <section class="campus-map">
+        <div class="container">
+            <h2>CAMPUS MAP</h2>
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <!-- Interactive map would be here -->
+                    <p>Interactive Campus Map Coming Soon</p>
+                </div>
+                <div class="map-legend">
+                    <h3>Key Locations</h3>
+                    <ul>
+                        <li><span class="legend-color academic"></span> Academic Buildings</li>
+                        <li><span class="legend-color residence"></span> Residence Halls</li>
+                        <li><span class="legend-color dining"></span> Dining Facilities</li>
+                        <li><span class="legend-color recreation"></span> Recreation Areas</li>
+                        <li><span class="legend-color parking"></span> Parking Facilities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="visit-campus">
+        <div class="container">
+            <h2>VISIT OUR CAMPUS</h2>
+            <p>Experience UUS firsthand through a guided campus tour. We offer tours Monday through Friday at 10 AM and 2 PM, and select Saturdays at 11 AM.</p>
+            <a href="#" class="schedule-button">Schedule a Visit <i class="fas fa-calendar-alt"></i></a>
+        </div>
+    </section>
+
+    <%- include('partials/footer'); %>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animation on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < window.innerHeight * 0.75) {
+                    section.classList.add('visible');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

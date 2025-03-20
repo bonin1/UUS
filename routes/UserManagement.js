@@ -22,7 +22,7 @@ router.post('/profile/update/:id', authMiddleware, upload.single('file'), Update
 router.post('/profile/delete/:id', authMiddleware, DeleteProfileImage);
 
 // insert profile image
-router.post('/profile/insert/:id', authMiddleware, upload.single('file'), InsertProfileImage);
+router.post('/profile/insert/:id', authMiddleware, upload.single('file'), InsertProfileImage); // errori o qetu jaran
 
 
 

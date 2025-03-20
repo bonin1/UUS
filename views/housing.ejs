@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housing | UUS</title>
+    <link rel="stylesheet" href="/static/css/housing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <%- include('partials/Navbar-light'); %>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>STUDENT HOUSING</h1>
+            <p>Your home away from home in a vibrant academic community</p>
+            <a href="#options" class="cta-button">Explore Housing Options <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+
+    <section id="welcome" class="welcome">
+        <div class="container">
+            <h2>WELCOME HOME</h2>
+            <div class="welcome-content">
+                <div class="welcome-text">
+                    <p>At UUS, we believe your living space is an extension of your learning environment. Our residence halls offer more than just a place to sleep—they're communities where lifelong friendships form, where ideas are exchanged, and where personal growth happens outside the classroom.</p>
+                    <p>Living on campus puts you at the heart of university life, with easy access to classes, libraries, dining options, recreational facilities, and campus events. Our diverse housing options cater to different preferences, needs, and budgets, ensuring you find your perfect college home.</p>
+                </div>
+                <div class="welcome-image"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="options" class="housing-options">
+        <div class="container">
+            <h2>HOUSING OPTIONS</h2>
+            <div class="options-tabs">
+                <button class="tab-button active" onclick="openTab('freshman')">Freshman Housing</button>
+                <button class="tab-button" onclick="openTab('upperclass')">Upperclass Housing</button>
+                <button class="tab-button" onclick="openTab('graduate')">Graduate Housing</button>
+                <button class="tab-button" onclick="openTab('family')">Family Housing</button>
+            </div>
+            
+            <div id="freshman" class="tab-content active">
+                <div class="option-grid">
+                    <div class="option-image freshman-image"></div>
+                    <div class="option-details">
+                        <h3>Freshman Residence Halls</h3>
+                        <p>Begin your university journey in our dedicated freshman communities, designed to help you transition to college life and build connections with fellow first-year students.</p>
+                        <ul class="option-features">
+                            <li><i class="fas fa-check-circle"></i> Traditional corridor-style and suite options</li>
+                            <li><i class="fas fa-check-circle"></i> Dedicated Resident Advisors on each floor</li>
+                            <li><i class="fas fa-check-circle"></i> First-year experience programs</li>
+                            <li><i class="fas fa-check-circle"></i> Common lounges and study spaces</li>
+                            <li><i class="fas fa-check-circle"></i> Close proximity to dining halls</li>
+                        </ul>
+                        <span class="option-price">Starting at $3,200 per semester</span>
+                        <a href="#apply" class="view-button">View Freshman Halls <i class="fas fa-angle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="upperclass" class="tab-content">
+                <div class="option-grid">
+                    <div class="option-image upperclass-image"></div>
+                    <div class="option-details">
+                        <h3>Upperclass Apartments</h3>
+                        <p>Enjoy more independence in our apartment-style residence halls for sophomores, juniors, and seniors, featuring kitchen facilities and more private living arrangements.</p>
+                        <ul class="option-features">
+                            <li><i class="fas fa-check-circle"></i> 2-4 bedroom apartment configurations</li>
+                            <li><i class="fas fa-check-circle"></i> Full kitchens and living areas</li>
+                            <li><i class="fas fa-check-circle"></i> Single and double bedroom options</li>
+                            <li><i class="fas fa-check-circle"></i> Community events tailored for returning students</li>
+                            <li><i class="fas fa-check-circle"></i> Optional meal plans available</li>
+                        </ul>
+                        <span class="option-price">Starting at $3,800 per semester</span>
+                        <a href="#apply" class="view-button">View Upperclass Apartments <i class="fas fa-angle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="graduate" class="tab-content">
+                <div class="option-grid">
+                    <div class="option-image graduate-image"></div>
+                    <div class="option-details">
+                        <h3>Graduate Student Housing</h3>
+                        <p>Focus on your advanced studies with housing options designed specifically for the needs and lifestyle of graduate students.</p>
+                        <ul class="option-features">
+                            <li><i class="fas fa-check-circle"></i> Studio and 1-bedroom apartments</li>
+                            <li><i class="fas fa-check-circle"></i> Quiet study environments</li>
+                            <li><i class="fas fa-check-circle"></i> Extended academic year leasing options</li>
+                            <li><i class="fas fa-check-circle"></i> Networking opportunities with fellow researchers</li>
+                            <li><i class="fas fa-check-circle"></i> Proximity to research facilities</li>
+                        </ul>
+                        <span class="option-price">Starting at $4,500 per semester</span>
+                        <a href="#apply" class="view-button">View Graduate Housing <i class="fas fa-angle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="family" class="tab-content">
+                <div class="option-grid">
+                    <div class="option-image family-image"></div>
+                    <div class="option-details">
+                        <h3>Family and Married Housing</h3>
+                        <p>Create a home for your family while pursuing your education in our comfortable family-oriented housing communities.</p>
+                        <ul class="option-features">
+                            <li><i class="fas fa-check-circle"></i> 1-3 bedroom family apartments</li>
+                            <li><i class="fas fa-check-circle"></i> Playground and family recreation areas</li>
+                            <li><i class="fas fa-check-circle"></i> Family support programs</li>
+                            <li><i class="fas fa-check-circle"></i> Close to childcare facilities</li>
+                            <li><i class="fas fa-check-circle"></i> Year-round leasing options</li>
+                        </ul>
+                        <span class="option-price">Starting at $6,000 per semester</span>
+                        <a href="#apply" class="view-button">View Family Housing <i class="fas fa-angle-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="amenities">
+        <div class="container">
+            <h2>AMENITIES & SERVICES</h2>
+            <div class="amenities-grid">
+                <div class="amenity-card">
+                    <div class="amenity-icon"><i class="fas fa-wifi"></i></div>
+                    <h3>High-Speed Internet</h3>
+                    <p>Wired and wireless high-speed internet throughout all residence halls and apartments.</p>
+                </div>
+                <div class="amenity-card">
+                    <div class="amenity-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>24/7 Security</h3>
+                    <p>Card access systems, security cameras, and 24-hour campus security patrols.</p>
+                </div>
+                <div class="amenity-card">
+                    <div class="amenity-icon"><i class="fas fa-tshirt"></i></div>
+                    <h3>Laundry Facilities</h3>
+                    <p>Free-to-use washers and dryers in every residential building with app monitoring.</p>
+                </div>
+                <div class="amenity-card">
+                    <div class="amenity-icon"><i class="fas fa-utensils"></i></div>
+                    <h3>Dining Options</h3>
+                    <p>Multiple dining halls, cafés, and convenience stores within easy walking distance.</p>
+                </div>
+                <div class="amenity-card">
+                    <div class="amenity-icon"><i class="fas fa-couch"></i></div>
+                    <h3>Common Spaces</h3>
+                    <p>Lounges, study rooms, game areas, and meeting spaces in each residential community.</p>
+                </div>
+                <div class="amenity-card">
+                    <div class="amenity-icon"><i class="fas fa-bicycle"></i></div>
+                    <h3>Bike Storage</h3>
+                    <p>Secure indoor and outdoor bicycle storage options at each residence hall.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="residential-life">
+        <div class="container">
+            <h2>RESIDENTIAL LIFE</h2>
+            <div class="life-content">
+                <div class="life-image"></div>
+                <div class="life-text">
+                    <p>Living on campus is about more than just convenience—it's about being part of a vibrant community that enhances your college experience. Our Residential Life program creates an engaging environment through:</p>
+                    <ul class="life-features">
+                        <li><i class="fas fa-users"></i> Community-building events and activities</li>
+                        <li><i class="fas fa-user-graduate"></i> Academic support services within residence halls</li>
+                        <li><i class="fas fa-hands-helping"></i> Peer mentorship programs</li>
+                        <li><i class="fas fa-chalkboard-teacher"></i> Faculty-in-residence programs</li>
+                        <li><i class="fas fa-globe-americas"></i> Special interest and themed communities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="apply" class="application">
+        <div class="container">
+            <h2>APPLICATION PROCESS</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Create Account</h3>
+                        <p>Create your housing portal account using your student ID and university email.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Complete Application</h3>
+                        <p>Fill out your personal information, preferences, and special accommodations if needed.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Pay Deposit</h3>
+                        <p>Submit your housing deposit to secure your place in the assignment process.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Room Selection</h3>
+                        <p>Select your preferred residence hall and room based on availability during your assigned timeslot.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Confirmation</h3>
+                        <p>Receive your housing assignment confirmation and prepare for move-in day!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="application-cta">
+                <a href="#" class="apply-button">Apply for Housing <i class="fas fa-home"></i></a>
+                <p>Current application window: <strong>February 1 - May 1</strong> for Fall semester</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="container">
+            <h2>FREQUENTLY ASKED QUESTIONS</h2>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-button">What items should I bring to campus?</button>
+                    <div class="accordion-content">
+                        <p>We recommend bringing bedding for an XL twin mattress, toiletries, study supplies, clothing for all seasons, and personal items to make your space feel like home. Check our comprehensive packing list on the housing portal for specific recommendations and restrictions.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-button">Can I choose my roommate?</button>
+                    <div class="accordion-content">
+                        <p>Yes! During the application process, you can request a specific roommate. Both students must mutually request each other and apply within the same timeframe to be matched together.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-button">Are meal plans required for residents?</button>
+                    <div class="accordion-content">
+                        <p>Meal plans are required for all freshman residents. Upperclassmen in apartment-style housing with kitchens have the option to choose smaller meal plans or opt out entirely.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-button">Is housing available during breaks?</button>
+                    <div class="accordion-content">
+                        <p>Most residence halls close during winter and spring breaks, but we offer break housing options for international students and those with academic or employment commitments. Graduate and family housing remains open year-round.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-button">How are housing assignments determined?</button>
+                    <div class="accordion-content">
+                        <p>Housing assignments are based on application date, student preferences, and class standing. Incoming freshmen are typically assigned by lifestyle preferences and learning community participation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="virtual-tours">
+        <div class="container">
+            <h2>TAKE A VIRTUAL TOUR</h2>
+            <p>Can't visit in person? Take a virtual tour of our residence halls to get a better feel for your future home.</p>
+            <div class="tours-grid">
+                <div class="tour-card">
+                    <div class="tour-image tour-freshman"></div>
+                    <h3>Freshman Halls</h3>
+                    <a href="#" class="tour-link">View Tour <i class="fas fa-vr-cardboard"></i></a>
+                </div>
+                <div class="tour-card">
+                    <div class="tour-image tour-upperclass"></div>
+                    <h3>Upperclass Apartments</h3>
+                    <a href="#" class="tour-link">View Tour <i class="fas fa-vr-cardboard"></i></a>
+                </div>
+                <div class="tour-card">
+                    <div class="tour-image tour-graduate"></div>
+                    <h3>Graduate Housing</h3>
+                    <a href="#" class="tour-link">View Tour <i class="fas fa-vr-cardboard"></i></a>
+                </div>
+                <div class="tour-card">
+                    <div class="tour-image tour-family"></div>
+                    <h3>Family Housing</h3>
+                    <a href="#" class="tour-link">View Tour <i class="fas fa-vr-cardboard"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-housing">
+        <div class="container">
+            <h2>CONTACT HOUSING SERVICES</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Location</h3>
+                            <p>Student Housing Office<br>University Center, Room 123<br>University Union Station</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>(555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>Email</h3>
+                            <p>housing@uus.edu</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h3>Office Hours</h3>
+                            <p>Monday-Friday: 8:00 AM - 5:00 PM<br>Saturday: 10:00 AM - 2:00 PM (during peak periods)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send us a message</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">Send Message <i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%- include('partials/footer'); %>
+
+    <script>
+        // Tab functionality
+        function openTab(tabName) {
+            // Hide all tab content
+            var tabContents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            
+            // Deactivate all tab buttons
+            var tabButtons = document.getElementsByClassName("tab-button");
+            for (var i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            
+            // Show selected tab content and activate button
+            document.getElementById(tabName).classList.add("active");
+            event.currentTarget.classList.add("active");
+        }
+
+        // Accordion functionality
+        var accordionButtons = document.getElementsByClassName("accordion-button");
+        for (var i = 0; i < accordionButtons.length; i++) {
+            accordionButtons[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Animation on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < window.innerHeight * 0.75) {
+                    section.classList.add('visible');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

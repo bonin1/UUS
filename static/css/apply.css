@@ -23,6 +23,7 @@
   padding: 20px 30px;
   font-weight: 500;
   border-radius: 10px;
+  z-index: 999;
 }
 .close{
   background-color: transparent;

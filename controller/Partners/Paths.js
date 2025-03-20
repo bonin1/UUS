@@ -1,6 +1,7 @@
 const { validationResult } = require('express-validator');
 const Partner = require('../../model/PartnersModel');
-
+const Department = require('../../model/DepartmentModel');
+const { Sequelize } = require('sequelize');
 
 exports.PartnersPath = async (req, res) => {
     try {
@@ -39,8 +40,40 @@ exports.PartnersPath = async (req, res) => {
                 partner.partners_photos = base64Data;
             }
         }
-        
-        res.render('partners', { data: partners });
+
+        // Get unique countries
+        const uniqueCountries = await Partner.findAll({
+            attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('countries')), 'countries']],
+            order: [['countries', 'ASC']]
+        });
+
+        // Get unique levels
+        const uniqueLevels = await Partner.findAll({
+            attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('level')), 'level']],
+            order: [['level', 'ASC']]
+        });
+
+        // Get unique semesters
+        const uniqueSemesters = await Partner.findAll({
+            attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('semester')), 'semester']],
+            order: [['semester', 'ASC']]
+        });
+
+        // Get all departments
+        const departments = await Department.findAll({
+            attributes: ['dep_id', 'dep_name'],
+            order: [['dep_name', 'ASC']]
+        });
+
+        res.render('partners', {
+            data: partners,
+            filterOptions: {
+                countries: uniqueCountries.map(c => c.countries),
+                levels: uniqueLevels.map(l => l.level),
+                semesters: uniqueSemesters.map(s => s.semester),
+                departments
+            }
+        });
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal server error');

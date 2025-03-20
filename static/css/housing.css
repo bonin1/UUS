@@ -1,0 +1,774 @@
+/* Modern Housing Page Styles */
+
+:root {
+    --primary-color: #2e7d32;    /* Green theme for housing */
+    --primary-light: #60ad5e;
+    --primary-dark: #005005;
+    --secondary-color: #3949ab;  /* Indigo accent */
+    --accent-color: #ff9800;     /* Orange accent for CTAs */
+    --text-color: #333333;
+    --text-light: #666666;
+    --light-gray: #f5f7fa;
+    --medium-gray: #e1e5ee;
+    --dark-gray: #6b7280;
+    --white: #ffffff;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: var(--primary-dark);
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+section {
+    padding: 5rem 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+section:nth-child(even) {
+    background-color: var(--light-gray);
+}
+
+p {
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+    color: var(--text-light);
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: var(--transition);
+}
+
+a:hover {
+    color: var(--primary-dark);
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/image/residence-hall.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    padding: 2rem;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    color: var(--white);
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: var(--accent-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.3);
+}
+
+.cta-button:hover {
+    background-color: #f57c00;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 152, 0, 0.4);
+}
+
+.cta-button i {
+    margin-left: 8px;
+    transition: var(--transition);
+}
+
+.cta-button:hover i {
+    transform: translateX(4px);
+}
+
+/* Welcome Section */
+.welcome-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    align-items: center;
+}
+
+.welcome-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.welcome-image {
+    flex: 1;
+    min-width: 300px;
+    height: 400px;
+    background: url('/static/image/dorm-life.jpg') no-repeat center center;
+    background-size: cover;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+/* Housing Options Section */
+.options-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    gap: 0.5rem;
+}
+
+.tab-button {
+    padding: 0.8rem 1.5rem;
+    background-color: var(--light-gray);
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-color);
+}
+
+.tab-button:hover {
+    background-color: var(--medium-gray);
+}
+
+.tab-button.active {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.option-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.option-image {
+    flex: 1;
+    min-width: 300px;
+    height: 350px;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+    box-shadow: var(--shadow);
+}
+
+.freshman-image {
+    background-image: url('/static/image/freshman-dorm.jpg');
+}
+
+.upperclass-image {
+    background-image: url('/static/image/upperclass-apt.jpg');
+}
+
+.graduate-image {
+    background-image: url('/static/image/graduate-housing.jpg');
+}
+
+.family-image {
+    background-image: url('/static/image/family-housing.jpg');
+}
+
+.option-details {
+    flex: 1.5;
+    min-width: 300px;
+}
+
+.option-features {
+    margin: 1.5rem 0;
+}
+
+.option-features li {
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+}
+
+.option-features i {
+    color: var(--primary-color);
+    margin-right: 10px;
+    font-size: 1.1rem;
+}
+
+.option-price {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    margin-bottom: 1.5rem;
+}
+
+.view-button {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    background-color: var(--white);
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 4px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.view-button:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.view-button i {
+    margin-left: 8px;
+    transition: var(--transition);
+}
+
+.view-button:hover i {
+    transform: translateX(4px);
+}
+
+/* Amenities Section */
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.amenity-card {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.amenity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.amenity-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.amenity-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--primary-dark);
+}
+
+.amenity-card p {
+    font-size: 1rem;
+}
+
+/* Residential Life Section */
+.residential-life {
+    background-color: var(--white);
+}
+
+.life-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    align-items: center;
+}
+
+.life-image {
+    flex: 1;
+    min-width: 300px;
+    height: 400px;
+    background: url('/static/image/dorm-community.jpg') no-repeat center center;
+    background-size: cover;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.life-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.life-features {
+    list-style: none;
+}
+
+.life-features li {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+}
+
+.life-features i {
+    color: var(--secondary-color);
+    margin-right: 15px;
+    font-size: 1.3rem;
+    width: 24px;
+    text-align: center;
+}
+
+/* Application Process Section */
+.process-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+}
+
+.step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    background-color: var(--white);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.step:hover {
+    transform: translateX(10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: 50%;
+    font-size: 1.5rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.step-content {
+    flex-grow: 1;
+}
+
+.step-content h3 {
+    margin-bottom: 0.5rem;
+}
+
+.application-cta {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.apply-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(57, 73, 171, 0.3);
+    margin-bottom: 1rem;
+}
+
+.apply-button:hover {
+    background-color: #303f9f;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(57, 73, 171, 0.4);
+}
+
+.application-cta p {
+    font-size: 1.1rem;
+}
+
+/* FAQ Section */
+.accordion {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.accordion-item {
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.accordion-button {
+    width: 100%;
+    text-align: left;
+    padding: 1.2rem;
+    background-color: var(--white);
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+}
+
+.accordion-button:after {
+    content: '\002B';
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    position: absolute;
+    right: 1.2rem;
+}
+
+.accordion-button.active:after {
+    content: '\2212';
+}
+
+.accordion-button:hover {
+    background-color: var(--light-gray);
+}
+
+.accordion-content {
+    padding: 0 1.2rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background-color: var(--white);
+}
+
+.accordion-content p {
+    padding: 0.5rem 0 1.2rem;
+}
+
+/* Virtual Tours Section */
+.virtual-tours {
+    text-align: center;
+    background-color: var(--light-gray);
+}
+
+.virtual-tours p {
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+    font-size: 1.2rem;
+}
+
+.tours-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.tour-card {
+    background-color: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.tour-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.tour-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.tour-freshman {
+    background-image: url('/static/image/tour-freshman.jpg');
+}
+
+.tour-upperclass {
+    background-image: url('/static/image/tour-upperclass.jpg');
+}
+
+.tour-graduate {
+    background-image: url('/static/image/tour-graduate.jpg');
+}
+
+.tour-family {
+    background-image: url('/static/image/tour-family.jpg');
+}
+
+.tour-card h3 {
+    padding: 1.2rem 1.2rem 0.5rem;
+    font-size: 1.3rem;
+}
+
+.tour-link {
+    display: inline-block;
+    margin: 0.5rem 1.2rem 1.2rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.tour-link i {
+    margin-left: 5px;
+    transition: var(--transition);
+}
+
+.tour-link:hover i {
+    transform: translateX(3px);
+}
+
+/* Contact Housing Section */
+.contact-housing {
+    background-color: var(--white);
+}
+
+.contact-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+}
+
+.contact-info {
+    flex: 1;
+    min-width: 300px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.contact-item i {
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-right: 1rem;
+    margin-top: 0.2rem;
+    width: 24px;
+    text-align: center;
+}
+
+.contact-item h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+}
+
+.contact-form {
+    flex: 1;
+    min-width: 300px;
+    background-color: var(--light-gray);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.contact-form h3 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--medium-gray);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
+}
+
+.submit-button {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.submit-button:hover {
+    background-color: var(--primary-dark);
+}
+
+.submit-button i {
+    margin-left: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    h2 {
+        font-size: 2rem;
+    }
+    
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+    
+    .tours-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 3rem;
+    }
+    
+    .hero p {
+        font-size: 1.2rem;
+    }
+    
+    .options-tabs {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .tab-button {
+        width: 80%;
+        text-align: center;
+    }
+    
+    .tours-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    section {
+        padding: 3rem 0;
+    }
+    
+    .cta-button, .apply-button, .submit-button {
+        padding: 0.8rem 1.6rem;
+        font-size: 0.9rem;
+    }
+    
+    .step {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .step-number {
+        margin-bottom: 1rem;
+    }
+}

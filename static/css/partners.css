@@ -1,27 +1,306 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
 }
 
-body{
+body {
     width: 100%;
-    height: 100vh;
-    background-color: #EDEDED;
+    min-height: 100vh;
+    background-color: #f5f7fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
 }
-.wrapper{
+
+.hero-section {
+    background: linear-gradient(rgba(0, 67, 146, 0.85), rgba(0, 67, 146, 0.9)), url('/static/image/university-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-content h1 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.section-header {
+    margin: 40px 0 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.section-header h2 {
+    font-size: 1.8rem;
+    color: #004392;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-header p {
+    color: #666;
+    margin-top: 8px;
+    font-size: 1rem;
+}
+
+.wrapper {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.wrapper-assist{
+
+.wrapper-assist {
     width: 1400px;
     height: auto;
-    padding: 50px 0;
+    padding: 30px 0;
 }
-.hamburger_undermenu{
+
+/* Map Container */
+.map-container {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+/* Filter Styles */
+.Form_Categories_Button {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 30px 0;
+    gap: 15px;
+}
+
+.filter-group {
+    position: relative;
+}
+
+.filter-group:after {
+    content: "";
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.Form_Categories_Button select {
+    width: auto;
+    min-width: 200px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #444;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 12px 20px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('/static/image/Polygon\ 2.png');
+    background-repeat: no-repeat;
+    background-position: 95%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.Form_Categories_Button select:hover {
+    border-color: #bbb;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.Form_Categories_Button select:focus {
+    outline: none;
+    border-color: #004392;
+    box-shadow: 0 0 0 3px rgba(0, 67, 146, 0.2);
+}
+
+.reset-btn {
+    background-color: #f8f9fa;
+    color: #555;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.reset-btn:hover {
+    background-color: #e9ecef;
+    color: #333;
+}
+
+/* Partner Cards */
+.partners-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.card1 {
+    width: calc(33.333% - 20px);
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.card1.card-hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-image {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+}
+
+.card1 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.5s ease;
+}
+
+.card1:hover img {
+    transform: scale(1.05);
+}
+
+.card-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: rgba(0, 67, 146, 0.9);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card1 h1 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: #333;
+    line-height: 1.3;
+}
+
+.card-details {
+    margin-bottom: 20px;
+}
+
+.card-details p {
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.card-details i {
+    color: #004392;
+    width: 20px;
+    margin-right: 8px;
+}
+
+.detail-label {
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.scholarship-count {
+    color: #009D23;
+    font-weight: 600;
+}
+
+.card-apply {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.apply-btn {
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background-color: #004392;
+    padding: 10px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    width: 100%;
+    justify-content: center;
+}
+
+.apply-btn:hover {
+    background-color: #003474;
+    transform: translateY(-2px);
+}
+
+/* No Results Message */
+.no-results-message {
+    width: 100%;
+    text-align: center;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    color: #666;
+}
+
+.no-results-message i {
+    font-size: 3rem;
+    color: #ccc;
+}
+
+.no-results-message h3 {
+    font-size: 1.5rem;
+    color: #444;
+}
+
+/* Menu & Navigation Styles */
+.hamburger_undermenu {
     cursor: pointer;
     color: #fff;
     display: none;
@@ -81,77 +360,6 @@ body{
     display: none;
 }
 
-.Form_Categories_Button{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin: 50px 0;
-}
-.Form_Categories_Button > select{
-    width: auto;
-    font-size: 20px;
-    font-weight: 500;
-    color: #373737;
-    background-color: #fff;
-    border-radius: 10px;
-    border: none;
-    padding: 10px 20px;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url('/static/image/Polygon\ 2.png');
-    background-repeat: no-repeat;
-    background-position: 95%;
-}
-.Form_Categories_Button > select:nth-child(4){
-    width: 250px;
-}
-.Form_Categories_Button > select:nth-child(-n+3){
-    padding-right:40px;
-}
-
-.Form_Categories_Button > select:focus{
-    outline: none;
-}
-.partners-container{
-    padding: 50px 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-.card1{
-    width: 300px;
-}
-.card1 > img{
-    width: 100%;
-    height: 233px;
-    object-fit: cover;
-    object-position: center;
-    margin: 20px 0;
-}
-.card1 > h1{
-    font-size: 20px;
-}
-.card1 > h2{
-    color: #009D23;
-    font-size: 16px;
-}
-.card-apply{
-    width: 100%;
-    display: flex;
-    justify-content: end;
-}
-.card-apply > a{
-    font-size: 16px;
-    color: #fff;
-    background-color: #373737;
-    padding: 10px 30px;
-    border-radius: 10px;
-    text-decoration: none;
-}
-
 .navbar-nav {
     flex-wrap: wrap;
     justify-content: center;
@@ -196,21 +404,57 @@ body{
     }
 }
 
-@media screen and (max-width:1400px) {
-    .wrapper{
+@media screen and (max-width: 1400px) {
+    .wrapper {
         padding: 0px 20px;
     }
-    .unordered > li > a{
-        font-size: 25px;
+    
+    .hero-content h1 {
+        font-size: 2.4rem;
+    }
+    
+    .card1 {
+        width: calc(50% - 20px);
     }
 }
-@media screen and (max-width:1100px) {
-    .unordered li > a{
-        font-size: 20px;
+
+@media screen and (max-width: 1100px) {
+    .unordered li > a {
+        font-size: 18px;
+    }
+    
+    .Form_Categories_Button {
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .filter-group {
+        width: calc(50% - 10px);
+    }
+    
+    .reset-btn {
+        margin-top: 10px;
     }
 }
-@media screen and (max-width:860px){
-    .hamburger_undermenu{
+
+@media screen and (max-width: 860px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+    }
+    
+    .card1 {
+        width: 100%;
+    }
+    
+    .filter-group {
+        width: 100%;
+    }
+    
+    .hamburger_undermenu {
         display: block;
     }
     .links{
@@ -276,5 +520,23 @@ body{
     }
     .Form_Categories_Button > select{
         margin: 20px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .card1 h1 {
+        font-size: 1.2rem;
+    }
+    
+    .Form_Categories_Button select {
+        width: 100%;
+    }
+    
+    .hero-section {
+        padding: 50px 15px;
     }
 }

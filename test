@@ -1,0 +1,68 @@
+<div class="statistics">
+                    <div class="statistics-part-one statistics-both">
+                        <h1>Number of Students: <span class="stats"><%= studentCount %></span></h1>
+                        <h1>Number of Professors: <span class="stats"><%= professorCount %></span></h1>
+                        <h1>Number of departments: <span class="stats"><%=departmentCount%></span></h1>
+                        <h1>Total Partners: <span class="stats"><%= totalPartners %></span></h1>
+                        
+                        <div class="box-statistics">
+                            <h1>Partners by Level:</h1>
+                            <% for(let level in partnersByLevel) { %>
+                                <h3><%= level %>: <span class="stats"><%= partnersByLevel[level] %></span></h3>
+                            <% } %>
+                        </div>
+
+                        <div class="box-statistics">
+                            <h1>Partners by Semester:</h1>
+                            <% for(let semester in partnersBySemester) { %>
+                                <h3><%= semester %>: <span class="stats"><%= partnersBySemester[semester] %></span></h3>
+                            <% } %>
+                        </div>
+
+                        <div class="box-statistics">
+                            <h1>Partners by Country:</h1>
+                            <% for(let country in partnersByCountry) { %>
+                                <h3><%= country %>: <span class="stats"><%= partnersByCountry[country] %></span></h3>
+                            <% } %>
+                        </div>
+
+                        <div class="box-statistics">
+                            <h1>Open Scholarships by Country:</h1>
+                            <% for(let country in openScholarsByCountry) { %>
+                                <h3><%= country %>: <span class="stats"><%= openScholarsByCountry[country] %></span></h3>
+                            <% } %>
+                        </div>
+                        
+                        <div class="box-statistics">
+                            <h1>Study Level Distribution:</h1>
+                            <% for(let level in studyLevelDistribution) { %>
+                                <h3><%= level %>: <span class="stats"><%= studyLevelDistribution[level] %></span></h3>
+                            <% } %>
+                        </div>
+
+                    </div>
+                    <div class="statistics-part-two statistics-both">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Department</th>
+                                    <th>Student Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% departmentStudentCounts.forEach(function(dep) { %>
+                                    <tr>
+                                        <td><%= dep.dep_name %></td>
+                                        <td><%= dep.count %></td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+
+
+
+

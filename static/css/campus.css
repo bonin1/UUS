@@ -1,0 +1,512 @@
+/* Modern Campus Page Styles */
+
+:root {
+    --primary-color: #0052cc;
+    --secondary-color: #404eed;
+    --accent-color: #ff6b6b;
+    --text-color: #333333;
+    --light-gray: #f5f7fa;
+    --medium-gray: #e1e5ee;
+    --dark-gray: #6b7280;
+    --white: #ffffff;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 2px;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+section {
+    padding: 5rem 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+section:nth-child(even) {
+    background-color: var(--light-gray);
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/image/advancedLabs.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    padding: 2rem;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: var(--primary-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(0, 82, 204, 0.3);
+}
+
+.cta-button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 82, 204, 0.4);
+}
+
+.cta-button i {
+    margin-left: 8px;
+    transition: var(--transition);
+}
+
+.cta-button:hover i {
+    transform: translateX(4px);
+}
+
+/* Overview Section */
+.overview-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+}
+
+.overview-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.overview-text p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.overview-stats {
+    flex: 1;
+    min-width: 300px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.stat-item {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    display: block;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    color: var(--dark-gray);
+}
+
+/* Facilities Section */
+.facilities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.facility-card {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.facility-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.facility-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.facility-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+}
+
+/* Campus Life Section */
+.life-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    align-items: center;
+}
+
+.life-image {
+    flex: 1;
+    min-width: 300px;
+    height: 400px;
+    background: url('/static/image/working.png') no-repeat center center;
+    background-size: cover;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.life-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.life-text p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.life-features {
+    list-style: none;
+}
+
+.life-features li {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+}
+
+.life-features i {
+    color: var(--accent-color);
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+/* Photo Gallery */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 200px);
+    gap: 1rem;
+}
+
+.gallery-item {
+    background-position: center;
+    background-size: cover;
+    border-radius: 8px;
+    transition: var(--transition);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.gallery-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-item-1 {
+    background-image: url('/static/image/social.png');
+}
+
+.gallery-item-2 {
+    background-image: url('/static/image/athletics.png');
+}
+
+.gallery-item-3 {
+    background-image: url('/static/image/uuscollege.png');
+}
+
+.gallery-item-4 {
+    background-image: url('/static/image/unioutsideedit.png');
+}
+
+.gallery-item-5 {
+    background-image: url('/static/image/SportsComplex.jpg');
+}
+
+.gallery-item-6 {
+    background-image: url('/static/image/programs.png');
+}
+
+/* Virtual Tour Section */
+.virtual-tour {
+    text-align: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/static/image/career.png');
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    padding: 5rem 0;
+}
+
+.virtual-tour h2, .virtual-tour p {
+    color: var(--white);
+}
+
+.virtual-tour h2::after {
+    background: var(--white);
+}
+
+.virtual-tour p {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    font-size: 1.2rem;
+}
+
+.tour-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: var(--accent-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.tour-button:hover {
+    background-color: #ff4f4f;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+}
+
+/* Campus Map Section */
+.map-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.map-placeholder {
+    flex: 2;
+    min-width: 300px;
+    height: 400px;
+    background-color: var(--medium-gray);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark-gray);
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.map-legend {
+    flex: 1;
+    min-width: 250px;
+    padding: 1.5rem;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.map-legend h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.map-legend ul {
+    list-style: none;
+}
+
+.map-legend li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.legend-color {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 4px;
+}
+
+.legend-color.academic {
+    background-color: #4285F4;
+}
+
+.legend-color.residence {
+    background-color: #EA4335;
+}
+
+.legend-color.dining {
+    background-color: #FBBC05;
+}
+
+.legend-color.recreation {
+    background-color: #34A853;
+}
+
+.legend-color.parking {
+    background-color: #8c44db;
+}
+
+/* Visit Campus Section */
+.visit-campus {
+    text-align: center;
+    background-color: var(--white);
+}
+
+.visit-campus p {
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    font-size: 1.2rem;
+}
+
+.schedule-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(64, 78, 237, 0.3);
+}
+
+.schedule-button:hover {
+    background-color: #2a39ea;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(64, 78, 237, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    h2 {
+        font-size: 2rem;
+    }
+    
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 3rem;
+    }
+    
+    .hero p {
+        font-size: 1.2rem;
+    }
+    
+    .overview-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    section {
+        padding: 3rem 0;
+    }
+    
+    .cta-button, .tour-button, .schedule-button {
+        padding: 0.8rem 1.6rem;
+        font-size: 0.9rem;
+    }
+}
