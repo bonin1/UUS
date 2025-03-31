@@ -38,10 +38,10 @@ router.get('/', async (req, res) => {
                 req.session.userId = decoded.userId;
             } catch (err) {
                 console.error('Invalid or expired remember token:', err);
-                return res.redirect('/login');
+                return res.redirect('/auth/login');
             }
         } else {
-            return res.redirect('/login');
+            return res.redirect('/auth/login');
         }
     }
 
