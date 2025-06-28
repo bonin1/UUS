@@ -5,7 +5,11 @@ const { getUserFromToken } = require('../../middleware/GetAdminTokenId');
 
 exports.viewChangeRequests = async (req, res) => {
     try {
+        console.log('Attempting to get user from token...');
+        console.log('Available cookies:', Object.keys(req.cookies || {}));
+        
         const user = await getUserFromToken(req);
+        console.log('User retrieved successfully:', user.id, user.role);
         
         const changeRequests = await ChangeRequestService.getAllChangeRequests({
             status: req.query.status,

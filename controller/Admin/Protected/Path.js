@@ -18,7 +18,7 @@ exports.ProtectedPath = async (req, res) => {
         // const statisticsResponse = await axios.get('http://localhost:8081/api/statistics');
         // const statistics = statisticsResponse.data;
 
-        const token = req.cookies.authToken;
+        const token = req.cookies.authToken || req.cookies.sessionToken || req.cookies.rememberToken;
         let userRole = null;
         
         if (token) {

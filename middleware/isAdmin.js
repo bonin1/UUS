@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 function isAdmin(req, res, next) {
-    const token = req.cookies.authToken;
+    const token = req.cookies.authToken || req.cookies.sessionToken || req.cookies.rememberToken;
 
     if (!token) {
         return res.status(401).send('Access denied. No token provided.');

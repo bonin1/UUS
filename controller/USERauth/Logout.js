@@ -13,8 +13,11 @@ exports.LogoutAdmin = (req, res) => {
         if (err) {
             console.error('Error destroying session:', err);
         }
+        // Clear all possible tokens
         res.clearCookie('authToken'); 
+        res.clearCookie('sessionToken'); 
         res.clearCookie('rememberToken'); 
+        res.clearCookie('userId');
         
         res.redirect('/admin');
     });
