@@ -47,7 +47,6 @@ exports.PartnersPath = async (req, res) => {
             order: [['countries', 'ASC']]
         });
 
-        // Get unique levels
         const uniqueLevels = await Partner.findAll({
             attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('level')), 'level']],
             order: [['level', 'ASC']]
