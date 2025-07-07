@@ -53,7 +53,6 @@ exports.PartnersPath = async (req, res) => {
             order: [['level', 'ASC']]
         });
 
-        // Get unique semesters
         const uniqueSemesters = await Partner.findAll({
             attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('semester')), 'semester']],
             order: [['semester', 'ASC']]
