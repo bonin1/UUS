@@ -59,7 +59,6 @@ exports.PartnersPath = async (req, res) => {
             order: [['semester', 'ASC']]
         });
 
-        // Get all departments
         const departments = await Department.findAll({
             attributes: ['dep_id', 'dep_name'],
             order: [['dep_name', 'ASC']]
