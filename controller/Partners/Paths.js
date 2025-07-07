@@ -41,7 +41,6 @@ exports.PartnersPath = async (req, res) => {
             }
         }
 
-        // Get unique countries
         const uniqueCountries = await Partner.findAll({
             attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('countries')), 'countries']],
             order: [['countries', 'ASC']]
